@@ -20,12 +20,11 @@ const UserSchema = new Schema ({
         type: String,
         required: true,
       },
-      is_admin: {
-        type: Boolean,
-        default: false,
+      user_type: {
+        type: String,
+        enum: ["Admin", "Customer"],
+        default: "Customer",
       },
 })
 
-<<<<<<< HEAD
 module.exports = mongoose.model("User", UserSchema);
-// test
