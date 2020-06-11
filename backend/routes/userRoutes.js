@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {auth,authReset} = require('../../middleware/auth')
+const {auth,authReset} = require('../middleware/auth')
 const UserController = require("../controllers/userController");
 
 //calling the postman and the controller

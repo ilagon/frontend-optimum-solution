@@ -13,27 +13,34 @@ const mg = mailgun({
 
 
 exports.user_register = (req, res) => {
-    const temp = new User({
+
+    const user = new User({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         account_status: req.body.account_status,
         email: req.body.email,
         password: req.body.password,
         is_admin: req.body.is_admin
-    });
-
-    temp.save().then(result => {
-        console.log(result);
-        res.status(201).json({
-            message: "User created"
-        })
     })
-        .catch(err => {
-            res.status(500).json({
-                error: err
+
+    bcrypt.hash(user.password, saltRounds, function (err, hash) {
+        user.password = hash;
+        user
+            .save()
+            .then((result) => {
+                console.log(result)
+                res.status(200).json({
+                    message: "User created"
+                })
             })
-        })
+            .catch((err) => {
+                res.status(500).json({
+                    error: err,
+                });
+            });
+    });
 }
+
 
 exports.users_get_all = (req, res) => {
     //retrieves all users that are admins
