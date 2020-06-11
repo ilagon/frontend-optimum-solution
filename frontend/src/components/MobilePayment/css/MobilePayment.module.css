@@ -1,0 +1,49 @@
+.container {
+    background-color: #e5e8ed;
+    width: 800px;
+    height: 800px;
+    position: absolute;
+    font-family: Avenir, Arial;
+    top: 100px;
+    left: 600px;
+    letter-spacing: 0.1em;
+}
+
+.TitleContainer{
+    font-size: 1.5625em; /* 1em = 16px */
+    margin-top: 20px;
+    color: #173a77;
+    position: relative;
+    text-align: left;
+    font-weight: bold;
+}
+
+.OneTimePayment {
+    margin-left: 80px;
+
+}
+
+.OtherRecipients {
+    margin-left: 150px;
+}
+
+.formBody {
+    margin-left: 80px;
+    float: left
+}
+
+.FormTitle {
+    font-size: 1.25em;
+    color: #AA3A21;
+    font-weight: bold;
+    margin-top: 80px;
+}
+
+.formFromBody {
+    float: right;
+    margin-right: 100px
+}
+
+.Button {
+    color: red
+}
