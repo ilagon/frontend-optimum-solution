@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
+const customerRoutes = require('./routes/customer');
 const cors = require("cors");
 
 const app = express();
@@ -26,7 +27,7 @@ app.use(bodyParser.json());
 
 //Routes
 app.use("/users", userRoutes); //Using userRoutes file
-
+app.use("/customers", customerRoutes); //using customerRoutes file
 
 app.listen(PORT, () => console.log(`Server is running in port: ${PORT}`));
 

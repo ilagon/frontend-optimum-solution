@@ -65,3 +65,25 @@ exports.customer_create = (req, res) => {
       });
   };
   
+  //reset credit balance to credit limit
+exports.reset_customer_credit_balance = (req,res) => {
+
+  var creditLimit = req.body.creditcard_limit;
+
+    Customer.updateMany(
+        {creditcard_status: "Active"},
+        {$set:{balance: creditLimit}},
+       
+    )
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })
+}
