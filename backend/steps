@@ -1,0 +1,23 @@
+install mongoDB https://www.mongodb.com/download-center/community
+https://www.mongodb.com/download-center/compass
+
+install postman
+
+create a backend and frontend
+
+Install dependencies <- npm i --save-dev babel-cli babel-preset-env babel-preset-stage-0 && npm install body-parser express mongoose nodemon ->
+
+//middleware for express and node.js
+npm i cors
+
+npm init
+create a .babelrc
+
+In the backend folder open the package.json file the line "test": "echo \"Error: no test specified\" && exit 1"
+to <- "start": "nodemon ./index.js --execute babel-node -e js" ->
+
+
+
+front end
+create-react-app
+npm i axios
