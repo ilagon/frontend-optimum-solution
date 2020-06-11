@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CreditCardSchema = new Schema ({
-      id: Schema.Types.ObjectId,
+      _id: Schema.Types.ObjectId,
       creditcard_num: {
         type: Number,
       },
