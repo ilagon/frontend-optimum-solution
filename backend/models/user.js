@@ -29,6 +29,3 @@ const UserSchema = new Schema ({
 <<<<<<< HEAD
 module.exports = mongoose.model("User", UserSchema);
 // test
-=======
-module.exports = mongoose.model("User", UserSchema);
->>>>>>> 471cc9d1dc2c72299fc25b42ed08e78e066fcf40
