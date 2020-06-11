@@ -17,21 +17,15 @@ const UserSchema = new Schema ({
         type: String,
         required: true,
       },
-      address:{
-        type: String,
-        required:true,
-      },
-      contact:{
-        type:Number,
-        required:true
-      },
+      
       password: {
         type: String,
         required: true,
       },
-      is_admin: {
-        type: Boolean,
-        default: false,
+      user_type: {
+        type: String,
+        enum: ["Admin", "Customer"],
+        default: "Customer",
       },
 })
 

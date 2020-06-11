@@ -9,7 +9,7 @@ exports.user_register = (req, res) => {
         account_status: req.body.account_status,
         email: req.body.email,
         password: req.body.password,
-        is_admin: req.body.is_admin,
+        user_type: req.body.user_type,
         contact: req.body.contact,
         address: req.body.address,
     });
@@ -40,7 +40,7 @@ exports.user_get_all= (req, res) => {
                     name: doc.name,
                     email: doc.email,
                     account_status: doc.account_status,
-                    is_admin: doc.is_admin,
+                    
                     _id: doc._id,
                     contact: doc.contact,
                     address: doc.address,
@@ -63,10 +63,10 @@ exports.user_get_by_id = (req, res) => {
     .select("name email account_status is_admin _id")
     .exec()
     .then(docs => {
-        console.log("From db", doc);
-        if(doc){
+        console.log("From db", docs);
+        if(docs){
             res.status(200).json({
-                user: doc
+                user: docs
             })
         } else{
             res.status(404).json({
