@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const User = require("../models/user");
+const User = require("../models/user_model");
 
 exports.user_register = (req, res) => {
     const user = new User({
