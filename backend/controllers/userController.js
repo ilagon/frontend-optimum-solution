@@ -127,5 +127,72 @@ exports.user_login = (req, res) => {
 
 
 
+exports.forgot_password = (req, res) => {
+    const email = req.body.email;
+    User.findOne({ email: email })
+        .exec()
+        .then((result) => {
+            if (result) {
+                const data = {
+                    from: "Mailgun Sandbox <noreply@optimum.com>",
+                    to: email,
+                    subject: "Reset Password",
+                    text: `To reset your password, please click on this link: http://localhost:7001/users/password/${uuidv4()}`
+                };
+                mg.messages().send(data, function (error, body) {
+                    console.log(body.message);
+                });
+                const token = jwt.sign({
+                    email: req.body.email,
+                },
+                    process.env.JWT_RESET, {
+                    expiresIn: 120
+                })
+                res.status(200).json({
+                    token,
+                    message: "Email has been sent"
+                })
+            }
+            else {
+                res.status(401).json({
+                    message: "Email not found"
+                })
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).json({
+                error: err
+            })
+        })
+}
 
-
+exports.resetPassword = (req,res) =>{
+     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+         User.updateOne(
+             { email: req.body.email },
+             {
+                 $set: {
+                     password: hash
+     
+                 }
+             },
+         )
+         .exec()
+         .then((doc) =>{
+             if(doc){ 
+                 res.status(200).json({
+                     message: "success"
+                 })
+                 
+             }
+         })
+         .catch((err) => {
+             console.log(err)
+             res.status(500).json({
+                 error: err
+             })
+         })
+     });
+ }
+ 
