@@ -1,5 +1,5 @@
 import React from 'react'
-import Reset from './ResetButton'
+import Reset from './button/ResetButton'
 
 export default function Overview() {
     

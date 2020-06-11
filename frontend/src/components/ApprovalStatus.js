@@ -1,6 +1,6 @@
 import React from 'react'
-import ApproveAccount from './ApproveAccountButton'
-import DenyAccount from './DenyAccountButton'
+import ApproveAccount from './button/ApproveAccountButton'
+import DenyAccount from './button/DenyAccountButton'
 
 export default function ApprovalStatus() {
     return (

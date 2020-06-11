@@ -1,6 +1,6 @@
 import React from 'react'
-import ApproveCreditCard from './ApproveCreditCardButton'
-import DenyCreditCard from './DenyCreditCardButton'
+import ApproveCreditCard from './button/ApproveCreditCardButton'
+import DenyCreditCard from './button/DenyCreditCardButton'
 
 export default function CreditCardStatus() {
     return (

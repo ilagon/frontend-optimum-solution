@@ -4,12 +4,14 @@ import ApprovalStatus from './ApprovalStatus'
 import CreditCardStatus from './CreditCardStatus'
 import Overview from './Overview'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import './Sidebar.css'
 
 export default function Mainpage() {
     return (
+        <>
         <div>
-            <nav>
-                <header className='app-header'>Optimum DigiBank</header>
+            <nav className='sidebar'>
+                <h4>Optimum DigiBank</h4>
                 <Router>
                     <ul>
                         <li>
@@ -43,5 +45,6 @@ export default function Mainpage() {
 
 
         </div>
+        </>
     )
 }
