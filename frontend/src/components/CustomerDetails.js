@@ -4,6 +4,7 @@ export default function CustomerDetails() {
     return (
         <div>
             <h1>Customer Details</h1>
+            <input placeholder='Search'></input>
             <table>
                 <th>Customer ID</th>
                 <th>Name</th>

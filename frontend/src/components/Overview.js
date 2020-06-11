@@ -13,6 +13,8 @@ export default function Overview() {
                 <th>Pending CreditCard Approval</th>
                 <th>Total Customers</th>
             </table>
+            <h1>Customer List</h1>
+            <input placeholder='Search'></input>
             <Reset></Reset>
         </div>
     )

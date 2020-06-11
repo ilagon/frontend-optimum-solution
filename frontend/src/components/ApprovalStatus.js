@@ -6,6 +6,7 @@ export default function ApprovalStatus() {
     return (
         <div>
             <h1>Customer Account Approval Status</h1>
+            <input placeholder='Search'></input>
             <table>
                 <th>Customer ID</th>
                 <th>Email</th>

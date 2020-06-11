@@ -6,6 +6,7 @@ export default function CreditCardStatus() {
     return (
         <div>
             <h1>Customer CreditCard Approval Status</h1>
+            <input placeholder='Search'></input>
             <table>
                 <th>Customer ID</th>
                 <th>Email</th>
