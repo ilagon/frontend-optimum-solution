@@ -3,7 +3,6 @@ import CustomerDetails from './CustomerDetails'
 import ApprovalStatus from './ApprovalStatus'
 import CreditCardStatus from './CreditCardStatus'
 import Overview from './Overview'
-import Reset from './ResetButton'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 export default function Mainpage() {
@@ -12,10 +11,18 @@ export default function Mainpage() {
             <nav>
                 <header className='app-header'>Optimum DigiBank</header>
                 <Router>
-                    <Link to='/'>Overview</Link>
-                    <Link to='/customerdetails'>Customer Details</Link>
-                    <Link to='/approvalstatus'>Approval Status</Link>
-                    <Link to='/creditcardstatus'>CreditCard Status</Link>
+                    <ul>
+                        <li>
+                            <Link to='/'>Overview</Link>
+                        </li>
+                        <li>
+                            <Link to='/customerdetails'>Customer Details</Link>
+                        </li>
+                        <li>
+                            <Link to='/approvalstatus'>Approval Status</Link>
+                        </li>
+                        <Link to='/creditcardstatus'>CreditCard Status</Link>
+                    </ul>
                     <Switch>
                         <Route exact path='/'>
                             <Overview></Overview>
@@ -34,7 +41,7 @@ export default function Mainpage() {
             </nav>
 
 
-            <Reset></Reset>
+
         </div>
     )
 }
