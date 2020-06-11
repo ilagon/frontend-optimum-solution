@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const User = require("../models/creditcard_model");
+const CreditCard = require("../models/creditcard_model");
 
 exports.creditcard_application = (req, res) => {
-    const creditcard = new creditcard({
+    const creditcard = new CreditCard({
         _id: new mongoose.Types.ObjectId(),
         creditcard_num: req.body.creditcard_num,
         creditcard_status: req.body.creditcard_status,
@@ -28,8 +28,8 @@ exports.creditcard_application = (req, res) => {
   
   exports.creditcard_get_by_userId = (req, res) => {
     const id = req.params.userId;
-    User.findById(id)
-      .select("creditcard_num creditcard_balance creditcard_limit")
+    CreditCard.findById(id)
+      .select("_id creditcard_num creditcard_status creditcard_balance creditcard_limit creditcard_type")
       .exec()
       .then((doc) => {
         console.log("From db", doc);
