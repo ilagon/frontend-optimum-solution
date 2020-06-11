@@ -1,15 +1,15 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
-
+const {auth,authReset} = require('../../middleware/auth')
 const UserController = require("../controllers/userController");
 
 //calling the postman and the controller
 router.post("/register", UserController.user_register);
-router.get("/", UserController.users_get_all)
-router.get("/userId/:userId", UserController.users_by_id)
-router.get("/email", UserController.users_by_email)
-router.patch("/account/:userId", UserController.update_acct_status)
-router.delete("/:userId", UserController.user_delete)
+//to test auth
+router.get("/",auth, UserController.users_get_all);
+router.post("/login",UserController.user_login);
+
+
 module.exports = router;
 
 
