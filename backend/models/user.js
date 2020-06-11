@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//added address and contact number
 const UserSchema = new Schema ({
     _id: Schema.Types.ObjectId,
     account_status: {
@@ -15,6 +16,14 @@ const UserSchema = new Schema ({
       email: {
         type: String,
         required: true,
+      },
+      address:{
+        type: String,
+        required:true,
+      },
+      contact:{
+        type:Number,
+        required:true
       },
       password: {
         type: String,

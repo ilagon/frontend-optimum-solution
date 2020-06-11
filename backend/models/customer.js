@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+//
 const CustomerSchema = new Schema({
     _id: Schema.Types.ObjectId,
     balance:{

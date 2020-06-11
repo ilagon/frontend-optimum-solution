@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Customer = require("../models/customer")
 const User = require("../models/user")
 
-
+//
 exports.customer_create = (req, res) => {
     User.findById(req.body.userId)
       .then((user) => {

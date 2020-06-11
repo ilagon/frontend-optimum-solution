@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/user");
 
+//addes contact number and address
 exports.user_register = (req, res) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
@@ -8,7 +9,9 @@ exports.user_register = (req, res) => {
         account_status: req.body.account_status,
         email: req.body.email,
         password: req.body.password,
-        is_admin: req.body.is_admin
+        is_admin: req.body.is_admin,
+        contact: req.body.contact,
+        address: req.body.address,
     });
     user
     .save()
@@ -38,7 +41,9 @@ exports.user_get_all= (req, res) => {
                     email: doc.email,
                     account_status: doc.account_status,
                     is_admin: doc.is_admin,
-                    _id: doc._id
+                    _id: doc._id,
+                    contact: doc.contact,
+                    address: doc.address,
                 }
             }))
         }
