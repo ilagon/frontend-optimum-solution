@@ -3,48 +3,31 @@ import CustomerDetails from './CustomerDetails'
 import ApprovalStatus from './ApprovalStatus'
 import CreditCardStatus from './CreditCardStatus'
 import Overview from './Overview'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import './Sidebar.css'
+import Sidebar from './sidebar/Sidebar'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 
 export default function Mainpage() {
     return (
-        <>
         <div>
-            <nav className='sidebar'>
-                <h4>Optimum DigiBank</h4>
-                <Router>
-                    <ul>
-                        <li>
-                            <Link to='/'>Overview</Link>
-                        </li>
-                        <li>
-                            <Link to='/customerdetails'>Customer Details</Link>
-                        </li>
-                        <li>
-                            <Link to='/approvalstatus'>Approval Status</Link>
-                        </li>
-                        <Link to='/creditcardstatus'>CreditCard Status</Link>
-                    </ul>
-                    <Switch>
-                        <Route exact path='/'>
-                            <Overview></Overview>
-                        </Route>
-                        <Route path='/customerDetails'>
-                            <CustomerDetails></CustomerDetails>
-                        </Route>
-                        <Route path='/approvalstatus'>
-                            <ApprovalStatus></ApprovalStatus>
-                        </Route>
-                        <Route path='/creditcardstatus'>
-                            <CreditCardStatus></CreditCardStatus>
-                        </Route>
-                    </Switch>
-                </Router>
-            </nav>
-
-
-
+            <Router>
+                <Sidebar></Sidebar>
+                <Switch>
+                    <Route exact path='/'>
+                        <Overview></Overview>
+                    </Route>
+                    <Route path='/customerDetails'>
+                        <CustomerDetails></CustomerDetails>
+                    </Route>
+                    <Route path='/approvalstatus'>
+                        <ApprovalStatus></ApprovalStatus>
+                    </Route>
+                    <Route path='/creditcardstatus'>
+                        <CreditCardStatus></CreditCardStatus>
+                    </Route>
+                </Switch>
+            </Router>
         </div>
-        </>
+
     )
 }
