@@ -11,7 +11,7 @@ router.post("/login",UserController.user_login);
 
 
 router.post("/forget_password",UserController.forgot_password);
-router.patch("/password/:id",authReset, UserController.resetPassword);
+router.patch("/recover/:token",authReset, UserController.resetPassword);
 
 
 module.exports = router;
