@@ -21,3 +21,9 @@ to <- "start": "nodemon ./index.js --execute babel-node -e js" ->
 front end
 create-react-app
 npm i axios
+
+backend
+npm install uuid
+npm install mailgun-js
+npm install bcrypt
+npm install jsonwebtoken
