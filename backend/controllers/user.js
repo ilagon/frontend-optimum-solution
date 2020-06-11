@@ -10,8 +10,7 @@ exports.user_register = (req, res) => {
         email: req.body.email,
         password: req.body.password,
         user_type: req.body.user_type,
-        contact: req.body.contact,
-        address: req.body.address,
+        
     });
     user
     .save()
@@ -30,7 +29,7 @@ exports.user_register = (req, res) => {
 
 exports.user_get_all= (req, res) => {
     User.find()
-    .select("name email account_status is_admin _id")
+    .select("name email account_status user_type")
     .exec()
     .then((docs) => {
         const response = {
@@ -39,11 +38,11 @@ exports.user_get_all= (req, res) => {
                 return{
                     name: doc.name,
                     email: doc.email,
+                    user_type: doc.user_type,
                     account_status: doc.account_status,
                     
                     _id: doc._id,
-                    contact: doc.contact,
-                    address: doc.address,
+                  
                 }
             }))
         }
@@ -60,7 +59,7 @@ exports.user_get_all= (req, res) => {
 exports.user_get_by_id = (req, res) => {
     const id = req.params.userId;
     User.findById(id)
-    .select("name email account_status is_admin _id")
+    .select("name email account_status user_type")
     .exec()
     .then(docs => {
         console.log("From db", docs);
