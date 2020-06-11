@@ -1,117 +1,99 @@
 const mongoose = require("mongoose");
 const User = require("../models/user");
+const bcrypt = require('bcrypt');
+const mailgun = require("mailgun-js");
+const { v4: uuidv4 } = require('uuid');
+const jwt = require("jsonwebtoken")
 
-exports.user_register = (req, res) => {
-    const user = new User({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        account_status: req.body.account_status,
-        email: req.body.email,
-        password: req.body.password,
-        is_admin: req.body.is_admin
-    });
-    user
-    .save()
-    .then(result => {
-        console.log(result);
-        res.status(201).json({
-            message: "User created"
-        })
-    })
-    .catch(err => {
-        res.status(500).json({
-            error: err,
-        })
-    })
-}   
+const mg = mailgun({
+    apiKey: process.env.MAILGUN_APIKEY,
+    domain: process.env.MAILGUN_DOMAIN, //
+});
 
-exports.user_get_all= (req, res) => {
-    User.find()
-    .select("name email account_status is_admin _id")
-    .exec()
-    .then((docs) => {
-        const response = {
-            count: docs.length,
-            Users: docs.map((doc => {
-                return{
-                    name: doc.name,
-                    email: doc.email,
-                    account_status: doc.account_status,
-                    is_admin: doc.is_admin,
-                    _id: doc._id
-                }
-            }))
-        }
-        res.status(200).json(response);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-    })
-}
+exports.user_login = (req, res) => {
+    User.findOne({ email: req.body.email })
+        .select("password account_status")
+        .exec()
+        .then((doc) => {
+            if (doc) {
+                bcrypt.compare(req.body.password, doc.password, function (err, result) {
+                    if (result) {
 
-exports.user_get_by_id = (req, res) => {
-    const id = req.params.userId;
-    User.findById(id)
-    .select("name email account_status is_admin _id")
-    .exec()
-    .then(docs => {
-        console.log("From db", doc);
-        if(doc){
-            res.status(200).json({
-                user: doc
-            })
-        } else{
-            res.status(404).json({
-                message: "No valid entry found"
-            })
-        }
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-        
-    })
-}
+                        const token = jwt.sign({
+                            email: req.body.email,
+                        },
+                            process.env.JWT_KEY, {
+                            expiresIn: 120
+                        })
+                        if (doc.account_status == "Active") {
+                            res.status(200).json({
+                                token,
+                                message: "success"
+                            })
+                        }
+                        else if (doc.account_status == "Pending") {
+                            res.status(401).json({
+                                message: "Your Account has not been approved by the Administrator"
+                            })
+                        }
+                        else if (doc.account_status == "inactive") {
+                            res.status(401).json({
+                                message: "Your account has been inactive"
+                            })
+                        }
+                    }
+                    else {
+                        res.status(401).json({
+                            message: "invalid credentials"
+                        })
+                    }
+                    if (err) {
+                        res.status(401).json({
+                            message: "Authentication failed"
+                        })
+                    }
 
-exports.user_delete = (req, res) => {
-    const id = req.params.userId;
-    User.deleteOne({_id: id})
-    .exec()
-    .then(() => {
-        res.status(200).json({message: "User delete"})
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-    })
-}
-
-exports.update_account_status = (req, res) => {
-    const id = req.params.userId;
-    User.updateOne(
-        {_id : id},
-        {
-            $set: {
-                account_status: req.body.account_status
+                });
             }
-        }
-    )
-    .exec()
-    .then(result => {
-        console.log(result);
-        res.status(200).json(result);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
+            else {
+                res.status(401).json({
+                    message: "email not found "
+                })
+            }
+
         })
-    })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
+}
+
+
+
+//to test authentication token
+exports.users_get_all = (req, res) => {
+    User.find()
+        .select("name email account_status is_admin _id")
+        .exec()
+        .then((docs) => {
+            const response = {
+                count: docs.length,
+                Users: docs.map((doc => {
+                    return {
+                        name: doc.name,
+                        email: doc.email,
+                        account_status: doc.account_status,
+                        is_admin: doc.is_admin,
+                        _id: doc._id,
+                    }
+                }))
+            }
+            res.status(200).json(response);
+        }) 
+        .catch((err) => {
+            console.log(err)
+            res.status(500).json({
+                error: err
+            })
+        })
 }
