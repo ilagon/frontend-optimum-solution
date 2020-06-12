@@ -46,7 +46,6 @@ export default function Sidebar() {
                     <ListItemText primary='CreditCard Status' />
                 </Link>
             </ListItem>
-
         </div >
     )
 }
