@@ -1,9 +1,0 @@
-{
-    "env": {
-      "JWT_KEY": "secret",
-      "JWT_RESET": "reset",
-      "MAILGUN_APIKEY": "addyourapikey",
-      "MAILGUN_DOMAIN": "addyourdomain"
-    }
-}
-  
