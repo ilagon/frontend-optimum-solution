@@ -14,7 +14,7 @@ exports.creditcard_create = (req, res) => {
     
         const creditcard = new CreditCard({
           _id: mongoose.Types.ObjectId(),
-          creditcard_status: "Approved",
+          creditcard_status: "Pending",
           creditcard_limit: req.body.creditcard_limit,
           creditcard_type: req.body.creditcard_type,
           creditcard_balance: req.body.creditcard_balance,
@@ -26,10 +26,10 @@ exports.creditcard_create = (req, res) => {
       .then((result) => {
         console.log(result);
         res.status(201).json({
-          message: "Credit Card created",
+          message: "Credit Card applied",
           createdCust: {
             cardId: result._id,
-            creditcard_status: "Approved",
+            creditcard_status: "Pending",
             creditcard_limit: result.creditcard_limit,
             creditcard_type: result.creditcard_type,
             creditcard_num: result.creditcard_num,

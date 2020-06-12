@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/user");
 
+
 //addes contact number and address
 exports.user_register = (req, res) => {
     const user = new User({
@@ -43,6 +44,7 @@ exports.user_get_all= (req, res) => {
                     email: doc.email,
                     user_type: doc.user_type,
                     account_status: doc.account_status,
+                    
       
                 }
             }))
@@ -56,6 +58,7 @@ exports.user_get_all= (req, res) => {
         })
     })
 }
+
 
 //view customer details search by ID
 exports.user_get_by_id = (req, res) => {
