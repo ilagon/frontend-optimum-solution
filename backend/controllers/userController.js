@@ -191,62 +191,54 @@ exports.forgot_password = (req, res) => {
 }
 
 exports.resetPassword = (req, res) => {
-
     User.findOne({ resetPasswordToken: req.params.token })
-
         .select("email password")
         .exec()
         .then((result) => {
             if (result) {
                 bcrypt.compare(req.body.password, result.password, function (err, match) {
-                    if (match) {
+                   if(match){
                         res.status(401).json({
-                            message: "New password cannot be your previous password"
+                            message: "Password cannot be the same"
                         })
-                    }
-                    else if (err) {
-                        res.status(401).json({
-                            error: err + "BIG ERROR"
-                        })
-                    }
-
-                });
-
-
-                bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-
-                    console.log(hash + "  " + result.password)
-                    User.updateOne(
-                        { email: result.email },
-                        {
-                            $set: {
-                                password: hash,
-
-                            }
-                        },
-                    )
+                   }
+                   if(err){
+                       res.status(401).json({
+                           err: err
+                       })
+                   }
+                   if(!match){
+                    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                        User.updateOne(
+                            { email: result.email },
+                            {
+                                $set: {
+                                    password: hash,
+                                    resetPasswordToken: null
+    
+                                }
+                            },
+                        )
                         .exec()
                         .then((doc) => {
-                            if (doc) {
-                                const data = {
-                                    from: "Mailgun Sandbox <noreply@optimum.com>",
-                                    to: result.email,
-                                    subject: "Password has been reset",
-                                    text: `Your password has been successfully reset`
-                                };
-                                mg.messages().send(data, function (error, body) {
-                                    console.log(body.message);
-                                });
-
-                                res.status(200).json({
-                                    message: "Password resetted"
-                                })
-
-                            }
+                            const data = {
+                                from: "Mailgun Sandbox <noreply@optimum.com>",
+                                to: result.email,
+                                subject: "Password has been reset",
+                                text: `Your password has been successfully reset`
+                            };
+                            mg.messages().send(data, function (error, body) {
+                                console.log(body.message);
+                            });
+                            res.status(200).json({
+                                message: "Successfully update"
+                            })
                         })
+                    });
+                   }
                 });
             }
-            else {
+            else{
                 res.status(404).json({
                     message: "404 not found"
                 })
@@ -256,7 +248,4 @@ exports.resetPassword = (req, res) => {
             console.log(err);
             res.status(500).json({ error: err });
         });
-
-
-
 }
