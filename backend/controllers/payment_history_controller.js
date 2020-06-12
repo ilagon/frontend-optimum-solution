@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const PaymentHistory = require("../models/payment_history_model");
 
 exports.paymentHistory_get_all = (req,res) => {
-    const creditcardID=req.params.creditcardID;
-    PaymentHistory.findById(creditcardID)
+    const creditcardId = req.params.creditcardId;
+    PaymentHistory.findById(creditcardId)
     .populate("creditCard", ["creditcard_num"])
     .exec()
     .then((docs) => {

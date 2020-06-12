@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PaymentHistorySchema = new Schema ({
-    id: Schema.Types.ObjectId,
+    _id: Schema.Types.ObjectId,
     payment_type: {
         type: String,
         enum: ["Mobile Bill", "Transfer", "Tax"],
-        default: "Mobile Bill"
+        required:true
       },
       payment_amount: {
         type: Number,
@@ -23,11 +23,6 @@ const PaymentHistorySchema = new Schema ({
       creditCard: {
         type: Schema.Types.ObjectId,
         ref: "CreditCard",
-        required: true
-      },
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
         required: true
       },
 })
