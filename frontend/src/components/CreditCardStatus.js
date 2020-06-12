@@ -1,13 +1,14 @@
 import React from 'react'
 import ApproveCreditCard from './button/ApproveCreditCardButton'
 import DenyCreditCard from './button/DenyCreditCardButton'
+import Search from './searchbar/Searchbar'
 
 export default function CreditCardStatus() {
     return (
         <div>
             <main>
                 <h1>Customer CreditCard Approval Status</h1>
-                <input placeholder='Search'></input>
+                <Search />
                 <table>
                     <th>Customer ID</th>
                     <th>Email</th>
