@@ -1,9 +1,16 @@
-#Container{
-  background-image: url(https://source.unsplash.com/random);
+#container{
+  position: relative;
 }
 
 #loginpic{
   width: 50vw;
   height: 100vh;
-  float: left;
+  display: block;
+  position: absolute;
+}
+
+#login{
+  position: absolute;
+  top: 10vh;
+  right: 15vw;
 }
