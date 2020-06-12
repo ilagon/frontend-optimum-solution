@@ -28,6 +28,8 @@ exports.user_register = (req, res) => {
     })
 }   
 
+
+
 //view customer details
 exports.user_get_all= (req, res) => {
     User.find()

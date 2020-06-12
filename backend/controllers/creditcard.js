@@ -46,7 +46,7 @@ exports.creditcard_create = (req, res) => {
       });
   };
   
-  
+  //overview page list
   exports.creditcard_get_all = (req, res) => {
     CreditCard.find()
       .populate("user", ["email", "account_status"])
@@ -74,6 +74,64 @@ exports.creditcard_create = (req, res) => {
       });
   };
   
+  //overview page user search by user id
+  exports.creditcard_search_by_id = (req, res) => {
+    const id = req.body.userId;
+    CreditCard.findById(id)
+      .populate("user", ["email", "account_status"])
+      .exec()
+      .then((docs) => {
+        res.status(200).json({
+          count: docs.length,
+          creditcard: docs.map((doc) => {
+            return {
+              _id: doc._id,
+              user: doc.user,
+              creditcard_balance: doc.creditcard_balance,
+              creditcard_type: doc.creditcard_type,
+              creditcard_status: doc.creditcard_status,
+              creditcard_limit: doc.creditcard_limit,
+         
+            };
+          }),
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  };
+
+  //overview page user search by card id
+  exports.creditcard_search_by_cardid = (req, res) => {
+    const id = req.params.cardId;
+    CreditCard.findById(id)
+      .populate("user", ["email", "account_status"])
+      .exec()
+      .then((docs) => {
+        res.status(200).json({
+          count: docs.length,
+          creditcard: docs.map((doc) => {
+            return {
+              _id: doc._id,
+              user: doc.user,
+              creditcard_balance: doc.creditcard_balance,
+              creditcard_type: doc.creditcard_type,
+              creditcard_status: doc.creditcard_status,
+              creditcard_limit: doc.creditcard_limit,
+         
+            };
+          }),
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  };
+
  
   exports.creditcard_approval = (req, res) => {
     
