@@ -85,7 +85,27 @@ exports.user_get_by_id = (req, res) => {
 }
 
 
-
+//get user by email
+exports.users_get_by_email = (req, res) => {
+    const email =req.params.email;
+    User.find({email: email})
+    .select ("name email account_status is_admin _id")
+    .exec()
+    .then((doc) => {
+        console.log("From db", doc);
+        if(doc){
+            res.status(200).json({
+                user:doc
+            })
+        }else{
+            res.status(404).json({message:"No valid entry found!"});
+        }
+    })
+    .catch((err)=>{
+        console.log(err);
+        res.status(500).json({error: err});
+    })
+}
 
 
 exports.user_delete = (req, res) => {

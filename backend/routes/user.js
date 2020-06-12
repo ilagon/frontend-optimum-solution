@@ -3,10 +3,11 @@ const router = express.Router();
 
 const UserController = require("../controllers/user");
 
-router.get("/", UserController.user_get_all);
-router.post("/register", UserController.user_register);
-router.get("/:userId", UserController.user_get_by_id);
-router.delete("/:userId", UserController.user_delete);
-router.patch("/:userId/account", UserController.update_account_status);
+router.get("/", UserController.user_get_all); //view customer details
+router.post("/register", UserController.user_register); //register customer
+router.get("/:email", UserController.users_get_by_email); //view customer by email
+router.get("/:userId", UserController.user_get_by_id); //view customer details by id
+router.delete("/:userId", UserController.user_delete); 
+router.patch("/:userId/account", UserController.update_account_status); //account activate
 
 module.exports = router;
