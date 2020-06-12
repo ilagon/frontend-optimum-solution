@@ -1,15 +1,19 @@
-:root{
-  /* Refers to the main page of every link
-  in this react application */
+/* :root{
+  
   font-size: 20px;
-}
+} */
 
-main{
-  /* Allocate an empty section 20px * 10rem = 200px 
-  to your left for the navbar */
+/* Refers to the main page of every link
+  in this react application */
+
+/* main{
+  
   margin-left: 10rem;
   padding: 1rem;
-}
+} */
+
+/* Allocate an empty section 20px * 10rem = 200px 
+  to your left for the navbar */
 
 body {
   margin: 0;

@@ -21,17 +21,17 @@ export default function Overview() {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth='1g' className={classes.container}>
                     <Grid container spacing={3}  justify="center" >
-                        <Grid item xs={12} md={3} lg={3}>
+                        <Grid item xs={4} md={3} lg={3}>
                             <Paper className={fixedHeightPaper}>
                                 Pending Customer Status
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={3} lg={3}>
+                        <Grid item xs={4} md={3} lg={3}>
                             <Paper className={fixedHeightPaper}>
                                 Pending CreditCard Approval
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={3} lg={3}>
+                        <Grid item xs={4} md={3} lg={3}>
                             <Paper className={fixedHeightPaper}>
                                 Total Customers
                             </Paper>
