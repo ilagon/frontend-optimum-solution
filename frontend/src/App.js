@@ -4,6 +4,7 @@ import Nav from './components/Login/Nav';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import signUp from './components/Login/SignUp'
 import Login from './components/Login/Login'
+import './App.css'
 
 
 function App() {

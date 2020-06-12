@@ -25,12 +25,15 @@ exports.user_register = (req, res) => {
 
     bcrypt.hash(user.password, saltRounds, function (err, hash) {
         user.password = hash;
-        user
-            .save()
+        user.save()
             .then((result) => {
                 console.log(result)
                 res.status(200).json({
-                    message: "User created"
+                    message: "User created",
+                    name: user.name,
+                    email: user.email,
+                    password: user.password,
+                    hash: hash
                 })
             })
             .catch((err) => {
@@ -80,7 +83,7 @@ exports.user_login = (req, res) => {
                             email: req.body.email,
                         },
                             process.env.JWT_KEY, {
-                            expiresIn: 120
+                            expiresIn: 1200
                         })
                         if (doc.account_status == "Active") {
                             res.status(200).json({
@@ -126,7 +129,6 @@ exports.user_login = (req, res) => {
 }
 
 
-
 exports.forgot_password = (req, res) => {
     const email = req.body.email;
     //const id = uuidv4();
@@ -144,20 +146,20 @@ exports.forgot_password = (req, res) => {
                     from: "Mailgun Sandbox <noreply@optimum.com>",
                     to: email,
                     subject: "Reset Password",
-                    text: `To reset your password, please click on this link: http://localhost:3000/users/recover/${token}`
+                    text: `To reset your password, please click on this link: http://localhost:7001/users/recover/${token}`
                 };
                 mg.messages().send(data, function (error, body) {
                     console.log(body.message);
                 });
                 User.updateOne(
-                            { email: email },
-                            {
-                                $set: {
-                                    resetPasswordToken: token
-                
-                                }
-                            },
-                        )
+                    { email: email },
+                    {
+                        $set: {
+                            resetPasswordToken: token
+
+                        }
+                    },
+                )
                     .exec()
                 res.status(200).json({
                     token,
@@ -184,7 +186,7 @@ exports.resetPassword = (req, res) => {
         .exec()
         .then((result) => {
             if (result) {
-                bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
                     User.updateOne(
                         { email: result.email },
                         {
@@ -194,18 +196,18 @@ exports.resetPassword = (req, res) => {
                             }
                         },
                     )
-                    .exec()
-                    .then((doc) =>{
-                        if(doc){
-                            res.status(200).json({
-                                message: "Password resetted"
-                            })
-            
-                        }
-                    })
+                        .exec()
+                        .then((doc) => {
+                            if (doc) {
+                                res.status(200).json({
+                                    message: "Password resetted"
+                                })
+
+                            }
+                        })
                 });
             }
-            else{
+            else {
                 res.status(404).json({
                     message: "404 not found"
                 })
@@ -216,7 +218,6 @@ exports.resetPassword = (req, res) => {
             res.status(500).json({ error: err });
         });
 
-  
-  
+
+
 }
- 

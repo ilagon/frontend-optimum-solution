@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -27,8 +28,19 @@ function Copyright() {
     );
 }
 const useStyles = makeStyles((theme) => ({
+    root: {
+        height: '100vh',
+    },
+    image: {
+        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor:
+            theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    },
     paper: {
-        marginTop: theme.spacing(8),
+        margin: theme.spacing(8, 4),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -39,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(1),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -73,20 +85,25 @@ const Login = () => {
     }
 
     return (
-        <React.Fragment>
-
+        <div >
+            <img src="https://source.unsplash.com/random" id="loginpic" />
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
+                <Grid id="Container" item xs={false} sm={4} md={7} className={classes.image} />
+
+
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         LOGIN
-        </Typography>
+                    </Typography>
+                    <Typography component="h1" variant="h5">
+                        Register
+                    </Typography>
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
-
 
                             <Grid item xs={12}>
                                 <TextField
@@ -134,10 +151,11 @@ const Login = () => {
                 <Box mt={5}>
                     <Copyright />
                 </Box>
+
             </Container>
 
 
-        </React.Fragment>
+        </div>
     )
 };
 
