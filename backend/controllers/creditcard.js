@@ -105,8 +105,8 @@ exports.creditcard_create = (req, res) => {
 
   //overview page user search by card id
   exports.creditcard_search_by_cardid = (req, res) => {
-    const id = req.params.cardId;
-    CreditCard.findById(id)
+    const cardId = req.params.cardId;
+    CreditCard.findById(cardId)
       .populate("user", ["email", "account_status"])
       .exec()
       .then((docs) => {
