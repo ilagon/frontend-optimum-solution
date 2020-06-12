@@ -127,13 +127,37 @@ exports.user_delete = (req, res) => {
 }
 
 //account activate
-exports.update_account_status = (req, res) => {
+exports.update_activate_account = (req, res) => {
     const id = req.params.userId;
     User.updateOne(
         {_id : id},
         {
             $set: {
                 account_status: "Active",
+            }
+        }
+    )
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })
+}
+
+//account deny
+exports.update_deactivate_account = (req, res) => {
+    const id = req.params.userId;
+    User.updateOne(
+        {_id : id},
+        {
+            $set: {
+                account_status: "Inactive",
             }
         }
     )
