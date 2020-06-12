@@ -1,9 +1,48 @@
 const mongoose = require("mongoose");
 const PaymentHistory = require("../models/payment_history_model");
+const CreditCard = require("../models/creditcard_model")
 
-exports.paymentHistory_get_all = (req,res) => {
+exports.add_paymentHistory = (req, res) => {
+    CreditCard.findById(req.body.creditcardId)
+  .then((creditcard) => {
+      if(!creditcard) {
+          return res.status(404).json({message: "CreditCard not found!"})
+      }
+    const paymentHistory = new PaymentHistory({
+        _id: new mongoose.Types.ObjectId(),
+        payment_type: req.body.payment_type,
+        payment_amount: req.body.payment_amount,
+        transfer_number: req.body.transfer_number,
+        date_time: req.body.date_time,
+        creditCard: req.body.creditcardId
+    });
+        return paymentHistory.save();
+    })
+    .then((result) => {
+      console.log(result);
+      res.status(201).json({
+      message: "Payment history updated",
+      createdCust: {
+        _id: result._id,
+        payment_type: result.payment_type,
+        payment_amount: result.payment_amount,
+        transfer_number: result.transfer_number,
+        date_time: result.date_time,
+        creditCard: result.creditCard,
+      },
+    });
+  })
+    .catch((err) => {
+        res.status(500).json({
+            error: err,
+        });
+    });
+};
+
+
+exports.paymentHistory_get_all_by_creditcardId = (req,res) => {
     const creditcardId = req.params.creditcardId;
-    PaymentHistory.findById(creditcardId)
+    PaymentHistory.find({creditCard:creditcardId})
     .populate("creditCard", ["creditcard_num"])
     .exec()
     .then((docs) => {

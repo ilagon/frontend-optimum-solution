@@ -3,7 +3,7 @@ const router = express.Router();
 
 const CreditCardController = require("../controllers/creditcard_controller");
 
-router.get("/:creditcardId", CreditCardController.creditcard_get_by_creditcardId);
+router.get("/:userId", CreditCardController.creditcard_get_by_userId);
 router.post("/creditcardApplication", CreditCardController.creditcard_application);
 // router.get("/:userId", CreditCardController.user_get_by_id);
 // router.delete("/:userId", CreditCardController.user_delete);
