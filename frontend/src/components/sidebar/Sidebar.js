@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import './Sidebar.css'
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import HouseIcon from '@material-ui/icons/House';
+import PeopleIcon from '@material-ui/icons/People';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
 
 export default function Sidebar() {
     return (
@@ -12,22 +14,22 @@ export default function Sidebar() {
                 <ul className='sidebar-nav'>
                     <li className='sidenav-item'>
                         <Link to='/'>
-                            <HouseIcon></HouseIcon>Overview
+                            <HouseIcon />Overview
                         </Link>
                     </li>
                     <li className='sidenav-item'>
                         <Link to='/customerdetails'>
-                            Customer Details
+                            <ContactMailIcon /> Customer Details
                              </Link>
                     </li>
                     <li className='sidenav-item'>
                         <Link to='/approvalstatus'>
-                            Approval Status
+                            <PeopleIcon /> Approval Status
                         </Link>
                     </li>
                     <li className='sidenav-item'>
                         <Link to='/creditcardstatus'>
-                            <CreditCardIcon></CreditCardIcon>CreditCard Status
+                            <CreditCardIcon />CreditCard Status
                         </Link>
                     </li>
                 </ul>

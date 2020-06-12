@@ -1,11 +1,12 @@
 import React from 'react'
+import Search from './searchbar/Searchbar'
 
 export default function CustomerDetails() {
     return (
         <div>
             <main>
                 <h1>Customer Details</h1>
-                <input placeholder='Search'></input>
+                <Search />
                 <table>
                     <th>Customer ID</th>
                     <th>Name</th>

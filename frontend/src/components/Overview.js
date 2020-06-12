@@ -1,31 +1,27 @@
 import React from 'react'
-
 import Reset from './button/ResetButton'
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-
-// import FormLabel from '@material-ui/core/FormLabel';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import Radio from '@material-ui/core/Radio';
-
+import Search from './searchbar/Searchbar'
 
 export default function Overview() {
 
     const classes = useStyles();
 
-    // xs = when you make your browser half screen
-    // md = when you make your browser full screen
+    // xs, sm, md, lg, xl are screen sizes
+    // this will dynamically resize the size of the grid
+    // as you make the browser small -> big or vice versa
+    // if the row adds up to 12, then all of it will
+    // be on the same row, otherwise it will get printed out
+    // on th next row
     return (
         <div>
 
             <header></header>
 
             <main>
-                <Grid container direction='row' justify='flex-start' alignItems="center" spacing={10} className={classes.grid}>
+                <Grid container direction='row' justify='flex-start' alignItems="center" spacing={3} className={classes.grid}>
                     <Grid item xs={4} md={4}>
                         <Paper className={classes.paper}>Pending Customer Status</Paper>
                     </Grid>
@@ -37,7 +33,7 @@ export default function Overview() {
                     </Grid>
                 </Grid>
                 <h1>Customer List</h1>
-                <input placeholder='Search'></input>
+                <Search />
                 <footer className="footer"><Reset></Reset></footer>
             </main>
         </div>
@@ -51,15 +47,15 @@ export default function Overview() {
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-      },
-      paper: {
+    },
+    paper: {
         height: 140,
-        width: 100,
-      },
-      control: {
+        width: 230,
+    },
+    control: {
         padding: theme.spacing(2),
-      },
-    }));
+    },
+}));
 
 
 
