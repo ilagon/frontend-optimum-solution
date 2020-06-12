@@ -3,7 +3,8 @@ const router = express.Router();
 
 const PaymentHistoryController = require("../controllers/payment_history_controller");
 
-router.get("/:creditcardId", PaymentHistoryController.paymentHistory_get_all);
+router.get("/:creditcardId", PaymentHistoryController.paymentHistory_get_all_by_creditcardId);
+router.post("/addPayment", PaymentHistoryController.add_paymentHistory);
 //router.post("/creditcardApplication", PaymentHistoryController.creditcard_application);
 // router.get("/:userId", PaymentHistoryController.user_get_by_id);
 // router.delete("/:userId", PaymentHistoryController.user_delete);

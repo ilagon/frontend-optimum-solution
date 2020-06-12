@@ -42,9 +42,9 @@ exports.creditcard_application = (req, res) => {
 };
 
   
-  exports.creditcard_get_by_creditcardId = (req, res) => {
-    const id = req.params.creditcardId;
-    CreditCard.findById(id)
+  exports.creditcard_get_by_userId = (req, res) => {
+    const userId = req.params.userId;
+    CreditCard.find({user:userId})
       .select("creditcard_num creditcard_status creditcard_balance creditcard_limit creditcard_type user _id")
       .exec()
       .then((doc) => {
