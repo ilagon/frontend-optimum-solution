@@ -27,6 +27,7 @@ exports.user_register = (req, res) => {
     })
 }   
 
+//view customer details
 exports.user_get_all= (req, res) => {
     User.find()
     .select("name email account_status user_type")
@@ -36,13 +37,13 @@ exports.user_get_all= (req, res) => {
             count: docs.length,
             Users: docs.map((doc => {
                 return{
+
+                     _id: doc._id,
                     name: doc.name,
                     email: doc.email,
                     user_type: doc.user_type,
                     account_status: doc.account_status,
-                    
-                    _id: doc._id,
-                  
+      
                 }
             }))
         }
@@ -56,6 +57,7 @@ exports.user_get_all= (req, res) => {
     })
 }
 
+//view customer details search by ID
 exports.user_get_by_id = (req, res) => {
     const id = req.params.userId;
     User.findById(id)
@@ -82,6 +84,10 @@ exports.user_get_by_id = (req, res) => {
     })
 }
 
+
+
+
+
 exports.user_delete = (req, res) => {
     const id = req.params.userId;
     User.deleteOne({_id: id})
@@ -97,13 +103,14 @@ exports.user_delete = (req, res) => {
     })
 }
 
+//account activate
 exports.update_account_status = (req, res) => {
     const id = req.params.userId;
     User.updateOne(
         {_id : id},
         {
             $set: {
-                account_status: req.body.account_status
+                account_status: "Active",
             }
         }
     )

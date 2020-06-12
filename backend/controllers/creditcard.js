@@ -5,14 +5,16 @@ const User = require("../models/user")
 
 //create credit card
 exports.creditcard_create = (req, res) => {
+    
     User.findById(req.body.userId)
       .then((user) => {
         if (!user) {
           return res.status(404).json({ message: "User not found!" });
         }
+    
         const creditcard = new CreditCard({
           _id: mongoose.Types.ObjectId(),
-          creditcard_status: req.body.creditcard_status,
+          creditcard_status: "Approved",
           creditcard_limit: req.body.creditcard_limit,
           creditcard_type: req.body.creditcard_type,
           creditcard_balance: req.body.creditcard_balance,
@@ -27,7 +29,7 @@ exports.creditcard_create = (req, res) => {
           message: "Credit Card created",
           createdCust: {
             cardId: result._id,
-            creditcard_status: result.creditcard_status,
+            creditcard_status: "Approved",
             creditcard_limit: result.creditcard_limit,
             creditcard_type: result.creditcard_type,
             creditcard_num: result.creditcard_num,
@@ -56,7 +58,7 @@ exports.creditcard_create = (req, res) => {
             return {
               _id: doc._id,
               user: doc.user,
-              balance: doc.balance,
+              creditcard_balance: doc.creditcard_balance,
               creditcard_type: doc.creditcard_type,
               creditcard_status: doc.creditcard_status,
               creditcard_limit: doc.creditcard_limit,
@@ -73,25 +75,27 @@ exports.creditcard_create = (req, res) => {
   };
   
  
-  exports.creditcard_get_by_id = (req, res) => {
-    const id = req.params.customerId;
-    const email = req.params.email
-    CreditCard.findById(id)
+  exports.creditcard_approval = (req, res) => {
+    
+    CreditCard.find({creditcard_status: "Pending"})
     .populate("user",["email", "account_status"])
     .exec()
-    .then(doc => {
-        console.log("From Database", doc);
-        if(doc){
+    .then(docs => {
+        console.log("From Database", docs);
+        if(docs){
             res.status(200).json({
-              
-                 
+              count: docs.length,
+              creditcard: docs.map((doc) => {
+                return {
+                  _id: doc._id,
                   user: doc.user,
-                  balance: doc.balance,
+                  creditcard_balance: doc.creditcard_balance,
                   creditcard_type: doc.creditcard_type,
                   creditcard_status: doc.creditcard_status,
                   creditcard_limit: doc.creditcard_limit,
              
-                
+                };
+              }),
             })
         } else{
             res.status(404).json({

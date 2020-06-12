@@ -11,11 +11,8 @@ router.get("/",creditcardController.creditcard_get_all);
 //credit card create
 router.post("/create",creditcardController.creditcard_create);
 
-//overview search
-router.get("/:customerId",creditcardController.creditcard_get_by_id);
-
-//credit card approval
-router.get("/details", creditcardController.creditcard_get_all);
+//credit card pending list
+router.get("/pending", creditcardController.creditcard_approval);
 
 
 //reset credit balance to credit limit
