@@ -1,64 +1,60 @@
 const mongoose = require("mongoose");
 const User = require("../models/userModel");
-const bcrypt = require('bcrypt');
 const mailgun = require("mailgun-js");
-const saltRounds = 10;
 const jwt = require("jsonwebtoken")
-const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
 
 const mg = mailgun({
     apiKey: process.env.MAILGUN_APIKEY,
     domain: process.env.MAILGUN_DOMAIN,
 });
 
-
 exports.user_register = (req, res) => {
-
-    User.findOne().select("email").exec().then(info => {
-        console.log(req.body.email + "  " + info.email)
-        if (info.email == req.body.email) {
-            res.status(401).json({
-                message: "Email already registered. Try a different email"
+    if(!req.body.email || !req.body.name || !req.body.password){
+        return res.status(500).json({
+            message: "Inputs are empty"
+        })
+    }
+    User.findOne({email: req.body.email}).exec().then(info => {    
+        if(info){
+           return res.status(401).json({
+                message: "Email already exist!"
+            })
+        }
+        else{
+            const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                name: req.body.name,
+                account_status: req.body.account_status,
+                email: req.body.email,
+                password: req.body.password,
+                is_admin: req.body.is_admin
+            })
+            bcrypt.hash(user.password, 10, function (err, hash) {
+                user.password = hash;
+                user.save()
+                    .then(() => {
+                        res.status(200).json({
+                            message: "Email successfully registered! Please wait 1-2 business days for admins to activate your account.",
+                        })
+                    })
+                    .catch((err) => {
+                        res.status(500).json({
+                            error: err
+                        })
+                    })
             })
         }
     })
-
-
-    const user = new User({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        account_status: req.body.account_status,
-        email: req.body.email,
-        password: req.body.password,
-        is_admin: req.body.is_admin
+    .catch((err) => {
+        res.status(500).json({
+            error: err
+        })
     })
-
-    bcrypt.hash(user.password, saltRounds, function (err, hash) {
-        user.password = hash;
-        user.save()
-            .then((result) => {
-                console.log(result)
-                res.status(200).json({
-                    message: "Email successfully registered! Please wait 1-2 business days for admins to activate your account.",
-                    name: user.name,
-                    email: user.email,
-                    password: user.password,
-                    hash: hash
-                })
-            })
-            .catch((err1) => {
-                res.status(500).json({
-                    error: err1,
-                });
-            });
-    });
 }
 
 
 exports.users_get_all = (req, res) => {
-    //retrieves all users that are admins
-    //User.find({is_admin:true})
-
     User.find().select("name email account_status _id").exec()
         .then(docs => {
             const response = {
@@ -81,14 +77,18 @@ exports.users_get_all = (req, res) => {
 
 
 exports.user_login = (req, res) => {
+    if(!req.body.email || !req.body.password){
+       return res.status(500).json({
+            message: "Inputs are empty"
+        })
+    }
     User.findOne({ email: req.body.email })
-        .select("password account_status")
+        .select("password account_status is_admin")
         .exec()
         .then((doc) => {
             if (doc) {
                 bcrypt.compare(req.body.password, doc.password, function (err, result) {
                     if (result) {
-
                         const token = jwt.sign({
                             email: req.body.email,
                         },
@@ -98,6 +98,7 @@ exports.user_login = (req, res) => {
                         if (doc.account_status == "Active") {
                             res.status(200).json({
                                 token,
+                                is_admin: doc.is_admin,
                                 message: "success"
                             })
                         }
@@ -122,7 +123,6 @@ exports.user_login = (req, res) => {
                             message: "Authentication failed"
                         })
                     }
-
                 });
             }
             else {
@@ -140,9 +140,12 @@ exports.user_login = (req, res) => {
 
 
 exports.forgot_password = (req, res) => {
-    const email = req.body.email;
-    //const id = uuidv4();
-    User.findOne({ email: email })
+    if(!req.body.email){
+        return res.status(401).json({
+            message: "inputs are empty"
+        })
+    }
+    User.findOne({ email: req.body.email })
         .exec()
         .then((result) => {
             if (result) {
@@ -154,19 +157,43 @@ exports.forgot_password = (req, res) => {
                 })
                 const data = {
                     from: "Mailgun Sandbox <noreply@optimum.com>",
-                    to: email,
+                    to: req.body.email,
                     subject: "Reset Password",
-                    text: `To reset your password, please click on this link: http://localhost:7001/users/recover/${token}`
+                    html: `There was recently a request to change the password on your account.
+                    <p>
+                    Hello there,
+                    <p>
+                         If you requested this password change, please click the link below to set a new password within 15min
+                         <br>
+                         <a href=" http://localhost:3000/users/recover/${token}">Click here to change your password</a>
+                         <p>
+                            If the link above does not work, paste this into your browser:
+                            <br>
+                            http://localhost:7001/users/recover/${token}
+                         </p>
+                         <p>
+                            If you don't want to change your password, just ignore this message.
+                         <p>
+                         <p>
+                         Thank you
+                         <br>
+                         Optimum Solution
+                         </p>
+                    </p>`
                 };
                 mg.messages().send(data, function (error, body) {
+                    if(error){
+                        res.status(500).json({
+                            error: error
+                        })
+                    }
                     console.log(body.message);
                 });
                 User.updateOne(
-                    { email: email },
+                    { email: req.body.email },
                     {
                         $set: {
                             resetPasswordToken: token
-
                         }
                     },
                 )
@@ -191,61 +218,70 @@ exports.forgot_password = (req, res) => {
 }
 
 exports.resetPassword = (req, res) => {
+    if(!req.body.password){
+       return res.status(500).json({
+            message: "Input is empty"
+        })
+    }
     User.findOne({ resetPasswordToken: req.params.token })
         .select("email password")
         .exec()
         .then((result) => {
             if (result) {
                 bcrypt.compare(req.body.password, result.password, function (err, match) {
-                   if(match){
+                    if (match) {
                         res.status(401).json({
                             message: "Password cannot be the same"
                         })
-                   }
-                   if(err){
-                       res.status(401).json({
-                           err: err
-                       })
-                   }
-                   if(!match){
-                    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-                        User.updateOne(
-                            { email: result.email },
-                            {
-                                $set: {
-                                    password: hash,
-                                    resetPasswordToken: null
-    
-                                }
-                            },
-                        )
-                        .exec()
-                        .then((doc) => {
-                            const data = {
-                                from: "Mailgun Sandbox <noreply@optimum.com>",
-                                to: result.email,
-                                subject: "Password has been reset",
-                                text: `Your password has been successfully reset`
-                            };
-                            mg.messages().send(data, function (error, body) {
-                                console.log(body.message);
-                            });
-                            res.status(200).json({
-                                message: "Successfully update"
-                            })
+                    }
+                    if (err) {
+                        res.status(401).json({
+                            err: err
                         })
-                    });
-                   }
+                    }
+                    if (!match) {
+                        bcrypt.hash(req.body.password, 10, function (err, hash) {
+                            User.updateOne(
+                                { email: result.email },
+                                {
+                                    $set: {
+                                        password: hash,
+                                        resetPasswordToken: null
+
+                                    }
+                                },
+                            )
+                                .exec()
+                                .then((doc) => {
+                                    const data = {
+                                        from: "Mailgun Sandbox <noreply@optimum.com>",
+                                        to: result.email,
+                                        subject: "Password has been reset",
+                                        text: `Your password has been successfully reset`
+                                    };
+                                    mg.messages().send(data, function (error, body) {
+                                        if(error){
+                                            res.status(500).json({
+                                                error: error
+                                            })
+                                        }
+                                        console.log(body.message);
+                                    });
+                                    res.status(200).json({
+                                        message: "Successfully update"
+                                    })
+                                })
+                        });
+                    }
                 });
             }
-            else{
+            else {
                 res.status(404).json({
                     message: "404 not found"
                 })
             }
         })
         .catch((err) => {
-            console.log(err);
             res.status(500).json({ error: err });
         });
 }
