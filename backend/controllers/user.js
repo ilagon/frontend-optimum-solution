@@ -64,7 +64,7 @@ exports.user_get_all= (req, res) => {
 
 //view customer details search by ID
 exports.user_get_by_id = (req, res) => {
-    const id = req.params.userId;
+    const id = req.params.userId
     User.findById(id)
     .select("name email account_status user_type")
     .exec()
