@@ -10,6 +10,8 @@ import Container from "@material-ui/core/Container";
 import clsx from "clsx";
 import axios from "axios";
 
+// 5 users per page
+
 export default function Overview() {
   const classes = useStyles();
   // clsx
@@ -18,7 +20,7 @@ export default function Overview() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const [userState, setUserState] = useState([]);
-  const [countUserState, setCountUserState ] = useState();
+  const [countUserState, setCountUserState] = useState();
 
   // Upon loading, useEffect will get called
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function Overview() {
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setUserState(response.data.Users);
-        setCountUserState(response.data.count)
+        setCountUserState(response.data.count);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));

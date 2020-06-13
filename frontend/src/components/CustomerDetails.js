@@ -5,9 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
-import MaterialTable from "material-table";
 import clsx from "clsx";
 import axios from "axios";
+
+// 10 Users per page
 
 export default function CustomerDetails() {
   const classes = useStyles();
