@@ -81,28 +81,25 @@ exports.creditcard_create = (req, res) => {
       .populate("user", ["email", "account_status"])
       .exec()
       .then((docs) => {
-        res.status(200).json({
-          count: docs.length,
-          creditcard: docs.map((doc) => {
-            return {
-              _id: doc._id,
-              user: doc.user,
-              creditcard_balance: doc.creditcard_balance,
-              creditcard_type: doc.creditcard_type,
-              creditcard_status: doc.creditcard_status,
-              creditcard_limit: doc.creditcard_limit,
-         
-            };
-          }),
-        });
-      })
-      .catch((err) => {
+        console.log("From db", docs);
+        if(docs){
+            res.status(200).json({
+                creditcard: docs
+            })
+        } else{
+            res.status(404).json({
+                message: "No valid entry found"
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
         res.status(500).json({
-          error: err,
-        });
-      });
-  };
-
+            error: err
+        })
+        
+    })
+}
   //overview page user search by card id
   exports.creditcard_search_by_cardid = (req, res) => {
     const cardId = req.params.cardId;
@@ -110,28 +107,25 @@ exports.creditcard_create = (req, res) => {
       .populate("user", ["email", "account_status"])
       .exec()
       .then((docs) => {
-        res.status(200).json({
-          count: docs.length,
-          creditcard: docs.map((doc) => {
-            return {
-              _id: doc._id,
-              user: doc.user,
-              creditcard_balance: doc.creditcard_balance,
-              creditcard_type: doc.creditcard_type,
-              creditcard_status: doc.creditcard_status,
-              creditcard_limit: doc.creditcard_limit,
-         
-            };
-          }),
-        });
-      })
-      .catch((err) => {
+        console.log("From db", docs);
+        if(docs){
+            res.status(200).json({
+                creditcard: docs
+            })
+        } else{
+            res.status(404).json({
+                message: "No valid entry found"
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
         res.status(500).json({
-          error: err,
-        });
-      });
-  };
-
+            error: err
+        })
+        
+    })
+}
  
   exports.creditcard_approval = (req, res) => {
     
