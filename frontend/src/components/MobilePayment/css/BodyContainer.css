@@ -1,0 +1,47 @@
+.content {
+    flex-grow: 1;
+    height: 100vh;
+    overflow: auto;
+}
+
+.container {
+    background-color: #aa3a21;
+    height: 100vh;
+}
+
+.bodyTitle{
+    color: #173a77;
+    text-align: center;
+    /* border: 2px solid red; */
+}
+
+.activeTitle {
+    text-decoration: underline;
+}
+
+.billPayment {
+    text-align: left;
+    color: #aa3a21;
+}
+
+/* .border {
+    border: 2px solid red;
+} */
+
+.toForm {
+    color: #173a77;
+    margin-left: 130px;
+}
+
+.fromForm {
+    color: #173a77;
+    margin-left: 130px;
+}
+
+#nextButton {
+    margin-top: 100px;
+    width: 260px;
+    background-color: #e26448;
+    color: white;
+    font-weight: bold;
+}
