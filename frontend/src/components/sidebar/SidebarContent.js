@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SidebarContent from "./SidebarContent";
 
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import HouseIcon from "@material-ui/icons/House";
@@ -49,37 +48,3 @@ export default function Sidebar() {
     </div>
   );
 }
-
-// Previous Codes :
-// import './Sidebar.css'
-// export default function Sidebar() {
-//     return (
-//         <div>
-//             <nav className='sidebar'>
-//                 <h4>Optimum DigiBank</h4>
-//                 <ul className='sidebar-nav'>
-//                     <li className='sidenav-item'>
-//                         <Link to='/'>
-//                             <HouseIcon />Overview
-//                         </Link>
-//                     </li>
-//                     <li className='sidenav-item'>
-//                         <Link to='/customerdetails'>
-//                             <ContactMailIcon /> Customer Details
-//                              </Link>
-//                     </li>
-//                     <li className='sidenav-item'>
-//                         <Link to='/approvalstatus'>
-//                             <PeopleIcon /> Approval Status
-//                         </Link>
-//                     </li>
-//                     <li className='sidenav-item'>
-//                         <Link to='/creditcardstatus'>
-//                             <CreditCardIcon />CreditCard Status
-//                         </Link>
-//                     </li>
-//                 </ul>
-//             </nav>
-//         </div>
-//     )
-// }

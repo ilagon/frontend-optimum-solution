@@ -21,8 +21,8 @@ export default function CreditCardStatus() {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth='1g' className={classes.container}>
                     <Grid container spacing={3} justify="center" >
-                        <Grid item xs={12} md={3} lg={3}>
-                            <Paper className={fixedHeightPaper}>
+                        <Grid item xs={12} md={3} lg={9}>
+                            <Paper className={fixedHeightPaper} elevation='3'>
                                 Customer CreditCard Approval Status
                             <Search />
                                 <table>

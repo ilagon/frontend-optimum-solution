@@ -22,7 +22,7 @@ export default function ApprovalStatus() {
                 <Container maxWidth='1g' className={classes.container}>
                     <Grid container spacing={3} justify="center" >
                         <Grid item xs={12} md={3} lg={3}>
-                            <Paper className={fixedHeightPaper}>
+                            <Paper className={fixedHeightPaper} elevation='3'>
                                 Customer Account Approval Status
                             <Search />
                                 <table>
