@@ -1,46 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import SidebarContent from "./SidebarContent";
-
-import CreditCardIcon from "@material-ui/icons/CreditCard";
-import HouseIcon from "@material-ui/icons/House";
-import PeopleIcon from "@material-ui/icons/People";
-import ContactMailIcon from "@material-ui/icons/ContactMail";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCreditCard,
+  faHome,
+  faIdCard,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
 export default function Sidebar() {
+  const classes = useStyles();
+  const [optionState, setOptionState] = useState(1);
+
+  const handleOptionSelected = (event, index) => {
+    setOptionState(index);
+  };
+
   return (
     <div>
       <h4>Optimum DigiBank</h4>
-      <ListItem button>
+      <ListItem
+        button
+        selected={optionState === 0}
+        onClick={(event) => handleOptionSelected(event, 0)}
+      >
         <ListItemIcon>
-          <HouseIcon />
+          <FontAwesomeIcon icon={faHome} />
         </ListItemIcon>
         <Link to="/">
           <ListItemText primary="Overview" />
         </Link>
       </ListItem>
-      <ListItem button>
+      <ListItem
+        button
+        selected={optionState === 1}
+        onClick={(event) => handleOptionSelected(event, 1)}
+      >
         <ListItemIcon>
-          <ContactMailIcon />
+          <FontAwesomeIcon icon={faIdCard} />
         </ListItemIcon>
         <Link to="/customerdetails">
           <ListItemText primary="Customer Details" />
         </Link>
       </ListItem>
-      <ListItem button>
+      <ListItem
+        button
+        selected={optionState === 2}
+        onClick={(event) => handleOptionSelected(event, 2)}
+      >
         <ListItemIcon>
-          <PeopleIcon />
+          <FontAwesomeIcon icon={faUsers} />
         </ListItemIcon>
         <Link to="/approvalstatus">
           <ListItemText primary=" Approval Status" />
         </Link>
       </ListItem>
-      <ListItem button>
+      <ListItem
+        button
+        selected={optionState === 3}
+        onClick={(event) => handleOptionSelected(event, 3)}
+      >
         <ListItemIcon>
-          <CreditCardIcon />
+          <FontAwesomeIcon icon={faCreditCard} />
         </ListItemIcon>
         <Link to="/creditcardstatus">
           <ListItemText primary="CreditCard Status" />

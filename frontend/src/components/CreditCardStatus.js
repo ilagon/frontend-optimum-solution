@@ -1,11 +1,10 @@
 import React from 'react'
-import ApproveCreditCard from './button/ApproveCreditCardButton'
-import DenyCreditCard from './button/DenyCreditCardButton'
+import ApproveCreditCard from './button/approvebutton/ApproveCreditCardButton'
+import DenyCreditCard from './button/denybutton/DenyCreditCardButton'
 import Search from './searchbar/Searchbar'
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import clsx from 'clsx';
 
@@ -16,7 +15,6 @@ export default function CreditCardStatus() {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth='1g' className={classes.container}>

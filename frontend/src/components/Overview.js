@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Reset from "./button/ResetButton";
-import { makeStyles } from "@material-ui/core/styles";
+import Reset from "./button/resetbutton/ResetButton";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Search from "./searchbar/Searchbar";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import clsx from "clsx";
@@ -41,7 +40,6 @@ export default function Overview() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="1g" className={classes.container}>
@@ -88,6 +86,7 @@ export default function Overview() {
                     {userState.map((user) => (
                       <tr>
                         <td>{user._id}</td>
+                        <td>{user.account_status}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                       </tr>

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import ApproveAccount from "./button/ApproveAccountButton";
-import DenyAccount from "./button/DenyAccountButton";
-import Search from "./searchbar/Searchbar";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
 import clsx from "clsx";
 import axios from "axios";
-import { TableHead } from "@material-ui/core";
+import ApproveAccount from "./button/approvebutton/ApproveAccountButton";
+import DenyAccount from "./button/denybutton/DenyAccountButton";
+import Search from "./searchbar/Searchbar";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
+import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
 import TablePagination from "@material-ui/core/TablePagination";
@@ -56,8 +55,8 @@ export default function ApprovalStatus() {
   };
 
   return (
+    
     <div className={classes.root}>
-      <CssBaseline />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="1g" className={classes.container}>
@@ -97,8 +96,12 @@ export default function ApprovalStatus() {
                       <tr>
                         <td>{user._id}</td>
                         <td>{user.email}</td>
-                        <ApproveAccount></ApproveAccount>
-                        <DenyAccount></DenyAccount>
+                        <td>
+                          <ApproveAccount />
+                        </td>
+                        <td>
+                          <DenyAccount />
+                        </td>
                       </tr>
                     ))}
                   </tbody>

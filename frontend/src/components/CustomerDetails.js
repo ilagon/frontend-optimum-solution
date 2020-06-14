@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Search from "./searchbar/Searchbar";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import clsx from "clsx";
 import axios from "axios";
@@ -41,7 +40,6 @@ export default function CustomerDetails() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="1g" className={classes.container}>

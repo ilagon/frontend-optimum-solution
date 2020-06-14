@@ -1,12 +1,14 @@
-import React from 'react';
-import './App.css'
-import Mainpage from './components/Mainpage'
+import React from "react";
+import "./App.css";
+import Mainpage from "./components/Mainpage";
+import { CssBaseline } from "@material-ui/core";
 
 function App() {
   return (
-    <div style={{height:'100%'}}>
+    <>
+      <CssBaseline />
       <Mainpage></Mainpage>
-    </div>
+    </>
   );
 }
 
