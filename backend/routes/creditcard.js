@@ -10,12 +10,14 @@ router.get("/",creditcardController.creditcard_get_all);
 
 
 
-//overview customer list search by user id
+//overview customer list search by user id //not working
 router.get("/search/:userId", creditcardController.creditcard_search_by_id);
 
 //overview customer list search by card id
 router.get("/:cardId", creditcardController.creditcard_search_by_cardid);
 
+//overview customer list search by card status //not working
+router.get("/:status", creditcardController.creditcard_search_by_cardStatus);
 
 //credit card create
 router.post("/create",creditcardController.creditcard_create);
