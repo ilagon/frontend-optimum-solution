@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Mainpage from "./components/Mainpage";
+import Mainpage from "./components/admin_components/Mainpage";
 import { CssBaseline } from "@material-ui/core";
 
 function App() {

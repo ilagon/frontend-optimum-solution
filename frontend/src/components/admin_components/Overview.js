@@ -96,11 +96,11 @@ export default function Overview() {
               </Paper>
             </Grid>
           </Grid>
-          <Box pt={4}>
-            <Reset></Reset>
-          </Box>
         </Container>
       </main>
+      <Box pt={4}>
+        <Reset></Reset>
+      </Box>
     </div>
   );
 }
