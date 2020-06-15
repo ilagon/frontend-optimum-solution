@@ -13,7 +13,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { TableFooter } from "@material-ui/core";
+
 
 // 10 Users per page
 
