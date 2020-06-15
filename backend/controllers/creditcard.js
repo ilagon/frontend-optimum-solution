@@ -77,7 +77,7 @@ exports.creditcard_create = (req, res) => {
   //overview page user search by user id //issue
   exports.creditcard_search_by_id = (req, res) => {
    
-    User.findById(req.body.userId)
+    User.findById(req.params.userId)
       .select("email account_status")
       .exec()
       .then((docs) => {
@@ -130,17 +130,28 @@ exports.creditcard_create = (req, res) => {
         
     })
 }
- //overview page user search by card status //issue
-exports.creditcard_search_by_cardStatus = (req, res) => {
-  const status = req.params.creditcard_status;
-  CreditCard.find({creditcard_status: status})
-    .populate("user", ["email", "account_status"])
-    .exec()
-    .then((docs) => {
-      console.log("From db", docs);
+ //overview page user search by card status "Approved""
+exports.creditcard_search_by_cardStatus_approve = (req, res) => {
+  const approve = "Approved"
+  CreditCard.find({creditcard_status:approve})
+  .populate("user",["email", "account_status"])
+  .exec()
+  .then(docs => {
+      console.log("From Database", docs);
       if(docs){
           res.status(200).json({
-              creditcard: docs
+            count: docs.length,
+            creditcard: docs.map((doc) => {
+              return {
+                _id: doc._id,
+                user: doc.user,
+                creditcard_balance: doc.creditcard_balance,
+                creditcard_type: doc.creditcard_type,
+                creditcard_status: doc.creditcard_status,
+                creditcard_limit: doc.creditcard_limit,
+           
+              };
+            }),
           })
       } else{
           res.status(404).json({
@@ -158,12 +169,48 @@ exports.creditcard_search_by_cardStatus = (req, res) => {
 }
 
 
+//overview page user search by card status "Rejected"
+exports.creditcard_search_by_cardStatus_reject = (req, res) => {
+  const reject= "Reject"
+  CreditCard.find({creditcard_status: reject})
+  .populate("user",["email", "account_status"])
+  .exec()
+  .then(docs => {
+      console.log("From Database", docs);
+      if(docs){
+          res.status(200).json({
+            count: docs.length,
+            creditcard: docs.map((doc) => {
+              return {
+                _id: doc._id,
+                user: doc.user,
+                creditcard_balance: doc.creditcard_balance,
+                creditcard_type: doc.creditcard_type,
+                creditcard_status: doc.creditcard_status,
+                creditcard_limit: doc.creditcard_limit,
+           
+              };
+            }),
+          })
+      } else{
+          res.status(404).json({
+              message: "No valid entry found"
+          })
+      }
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({
+          error: err
+      })
+      
+  })
+}
 
 
-
-  exports.creditcard_approval = (req, res) => {
-    
-    CreditCard.find({creditcard_status: "Pending"})
+  exports.creditcard_pending = (req, res) => {
+    const pending = "Pending"
+    CreditCard.find({creditcard_status:pending})
     .populate("user",["email", "account_status"])
     .exec()
     .then(docs => {

@@ -9,21 +9,22 @@ const creditcardController = require("../controllers/creditcard");
 router.get("/",creditcardController.creditcard_get_all);
 
 
+//credit card pending list
+router.get("/pending", creditcardController.creditcard_pending);
+
+//overview customer list search by card status approve
+router.get("/search/approve", creditcardController.creditcard_search_by_cardStatus_approve);
+
+//overview customer list search by card status reject
+router.get("/search/reject", creditcardController.creditcard_search_by_cardStatus_reject);
 
 //overview customer list search by user id //not working
 router.get("/search/:userId", creditcardController.creditcard_search_by_id);
 
 //overview customer list search by card id
 router.get("/:cardId", creditcardController.creditcard_search_by_cardid);
-
-//overview customer list search by card status //not working
-router.get("/:status", creditcardController.creditcard_search_by_cardStatus);
-
 //credit card create
 router.post("/create",creditcardController.creditcard_create);
-
-//credit card pending list
-router.get("/pending", creditcardController.creditcard_approval);
 
 
 //reset credit balance to credit limit
