@@ -76,15 +76,19 @@ exports.creditcard_create = (req, res) => {
   
   //overview page user search by user id //issue
   exports.creditcard_search_by_id = (req, res) => {
-    const id = req.body.userId;
-    CreditCard.findById(id)
-      .populate("user", ["email", "account_status"])
+   
+    User.findById(req.body.userId)
+      .select("email account_status")
       .exec()
       .then((docs) => {
         console.log("From db", docs);
         if(docs){
             res.status(200).json({
-                creditcard: docs
+              user: docs,
+              creditcard_balance: docs.creditcard_balance,
+              creditcard_type: docs.creditcard_type,
+              creditcard_status: docs.creditcard_status,
+              creditcard_limit: docs.creditcard_limit,
             })
         } else{
             res.status(404).json({
@@ -128,7 +132,7 @@ exports.creditcard_create = (req, res) => {
 }
  //overview page user search by card status //issue
 exports.creditcard_search_by_cardStatus = (req, res) => {
-  const status = req.params;
+  const status = req.params.creditcard_status;
   CreditCard.find({creditcard_status: status})
     .populate("user", ["email", "account_status"])
     .exec()
