@@ -17,6 +17,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputBase from '@material-ui/core/InputBase';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import UserMenu from './UserMenu';
 import { paymentListItems, serviceListItems } from './SideNavigation';
 import CreditBalance from './CreditBalance';
 import CreditLimit from './CreditLimit';
@@ -60,12 +61,13 @@ export default function Dashboard() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
               <AccountCircleIcon /> 
               <Typography component="h6" variant="p" color="inherit" noWrap className="title">
               Ethan Khoo
               </Typography>
-          </IconButton>
+          </IconButton> */}
+          <UserMenu/>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -88,7 +90,7 @@ export default function Dashboard() {
           <Grid container spacing={3}>
           {/* Select CreditCard Dropdown */}
             <Grid item xs={6}>
-              <Paper className="selectCreditCardPaper">
+              <Paper className="selectCreditCardPaper" elevation="3">
               <FormControl variant="filled" className="formControl">
                 <InputLabel htmlFor="creditCardSelect">Select CreditCard</InputLabel>
                 <Select
@@ -113,19 +115,19 @@ export default function Dashboard() {
           <Grid container spacing={3}>
             {/* Credit Balance Amount */}
             <Grid item xs={12} md={8} lg={6}>
-              <Paper className="fixedHeightPaper">
+              <Paper className="fixedHeightPaper" elevation="3">
                 <CreditBalance />
               </Paper>
             </Grid>
             {/* Credit Limit */}
             <Grid item xs={12} md={4} lg={6}>
-              <Paper className="fixedHeightPaper">
+              <Paper className="fixedHeightPaper" elevation="3">
                 <CreditLimit />
               </Paper>
             </Grid>
             {/* Payment Details */}
             <Grid item xs={12}>
-              <Paper className="paper">
+              <Paper className="paper" elevation="3">
                 <PaymentDetails />
               </Paper>
             </Grid>

@@ -70,6 +70,36 @@
     padding-left: calc(1em + 32px) !important;
 }
 
+.userMenuDd {
+    background-color: transparent !important;
+    box-shadow: none !important;
+} 
+
+.userMenuPerson {
+    margin-right: 9px;
+}
+
+.userMenuArrow {
+    margin-left: 9px;
+}
+
+.userMenuDd-paper {
+    color: white !important;
+    min-width: 160px !important;
+    border-radius: 0 !important;
+    background-color: #173A77 !important;
+    left: 1102px !important;
+}
+
+.userMenuIcon {
+    margin-left: 18px;
+}
+
+.userName {
+    color: #173A77 !important;
+    text-transform: none !important;
+}
+
 .toolbar {
     padding-right: 24px;
 }
@@ -142,4 +172,37 @@
 /* Styling for CreditBalance */
 .textCenter {
     text-align: center;
+}
+
+/* Styling for PaymentDetails */
+.paymentHistoryTitle {
+    float: left;
+    padding-left: 16px !important;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    color: #173A77;
+    font-weight: bold !important;
+    font-size: 16px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+}
+
+.MuiTableCell-stickyHeader {
+    color: #173A77 !important;
+    font-weight: bold !important;
+    background-color: white !important;
+}
+
+.paymentTableCell {
+    color: #173A77 !important;
+}
+
+.MuiTablePagination-toolbar {
+    color: #173A77 !important;
+}
+
+.MuiTablePagination-caption {
+    font-size: 13px;
 }
