@@ -1,112 +1,154 @@
-import React from 'react'
-import Reset from './button/ResetButton'
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Search from './searchbar/Searchbar'
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import clsx from 'clsx';
+import React, { useState, useEffect } from "react";
+import Reset from "./button/resetbutton/ResetButton";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Search from "./searchbar/Searchbar";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import clsx from "clsx";
+import axios from "axios";
+
+// 5 users per page
 
 export default function Overview() {
+  const classes = useStyles();
+  // clsx
+  //A tiny (228B) utility for constructing className strings conditionally.
+  //Also serves as a faster & smaller drop-in replacement for the classnames module
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    const classes = useStyles();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const [userState, setUserState] = useState([]);
+  const [countUserState, setCountUserState] = useState();
 
-    return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth='1g' className={classes.container}>
-                    <Grid container spacing={3}  justify="center" >
-                        <Grid item xs={4} md={3} lg={3}>
-                            <Paper className={fixedHeightPaper}>
-                                Pending Customer Status
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={4} md={3} lg={3}>
-                            <Paper className={fixedHeightPaper}>
-                                Pending CreditCard Approval
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={4} md={3} lg={3}>
-                            <Paper className={fixedHeightPaper}>
-                                Total Customers
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={3} justify="center">
-                        <Grid item xs={9}>
-                            <Paper className={fixedHeightPaper}>
-                                Customer List
-                                <Search />
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                    <Box pt={4}>
-                        <Reset></Reset>
-                    </Box>
-                </Container>
-            </main>
-        </div>
-    )
+  // Upon loading, useEffect will get called
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
+    axios
+      .get("http://localhost:9000/users")
+      .then((response) => {
+        // Retrieve from object => object => array (Users)
+        setUserState(response.data.Users);
+        setCountUserState(response.data.count);
+      })
+      // throws an error if there is no data
+      .catch((error) => alert(error));
+  };
+
+  return (
+    <div className={classes.root}>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="1g" className={classes.container}>
+          <Grid container spacing={3} justify="center">
+            <Grid item xs={3} md={2} lg={3}>
+              <Paper className={fixedHeightPaper} elevation="3">
+                Pending Customer Status
+              </Paper>
+            </Grid>
+            <Grid item xs={3} md={2} lg={3}>
+              <Paper className={fixedHeightPaper} elevation="3">
+                Pending CreditCard Approval
+              </Paper>
+            </Grid>
+            <Grid item xs={3} md={2} lg={3}>
+              <Paper className={fixedHeightPaper} elevation="3">
+                Total Customers
+                <span>{countUserState}</span>
+              </Paper>
+            </Grid>
+          </Grid>
+          <Grid container spacing={3} justify="center">
+            <Grid item xs={6}>
+              <Paper elevation="3">
+                <table>
+                  <thead>
+                    <tr>Customer List</tr>
+                    <tr>
+                      <Search />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>Customer ID</th>
+                      <th>Account Status</th>
+                      <th>Email</th>
+                      <th>Balance</th>
+                      <th>CreditCard Type</th>
+                      <th>CreditCard Status</th>
+                      <th>CreditCard Limit</th>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    {userState.map((user) => (
+                      <tr>
+                        <td>{user._id}</td>
+                        <td>{user.account_status}</td>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                      </tr>
+                    ))}
+                  </tfoot>
+                </table>
+              </Paper>
+            </Grid>
+          </Grid>
+          <Box pt={4}>
+            <Reset></Reset>
+          </Box>
+        </Container>
+      </main>
+    </div>
+  );
 }
 
-
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
 
-    root: {
-        display: 'flex',
-    },
+  toolbarIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
+    ...theme.mixins.toolbar,
+  },
 
-    toolbar: {
-        paddingRight: 24, // keep right padding when drawer closed
-    },
+  title: {
+    flexGrow: 1,
+  },
 
-    toolbarIcon: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-    },
+  appBarSpacer: theme.mixins.toolbar,
 
-    title: {
-        flexGrow: 1,
-    },
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
 
-    appBarSpacer: theme.mixins.toolbar,
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
 
-    content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-    },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+  },
 
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-
-    paper: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-    },
-
-    fixedHeight: {
-        height: 240,
-    },
-
+  fixedHeight: {
+    height: 240,
+  },
 }));
 
-
-
-
-{/* <Grid container direction='row' justify='flex-start' alignItems="center" spacing={3} className={classes.grid}>
+{
+  /* <Grid container direction='row' justify='flex-start' alignItems="center" spacing={3} className={classes.grid}>
     <Grid item xs={4} md={4}>
         <Paper className={classes.paper}>Pending Customer Status</Paper>
     </Grid>
@@ -116,24 +158,15 @@ const useStyles = makeStyles((theme) => ({
     <Grid item xs={4} md={4}>
         <Paper className={classes.paper}>Total Customers</Paper>
     </Grid>
-</Grid> */}
+</Grid> */
+}
 
-
-
-
-
-
-
-    // xs, sm, md, lg, xl are screen sizes
-    // this will dynamically resize the size of the grid
-    // as you make the browser small -> big or vice versa
-    // if the row adds up to 12, then all of it will
-    // be on the same row, otherwise it will get printed out
-    // on th next row
-
-
-
-
+// xs, sm, md, lg, xl are screen sizes
+// this will dynamically resize the size of the grid
+// as you make the browser small -> big or vice versa
+// if the row adds up to 12, then all of it will
+// be on the same row, otherwise it will get printed out
+// on th next row
 
 // function SpacingGrid() {
 //     const [spacing, setSpacing] = React.useState(2);
