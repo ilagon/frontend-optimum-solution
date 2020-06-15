@@ -74,7 +74,7 @@ exports.creditcard_create = (req, res) => {
       });
   };
   
-  //overview page user search by user id
+  //overview page user search by user id //issue
   exports.creditcard_search_by_id = (req, res) => {
     const id = req.body.userId;
     CreditCard.findById(id)
@@ -126,7 +126,37 @@ exports.creditcard_create = (req, res) => {
         
     })
 }
- 
+ //overview page user search by card status //issue
+exports.creditcard_search_by_cardStatus = (req, res) => {
+  const status = req.params;
+  CreditCard.find({creditcard_status: status})
+    .populate("user", ["email", "account_status"])
+    .exec()
+    .then((docs) => {
+      console.log("From db", docs);
+      if(docs){
+          res.status(200).json({
+              creditcard: docs
+          })
+      } else{
+          res.status(404).json({
+              message: "No valid entry found"
+          })
+      }
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({
+          error: err
+      })
+      
+  })
+}
+
+
+
+
+
   exports.creditcard_approval = (req, res) => {
     
     CreditCard.find({creditcard_status: "Pending"})
