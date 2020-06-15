@@ -24,11 +24,13 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#AA3A21'
           },
     },
+    'a': {
+        color: '#173A77'
+    }
 }));
 
 const Login = () => {
     const classes = useStyles();
-
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -75,6 +77,13 @@ const Login = () => {
                                     label="Email Address"
                                     name="email"
                                     onChange={handleEmail}
+                                    InputLabelProps={{
+                                        style: {
+                                          whiteSpace: 'nowrap',
+                                          overflow: 'hidden',
+                                          width: '100%',
+                                          color: '#173A77'
+                                    } }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -86,6 +95,13 @@ const Login = () => {
                                     type="password"
                                     id="password"
                                     onChange={handlePassword}
+                                    InputLabelProps={{
+                                        style: {
+                                          whiteSpace: 'nowrap',
+                                          overflow: 'hidden',
+                                          width: '100%',
+                                          color: '#173A77'
+                                    } }}
                                 />
                             </Grid>
                         </Grid>
@@ -99,7 +115,11 @@ const Login = () => {
                             Login
                         </Button>
 
-                        <Typography><a href="/ForgetPass">Forget Password?</a></Typography>
+                        <Typography>
+                            <a href="/ForgetPass">
+                                Forget Password?
+                            </a>
+                        </Typography>
                     </form>
                 </div>
 

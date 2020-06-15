@@ -84,7 +84,6 @@ const ForgetPass = () => {
                             
                         </Grid>
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             className={classes.submit}
