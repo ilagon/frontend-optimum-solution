@@ -101,7 +101,9 @@ const useStyles = makeStyles((theme) => ({
                 name="Email"
                 autoFocus
                 value ={email}
-                onChange ={(e) => setEmail(e.target.value)}
+                onChange ={(e) => {setEmail(e.target.value)
+                setError(false)
+                }}
                 error={error ? true : false}
                 helperText={error ?  "Incorrect Username or password": ''}
               />
@@ -115,7 +117,9 @@ const useStyles = makeStyles((theme) => ({
                 id="password"
                 autoComplete="current-password"
                 value ={pass}
-                onChange ={(e) => setPass(e.target.value)}
+                onChange ={(e) => {setPass(e.target.value)
+                  setError(false)
+                }}
                 error={error ? true : false}
               />
               <div align="center">
