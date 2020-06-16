@@ -73,20 +73,14 @@ export default function SignUp() {
     const [error,setError] = useState(false)
 
     
-    const registerUser = () => {
-        if (cnfmPassword === password) {
-          
-            axios.post("http://localhost:7001/users/register", {
-                name: name,
-                email: email,
-                password: password
-            })
-                .then(res => { console.log(res) })
-                .catch(err => { console.log(err) })
-        }
+    const registerUser = (e) => {
+      e.preventDefault();
+      if(cnfmPassword !== password){
+        setError(true)
+      }
         else {
-            //render error msg
-            console.log("Passwords do not match!")
+          setError(false)
+          //axios post here
         }
     }
    
@@ -116,7 +110,6 @@ export default function SignUp() {
                   autoComplete="name"
                   autoFocus
                   onChange={(e) => setName(e.target.value)}
-                  error={error ? true : false}
                 />
                 <TextField
                   margin="normal"
@@ -129,7 +122,6 @@ export default function SignUp() {
                   id="email"  
                   autoComplete="email"
                   onChange={(e) => setEmail(e.target.value)}
-                  error={error ? true : false}
                 />
                 <TextField
                   margin="normal"
@@ -140,7 +132,9 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {setPassword(e.target.value)
+                    setError(false)
+                  }}
                   error={error ? true : false}
                   helperText={error ?  "Password not the same": ''}
                 />
@@ -152,8 +146,11 @@ export default function SignUp() {
                   label="Retype Password"
                   type="retype"
                   id="retype"
+                  type="password"
                   autoComplete="current-password"
-                  onChange={(e) => {setCnfmPassword(e.target.value)}}
+                  onChange={(e) => {{setCnfmPassword(e.target.value)}
+                  setError(false)
+                  }}
                   helperText={error ?  "Password not the same": ''}
                   error={error ? true : false}
                 />
