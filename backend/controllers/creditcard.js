@@ -74,36 +74,7 @@ exports.creditcard_create = (req, res) => {
       });
   };
   
-  //overview page user search by user id //issue
-  exports.creditcard_search_by_id = (req, res) => {
-   
-    User.findById(req.params.userId)
-      .select("email account_status")
-      .exec()
-      .then((docs) => {
-        console.log("From db", docs);
-        if(docs){
-            res.status(200).json({
-              user: docs,
-              creditcard_balance: docs.creditcard_balance,
-              creditcard_type: docs.creditcard_type,
-              creditcard_status: docs.creditcard_status,
-              creditcard_limit: docs.creditcard_limit,
-            })
-        } else{
-            res.status(404).json({
-                message: "No valid entry found"
-            })
-        }
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-        
-    })
-}
+  
   //overview page user search by card id
   exports.creditcard_search_by_cardid = (req, res) => {
     const cardId = req.params.cardId;
@@ -130,6 +101,37 @@ exports.creditcard_create = (req, res) => {
         
     })
 }
+
+exports.creditcard_search_by_userid = (req, res) => {
+  const id = req.params._id;
+  CreditCard.findOne({"User.$_id":id})
+    .populate("user", ["email", "account_status"])
+    .exec()
+    .then((docs) => {
+      console.log("From db", docs);
+      if(docs){
+          res.status(200).json({
+              creditcard: docs
+          })
+      } else{
+          res.status(404).json({
+              message: "No valid entry found"
+          })
+      }
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({
+          error: err
+      })
+      
+  })
+}
+
+
+
+
+
  //overview page user search by card status "Approved""
 exports.creditcard_search_by_cardStatus_approve = (req, res) => {
   const approve = "Approved"

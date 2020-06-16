@@ -18,8 +18,7 @@ router.get("/search/approve", creditcardController.creditcard_search_by_cardStat
 //overview customer list search by card status reject
 router.get("/search/reject", creditcardController.creditcard_search_by_cardStatus_reject);
 
-//overview customer list search by user id //not working
-router.get("/search/:userId", creditcardController.creditcard_search_by_id);
+router.get("/search/:id",creditcardController.creditcard_search_by_userid);
 
 //overview customer list search by card id
 router.get("/:cardId", creditcardController.creditcard_search_by_cardid);
