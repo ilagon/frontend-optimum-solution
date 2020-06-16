@@ -247,6 +247,54 @@ exports.creditcard_search_by_cardStatus_reject = (req, res) => {
     })
 }
 
+//credit card approval approve 
+exports.creditcard_approve = (req,res) => {
+
+    const id = req.params.cardId;
+
+    CreditCard.updateOne(
+        {creditcard_status: "Pending", _id: id},
+        {$set:{creditcard_status: "Approved"}},
+       
+    )
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })
+}
+
+
+//credit card approval deny
+exports.creditcard_approve = (req,res) => {
+
+  const id = req.params.cardId;
+
+  CreditCard.updateOne(
+      {creditcard_status: "Pending", _id:id},
+      {$set:{creditcard_status: "Rejected"}},
+     
+  )
+  .exec()
+  .then(result => {
+      console.log(result);
+      res.status(200).json(result);
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({
+          error: err
+      })
+  })
+}
+
+
 
   //reset credit balance to credit limit
 exports.reset_credit_balance = (req,res) => {
