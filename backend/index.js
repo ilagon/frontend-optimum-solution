@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 7001;
 //mongo connection - mongoose is a library to simplify syntax to mongo DB
 mongoose.Promise = global.Promise; // gets a response from DB fail or success
 
+//"mongodb+srv://optimum-leads:12345@optimumbatch7-1rg4n.mongodb.net/bankappphase2?retryWrites=true&w=majority"
 //connect to the schema
 mongoose.connect("mongodb://localhost/bankAppPhase2", {
     useNewUrlParser: true,
