@@ -5,7 +5,8 @@ const CreditCardSchema = new Schema ({
       _id: Schema.Types.ObjectId,
       creditcard_num: {
         type: Number,
-        unique: true
+        unique: true,
+        default: 0
       },
       creditcard_status: {
         type: String,
@@ -28,7 +29,7 @@ const CreditCardSchema = new Schema ({
       user:{
         type:Schema.Types.ObjectId,
         ref:"User",
-        require:true,
+        required:true,
       }
 
 })
