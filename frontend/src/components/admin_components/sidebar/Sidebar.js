@@ -11,12 +11,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#b23c17",
+  },
+  textprimary: {
+    color: "#fff",
   },
 }));
 
@@ -29,18 +33,20 @@ export default function Sidebar() {
   };
 
   return (
-    <div>
-      <h4>Optimum DigiBank</h4>
+    <div className={classes.root}>
+      <Typography variant="h6" gutterBottom className={classes.textprimary}>
+        Optimum DigiBank
+      </Typography>
       <ListItem
         button
         selected={optionState === 0}
         onClick={(event) => handleOptionSelected(event, 0)}
       >
         <ListItemIcon>
-          <FontAwesomeIcon icon={faHome} />
+          <FontAwesomeIcon icon={faHome} color="white" />
         </ListItemIcon>
         <Link to="/">
-          <ListItemText primary="Overview" />
+          <ListItemText primary="Overview" className={classes.textprimary} />
         </Link>
       </ListItem>
       <ListItem
@@ -49,10 +55,13 @@ export default function Sidebar() {
         onClick={(event) => handleOptionSelected(event, 1)}
       >
         <ListItemIcon>
-          <FontAwesomeIcon icon={faIdCard} />
+          <FontAwesomeIcon icon={faIdCard} color="white" />
         </ListItemIcon>
         <Link to="/customerdetails">
-          <ListItemText primary="Customer Details" />
+          <ListItemText
+            primary="Customer Details"
+            className={classes.textprimary}
+          />
         </Link>
       </ListItem>
       <ListItem
@@ -61,10 +70,13 @@ export default function Sidebar() {
         onClick={(event) => handleOptionSelected(event, 2)}
       >
         <ListItemIcon>
-          <FontAwesomeIcon icon={faUsers} />
+          <FontAwesomeIcon icon={faUsers} color="white" />
         </ListItemIcon>
         <Link to="/approvalstatus">
-          <ListItemText primary=" Approval Status" />
+          <ListItemText
+            primary=" Approval Status"
+            className={classes.textprimary}
+          />
         </Link>
       </ListItem>
       <ListItem
@@ -73,10 +85,13 @@ export default function Sidebar() {
         onClick={(event) => handleOptionSelected(event, 3)}
       >
         <ListItemIcon>
-          <FontAwesomeIcon icon={faCreditCard} />
+          <FontAwesomeIcon icon={faCreditCard} color="white" />
         </ListItemIcon>
         <Link to="/creditcardstatus">
-          <ListItemText primary="CreditCard Status" />
+          <ListItemText
+            primary="CreditCard Status"
+            className={classes.textprimary}
+          />
         </Link>
       </ListItem>
     </div>

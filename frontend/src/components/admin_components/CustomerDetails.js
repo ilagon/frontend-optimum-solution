@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Search from "./searchbar/Searchbar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -9,8 +8,15 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import TextField from "@material-ui/core/TextField";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+
 
 // 10 Users per page
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -48,30 +54,44 @@ export default function CustomerDetails() {
     classes.fixedWidth
   );
 
-  const [userState, setUserState] = useState([]);
-  const [emailState, setEmailState] = useState('');
+  const [allCustomerState, setAllCustomerState] = useState([]);
+  const [customerState, setCustomerState] = useState({});
+  const [idState, setIdState] = useState("");
+  const [totalItemsState, setTotalItemsState] = useState(0);
+  const [currentPageState, setCurrentPageState] = useState();
+  const [searchState, setSearchState] = useState("");
+  const ITEMS_PER_PAGE = 10;
 
   // Upon loading, useEffect will get called
   useEffect(() => {
-    getUser();
+    getAllCustomer();
   }, []);
 
-  const getUser = () => {
+  // Retrieve all the customers
+  const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/${emailState}`)
+      .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
-        setUserState(response.data.Users);
-        setEmailState('');
+        setAllCustomerState(response.data.Users);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
-
-    
   };
 
-  const handleSearchChange = (event) => {
-    setEmailState(event.target.value);
+  // Ensure that the data gets re-rendered
+  useEffect(() => {
+    getSpecificCustomer();
+  }, [idState]);
+
+  // Searching for a specific customer
+  const getSpecificCustomer = () => {
+    axios
+      .get(`http://localhost:9000/users/search/${idState}`)
+      .then((response) => {
+        setCustomerState(response.data.user);
+      })
+      .catch((error) => alert(error));
   };
 
   return (
@@ -82,34 +102,54 @@ export default function CustomerDetails() {
           <Grid container spacing={3} justify="center">
             <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightWidthPaper} elevation="3">
-                <table>
-                  <thead>
-                    Customer Details
-                    <h1>{emailState}</h1>
-                    <TextField
-                      id="search-with-icon"
-                      value={emailState}
-                      onChange={handleSearchChange}
-                      label="SEARCH"
-                    />
-                  </thead>
-                  <tbody>
-                    <th>Customer ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Contact Number</th>
-                  </tbody>
-                  <tfoot>
-                    {userState.map((user) => (
-                      <tr>
-                        <td>{user._id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                      </tr>
+                <Table>
+                  <TableHead>
+                    <TableRow>Customer Details</TableRow>
+                    <TableRow>
+                      <Grid container spacing={1} alignItems="flex-end">
+                        <Grid>
+                          <FontAwesomeIcon icon={faSearch} />
+                        </Grid>
+                        <Grid>
+                          <TextField
+                            id="search-with-icon"
+                            value={idState}
+                            label="SEARCH"
+                            onChange={(event) => setIdState(event.target.value)}
+                          />
+                        </Grid>
+                      </Grid>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Customer ID</TableCell>
+                        <TableCell align="center">Name</TableCell>
+                        <TableCell align="center">Email</TableCell>
+                        <TableCell align="center">Address</TableCell>
+                        <TableCell align="center">Contact Number</TableCell>
+                      </TableRow>
+                    </TableHead>
+                  </TableBody>
+                  <TableBody>
+                    {allCustomerState.map((user) => (
+                      // Tells React that each rows are individual
+                      <TableRow key={user._id}>
+                        <TableCell component="th" scope="user">
+                          {user._id}
+                        </TableCell>
+                        <TableCell align="left">{user.name}</TableCell>
+                        <TableCell align="left">{user.email}</TableCell>
+                        <TableCell align="left"></TableCell>
+                        <TableCell align="left"></TableCell>
+                        {customerState.name}
+                        {customerState.email}
+                        {customerState._id}
+                      </TableRow>
                     ))}
-                  </tfoot>
-                </table>
+                  </TableBody>
+                </Table>
               </Paper>
             </Grid>
           </Grid>
@@ -117,25 +157,6 @@ export default function CustomerDetails() {
       </main>
     </div>
   );
-}
-
-{
-  /* <MaterialTable title="Customer Details"
-columns= { [
-  { title: "Customer ID", field: "id", type:'numeric' },
-  { title: "Name", field: "name" },
-  { title: "Email", field: "email" },
-  { title: "Address", field: "address" },
-  { title: "Contact Number", field: "cnumber", type:'numeric' },
-]
-}
-{...userState.map((data) => (
-  data ={
-    id: data._id, name: data.name, email: data.email
-  }
-)
-  
-  )} */
 }
 
 //  <div className={classes.root}>

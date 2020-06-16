@@ -3,12 +3,16 @@ import Reset from "./button/resetbutton/ResetButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Search from "./searchbar/Searchbar";
+import Search from "./search/Search";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Table from "@material-ui/core/Table";
 import clsx from "clsx";
 import axios from "axios";
-
 // 5 users per page
 
 export default function Overview() {
@@ -18,21 +22,21 @@ export default function Overview() {
   //Also serves as a faster & smaller drop-in replacement for the classnames module
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  const [userState, setUserState] = useState([]);
-  const [countUserState, setCountUserState] = useState();
+  const [allCustomerState, setAllCustomerState] = useState([]);
+  const [countCustomerState, setCountCustomerState] = useState();
 
   // Upon loading, useEffect will get called
   useEffect(() => {
-    getUser();
+    getAllCustomer();
   }, []);
 
-  const getUser = () => {
+  const getAllCustomer = () => {
     axios
-      .get("http://localhost:9000/users")
+      .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
-        setUserState(response.data.Users);
-        setCountUserState(response.data.count);
+        setAllCustomerState(response.data.Users);
+        setCountCustomerState(response.data.count);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
@@ -57,42 +61,41 @@ export default function Overview() {
             <Grid item xs={3} md={2} lg={3}>
               <Paper className={fixedHeightPaper} elevation="3">
                 Total Customers
-                <span>{countUserState}</span>
+                <span>{countCustomerState}</span>
               </Paper>
             </Grid>
           </Grid>
           <Grid container spacing={3} justify="center">
             <Grid item xs={6}>
               <Paper elevation="3">
-                <table>
-                  <thead>
-                    <tr>Customer List</tr>
-                    <tr>
+                <Table>
+                  <TableHead>
+                    <TableRow>Customer List</TableRow>
+                    <TableRow>
                       <Search />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>Customer ID</th>
-                      <th>Account Status</th>
-                      <th>Email</th>
-                      <th>Balance</th>
-                      <th>CreditCard Type</th>
-                      <th>CreditCard Status</th>
-                      <th>CreditCard Limit</th>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    {userState.map((user) => (
-                      <tr>
-                        <td>{user._id}</td>
-                        <td>{user.account_status}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                      </tr>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Customer ID</TableCell>
+                      <TableCell>Account Status</TableCell>
+                      <TableCell>Email</TableCell>
+                      <TableCell>Balance</TableCell>
+                      <TableCell>CreditCard Type</TableCell>
+                      <TableCell>CreditCard Status</TableCell>
+                      <TableCell>CreditCard Limit</TableCell>
+                    </TableRow>
+                  </TableBody>
+                  <TableBody>
+                    {allCustomerState.map((user) => (
+                      <TableRow>
+                        <TableCell>{user._id}</TableCell>
+                        <TableCell>{user.account_status}</TableCell>
+                        <TableCell>{user.email}</TableCell>
+                      </TableRow>
                     ))}
-                  </tfoot>
-                </table>
+                  </TableBody>
+                </Table>
               </Paper>
             </Grid>
           </Grid>

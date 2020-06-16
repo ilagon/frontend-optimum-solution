@@ -3,7 +3,7 @@ import clsx from "clsx";
 import axios from "axios";
 import ApproveAccount from "./button/approvebutton/ApproveAccountButton";
 import DenyAccount from "./button/denybutton/DenyAccountButton";
-import Search from "./searchbar/Searchbar";
+import Search from "./../admin_components/search/Search";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -12,6 +12,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
 import TablePagination from "@material-ui/core/TablePagination";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
 
 // 10 Users per page
 
@@ -25,7 +27,7 @@ export default function ApprovalStatus() {
     classes.fixedHeight,
     classes.fixedWidth
   );
-  const [userState, setUserState] = useState([]);
+  const [allCustomerState, setAllCustomerState] = useState([]);
   const [page, setPage] = useState(0);
   const [userPerPage, setUserPerPage] = useState(10);
 
@@ -40,22 +42,21 @@ export default function ApprovalStatus() {
 
   // Upon loading, useEffect will get called
   useEffect(() => {
-    getUser();
+    getAllCustomer();
   }, []);
 
-  const getUser = () => {
+  const getAllCustomer = () => {
     axios
-      .get("http://localhost:9000/users")
+      .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
-        setUserState(response.data.Users);
+        setAllCustomerState(response.data.Users);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
   };
 
   return (
-    
     <div className={classes.root}>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -66,46 +67,44 @@ export default function ApprovalStatus() {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <th>Customer Account Approval Status</th>
-                      <th>
+                      <TableCell>Customer Account Approval Status</TableCell>
+                      <TableCell>
                         <TablePagination
                           userPerPageOptions={[5, 10, 15]}
                           component="div"
-                          count={userState.length}
+                          count={allCustomerState.length}
                           userPerPage={userPerPage}
                           page={page}
                           onChangePage={handlePageChanges}
                           onChangeRowsPerPage={handleUserPerPageChanges}
                         />
-                      </th>
+                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <Search />
                     </TableRow>
+                    <TableRow>
+                      <TableCell>Customer ID</TableCell>
+                      <TableCell>Email</TableCell>
+                      <TableCell>Approve / Deny Account</TableCell>
+                    </TableRow>
                   </TableHead>
+                  <TableBody></TableBody>
                 </Table>
-
-                <table>
-                  <thead>
-                    <th>Customer ID</th>
-                    <th>Email</th>
-                    <th>Approval / Deny Account</th>
-                  </thead>
-                  <tbody>
-                    {userState.map((user) => (
-                      <tr>
-                        <td>{user._id}</td>
-                        <td>{user.email}</td>
-                        <td>
-                          <ApproveAccount />
-                        </td>
-                        <td>
-                          <DenyAccount />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <TableBody>
+                  {allCustomerState.map((user) => (
+                    <TableRow key={user._id}>
+                      <TableCell>{user._id}</TableCell>
+                      <TableCell>{user.email}</TableCell>
+                      <TableCell>
+                        <ApproveAccount />
+                      </TableCell>
+                      <TableCell>
+                        <DenyAccount />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
               </Paper>
             </Grid>
           </Grid>
