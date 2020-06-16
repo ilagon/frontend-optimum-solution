@@ -1,0 +1,21 @@
+.EmailSent {
+    font-family: 'Avenir family', sans-serif;
+    text-align: center;
+  }
+  
+  .EmailSent h1{
+    color:#173A77;
+  }
+  
+  .EmailSent a{
+    color:#AA3A21;
+  }
+
+ #social-icons{
+    margin-bottom: 20px;
+}
+#social-icons i{
+    padding: 0 2px;
+    color: #AA3A21;
+    font-size: 18px;
+}

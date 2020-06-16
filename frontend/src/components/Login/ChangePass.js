@@ -12,9 +12,25 @@ const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
     },
+    paper: {
+        marginTop: '50%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    logo: {
+        color: '#AA3A21',
+        fontFamily: [
+            'Avenir Heavy Oblique',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+        ]
+    },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(3),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -26,66 +42,57 @@ const useStyles = makeStyles((theme) => ({
     },
     'a': {
         color: '#173A77'
-    }
+    },
 }));
 
-const Login = () => {
+
+export default function SignUp() {
     const classes = useStyles();
 
-    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const getUsers = () => {
-        axios.get("http://localhost:7001/users/",
-            email,
-            password
-        )
-            .then(res => console.log(res))
-            .catch(err => { console.log(err) })
-    }
+    const [cnfmPassword, setCnfmPassword] = useState('')
 
-    const handleEmail = e => {
-        setEmail(e.target.value);
-        console.log(e.target.value)
-    }
     const handlePassword = e => {
         setPassword(e.target.value);
         console.log(e.target.value)
     }
+    const handleCfmPassword = e => {
+        setCnfmPassword(e.target.value);
+        console.log(e.target.value)
+    }
+
+    const checkPass = () => {
+        //confirm the password matches before registering
+        if (cnfmPassword === password) {
+            //check pw not old pw
+
+            axios.post("http://localhost:7001/users/register", {
+                password: password
+            })
+                .then(res => { console.log(res) })
+                .catch(err => { console.log(err) })
+        }
+        else {
+            //render error msg
+            console.log("Passwords do not match!")
+        }
+
+    }
 
     return (
         <div id="container">
-            <img src="https://source.unsplash.com/ULwzqOnPem0" id="loginpic" />
-            <Container id="login" component="main" maxWidth="xs">
-                <CssBaseline />
-                <Grid id="Container" item xs={false} sm={4} md={7} className={classes.image} />
+        <img src="https://source.unsplash.com/ULwzqOnPem0" id="loginpic" />
+        <Container id="login" component="main" maxWidth="xs">
+            <CssBaseline />
+            <Grid id="Container" item xs={false} sm={4} md={7} className={classes.image} />
 
-                <div>
-                    <Typography component="h1" variant="h5">
-                        LOGIN
-                    </Typography>
-                    <Typography component="h1" variant="h5">
-                        <a href="/SignUp">REGISTER</a>
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5" className={classes.logo}>
+                        Optimum DigiBank
                     </Typography>
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    onChange={handleEmail}
-                                    InputLabelProps={{
-                                        style: {
-                                          whiteSpace: 'nowrap',
-                                          overflow: 'hidden',
-                                          width: '100%',
-                                          color: '#173A77'
-                                    } }}
-                                />
-                            </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -104,30 +111,36 @@ const Login = () => {
                                     } }}
                                 />
                             </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="confirmPass"
+                                    label="Retype Password"
+                                    type="password"
+                                    id="password"
+                                    onChange={handleCfmPassword}
+                                    InputLabelProps={{
+                                        style: {
+                                          whiteSpace: 'nowrap',
+                                          overflow: 'hidden',
+                                          width: '100%',
+                                          color: '#173A77'
+                                    } }}
+                                />
+                            </Grid>
                         </Grid>
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             className={classes.submit}
-                            onClick={getUsers}
-                        >
-                            Login
+                            onClick={checkPass} >
+                            Submit
                         </Button>
 
-                        <Typography>
-                            <a href="/ForgetPass">
-                                Forget Password?
-                            </a>
-                        </Typography>
                     </form>
                 </div>
-
             </Container>
-
-
         </div>
-    )
-};
-
-export default Login;
+    );
+}

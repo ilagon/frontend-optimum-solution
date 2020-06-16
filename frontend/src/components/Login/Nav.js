@@ -17,7 +17,7 @@ function Nav() {
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="/forget">forget pass</a>
+          <a href="/ForgetPass">forget pass</a>
 
         </div>
       </div>
