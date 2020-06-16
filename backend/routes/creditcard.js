@@ -12,6 +12,8 @@ router.get("/",creditcardController.creditcard_get_all);
 //credit card pending list
 router.get("/pending", creditcardController.creditcard_pending);
 
+
+
 //overview customer list search by card status approve
 router.get("/search/approve", creditcardController.creditcard_search_by_cardStatus_approve);
 
@@ -22,6 +24,7 @@ router.get("/search/:id",creditcardController.creditcard_search_by_userid);
 
 //overview customer list search by card id
 router.get("/:cardId", creditcardController.creditcard_search_by_cardid);
+
 //credit card create
 router.post("/create",creditcardController.creditcard_create);
 
