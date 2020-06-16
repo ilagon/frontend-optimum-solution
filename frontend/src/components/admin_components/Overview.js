@@ -43,6 +43,8 @@ export default function Overview() {
   };
 
   return (
+    <Grid container justify = "center">
+
     <div className={classes.root}>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -105,6 +107,7 @@ export default function Overview() {
         <Reset></Reset>
       </Box>
     </div>
+    </Grid>
   );
 }
 

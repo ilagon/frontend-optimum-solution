@@ -20,6 +20,7 @@ import TableRow from "@material-ui/core/TableRow";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+  
   },
 
   container: {
