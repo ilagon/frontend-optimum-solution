@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -70,30 +70,12 @@ export default function SignUp() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [cnfmPassword, setCnfmPassword] = useState('')
+    const [error,setError] = useState(false)
 
-    const handleName = e => {
-        setName(e.target.value);
-        console.log(e.target.value)
-    }
-    const handleEmail = e => {
-        setEmail(e.target.value);
-        console.log(e.target.value)
-    }
-    const handlePassword = e => {
-        setPassword(e.target.value);
-        console.log(e.target.value)
-    }
-    const handlePassword1 = e => {
-        setCnfmPassword(e.target.value);
-        console.log(e.target.value)
-    }
-
+    
     const registerUser = () => {
-        //confrim the password matches before registering
         if (cnfmPassword === password) {
-            //also need to confirm the same email doesn't already
-            //exist in DB
-
+          
             axios.post("http://localhost:7001/users/register", {
                 name: name,
                 email: email,
@@ -106,9 +88,8 @@ export default function SignUp() {
             //render error msg
             console.log("Passwords do not match!")
         }
-
     }
-
+   
     return (
         <Grid container component="main" className={classes.root}>
           <CssBaseline />
@@ -124,27 +105,31 @@ export default function SignUp() {
                 <a href="/SignUp" className={classes.links}>REGISTER</a>
               </Box>
             </Box>
-              <form className={classes.form} noValidate>
+              <form className={classes.form} onSubmit={registerUser}>
                 <TextField
                   margin="normal"
                   required
                   fullWidth
                   id="name"
                   label="Name"
-                  floatingLabel={true}
                   name="name"
                   autoComplete="name"
                   autoFocus
+                  onChange={(e) => setName(e.target.value)}
+                  error={error ? true : false}
                 />
                 <TextField
                   margin="normal"
                   required
                   fullWidth
+                  type= "email"
                   name="email"
                   label="Email Address"
                   type="email"
-                  id="email"
+                  id="email"  
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  error={error ? true : false}
                 />
                 <TextField
                   margin="normal"
@@ -155,6 +140,9 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  error={error ? true : false}
+                  helperText={error ?  "Password not the same": ''}
                 />
                 <TextField
                   margin="normal"
@@ -165,6 +153,9 @@ export default function SignUp() {
                   type="retype"
                   id="retype"
                   autoComplete="current-password"
+                  onChange={(e) => {setCnfmPassword(e.target.value)}}
+                  helperText={error ?  "Password not the same": ''}
+                  error={error ? true : false}
                 />
                 <div align="center">
                 <Button

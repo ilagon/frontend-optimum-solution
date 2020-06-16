@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,7 +61,20 @@ const useStyles = makeStyles((theme) => ({
   
   export default function SignInSide() {
     const classes = useStyles();
-  
+    const [email,setEmail] = useState('');
+    const [pass,setPass] = useState('');
+    const [error,setError] = useState(false);
+
+
+    const submit = (e) =>{
+      e.preventDefault();
+      //for testing only
+      if(email == "apzhawk@gmail.com" && pass == "123"){
+        setError(false)
+      }
+      else
+      setError(true)
+    }
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
@@ -76,17 +90,20 @@ const useStyles = makeStyles((theme) => ({
               <a href="/SignUp" className={classes.links}>REGISTER</a>
             </Box>
           </Box>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={submit}>
               <TextField
                 margin="normal"
+                type="email"
                 required
                 fullWidth
-                id="username"
-                label="Username"
-                floatingLabel={true}
-                name="username"
-                autoComplete="username"
+                id="Email"
+                label="Email"
+                name="Email"
                 autoFocus
+                value ={email}
+                onChange ={(e) => setEmail(e.target.value)}
+                error={error ? true : false}
+                helperText={error ?  "Incorrect Username or password": ''}
               />
               <TextField
                 margin="normal"
@@ -97,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value ={pass}
+                onChange ={(e) => setPass(e.target.value)}
+                error={error ? true : false}
               />
               <div align="center">
               <Button
