@@ -1,133 +1,123 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '100vh',
+      height: '100vh',
+    },
+    image: {
+      backgroundImage: 'url(https://source.unsplash.com/ULwzqOnPem0)',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'absolute',
+    },
+    links: {
+      textDecoration: 'none',
+      fontFamily: 'Helvetica Neue',
+      color: 'black',
+      fontWeight: '700',
+      fontSize: '1.5rem'
+    },
+    paper: {
+      margin: theme.spacing(8, 4),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    title: {
+      fontFamily: 'Arial',
+      color: '#ab3a22',
+      fontSize: '2.5rem',
+      fontWeight: '700',
+      fontStyle: 'italic'
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+      width: '25rem', // Fix IE 11 issue.
+      position: 'relative',
+      marginTop: theme.spacing(1),
+      color: 'black'
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
-        backgroundColor: '#AA3A21',
-        color: '#fff',
-        '&:hover': {
-            backgroundColor: '#AA3A21'
-          },
+      margin: theme.spacing(3, 0, 2),
+      backgroundColor: '#ab3a22',
+      width: '25rem',
+      height: '3rem'
     },
-    'a': {
-        color: '#173A77'
+    forgetButton: {
+      color: 'black',
+      fontStyle: 'bold'
     }
-}));
-
-const Login = () => {
+  }));
+  
+  export default function SignInSide() {
     const classes = useStyles();
-
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const getUsers = () => {
-        axios.get("http://localhost:7001/users/",
-            email,
-            password
-        )
-            .then(res => console.log(res))
-            .catch(err => { console.log(err) })
-    }
-
-    const handleEmail = e => {
-        setEmail(e.target.value);
-        console.log(e.target.value)
-    }
-    const handlePassword = e => {
-        setPassword(e.target.value);
-        console.log(e.target.value)
-    }
-
+  
     return (
-        <div id="container">
-            <img src="https://source.unsplash.com/ULwzqOnPem0" id="loginpic" />
-            <Container id="login" component="main" maxWidth="xs">
-                <CssBaseline />
-                <Grid id="Container" item xs={false} sm={4} md={7} className={classes.image} />
-
-                <div>
-                    <Typography component="h1" variant="h5">
-                        LOGIN
-                    </Typography>
-                    <Typography component="h1" variant="h5">
-                        <a href="/SignUp">REGISTER</a>
-                    </Typography>
-                    <form className={classes.form} noValidate>
-                        <Grid container spacing={2}>
-
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    onChange={handleEmail}
-                                    InputLabelProps={{
-                                        style: {
-                                          whiteSpace: 'nowrap',
-                                          overflow: 'hidden',
-                                          width: '100%',
-                                          color: '#173A77'
-                                    } }}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    onChange={handlePassword}
-                                    InputLabelProps={{
-                                        style: {
-                                          whiteSpace: 'nowrap',
-                                          overflow: 'hidden',
-                                          width: '100%',
-                                          color: '#173A77'
-                                    } }}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            className={classes.submit}
-                            onClick={getUsers}
-                        >
-                            Login
-                        </Button>
-
-                        <Typography>
-                            <a href="/ForgetPass">
-                                Forget Password?
-                            </a>
-                        </Typography>
-                    </form>
-                </div>
-
-            </Container>
-
-
-        </div>
-    )
-};
-
-export default Login;
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper} >
+          <h1 className={classes.title}>Optimum DigiBank</h1> 
+          <Box display="flex" p={1} bgcolor="background.paper">
+            <Box p={5}>
+              <a href="/Login" className={classes.links}>LOGIN</a>
+            </Box>
+            <Box p={5}>
+              <a href="/SignUp" className={classes.links}>REGISTER</a>
+            </Box>
+          </Box>
+            <form className={classes.form} noValidate>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                floatingLabel={true}
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <div align="center">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Login
+              </Button></div>
+              <Grid container align="center">
+                <Grid item xs>
+                  <Link href="#" variant="body2" className={classes.forgetButton}>
+                    Forgot password?
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+        </Grid>
+      </Grid>
+    );
+  }
