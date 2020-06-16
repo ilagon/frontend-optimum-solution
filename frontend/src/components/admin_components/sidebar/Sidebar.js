@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     maxWidth: "300px",
-    backgroundColor: "#b23c17",
+    backgroundColor: "#AA3A21",
   },
   headertextprimary: {
     color: "#fff",
