@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
@@ -23,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     },
     links: {
       textDecoration: 'none',
-      fontFamily: 'Helvetica Neue',
-      color: 'black',
+      fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+      color: '#173A77',
       fontWeight: '700',
       fontSize: '1.5rem'
     },
@@ -35,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
     title: {
-      fontFamily: 'Arial',
-      color: '#ab3a22',
+      fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+      color: '#AA3A21',
       fontSize: '2.5rem',
       fontWeight: '700',
       fontStyle: 'italic'
@@ -49,12 +47,17 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
-      backgroundColor: '#ab3a22',
+      backgroundColor: '#AA3A21',
+      fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+      color: '#fff',
       width: '25rem',
-      height: '3rem'
+      height: '3rem',
+      '&:hover': {
+        backgroundColor: '#AA3A21'
+      },
     },
     forgetButton: {
-      color: 'black',
+      color: '#173A77',
       fontStyle: 'bold'
     }
   }));
@@ -72,8 +75,10 @@ const useStyles = makeStyles((theme) => ({
       if(email == "apzhawk@gmail.com" && pass == "123"){
         setError(false)
       }
-      else
-      setError(true)
+      else {
+        setError(true)
+      }
+      
     }
     return (
       <Grid container component="main" className={classes.root}>
@@ -101,6 +106,13 @@ const useStyles = makeStyles((theme) => ({
                 name="Email"
                 autoFocus
                 value ={email}
+                InputLabelProps={{
+                  style: {
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    width: '100%',
+                    color: '#173A77'
+              } }}
                 onChange ={(e) => {setEmail(e.target.value)
                 setError(false)
                 }}
@@ -117,6 +129,13 @@ const useStyles = makeStyles((theme) => ({
                 id="password"
                 autoComplete="current-password"
                 value ={pass}
+                InputLabelProps={{
+                  style: {
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    width: '100%',
+                    color: '#173A77'
+              } }}
                 onChange ={(e) => {setPass(e.target.value)
                   setError(false)
                 }}
@@ -127,14 +146,13 @@ const useStyles = makeStyles((theme) => ({
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
                 className={classes.submit}
               >
                 Login
               </Button></div>
               <Grid container align="center">
                 <Grid item xs>
-                  <Link href="#" variant="body2" className={classes.forgetButton}>
+                  <Link href="/ForgetPass" variant="body2" className={classes.forgetButton}>
                     Forgot password?
                   </Link>
                 </Grid>
