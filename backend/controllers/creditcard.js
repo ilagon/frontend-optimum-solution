@@ -248,6 +248,99 @@ exports.creditcard_search_by_cardStatus_reject = (req, res) => {
 }
 
 
+//credit card pending search
+exports.creditcard_pending_searh_id = (req, res) => {
+
+  const id = req.params.cardId;
+
+  CreditCard.find({creditcard_status:"Pending", _id: id})
+  .populate("user",["email", "account_status"])
+  .exec()
+  .then(docs => {
+      console.log("From Database", docs);
+      if(docs){
+          res.status(200).json({
+            count: docs.length,
+            creditcard: docs.map((doc) => {
+              return {
+                _id: doc._id,
+                user: doc.user,
+                creditcard_balance: doc.creditcard_balance,
+                creditcard_type: doc.creditcard_type,
+                creditcard_status: doc.creditcard_status,
+                creditcard_limit: doc.creditcard_limit,
+           
+              };
+            }),
+          })
+      } else{
+          res.status(404).json({
+              message: "No valid entry found"
+          })
+      }
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({
+          error: err
+      })
+      
+  })
+}
+
+
+
+
+
+//credit card approval approve 
+exports.creditcard_approve = (req,res) => {
+
+    const id = req.params.cardId;
+
+    CreditCard.updateOne(
+        {creditcard_status: "Pending", _id: id},
+        {$set:{creditcard_status: "Approved"}},
+       
+    )
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })
+}
+
+
+//credit card approval deny
+exports.creditcard_approve = (req,res) => {
+
+  const id = req.params.cardId;
+
+  CreditCard.updateOne(
+      {creditcard_status: "Pending", _id:id},
+      {$set:{creditcard_status: "Rejected"}},
+     
+  )
+  .exec()
+  .then(result => {
+      console.log(result);
+      res.status(200).json(result);
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({
+          error: err
+      })
+  })
+}
+
+
+
   //reset credit balance to credit limit
 exports.reset_credit_balance = (req,res) => {
 
