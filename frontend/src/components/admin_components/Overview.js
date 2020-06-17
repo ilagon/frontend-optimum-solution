@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Reset from "./button/resetbutton/ResetButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Search from "./search/Search";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Table from "@material-ui/core/Table";
+import {
+  Grid,
+  Paper,
+  Container,
+  TableCell,
+  TableBody,
+  TableHead,
+  TableRow,
+  Table,
+  TableContainer,
+  Typography,
+  TextField,
+} from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import axios from "axios";
 // 5 users per page
@@ -24,89 +29,111 @@ export default function Overview() {
 
   const [allCustomerState, setAllCustomerState] = useState([]);
   const [countCustomerState, setCountCustomerState] = useState();
+  const [customerState, setCustomerState] = useState({});
+  const [idState, setIdState] = useState("");
 
   // Upon loading, useEffect will get called
   useEffect(() => {
     getAllCustomer();
   }, []);
 
+  // Retrieve all the customers
   const getAllCustomer = () => {
     axios
       .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
+        // Retrieve the number of customer
         setCountCustomerState(response.data.count);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
   };
 
-  return (
-    <Grid container justify = "center">
+  // Ensure that the data gets re-rendered
+  useEffect(() => {
+    getSpecificCustomer();
+  }, [idState]);
 
-    <div className={classes.root}>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="1g" className={classes.container}>
-          <Grid container spacing={3} justify="center">
-            <Grid item xs={3} md={2} lg={3}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Pending Customer Status
-              </Paper>
-            </Grid>
-            <Grid item xs={3} md={2} lg={3}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Pending CreditCard Approval
-              </Paper>
-            </Grid>
-            <Grid item xs={3} md={2} lg={3}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Total Customers
-                <span>{countCustomerState}</span>
-              </Paper>
-            </Grid>
+  // Searching for a specific customer
+  const getSpecificCustomer = () => {
+    axios
+      .get(`http://localhost:9000/users/search/${idState}`)
+      .then((response) => {
+        setCustomerState(response.data.user);
+      })
+      .catch((error) => alert(error));
+  };
+
+  return (
+    <Grid container justify="center">
+      <Container maxWidth="1g" className={classes.container}>
+        <Grid container spacing={3} justify="center">
+          <Grid item xs={3} md={2} lg={3}>
+            <Paper className={fixedHeightPaper} elevation="3">
+              Pending Customer Status
+            </Paper>
           </Grid>
-          <Grid container spacing={3} justify="center">
-            <Grid item xs={6}>
-              <Paper elevation="3">
-                <Table>
-                  <TableHead>
-                    <TableRow>Customer List</TableRow>
-                    <TableRow>
-                      <Search />
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>Customer ID</TableCell>
-                      <TableCell>Account Status</TableCell>
-                      <TableCell>Email</TableCell>
-                      <TableCell>Balance</TableCell>
-                      <TableCell>CreditCard Type</TableCell>
-                      <TableCell>CreditCard Status</TableCell>
-                      <TableCell>CreditCard Limit</TableCell>
-                    </TableRow>
-                  </TableBody>
-                  <TableBody>
-                    {allCustomerState.map((user) => (
-                      <TableRow>
-                        <TableCell>{user._id}</TableCell>
-                        <TableCell>{user.account_status}</TableCell>
-                        <TableCell>{user.email}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Paper>
-            </Grid>
+          <Grid item xs={3} md={2} lg={3}>
+            <Paper className={fixedHeightPaper} elevation="3">
+              Pending CreditCard Approval
+            </Paper>
           </Grid>
-        </Container>
-      </main>
-      <Box pt={4}>
-        <Reset></Reset>
-      </Box>
-    </div>
+          <Grid item xs={3} md={2} lg={3}>
+            <Paper className={fixedHeightPaper} elevation="3">
+              Total Customers
+              <span><Typography variant="h1">{countCustomerState}</Typography></span>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+      <Container>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item className={classes.gridItem}>
+            <TableContainer component={Paper}>
+              <Table className={classes.table}>
+                <TableHead>
+                  <Typography variant="h6">Customer Details</Typography>
+                  <Grid>
+                    <FontAwesomeIcon icon={faSearch} />
+                    <TextField
+                      id="search-with-icon"
+                      value={idState}
+                      label="SEARCH"
+                      onChange={(event) => setIdState(event.target.value)}
+                    />
+                  </Grid>
+                  <TableRow>
+                    <TableCell width="20%">Customer ID</TableCell>
+                    <TableCell width="10%">Account Status</TableCell>
+                    <TableCell width="20%">Email</TableCell>
+                    <TableCell width="15%">Balance</TableCell>
+                    <TableCell width="10%">CreditCard Type</TableCell>
+                    <TableCell width="10%">CreditCard Status</TableCell>
+                    <TableCell width="15%">CreditCard Limit</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {allCustomerState.map((row) => (
+                    <TableRow key={row._id}>
+                      <TableCell width="20%" component="th" scope="row">
+                        {row._id}
+                      </TableCell>
+                      <TableCell width="10%">{row.account_status}</TableCell>
+                      <TableCell width="20%">{row.email}</TableCell>
+                      <TableCell width="15%">10000</TableCell>
+                      <TableCell width="10%">Gold</TableCell>
+                      <TableCell width="10%">Inactive</TableCell>
+                      <TableCell width="15%">10000</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
+      </Container>
     </Grid>
   );
 }
@@ -151,57 +178,10 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  gridItem: {
+    paddingTop: 40,
+  },
+  table: {
+    minWidth: 650,
+  },
 }));
-
-{
-  /* <Grid container direction='row' justify='flex-start' alignItems="center" spacing={3} className={classes.grid}>
-    <Grid item xs={4} md={4}>
-        <Paper className={classes.paper}>Pending Customer Status</Paper>
-    </Grid>
-    <Grid item xs={4} md={4}>
-        <Paper className={classes.paper}>Pending CreditCard Approval</Paper>
-    </Grid>
-    <Grid item xs={4} md={4}>
-        <Paper className={classes.paper}>Total Customers</Paper>
-    </Grid>
-</Grid> */
-}
-
-// xs, sm, md, lg, xl are screen sizes
-// this will dynamically resize the size of the grid
-// as you make the browser small -> big or vice versa
-// if the row adds up to 12, then all of it will
-// be on the same row, otherwise it will get printed out
-// on th next row
-
-// function SpacingGrid() {
-//     const [spacing, setSpacing] = React.useState(2);
-//     const classes = useStyles();
-
-//     const handleChange = (event) => {
-//         setSpacing(Number(event.target.value));
-//     };
-
-//     return (
-//         <Grid container className={classes.root} spacing={2}>
-//             <Grid item xs={12}>
-//                 <Grid container justify="center" spacing={spacing}>
-//                     {[0, 1, 2].map((value) => (
-//                         <Grid key={value} item>
-//                             <Paper className={classes.paper} />
-//                         </Grid>
-//                     ))}
-//                 </Grid>
-//             </Grid>
-//             <Grid item xs={12}>
-//                 <Paper className={classes.control}>
-//                     <Grid container>
-//                         <Grid item>
-
-//                         </Grid>
-//                     </Grid>
-//                 </Paper>
-//             </Grid>
-//         </Grid>
-//     );
-// }

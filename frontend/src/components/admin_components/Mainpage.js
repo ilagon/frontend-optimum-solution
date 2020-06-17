@@ -18,13 +18,13 @@ export default function Mainpage() {
             <Overview></Overview>
           </Route>
           <Route path="/customerDetails">
-            <CustomerDetails></CustomerDetails>
+            <CustomerDetails />
           </Route>
           <Route path="/approvalstatus">
-            <ApprovalStatus></ApprovalStatus>
+            <ApprovalStatus />
           </Route>
           <Route path="/creditcardstatus">
-            <CreditCardStatus></CreditCardStatus>
+            <CreditCardStatus />
           </Route>
         </Switch>
       </Router>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCreditCard,
@@ -7,14 +8,14 @@ import {
   faIdCard,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Typography from "@material-ui/core/Typography";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-
+import {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  Drawer,
+  List,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,7 +80,7 @@ export default function Sidebar() {
           <ListItemIcon className={classes.overviewicon}>
             <FontAwesomeIcon icon={faHome} color="white" />
           </ListItemIcon>
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: "none" }}>
             <ListItemText
               primary="OVERVIEW"
               className={classes.overviewtextprimary}
@@ -94,7 +95,7 @@ export default function Sidebar() {
           <ListItemIcon className={classes.icon}>
             <FontAwesomeIcon icon={faIdCard} color="white" />
           </ListItemIcon>
-          <Link to="/customerdetails">
+          <Link to="/customerdetails" style={{ textDecoration: "none" }}>
             <ListItemText
               primary="Customer Details"
               className={classes.textprimary}
@@ -109,7 +110,7 @@ export default function Sidebar() {
           <ListItemIcon className={classes.icon}>
             <FontAwesomeIcon icon={faUsers} color="white" />
           </ListItemIcon>
-          <Link to="/approvalstatus">
+          <Link to="/approvalstatus" style={{ textDecoration: "none" }}>
             <ListItemText
               primary=" Approval Status"
               className={classes.textprimary}
@@ -124,7 +125,7 @@ export default function Sidebar() {
           <ListItemIcon className={classes.icon}>
             <FontAwesomeIcon icon={faCreditCard} color="white" />
           </ListItemIcon>
-          <Link to="/creditcardstatus">
+          <Link to="/creditcardstatus" style={{ textDecoration: "none" }}>
             <ListItemText
               primary="CreditCard Status"
               className={classes.textprimary}
@@ -135,37 +136,3 @@ export default function Sidebar() {
     </Drawer>
   );
 }
-
-// Previous Codes :
-// import './Sidebar.css'
-// export default function Sidebar() {
-//     return (
-//         <div>
-//             <nav className='sidebar'>
-//                 <h4>Optimum DigiBank</h4>
-//                 <ul className='sidebar-nav'>
-//                     <li className='sidenav-item'>
-//                         <Link to='/'>
-//                             <HouseIcon />Overview
-//                         </Link>
-//                     </li>
-//                     <li className='sidenav-item'>
-//                         <Link to='/customerdetails'>
-//                             <ContactMailIcon /> Customer Details
-//                              </Link>
-//                     </li>
-//                     <li className='sidenav-item'>
-//                         <Link to='/approvalstatus'>
-//                             <PeopleIcon /> Approval Status
-//                         </Link>
-//                     </li>
-//                     <li className='sidenav-item'>
-//                         <Link to='/creditcardstatus'>
-//                             <CreditCardIcon />CreditCard Status
-//                         </Link>
-//                     </li>
-//                 </ul>
-//             </nav>
-//         </div>
-//     )
-// }
