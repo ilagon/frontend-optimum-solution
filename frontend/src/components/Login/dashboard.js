@@ -24,12 +24,15 @@ function Dashboard() {
             });
         })
 
-
+        const logout = () =>{
+            sessionStorage.removeItem("token");
+            window.location.href = "/logout"
+        }
     return (
         <div>
             <title>A Dashboard</title>
             Empty spaces fill me up with hope.....
-            
+            <button onClick={logout}>Logout</button>
         </div>
     )
 }

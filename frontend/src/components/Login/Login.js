@@ -90,6 +90,25 @@ const useStyles = makeStyles((theme) => ({
       });
     }
 
+    var config = {
+      method: 'get',
+      url: 'http://localhost:7001/users',
+      headers: { 
+        'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+      },
+    };
+
+    useEffect(() => {
+      axios(config)
+      .then(function (response) {
+          window.location.href = "/dashboard"
+      })
+      .catch(function (error) {
+          console.log(error)
+      })
+      .then(function () {
+      });
+    },[])
 
     return (
       <Grid container component="main" className={classes.root}>
