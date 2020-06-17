@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -71,18 +69,30 @@ export default function SignUp() {
     const [password, setPassword] = useState('')
     const [cnfmPassword, setCnfmPassword] = useState('')
     const [error,setError] = useState(false)
-
     
     const registerUser = (e) => {
       e.preventDefault();
-      if(cnfmPassword !== password){
-        setError(true)
-      }
-        else {
-          setError(false)
-          //axios post here
+       //axios post here
+       axios.post("http://localhost:7001/users/register",{
+         name: name,
+         email: email,
+         password: password
+       })
+       .then((res) => {
+         console.log(res)
+        if(res.data.message == "success"){
+
         }
+         //#todo clear all state if successful
+       })
+       .catch((err) => {
+         console.log(err)
+       })
     }
+
+    useEffect(() => {
+      (cnfmPassword !== password) ?  setError(true) : setError(false);
+    }, [cnfmPassword,password]);
    
     return (
         <Grid container component="main" className={classes.root}>
@@ -124,6 +134,7 @@ export default function SignUp() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
+                  inputProps={{ pattern: "(?=.*[A-Za-z]).{6,}" ,title: "More than 6 Character Alphanumeric character only allowed!"}}
                   margin="normal"
                   required
                   fullWidth
@@ -148,8 +159,8 @@ export default function SignUp() {
                   id="retype"
                   type="password"
                   autoComplete="current-password"
-                  onChange={(e) => {{setCnfmPassword(e.target.value)}
-                  setError(false)
+                  onChange={(e) => {setCnfmPassword(e.target.value)
+                
                   }}
                   helperText={error ?  "Password not the same": ''}
                   error={error ? true : false}

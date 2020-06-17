@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     const [email,setEmail] = useState('');
     const [pass,setPass] = useState('');
     const [error,setError] = useState(false);
+    const [result,setResult] = useState('')
 
 
     const submit = (e) =>{
@@ -72,9 +73,12 @@ const useStyles = makeStyles((theme) => ({
       if(email == "apzhawk@gmail.com" && pass == "123"){
         setError(false)
       }
-      else
-      setError(true)
+      else{
+        setError(true)
+      }
     }
+
+
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
