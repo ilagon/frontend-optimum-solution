@@ -1,9 +1,9 @@
 import React from "react";
 import SideBar from "./MobilePayment-SideBar"
 import SearchBar from "../common/Searchbar";
-import BodyContainer from "../MobilePayment/BodyContainer";
+import BodyContainer from "./OtherRecipients/OtherRecipients_Body";
 
-export default function OneTimePayment() {
+export default function OtherRecipientsPage() {
   return (
     <div style={{ display: "flex" }}>
       <SearchBar />
