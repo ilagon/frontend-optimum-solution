@@ -55,22 +55,12 @@ exports.user_register = (req, res) => {
 
 
 exports.users_get_all = (req, res) => {
-    User.find().select("name email account_status _id is_admin").exec()
+    User.findOne({email:req.user.email}).select("name email account_status _id is_admin").exec()
         .then(docs => {
-            const response = {
-                count: docs.length,
-                Users: docs.map(doc => {
-                    return {
-                        account_status: doc.account_status,
-                        name: doc.name,
-                        email: doc.email,
-                        is_admin: doc.is_admin,
-                        _id: doc._id
-                    }
-                })
-            }
-
-            res.status(200).json(response);
+           if(docs){
+               console.log(docs)
+               res.status(200).json(docs);
+           }
         }).catch(err => {
             res.status(500).json({ error: err })
         })

@@ -3,6 +3,8 @@ import axios from 'axios'
 
 
 function Dashboard() {
+
+    const [name,setName] = useState('');
     var config = {
         method: 'get',
         url: 'http://localhost:7001/users',
@@ -14,7 +16,8 @@ function Dashboard() {
         useEffect(() => {
             axios(config)
             .then(function (response) {
-                console.log(response)
+                console.log(response.data.name)
+                setName(response.data.name)
             })
             .catch(function (error) {
                 console.log(error)
@@ -31,8 +34,8 @@ function Dashboard() {
     return (
         <div>
             <title>A Dashboard</title>
-            Empty spaces fill me up with hope.....
-            <button onClick={logout}>Logout</button>
+             <h1>You are {name}!</h1>
+            <button onClick={logout}>Logout</button>    
         </div>
     )
 }
