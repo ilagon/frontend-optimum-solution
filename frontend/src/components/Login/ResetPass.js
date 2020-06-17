@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -64,25 +65,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SignUp() {
+
+export default function ResetPass() {
     const classes = useStyles();
 
     const [password, setPassword] = useState('')
     const [cnfmPassword, setCnfmPassword] = useState('')
     const [error, setError] = useState(false)
-    const [errorOld, setErrorOld] = useState(false)
+    const [errorText, setErrorText] = useState('')
+
+    let { token } = useParams();
 
     const resetPassword = (e) => {
         e.preventDefault();
         //axios post here
-        axios.post("http://localhost:7001/users/recover", {
-
+        axios.patch(`http://localhost:7001/users/recover/${token}`, {
             password: password
         })
             .then((res) => {
+
                 console.log(res)
-                if (res.data.message == "Password cannot be the same as the old password") {
-                    setErrorOld(true)
+                if (res.data.message == "Password cannot be the same") {
+                    setError(true)
+                    setErrorText("Password cannot be the same as the old password")
+
                 }
                 if (res.data.message == "Successfully update") {
                     window.location.href = "/ChangedPass"
@@ -98,6 +104,7 @@ export default function SignUp() {
 
     useEffect(() => {
         (cnfmPassword !== password) ? setError(true) : setError(false);
+        setErrorText("Password not the same")
     }, [cnfmPassword, password]);
 
     return (
@@ -132,12 +139,12 @@ export default function SignUp() {
                             onChange={(e) => {
                                 setPassword(e.target.value)
                                 setError(false)
-                                setErrorOld(false)
+
                             }}
                             error={error ? true : false}
-                            helperText={error ? "Password not the same" : ''}
-                            error={errorOld ? true : false}
-                            helperText={errorOld ? "Password cannot be the same as the previous password" : ''}
+                            helperText={error ? `${errorText}` : ''}
+
+
                         />
                         <TextField
                             margin="normal"
@@ -153,7 +160,7 @@ export default function SignUp() {
                                 setCnfmPassword(e.target.value)
 
                             }}
-                            helperText={error ? "Password not the same" : ''}
+                            helperText={error ? `${errorText}` : ''}
                             error={error ? true : false}
                         />
                         <div align="center">

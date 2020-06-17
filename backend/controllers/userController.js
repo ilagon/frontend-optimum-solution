@@ -166,11 +166,11 @@ exports.forgot_password = (req, res) => {
                     <p>
                          If you requested this password change, please click the link below to set a new password within 15min
                          <br>
-                         <a href=" http://localhost:3000/users/recover/${token}">Click here to change your password</a>
+                         <a href=" http://localhost:3000/ResetPass/recover/${token}">Click here to change your password</a>
                          <p>
                             If the link above does not work, paste this into your browser:
                             <br>
-                            http://localhost:7001/users/recover/${token}
+                            http://localhost:3000/ResetPass/recover/${token}
                          </p>
                          <p>
                             If you don't want to change your password, just ignore this message.
