@@ -8,7 +8,7 @@ export default function OneTimePaymentConfirmation(props) {
     <div style={{ display: "flex" }}>
       <SearchBar />
       <SideBar />
-      <BodyContainer props={props}/>
+      <BodyContainer/>
     </div>
   );
 }

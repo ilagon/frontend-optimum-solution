@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "../css/OneTimeTransfer.css";
 import Grid from "@material-ui/core/Grid";
@@ -7,35 +7,49 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
-import OneTimeTransferConfirmationPage from "../OneTimeTransfer/OneTimeTransferConfirmation_Body";
+import { useDispatch } from "react-redux";
+import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput";
+import { store } from "../../../index";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+
+var cards = [];
 
 export default function BodyContainer() {
-  const creditCardObject = [
-    {
-      name: "CreditCard1",
-      balance: 100,
-    },
-    {
-      name: "CreditCard2",
-      balance: 200,
-    },
-    {
-      name: "CreditCard3",
-      balance: 300,
-    },
-  ];
+  const dispatch = useDispatch();
+  console.log(store.getState());
+  const history = useHistory();
+
+  const handleFormInputs = () => {
+    dispatch(storeInput(phoneNumber, amount, creditCard));
+    history.push("/MobilePayment/ConfirmationPage");
+  };
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
-  const [creditCard, setCreditCard] = useState({ name: "", balance: "" });
+  const [creditCard, setCreditCard] = useState({});
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      axios
+        .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+        .then((response) => {
+          cards = response.data.creditcard;
+          setLoading(true);
+        })
+        .catch((error) => console.log(error));
+    };
+    fetchData();
+  });
 
   const handleCreditCard = (e) => {
-    creditCardObject.map((creditcard) => {
-      if (creditcard.name === e.target.value) {
-        setCreditCard({ name: e.target.value, balance: creditcard.balance });
+    cards.map((creditcard) => {
+      if (creditcard.creditcard_type === e.target.value) {
+        setCreditCard(creditcard);
       }
     });
+    console.log(creditCard);
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -84,78 +98,68 @@ export default function BodyContainer() {
   );
 
   const formFrom = (
-    <Router>
-      <Switch>
-        <div className="fromForm">
-          <h1>From</h1>
-          <div>
-            <FormControl variant="filled" className={classes.formControl}>
-              <Select
-                labelId="selectCreditCard"
-                id="selectCreditCard"
-                onChange={(e) => handleCreditCard(e)}
-              >
-                {/* <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem> */}
-                {creditCardObject.map((option) => (
-                  <MenuItem value={option.name}>{option.name}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <p>Current Balance</p>
-          <p>${creditCard.balance}</p>
-          <a href="/a">
-            <Button id="nextButton" variant="contained">
-              Next
-            </Button>
-          </a>
-          <Route
-            path="/"
-            render={() => (
-              <OneTimeTransferConfirmationPage
-                phoneNumber={phoneNumber}
-                amount={amount}
-                creditCard={creditCard}
-              />
-            )}
-          />
-        </div>
-      </Switch>
-    </Router>
+    <div className="fromForm">
+      <h1>From</h1>
+      <div>
+        <FormControl variant="filled" className={classes.formControl}>
+          <Select
+            labelId="selectCreditCard"
+            id="selectCreditCard"
+            onChange={(e) => handleCreditCard(e)}
+          >
+            {cards.map((obj) => (
+              <MenuItem value={obj.creditcard_type}>
+                {obj.creditcard_type}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <p>Current Balance</p>
+      <p>${creditCard.creditcard_balance}</p>
+      <Button
+        id="nextButton"
+        variant="contained"
+        onClick={() => handleFormInputs()}
+      >
+        Next
+      </Button>
+    </div>
   );
-
   return (
-    <main className="content">
-      <div className={classes.appBarSpacer} />
-      <Grid container direction="row" justify="space-evenly" wrap="wrap">
-        <Grid item sm={6} className="bodyTitle activeTitle">
-          <h1>One Time Transfer</h1>
-        </Grid>
-        <Grid item sm={6} className="bodyTitle nonActiveTitle">
-          <a href="/MobilePayment/OtherRecipients">
-            <h1>Other Recipients</h1>
-          </a>
-        </Grid>
-        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-          <h1>Bill Payment</h1>
-        </Grid>
-        <Grid
-          item
-          sm={6}
-          direction="row"
-          className={classes.gridMargin + " border"}
-        >
-          {formTo}
-        </Grid>
-        <Grid item sm={6} className={classes.gridMargin + " border"}>
-          {formFrom}
-        </Grid>
-      </Grid>
-    </main>
+    <div>
+      <div>Something</div>
+      {isLoading ? (
+        <main className="content">
+          <div className={classes.appBarSpacer} />
+          <Grid container direction="row" justify="space-evenly" wrap="wrap">
+            <Grid item sm={6} className="bodyTitle activeTitle">
+              <h1>One Time Transfer</h1>
+            </Grid>
+            <Grid item sm={6} className="bodyTitle nonActiveTitle">
+              <a href="/MobilePayment/OtherRecipients" style={{textDecoration: "none"}}>
+                <h1>Other Recipients</h1>
+              </a>
+            </Grid>
+            <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+              <h1>Bill Payment</h1>
+            </Grid>
+            <Grid
+              item
+              sm={6}
+              direction="row"
+              className={classes.gridMargin + " border"}
+            >
+              {formTo}
+            </Grid>
+            <Grid item sm={6} className={classes.gridMargin + " border"}>
+              {formFrom}
+            </Grid>
+          </Grid>
+        </main>
+      ) : (
+        <div>Loading..</div>
+      )}
+    </div>
   );
 }
