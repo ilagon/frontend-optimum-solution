@@ -1,5 +1,5 @@
 import React from 'react';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -40,9 +40,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
-
-export default function EmailSent() {
+export default function SignUpResult() {
     const classes = useStyles();
 
     return (
@@ -50,22 +48,17 @@ export default function EmailSent() {
             <Container id="logout" component="main" maxWidth="sm">
 
                 <div className={classes.paper}>
-                    <MailOutlineIcon style={{ color: "AA3A21", fontSize: 120 }} />
-                    <Typography component="h1" variant="h2" className={classes.title}>
-                        Email Sent!
-                    </Typography>
-                    <Typography component="h2" variant="h6" className={classes.bodytxt}>
-                        We've sent you an email with a link to reset your password
-                    </Typography>
-                    <Typography component="h2" variant="h6" className={classes.bodytxt}>
-                        Didn't get the email or not your email address? <Link href="/ForgetPass" className={classes.bodytxt2}>Try again.</Link>
+                    <CheckSharpIcon style={{ color: "388e3c", fontSize: 120 }} />
 
+                    <Typography component="h1" variant="h4" className={classes.title}>
+                        Password successfully reset!
+                    </Typography>
+                    <Typography component="h2" variant="h6" className={classes.bodytxt}>
+                        You will receive an email regarding this update.
                     </Typography>
                     <Typography component="h2" variant="h6" className={classes.bodytxt}>
                         Click here to return to the <Link href="/Login" className={classes.bodytxt2}> Login Page </Link>
-
                     </Typography>
-
                 </div>
             </Container>
 

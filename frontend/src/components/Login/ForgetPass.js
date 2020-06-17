@@ -32,30 +32,30 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
         '&:hover': {
             backgroundColor: '#AA3A21'
-          },
+        },
     },
 }));
 
 const ForgetPass = () => {
     const classes = useStyles();
     const [email, setEmail] = useState('')
-    const [error,setError] = useState(false)
+    const [error, setError] = useState(false)
     const getPass = (e) => {
         e.preventDefault();
 
         axios.post('http://localhost:7001/users/forget_password', {
             email: email
-          })
-          .then(function (res) {
-            if(res.data.message == "Email has been sent"){
-                console.log("directing to email sent")
-                window.location.href = "/EmailSent"
-            }
-          })
-          .catch(function (error) {
-            setError(true)
-            console.log(error)
-          });
+        })
+            .then(function (res) {
+                if (res.data.message == "Email has been sent") {
+                    console.log("directing to email sent")
+                    window.location.href = "/EmailSent"
+                }
+            })
+            .catch(function (error) {
+                setError(true)
+                console.log(error)
+            });
     }
 
     return (
@@ -83,20 +83,21 @@ const ForgetPass = () => {
                                     onChange={(e) => {
                                         setEmail(e.target.value)
                                         setError(false)
-                                
-                                }}
+
+                                    }}
                                     InputLabelProps={{
                                         style: {
-                                          whiteSpace: 'nowrap',
-                                          overflow: 'hidden',
-                                          width: '100%',
-                                          color: '#173A77'
-                                    }}}
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            width: '100%',
+                                            color: '#173A77'
+                                        }
+                                    }}
                                     error={error ? true : false}
-                                     helperText={error ?  "Email does not exist": ''}
+                                    helperText={error ? "Email does not exist" : ''}
                                 />
                             </Grid>
-                            
+
                         </Grid>
                         <Button
                             fullWidth
