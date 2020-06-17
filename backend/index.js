@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user_routes');
 const creditcardRoutes = require('./routes/creditcard_routes');
 const paymentHistoryRoutes = require('./routes/payment_history_routes');
+const payeeRoutes = require('./routes/payee_routes');
 const cors = require("cors");
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use("/users", userRoutes); //Using userRoutes file
 app.use("/creditcards", creditcardRoutes);
 app.use("/payment_history", paymentHistoryRoutes);
+app.use("/payee", payeeRoutes);
 
 app.get("/",(req,res) =>
     res.send(`Our application is running on port ${PORT}`)
