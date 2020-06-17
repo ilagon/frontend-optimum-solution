@@ -9,6 +9,7 @@ import SignUpResult from './components/Login/SignUpResult';
 import ChangedPass from './components/Login/ChangedPass';
 import ResetPass from './components/Login/ResetPass';
 import Logout from './components/Login/Logout';
+import Dashboard from './components/Login/dashboard'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/ChangedPass" exact component={ChangedPass} />
             <Route path="/ResetPass" exact component={ResetPass} />
             <Route path="/Logout" exact component={Logout} />
+            <Route path="/Dashboard" exact component={Dashboard} />
           </Switch>
         </div>
       </Router>

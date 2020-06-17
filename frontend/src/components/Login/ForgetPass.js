@@ -38,16 +38,24 @@ const useStyles = makeStyles((theme) => ({
 
 const ForgetPass = () => {
     const classes = useStyles();
-
-
     const [email, setEmail] = useState('')
-    const getPass = () => {
-        window.location.href = "/EmailSent"
-    }
+    const [error, setError] = useState(false)
+    const getPass = (e) => {
+        e.preventDefault();
 
-    const handleEmail = e => {
-        setEmail(e.target.value);
-        console.log(e.target.value)
+        axios.post('http://localhost:7001/users/forget_password', {
+            email: email
+        })
+            .then(function (res) {
+                if (res.data.message == "Email has been sent") {
+                    console.log("directing to email sent")
+                    window.location.href = "/EmailSent"
+                }
+            })
+            .catch(function (error) {
+                setError(true)
+                console.log(error)
+            });
     }
 
     return (
@@ -61,17 +69,22 @@ const ForgetPass = () => {
                     <Typography component="h1" variant="h5" className={classes.logo}>
                         Optimum DigiBank
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} onSubmit={getPass}>
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
                                 <TextField
                                     required
                                     fullWidth
+                                    type="email"
                                     id="email"
                                     label="Email Address"
                                     name="email"
-                                    onChange={handleEmail}
+                                    onChange={(e) => {
+                                        setEmail(e.target.value)
+                                        setError(false)
+
+                                    }}
                                     InputLabelProps={{
                                         style: {
                                             whiteSpace: 'nowrap',
@@ -80,6 +93,8 @@ const ForgetPass = () => {
                                             color: '#173A77'
                                         }
                                     }}
+                                    error={error ? true : false}
+                                    helperText={error ? "Email does not exist" : ''}
                                 />
                             </Grid>
 
@@ -88,7 +103,7 @@ const ForgetPass = () => {
                             fullWidth
                             variant="contained"
                             className={classes.submit}
-                            onClick={getPass}
+                            type="submit"
                         >
                             Submit
                         </Button>
