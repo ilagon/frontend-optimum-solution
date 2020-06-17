@@ -1,0 +1,29 @@
+#paymentSuccessful{
+   
+    position: absolute;
+    top: 30%;
+    right:30%;
+    line-height: 1em;
+    text-align: center;
+ 
+ }
+ 
+ #text{
+     color: #173A77; 
+     font-size: 52px ;
+     font-family: Arial Black;
+ }
+ 
+ #message{
+     color: #173A77; 
+     font-size: 20px ;
+ }
+ #message1{
+    color: #173A77; 
+    font-size: 20px ;
+}
+
+.creditcardSuccessIcon {
+    font-size: 200px !important;
+    color: darkred;
+}
