@@ -63,3 +63,27 @@ exports.creditcard_application = (req, res) => {
       });
   };
   
+  // update balance
+  exports.update_balance = (req, res) =>{
+    const id = req.body.creditcard_Id
+    CreditCard.updateOne({_id: id},
+      {
+        $set: {
+          creditcard_balance: req.body.creditcard_balance
+        }        
+      })
+      .exec()
+      .then((result) => {
+        console.log(result);
+        res.status(200).json({
+        message: "Balance Updated",
+        });
+      })
+      .catch((err) =>{
+        console.log(err)
+        res.status(500).json({
+          error: err,
+        });
+      })
+  }
+  
