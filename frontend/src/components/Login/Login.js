@@ -73,14 +73,16 @@ const useStyles = makeStyles((theme) => ({
     const submit = (e) =>{
       e.preventDefault();
 
-      axios.post('http://localhost:7001/users/forget_password', {
+      axios.post('http://localhost:7001/users/login', {
         email: email,
         password: pass
       })
       .then(function (res) {
         console.log(res)
+        setError(false)
         sessionStorage.setItem("token",res.data.token)
         //window href to dashboard
+        window.location.href = "/Dashboard"
       })
       .catch(function (error) {
         setError(true)

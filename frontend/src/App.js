@@ -7,6 +7,7 @@ import ForgetPass from './components/Login/ForgetPass';
 import EmailSent from './components/Login/EmailSent';
 import ChangePass from './components/Login/ChangePass';
 import Logout from './components/Login/Logout';
+import Dashboard from './components/Login/dashboard'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path = "/EmailSent" exact component={EmailSent} />
             <Route path = "/ChangePass" exact component={ChangePass} />
             <Route path = "/Logout" exact component={Logout} />
+            <Route path = "/Dashboard" exact component={Dashboard} />
           </Switch>
         </div>
       </Router>
