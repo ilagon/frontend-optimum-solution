@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
       },
       links: {
         textDecoration: 'none',
-        fontFamily: 'Helvetica Neue',
-        color: 'black',
+        fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+        color: '#173A77',
         fontWeight: '700',
         fontSize: '1.5rem'
       },
@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
       },
       title: {
-        fontFamily: 'Arial',
-        color: '#ab3a22',
+        fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+        color: '#AA3A21',
         fontSize: '2.5rem',
         fontWeight: '700',
         fontStyle: 'italic'
@@ -49,9 +49,14 @@ const useStyles = makeStyles((theme) => ({
       },
       submit: {
         margin: theme.spacing(3, 0, 2),
-        backgroundColor: '#ab3a22',
+        backgroundColor: '#AA3A21',
+        fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+        color: '#fff',
         width: '25rem',
-        height: '3rem'
+        height: '3rem',
+        '&:hover': {
+          backgroundColor: '#AA3A21'
+        },
       },
       forgetButton: {
         color: 'black',
@@ -111,6 +116,7 @@ export default function SignUp() {
             </Box>
               <form className={classes.form} onSubmit={registerUser}>
                 <TextField
+                inputProps={{ pattern: "[A-Za-z]+" ,title: "Letters characters only"}}
                   margin="normal"
                   required
                   fullWidth
@@ -119,6 +125,13 @@ export default function SignUp() {
                   name="name"
                   autoComplete="name"
                   autoFocus
+                  InputLabelProps={{
+                    style: {
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      width: '100%',
+                      color: '#173A77'
+                } }}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
@@ -131,6 +144,13 @@ export default function SignUp() {
                   type="email"
                   id="email"  
                   autoComplete="email"
+                  InputLabelProps={{
+                    style: {
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      width: '100%',
+                      color: '#173A77'
+                } }}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
@@ -143,6 +163,13 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  InputLabelProps={{
+                    style: {
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      width: '100%',
+                      color: '#173A77'
+                } }}
                   onChange={(e) => {setPassword(e.target.value)
                     setError(false)
                   }}
