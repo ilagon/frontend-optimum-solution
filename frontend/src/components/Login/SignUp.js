@@ -199,6 +199,14 @@ export default function SignUp() {
               id="retype"
               type="password"
               autoComplete="current-password"
+              InputLabelProps={{
+                style: {
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  width: '100%',
+                  color: '#173A77'
+                }
+              }}
               onChange={(e) => {
                 setCnfmPassword(e.target.value)
 
