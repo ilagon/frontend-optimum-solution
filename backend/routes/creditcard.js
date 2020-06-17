@@ -12,6 +12,9 @@ router.get("/",creditcardController.creditcard_get_all);
 //credit card approval pending list
 router.get("/pending", creditcardController.creditcard_pending);
 
+//credit card approval pending list search
+router.get("/pending/:cardId", creditcardController.creditcard_pending_searh_id);
+
 //overview customer list search by card status approve
 router.get("/search/approve", creditcardController.creditcard_search_by_cardStatus_approve);
 
