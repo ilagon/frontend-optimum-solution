@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,13 +72,20 @@ const useStyles = makeStyles((theme) => ({
 
     const submit = (e) =>{
       e.preventDefault();
-      //for testing only
-      if(email == "apzhawk@gmail.com" && pass == "123"){
-        setError(false)
-      }
-      else{
+
+      axios.post('http://localhost:7001/users/forget_password', {
+        email: email,
+        password: pass
+      })
+      .then(function (res) {
+        console.log(res)
+        sessionStorage.setItem("token",res.data.token)
+        //window href to dashboard
+      })
+      .catch(function (error) {
         setError(true)
-      }
+        console.log(error)
+      });
     }
 
 
