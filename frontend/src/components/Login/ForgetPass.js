@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
         '&:hover': {
             backgroundColor: '#AA3A21'
-          },
+        },
     },
 }));
 
@@ -74,14 +74,15 @@ const ForgetPass = () => {
                                     onChange={handleEmail}
                                     InputLabelProps={{
                                         style: {
-                                          whiteSpace: 'nowrap',
-                                          overflow: 'hidden',
-                                          width: '100%',
-                                          color: '#173A77'
-                                    } }}
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            width: '100%',
+                                            color: '#173A77'
+                                        }
+                                    }}
                                 />
                             </Grid>
-                            
+
                         </Grid>
                         <Button
                             fullWidth

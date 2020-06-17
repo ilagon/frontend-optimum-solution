@@ -5,7 +5,9 @@ import Login from './components/Login/Login';
 import './App.css'
 import ForgetPass from './components/Login/ForgetPass';
 import EmailSent from './components/Login/EmailSent';
-import ChangePass from './components/Login/ChangePass';
+import SignUpResult from './components/Login/SignUpResult';
+import ChangedPass from './components/Login/ChangedPass';
+import ResetPass from './components/Login/ResetPass';
 import Logout from './components/Login/Logout';
 
 function App() {
@@ -19,15 +21,17 @@ function App() {
             <Route path="/signUp" exact component={signUp} />
             <Route path="/Login" exact component={Login} />
             <Route path="/ForgetPass" exact component={ForgetPass} />
-            <Route path = "/EmailSent" exact component={EmailSent} />
-            <Route path = "/ChangePass" exact component={ChangePass} />
-            <Route path = "/Logout" exact component={Logout} />
+            <Route path="/EmailSent" exact component={EmailSent} />
+            <Route path="/SignUpResult" exact component={SignUpResult} />
+            <Route path="/ChangedPass" exact component={ChangedPass} />
+            <Route path="/ResetPass" exact component={ResetPass} />
+            <Route path="/Logout" exact component={Logout} />
           </Switch>
         </div>
       </Router>
 
     </React.Fragment>
-    
+
   )
 }
 
