@@ -7,6 +7,10 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +71,8 @@ const useStyles = makeStyles((theme) => ({
     const [email,setEmail] = useState('');
     const [pass,setPass] = useState('');
     const [error,setError] = useState(false);
-    const [result,setResult] = useState('')
+    const [message,setMessage] = useState('')
+    const [open, setOpen] = React.useState(false);
 
 
     const submit = (e) =>{
@@ -80,9 +85,19 @@ const useStyles = makeStyles((theme) => ({
       .then(function (res) {
         console.log(res)
         setError(false)
-        sessionStorage.setItem("token",res.data.token)
-        //window href to dashboard
-        window.location.href = "/Dashboard"
+        if(res.data.message == "success"){
+          sessionStorage.setItem("token",res.data.token)
+          window.location.href = "/Dashboard"
+        }
+        if(res.data.message == "Your Account has not been approved by the Administrator"){
+          setOpen(true);
+          setMessage('Account not approved by Administrator')
+        }
+        if(res.data.message == "Your account has been inactive"){
+          setOpen(true);
+          setMessage('Your account has been deactivated')
+        }
+     
       })
       .catch(function (error) {
         setError(true)
@@ -90,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
       });
     }
 
+    
     var config = {
       method: 'get',
       url: 'http://localhost:7001/users',
@@ -126,6 +142,25 @@ const useStyles = makeStyles((theme) => ({
             </Box>
           </Box>
             <form className={classes.form} onSubmit={submit}>
+                    <Collapse in={open}>
+                <Alert
+                severity="info" 
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  {message}
+                </Alert>
+              </Collapse>
               <TextField
                 margin="normal"
                 type="email"
@@ -145,6 +180,7 @@ const useStyles = makeStyles((theme) => ({
               } }}
                 onChange ={(e) => {setEmail(e.target.value)
                 setError(false)
+                setOpen(false)
                 }}
                 error={error ? true : false}
                 helperText={error ?  "Incorrect Username or password": ''}
@@ -168,6 +204,7 @@ const useStyles = makeStyles((theme) => ({
               } }}
                 onChange ={(e) => {setPass(e.target.value)
                   setError(false)
+                  setOpen(false)
                 }}
                 error={error ? true : false}
               />
