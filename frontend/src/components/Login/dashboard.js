@@ -16,7 +16,6 @@ function Dashboard() {
         useEffect(() => {
             axios(config)
             .then(function (response) {
-                console.log(response.data.name)
                 setName(response.data.name)
             })
             .catch(function (error) {

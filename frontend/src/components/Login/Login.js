@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
       height: '100vh',
     },
     image: {
-      backgroundImage: 'url(https://source.unsplash.com/ULwzqOnPem0)',
+      backgroundImage: 'url(/images/loginPic.jpg)',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'absolute',
@@ -82,9 +82,18 @@ const useStyles = makeStyles((theme) => ({
       .then(function (res) {
         console.log(res)
         setError(false)
-        sessionStorage.setItem("token",res.data.token)
-        //window href to dashboard
-        window.location.href = "/Dashboard"
+        if(res.data.message == "success"){
+           sessionStorage.setItem("token",res.data.token)
+            window.location.href = "/Dashboard"
+                  }
+        if(res.data.message == "Your Account has not been approved by the Administrator"){
+          setOpen(true);
+           setMessage('Account not approved by Administrator')
+        }
+       if(res.data.message == "Your account has been inactive"){
+          setOpen(true);
+          setMessage('Your account has been deactivated')
+         }
       })
       .catch(function (error) {
         setError(true)
