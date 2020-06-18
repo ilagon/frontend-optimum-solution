@@ -6,6 +6,7 @@ const PayeeSchema = new Schema ({
     
       name: {
         type: String,
+        required: true,
       },
 
       number:{
