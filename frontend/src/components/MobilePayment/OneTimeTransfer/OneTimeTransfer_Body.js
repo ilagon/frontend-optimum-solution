@@ -21,7 +21,7 @@ export default function BodyContainer() {
   const history = useHistory();
 
   const handleFormInputs = () => {
-    dispatch(storeInput(phoneNumber, amount, creditCard));
+    dispatch(storeInput(amount, creditCard));
     history.push("/MobilePayment/ConfirmationPage");
   };
 
@@ -128,7 +128,6 @@ export default function BodyContainer() {
   );
   return (
     <div>
-      <div>Something</div>
       {isLoading ? (
         <main className="content">
           <div className={classes.appBarSpacer} />
@@ -137,7 +136,10 @@ export default function BodyContainer() {
               <h1>One Time Transfer</h1>
             </Grid>
             <Grid item sm={6} className="bodyTitle nonActiveTitle">
-              <a href="/MobilePayment/OtherRecipients" style={{textDecoration: "none"}}>
+              <a
+                href="/MobilePayment/OtherRecipients"
+                style={{ textDecoration: "none", color: "#173a77" }}
+              >
                 <h1>Other Recipients</h1>
               </a>
             </Grid>

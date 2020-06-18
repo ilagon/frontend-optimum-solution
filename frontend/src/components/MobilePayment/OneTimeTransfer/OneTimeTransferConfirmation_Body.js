@@ -13,7 +13,7 @@ export default function BodyContainer() {
   const state = store.getState();
   console.log(state);
   console.log("cc id:" + state.mobilePayment.creditCard._id);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     axios
       .post("http://localhost:9002/payment_history/addPayment", {
         payment_type: "Mobile Bill",
@@ -21,8 +21,28 @@ export default function BodyContainer() {
         transfer_number: 1,
         creditcardId: state.mobilePayment.creditCard._id,
       })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => {
+        console.log(response);
+        axios
+          .patch("http://localhost:9002/creditcards/updateBalance", {
+            creditcard_Id: state.mobilePayment.creditCard._id,
+            creditcard_balance:
+              state.mobilePayment.creditCard.creditcard_balance -
+              state.mobilePayment.amount,
+          })
+          .then((response2) => {
+            console.log(response2);
+            history.push("/Payment/Successful");
+          })
+          .catch((error) => {
+            console.log(error);
+            history.push("/Payment/Unsuccessful");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        history.push("/Payment/Unsuccessful");
+      });
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -58,21 +78,19 @@ export default function BodyContainer() {
       <h1>From</h1>
       <p>{state.mobilePayment.creditCard.creditcard_type}</p>
       <div>
-        <a href="/" style={{ textDecoration: 'none' }}>
-          <Button
-            id="submitButton"
-            variant="contained"
-            onClick={() => handleSubmit()}
-          >
-            Submit
-          </Button>
-        </a>
+        <Button
+          id="submitButton"
+          variant="contained"
+          onClick={() => handleSubmit()}
+        >
+          Submit
+        </Button>
       </div>
       <div>
         <Button
           id="cancelButton"
           variant="contained"
-          onClick={() => history.push("/")}
+          onClick={() => history.push("/Payment/Unsuccessful")}
         >
           Cancel
         </Button>
