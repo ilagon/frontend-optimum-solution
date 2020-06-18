@@ -49,9 +49,13 @@ function MainPage(props) {
         Choose the right bank today
       </Typography>
       <Typography variant="h5" component="h5" align="center">
-        <p>We craft the best possibilities for you.</p>
-        <p>Optimum Digital Bank prioritises in optimising your experiences.</p>
-        <p>we will place the best opportunities into your finger tips.</p>
+        <div>
+        We craft the best possibilities for you.
+        <br/>
+        Optimum Digital Bank prioritises in optimising your experiences.
+        <br/>
+        We will place the best opportunities into your finger tips.
+        </div>
       </Typography>
       <Button
         className={classes.button}

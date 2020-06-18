@@ -74,14 +74,18 @@ function ContactUs(props) {
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
                 <Typography variant="h6" align="left">
-                  <p>We are located at:
+                  <div>
+                  We are located at:
                   1 Changi Business Park Crescent,
                   Plaza8 @ CBP, #03-09 to #03-12,
-                  Podium B, 486025</p>
-
-                  <p>Contact No: +65 6236 0070
+                  Podium B, 486025
+                  <br/>
+                  Contact No: +65 6236 0070
+                  <br/>
                   Fax No: +65 65351334
-                  Email: info@optimumdigibank.com</p>
+                  <br/>
+                  Email: info@optimumdigibank.com
+                  </div>
                 </Typography>
               </div>
             </Grid>

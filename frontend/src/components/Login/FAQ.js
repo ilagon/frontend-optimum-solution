@@ -55,25 +55,25 @@ function FAQ(props) {
           <Typography variant="h5" component="h5" align="left" className={classes.qns}>
             How to apply for Credit Card?
           </Typography>
-          <Typography variant="p" component="p" align="left" className={classes.ans}>
+          <Typography variant="body1" align="left" className={classes.ans}>
             Simply login to your Optimum DigiBank Internet Banking to apply.
           </Typography>
           <Typography variant="h5" component="h5" align="left" className={classes.qns}>
             What is the minimum income level to apply for Credit Card?
           </Typography>
-          <Typography variant="p" component="p" align="left" className={classes.ans}>
+          <Typography variant="body1" align="left" className={classes.ans}>
             To qualify, you’ll need to earn a minimum annual income of S$30,000.
           </Typography>
           <Typography variant="h5" component="h5" align="left" className={classes.qns}>
             What is eligibility for Credit Card Application?
           </Typography>
-          <Typography variant="p" component="p" align="left" className={classes.ans}>
+          <Typography variant="body1" align="left" className={classes.ans}>
             You will need to be above 21 years and earn a gross annual income of S$30k.
           </Typography>
           <Typography variant="h5" component="h5" align="left" className={classes.qns}>
             How to check Credit Card Application Status?
           </Typography>
-          <Typography variant="p" component="p" align="left" className={classes.ans}>
+          <Typography variant="body1" align="left" className={classes.ans}>
             Log in to Optimum Digibank with your User ID and Password. Click on CreditCard Status under Service.
             Please allow 5 to 7 working days to process the application.
           </Typography>

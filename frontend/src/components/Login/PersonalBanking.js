@@ -83,7 +83,7 @@ function PersonalBanking(props) {
                       EXPERIENCE
                       </Typography>
 
-                    <Typography variant="p" align="center">
+                    <Typography variant="body1" align="center">
                       We craft the absolute for you.
                       </Typography>
                   </Grid>
@@ -94,7 +94,7 @@ function PersonalBanking(props) {
                       CONVENIENCE
                       </Typography>
 
-                    <Typography variant="p" align="center">
+                    <Typography variant="body1" align="center">
                       With our DigitalBank, you can worry less.
                       </Typography>
 
@@ -105,7 +105,7 @@ function PersonalBanking(props) {
                     <Typography variant="h6">
                       SECURE. SAFE ACCESS.
                       </Typography>
-                    <Typography variant="p" align="center">
+                    <Typography variant="body1" align="center">
                       Safety is not just our priority.
                       We Safeguard what is on your heart.
                       </Typography>
@@ -118,7 +118,7 @@ function PersonalBanking(props) {
                       EASY TO USE
                       </Typography>
 
-                    <Typography variant="p" align="center">
+                    <Typography variant="body1" align="center">
                       We support our customers all the way, even if it is about a reach of a pocket.
                       </Typography>
 
