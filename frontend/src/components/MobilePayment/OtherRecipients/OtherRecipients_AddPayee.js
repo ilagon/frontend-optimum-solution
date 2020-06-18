@@ -67,7 +67,13 @@ export default function BodyContainer() {
           className={classes.textBoxMargin}
           id="phoneNumberInput"
           label="Phone Number"
+          type="number"
           value={phoneNumber}
+          onInput={(e) => {
+            e.target.value = Math.max(0, parseInt(e.target.value))
+              .toString()
+              .slice(0, 8);
+          }}
           onChange={(e) => {
             setPhoneNumber(e.target.value);
           }}

@@ -21,14 +21,18 @@ export default function BodyContainer() {
   const history = useHistory();
 
   const handleFormInputs = () => {
-    dispatch(storeInput(amount, creditCard));
-    history.push("/MobilePayment/ConfirmationPage");
+    if ((amount != "") && (Object.keys(creditCard).length != 0)) {
+      dispatch(storeInput(amount, creditCard));
+      history.push("/MobilePayment/ConfirmationPage");
+    } else alert("Please fill in the form");
   };
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [creditCard, setCreditCard] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const [visible, setVisible] = useState("hidden");
+  const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,10 +47,27 @@ export default function BodyContainer() {
     fetchData();
   });
 
+  const handleAmount = (value) => {
+    if (value > creditCard.creditcard_balance) {
+      setVisible("visible");
+      setNextButton(true);
+    } else {
+      setVisible("hidden");
+      setNextButton(false);
+    }
+  };
+
   const handleCreditCard = (e) => {
     cards.map((creditcard) => {
       if (creditcard.creditcard_type === e.target.value) {
         setCreditCard(creditcard);
+        if (amount > creditcard.creditcard_balance) {
+          setVisible("visible");
+          setNextButton(true);
+        } else {
+          setVisible("hidden");
+          setNextButton(false);
+        }
       }
     });
     console.log(creditCard);
@@ -67,6 +88,21 @@ export default function BodyContainer() {
       marginTop: theme.spacing(8),
       minWidth: 240,
     },
+
+    errorMessage: {
+      visibility: visible,
+    },
+
+    nextButton: {
+      marginTop: "100px",
+      width: "260px",
+      backgroundColor: "#e26448",
+      color: "white",
+      fontWeight: "bold",
+      "&:hover": {
+        backgroundColor: "#e26448",
+      },
+    },
   }));
 
   const classes = useStyles();
@@ -80,7 +116,13 @@ export default function BodyContainer() {
           className={classes.textBoxMargin}
           id="phoneNumberInput"
           label="Phone Number"
+          type="number"
           value={phoneNumber}
+          onInput={(e) => {
+            e.target.value = Math.max(0, parseInt(e.target.value))
+              .toString()
+              .slice(0, 8);
+          }}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </div>
@@ -90,8 +132,12 @@ export default function BodyContainer() {
           className={classes.textBoxMargin}
           id="amountInput"
           label="Amount"
+          type="number"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => {
+            setAmount(e.target.value);
+            handleAmount(e.target.value);
+          }}
         />
       </div>
     </div>
@@ -117,10 +163,14 @@ export default function BodyContainer() {
       </div>
       <p>Current Balance</p>
       <p>${creditCard.creditcard_balance}</p>
+      <p className={classes.errorMessage + " errorMessage"}>
+        Please type in an amount less than the balance amount
+      </p>
       <Button
-        id="nextButton"
+        className={classes.nextButton}
         variant="contained"
         onClick={() => handleFormInputs()}
+        disabled={nextButton}
       >
         Next
       </Button>
