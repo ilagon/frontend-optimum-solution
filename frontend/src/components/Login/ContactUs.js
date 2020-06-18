@@ -47,12 +47,12 @@ function ContactUs(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-          <Typography variant="h2" marked="center" className={classes.title} component="h2">
-            Contact Us
+        <Typography variant="h2" marked="center" className={classes.title} component="h2">
+          Contact Us
           </Typography>
-          <Typography variant="h4" marked="center" className={classes.subtitle} component="h2">
+        <Typography variant="h4" marked="center" className={classes.subtitle} component="h2">
           How may we assist you?
-          </Typography>        
+          </Typography>
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
@@ -63,9 +63,14 @@ function ContactUs(props) {
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
                 <Typography variant="h6" align="left">
-                <p>As the leading banking services in South East Asia, we ensure your investments are in responsible hands. Every foresight and insights were made and executed especially for you.</p>
-                
-                <p>We go further than what is needed, with experiences and specialties in commodities, investments, and services because we value what you truly value.</p>
+                  <p>We are located at:
+                  1 Changi Business Park Crescent,
+                  Plaza8 @ CBP, #03-09 to #03-12,
+                  Podium B, 486025</p>
+
+                  <p>Contact No: +65 6236 0070
+                  Fax No: +65 65351334
+                  Email: info@optimumdigibank.com</p>
                 </Typography>
               </div>
             </Grid>
