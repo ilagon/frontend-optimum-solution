@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 
 const styles = (theme) => ({
   root: {
@@ -38,7 +40,7 @@ const styles = (theme) => ({
     height: 55,
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
-  },
+  }
 });
 
 function ContactUs(props) {
@@ -56,9 +58,18 @@ function ContactUs(props) {
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
-              <div className={classes.item}>
-                {/* google map here */}
-              </div>
+        
+                <Map google={props.google} zoom={18}
+                    style={{width: '500px', height: '300px'}}
+                    initialCenter={{
+                    lat: 1.33690,
+                    lng: 103.965962
+                  }}
+                  >
+                  <Marker onClick={props.onMarkerClick}
+                    name={'Current location'} />
+                </Map>
+         
             </Grid>
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
@@ -85,4 +96,7 @@ ContactUs.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ContactUs);
+
+export default GoogleApiWrapper({
+  apiKey: ('AIzaSyCs8xtYZXXFLe131vR7RYeNF9nsyDN92v8')
+})(withStyles(styles)(ContactUs))
