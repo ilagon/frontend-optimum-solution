@@ -1,0 +1,43 @@
+*[33m-[m[33m.[m   [33m9b1653b[m On Customer-Branch: UIs all done
+[31m|[m[32m\[m [33m\[m  
+[31m|[m [32m|[m * [33m659a5c9[m untracked files on Customer-Branch: 2130cee thank you god zaf
+[31m|[m * [33ma859ca1[m index on Customer-Branch: 2130cee thank you god zaf
+[31m|[m[31m/[m  
+* [33m2130cee[m thank you god zaf
+* [33m5dcb426[m Zaf commit
+*   [33ma23e706[m Merge branch 'Customer-Branch' of https://bitbucket.org/bank-application/bankapplication-phase2-mern into Customer-Branch
+[34m|[m[35m\[m  
+[34m|[m *   [33mb56ce50[m Merge branch 'Customer-Branch' of https://bitbucket.org/bank-application/bankapplication-phase2-mern into Customer-Branch
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m * [1;31m|[m [33m99d891b[m added add_paymentHistory function
+* [1;31m|[m [1;31m|[m [33m041225c[m Mandy's Commit result pages
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m [33m95e5d08[m Edited images
+* [1;31m|[m [33md53f373[m mandy's commit
+[1;31m|[m[1;31m/[m  
+* [33mc4dd6a0[m user and creditcard creation tested, working
+* [33md13a74a[m controller updated
+*   [33m9d83db8[m Merge branch 'Customer-Branch' of https://bitbucket.org/bank-application/bankapplication-phase2-mern into Customer-Branch
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m00a79db[m Test Commit
+* [1;33m|[m [33md1784a1[m schema update
+* [1;33m|[m [33md64d12d[m schema update
+[1;33m|[m[1;33m/[m  
+* [33md168873[m user type
+* [33m13e30de[m ddddddd
+*   [33m4078bd0[m dddd
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m471cc9d[m test2
+* [1;35m|[m [33ma7ced2e[m commit
+[1;36m|[m[1;35m\[m[1;35m|[m 
+[1;36m|[m * [33mc85e637[m testing
+* [31m|[m [33mfd7f89a[m aaaaa
+* [31m|[m [33m535a436[m testtttttt
+* [31m|[m [33m406548a[m test
+[31m|[m[31m/[m  
+*   [33md03ab68[m Merged master into Customer-Branch
+[32m|[m[33m\[m  
+[32m|[m * [33m1327811[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Added backend folder to master
+[32m|[m[32m/[m  
+* [33m86faa91[m Master Commit

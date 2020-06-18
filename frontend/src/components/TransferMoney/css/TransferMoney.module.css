@@ -1,0 +1,113 @@
+.wrapper {
+        margin-left: 80px;
+      text-decoration: none;
+      font-size: 60px; /* 1em = 16px */
+    color:  #B9B9B9;
+    position: relative;
+    text-align: left;
+    font-weight: bold;
+    flex-grow: 1;
+    white-space: nowrap;
+    width: 100%;
+    }
+
+.rapper{
+    font-size: 60px; /* 1em = 16px */
+    text-decoration: none;
+    color: #B9B9B9 ;
+    text-align: right;
+    font-weight: bold;
+    flex-grow: 1;
+    white-space: nowrap;
+    width: 100%;
+    margin: auto 200px;
+}
+
+.selected{
+    text-decoration: underline;
+    color:  #173A77;
+  }
+  
+
+.FormTitle {
+    font-size: 28px;
+    color: #AA3A21 !important;
+    font-weight: bold;
+    margin-top: 80px;
+    margin-left: 60px;
+    white-space: nowrap,
+}
+
+.Button {
+    color:  #AA3A21;
+    padding: '6px 12px'
+}
+
+#TitleContainer{
+    margin-top: 20px;
+    color: #173A77 !important;
+    position: relative;
+    text-align: left;
+    font-weight: bold;
+    flex-grow: 1;
+    background-color: #E5E8ED;
+
+}
+
+.root {
+    display: flex;
+    width: 100%;
+    background-color: #E5E8ED;
+}
+
+.formBody {
+    margin-left: 60px;
+    float: left
+}
+
+.content {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    background-color: #E5E8ED;
+}
+
+.paper, .fixedHeightPaper, .selectPaper {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.fixedHeightPaper {
+    justify-content: center;
+}
+
+.selectCreditCardPaper {
+    margin: 0;
+    padding: 0;
+}
+
+.selectColor {
+    background-color: white !important;
+}
+
+.paper{
+    padding: 16px;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.textLeft {
+    text-align: left;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.infoIcon {
+    color:  #173A77;
+    margin-left: 1530px
+}
