@@ -9,7 +9,14 @@ import SignUpResult from './components/Login/SignUpResult';
 import ChangedPass from './components/Login/ChangedPass';
 import ResetPass from './components/Login/ResetPass';
 import Logout from './components/Login/Logout';
-import Dashboard from './components/Login/dashboard'
+import Dashboard from './components/Login/dashboard';
+import TopNav from './components/Login/TopNav';
+import MainPage from './components/Login/MainPage';
+import AboutUs from './components/Login/AboutUs';
+import PersonalBanking from './components/Login/PersonalBanking';
+import FAQ from './components/Login/FAQ';
+import ContactUs from './components/Login/ContactUs';
+import Footer from './components/Login/Footer';
 
 function App() {
 
@@ -18,7 +25,7 @@ function App() {
       <Router>
         <div>
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={home} />
             <Route path="/signUp" exact component={signUp} />
             <Route path="/Login" exact component={Login} />
             <Route path="/ForgetPass" exact component={ForgetPass} />
@@ -40,7 +47,13 @@ function App() {
 
 const home = () => (
   <div>
-    <h1>START PAGE</h1>
+    <TopNav/>
+    <MainPage/>
+    <AboutUs/>
+    <PersonalBanking/>
+    <FAQ/>
+    <ContactUs/>
+    <Footer/>
   </div>
 );
 
