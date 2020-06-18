@@ -4,7 +4,6 @@ import TransferMoneyPage from "./components/TransferMoney/transfer_money"
 
 
 function App() {
-
   return (
 
 <TransferMoneyPage></TransferMoneyPage>

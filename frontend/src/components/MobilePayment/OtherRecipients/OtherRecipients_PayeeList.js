@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "../css/OtherRecipients.css";
 import Grid from "@material-ui/core/Grid";
@@ -10,8 +10,33 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { blue } from "@material-ui/core/colors";
+import axios from "axios";
+import { store } from "../../../index";
+import { useDispatch } from "react-redux";
+import { storePayee } from "../../common/redux/actions/mobilePayment_storeInput";
+import { useHistory, Link, NavLink } from "react-router-dom";
+
+var payeeList = [];
 
 export default function BodyContainer() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      axios
+        .get("http://localhost:9002/payee/mobile/5ee8792db5be6439f4d8474e")
+        .then((response) => {
+          console.log(response);
+          payeeList = response.data.payee;
+          setLoading(true);
+        })
+        .catch((error) => console.log(error));
+    };
+    fetchData();
+  });
+
   const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
 
@@ -31,29 +56,58 @@ export default function BodyContainer() {
 
   const classes = useStyles();
 
+  const handleOnClick = (event) => {
+    payeeList.map((obj) => {
+      if (obj._id === event.target.id) {
+        dispatch(storePayee(obj));
+      }
+    });
+    history.push("/MobilePayment/OtherRecipients/Form");
+  };
+
   return (
-    <main className="content">
-      <div className={classes.appBarSpacer} />
-      <Grid container direction="row" justify="space-evenly" wrap="wrap">
-        <Grid item sm={6} className="bodyTitle nonActiveTitle">
-          <h1>One Time Transfer</h1>
-        </Grid>
-        <Grid item sm={6} className="bodyTitle activeTitle">
-          <h1>Other Recipients</h1>
-        </Grid>
-        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-          <h1>Bill Payment</h1>
-        </Grid>
-        <Grid item sm={12}>
-          <Paper elevation={3} className="paperHeight">
-            insert div content here
-            <InfoIcon className="infoIcon" />
-          </Paper>
-        </Grid>
-      </Grid>
-      <Button id="addPayee" variant="contained">
-        Add Payee
-      </Button>
-    </main>
+    <div>
+      {isLoading ? (
+        <main className="content">
+          <div className={classes.appBarSpacer} />
+          <Grid container direction="row" justify="space-evenly" wrap="wrap">
+            <Grid item sm={6} className="bodyTitle nonActiveTitle">
+              <a href="/" style={{ textDecoration: "none", color: "#173a77" }}>
+                <h1>One Time Transfer</h1>
+              </a>
+            </Grid>
+            <Grid item sm={6} className="bodyTitle activeTitle">
+              <h1>Other Recipients</h1>
+            </Grid>
+            <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+              <h1>Bill Payment</h1>
+            </Grid>
+            <Grid item sm={12}>
+              {payeeList.map((obj) => (
+                <Paper
+                  elevation={3}
+                  id={obj._id}
+                  className="paperHeight"
+                  onClick={(e) => handleOnClick(e)}
+                >
+                  <span>{obj.name}</span>
+                  <br />
+                  <br />
+                  <span>Mobile Bill</span>
+                  <InfoIcon className="infoIcon" />
+                </Paper>
+              ))}
+            </Grid>
+          </Grid>
+          <a href="/MobilePayment/AddPayee">
+            <Button id="addPayee" variant="contained">
+              Add Payee
+            </Button>
+          </a>
+        </main>
+      ) : (
+        <div>Loading..</div>
+      )}
+    </div>
   );
 }
