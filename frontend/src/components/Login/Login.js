@@ -44,8 +44,7 @@ const useStyles = makeStyles((theme) => ({
       fontStyle: 'italic'
     },
     form: {
-      width: '25rem', // Fix IE 11 issue.
-      position: 'relative',
+      width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
       color: 'black'
     },
@@ -54,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#AA3A21',
       fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
       color: '#fff',
-      width: '25rem',
-      height: '3rem',
       '&:hover': {
         backgroundColor: '#AA3A21'
       },
@@ -85,27 +82,15 @@ const useStyles = makeStyles((theme) => ({
       .then(function (res) {
         console.log(res)
         setError(false)
-        if(res.data.message == "success"){
-          sessionStorage.setItem("token",res.data.token)
-          window.location.href = "/Dashboard"
-        }
-        if(res.data.message == "Your Account has not been approved by the Administrator"){
-          setOpen(true);
-          setMessage('Account not approved by Administrator')
-        }
-        if(res.data.message == "Your account has been inactive"){
-          setOpen(true);
-          setMessage('Your account has been deactivated')
-        }
-     
+        sessionStorage.setItem("token",res.data.token)
+        //window href to dashboard
+        window.location.href = "/Dashboard"
       })
       .catch(function (error) {
         setError(true)
         console.log(error)
       });
     }
-
-    
     var config = {
       method: 'get',
       url: 'http://localhost:7001/users',

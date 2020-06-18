@@ -39,8 +39,7 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'italic'
   },
   form: {
-    width: '25rem', // Fix IE 11 issue.
-    position: 'relative',
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
     color: 'black'
   },
@@ -49,10 +48,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#AA3A21',
     fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
     color: '#fff',
-    width: '25rem',
-    height: '3rem',
     '&:hover': {
-      backgroundColor: '#AA3A21'
+        backgroundColor: '#AA3A21'
     },
   },
   forgetButton: {
