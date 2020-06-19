@@ -87,9 +87,12 @@ const ForgetPass = () => {
                     console.log("directing to email sent")
                     window.location.href = "/EmailSent"
                 }
+                if(res.data.message == "Email not found"){
+                    setError(true)
+                }
             })
             .catch(function (error) {
-                setError(true)
+                alert("An error Occurred")
                 console.log(error)
             });
     }

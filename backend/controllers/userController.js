@@ -144,7 +144,7 @@ exports.forgot_password = (req, res) => {
                     email: req.body.email,
                 },
                     process.env.JWT_RESET, {
-                    expiresIn: '1h'
+                    expiresIn: 900
                 })
                 const data = {
                     from: "Mailgun Sandbox <noreply@optimum.com>",
@@ -173,29 +173,34 @@ exports.forgot_password = (req, res) => {
                     </p>`
                 };
                 mg.messages().send(data, function (error, body) {
+                 
                     if (error) {
-                        res.status(500).json({
+                        console.log(error)
+                        return res.status(401).json({
                             error: error
                         })
                     }
-                    console.log(body.message);
+                    else{
+                        console.log(body.message)
+                        User.updateOne(
+                            { email: req.body.email },
+                            {
+                                $set: {
+                                    resetPasswordToken: token
+                                }
+                            },
+                        )
+                            .exec()
+                        res.status(200).json({
+                            token,
+                            message: "Email has been sent"
+                        })
+                    }
                 });
-                User.updateOne(
-                    { email: req.body.email },
-                    {
-                        $set: {
-                            resetPasswordToken: token
-                        }
-                    },
-                )
-                    .exec()
-                res.status(200).json({
-                    token,
-                    message: "Email has been sent"
-                })
+              
             }
             else {
-                res.status(401).json({
+                res.status(200).json({
                     message: "Email not found"
                 })
             }
@@ -275,4 +280,15 @@ exports.resetPassword = (req, res) => {
         .catch((err) => {
             res.status(500).json({ error: err });
         });
+}
+
+
+exports.resetAuth = (req,res) => {
+    User.findOne(req.param.token)
+    .exec()
+    .then((res) => {
+        if(res){
+            console.log(res)
+        }
+    })
 }
