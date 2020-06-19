@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -74,7 +73,7 @@ export default function SignUp() {
 
   const registerUser = (e) => {
     e.preventDefault();
-    if (cnfmPassword != password) {
+    if (cnfmPassword !== password) {
       return;
     }
     axios.post('http://localhost:7001/users/register', {
@@ -84,10 +83,10 @@ export default function SignUp() {
     })
       .then((res) => {
         console.log(res);
-        if (res.data.message == 'register success') {
+        if (res.data.message === 'register success') {
           window.location.href = '/SignUpResult';
         }
-        if (res.data.message == 'Email already exist!') {
+        if (res.data.message === 'Email already exist!') {
           setEmailError(true);
         }
       })
@@ -120,7 +119,7 @@ export default function SignUp() {
           </Box>
           <form className={classes.form} onSubmit={registerUser}>
             <TextField
-              inputProps={{ pattern: "[A-Za-z ]+", title: "Letters characters only" }}
+              inputProps={{ pattern: '[A-Za-z ]+', title: 'Letters characters only' }}
               margin="normal"
               required
               fullWidth
@@ -146,7 +145,6 @@ export default function SignUp() {
               type="email"
               name="email"
               label="Email Address"
-              type="email"
               id="email"
               autoComplete="email"
               InputLabelProps={{
@@ -196,7 +194,6 @@ export default function SignUp() {
               fullWidth
               name="retype"
               label="Retype Password"
-              type="retype"
               id="retype"
               type="password"
               autoComplete="current-password"

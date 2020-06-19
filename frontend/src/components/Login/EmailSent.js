@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -53,10 +53,10 @@ export default function EmailSent() {
             Email Sent!
           </Typography>
           <Typography component="h2" variant="h6" className={classes.bodytxt}>
-            We've sent you an email with a link to reset your password
+            We&apos;ve sent you an email with a link to reset your password
           </Typography>
           <Typography component="h2" variant="h6" className={classes.bodytxt}>
-            Didn't get the email or not your email address?
+            Didn&apos;t get the email or not your email address?
             {' '}
             <Link href="/ForgetPass" className={classes.bodytxt2}>Try again.</Link>
 

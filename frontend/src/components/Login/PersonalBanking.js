@@ -135,7 +135,7 @@ function PersonalBanking(props) {
 }
 
 PersonalBanking.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf.isRequired,
 };
 
 export default withStyles(styles)(PersonalBanking);

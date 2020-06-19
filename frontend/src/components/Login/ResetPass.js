@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +75,7 @@ export default function ResetPass() {
 
   const resetPassword = (e) => {
     e.preventDefault();
-    if (cnfmPassword != password) {
+    if (cnfmPassword !== password) {
       return;
     }
     axios.patch(`http://localhost:7001/users/recover/${token}`, {
@@ -84,11 +83,11 @@ export default function ResetPass() {
     })
       .then((res) => {
         console.log(res);
-        if (res.data.message == 'Password cannot be the same') {
+        if (res.data.message === 'Password cannot be the same') {
           setError(true);
           setErrorText('Password cannot be the same as the old password');
         }
-        if (res.data.message == 'Successfully update') {
+        if (res.data.message === 'Successfully update') {
           window.location.href = '/ChangedPass';
         }
       })
@@ -145,7 +144,6 @@ export default function ResetPass() {
               fullWidth
               name="retype"
               label="Retype Password"
-              type="retype"
               id="retype"
               type="password"
               autoComplete="current-password"

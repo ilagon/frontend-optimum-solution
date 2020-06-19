@@ -73,7 +73,8 @@ function FAQ(props) {
             How to check Credit Card Application Status?
           </Typography>
           <Typography variant="body1" align="left" className={classes.ans}>
-            Log in to Optimum Digibank with your User ID and Password. Click on CreditCard Status under Service.
+            Log in to Optimum Digibank with your User ID and Password.
+            Click on CreditCard Status under Service.
             Please allow 5 to 7 working days to process the application.
           </Typography>
         </Grid>
@@ -83,7 +84,7 @@ function FAQ(props) {
 }
 
 FAQ.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf.isRequired,
 };
 
 export default withStyles(styles)(FAQ);

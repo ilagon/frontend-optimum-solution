@@ -36,7 +36,7 @@ function Dashboard() {
         {name}
         !
       </h1>
-      <button onClick={logout}>Logout</button>
+      <button type="button" onClick={logout}>Logout</button>
     </div>
   );
 }

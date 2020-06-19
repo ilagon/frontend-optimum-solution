@@ -4,10 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -83,17 +81,17 @@ const ForgetPass = () => {
       email,
     })
       .then((res) => {
-        if (res.data.message == 'Email has been sent') {
+        if (res.data.message === 'Email has been sent') {
           console.log('directing to email sent');
           window.location.href = '/EmailSent';
         }
-        if (res.data.message == 'Email not found') {
+        if (res.data.message === 'Email not found') {
           setError(true);
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         alert('An error Occurred');
-        console.log(error);
+        console.log(err);
       });
   };
 
@@ -116,17 +114,17 @@ const ForgetPass = () => {
                   label="Email Address"
                   name="email"
                   onChange={(e) => {
-                      setEmail(e.target.value);
-                      setError(false);
-                    }}
+                    setEmail(e.target.value);
+                    setError(false);
+                  }}
                   InputLabelProps={{
-                      style: {
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        width: '100%',
-                        color: '#173A77',
-                      },
-                    }}
+                    style: {
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      width: '100%',
+                      color: '#173A77',
+                    },
+                  }}
                   error={!!error}
                   helperText={error ? 'Email does not exist' : ''}
                 />
@@ -145,7 +143,7 @@ const ForgetPass = () => {
               <Grid item xs>
                 <Link href="/Login" variant="body2" className={classes.backButton}>
                   Back to Login?
-                  </Link>
+                </Link>
               </Grid>
             </Grid>
           </form>

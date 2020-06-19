@@ -68,7 +68,7 @@ function MainPageLayout(props) {
 MainPageLayout.propTypes = {
   backgroundClassName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf.isRequired,
 };
 
 export default withStyles(styles)(MainPageLayout);

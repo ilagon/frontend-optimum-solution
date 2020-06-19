@@ -19,6 +19,18 @@ import ContactUs from './components/Login/ContactUs';
 import Footer from './components/Login/Footer';
 
 function App() {
+  const home = () => (
+    <div>
+      <TopNav />
+      <MainPage />
+      <AboutUs />
+      <PersonalBanking />
+      <FAQ />
+      <ContactUs />
+      <Footer />
+    </div>
+  );
+
   return (
     <>
       <Router>
@@ -43,17 +55,5 @@ function App() {
 
   );
 }
-
-const home = () => (
-  <div>
-    <TopNav />
-    <MainPage />
-    <AboutUs />
-    <PersonalBanking />
-    <FAQ />
-    <ContactUs />
-    <Footer />
-  </div>
-);
 
 export default App;

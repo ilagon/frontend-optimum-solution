@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -84,22 +84,22 @@ export default function SignInSide() {
       .then((res) => {
         console.log(res);
         setError(false);
-        if (res.data.message == 'success') {
+        if (res.data.message === 'success') {
           sessionStorage.setItem('token', res.data.token);
           window.location.href = '/Dashboard';
         }
-        if (res.data.message == 'Your Account has not been approved by the Administrator') {
+        if (res.data.message === 'Your Account has not been approved by the Administrator') {
           setOpen(true);
           setMessage('Account not approved by Administrator');
         }
-        if (res.data.message == 'Your account has been inactive') {
+        if (res.data.message === 'Your account has been inactive') {
           setOpen(true);
           setMessage('Your account has been deactivated');
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         setError(true);
-        console.log(error);
+        console.log(err);
       });
   };
 
@@ -130,8 +130,8 @@ export default function SignInSide() {
                     color="inherit"
                     size="small"
                     onClick={() => {
-                        setOpen(false);
-                      }}
+                      setOpen(false);
+                    }}
                   >
                     <CloseIcon fontSize="inherit" />
                   </IconButton>

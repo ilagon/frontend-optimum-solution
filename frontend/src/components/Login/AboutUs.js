@@ -58,8 +58,12 @@ function AboutUs(props) {
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
                 <Typography variant="h6" align="left">
-                  Optimum has over 120 years of experience in Banking and Every generation In South East Asia knows about optimum.
-                  We make the best effort for you, and we are in the business of creating. With more than 10,000 Employees and in all markets in South East Asia, we provide excellent services for everyone who trusts Optimum.
+                  Optimum has over 120 years of experience in Banking and
+                  every generation In South East Asia knows about optimum.
+                  We make the best effort for you,
+                  and we are in the business of creating.
+                  With more than 10,000 Employees and in all markets in South East Asia,
+                  we provide excellent services for everyone who trusts Optimum.
                 </Typography>
               </div>
             </Grid>
@@ -67,9 +71,13 @@ function AboutUs(props) {
               <div className={classes.item}>
                 <Typography variant="h6" align="left">
                   <div>
-                    As the leading banking services in South East Asia, we ensure your investments are in responsible hands. Every foresight and insights were made and executed especially for you.
+                    As the leading banking services in South East Asia,
+                    we ensure your investments are in responsible hands.
+                    Every foresight and insights were made and executed especially for you.
                     <br />
-                    We go further than what is needed, with experiences and specialties in commodities, investments, and services because we value what you truly value.
+                    We go further than what is needed,
+                    with experiences and specialties in commodities,
+                    investments, and services because we value what you truly value.
                   </div>
                 </Typography>
               </div>
@@ -82,7 +90,7 @@ function AboutUs(props) {
 }
 
 AboutUs.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf.isRequired,
 };
 
 export default withStyles(styles)(AboutUs);
