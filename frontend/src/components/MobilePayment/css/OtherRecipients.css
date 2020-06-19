@@ -1,26 +1,27 @@
 .content {
-    flex-grow: 1;
-    height: 100vh;
-    overflow: auto;
+  flex-grow: 1;
+  height: 100vh;
+  overflow: auto;
 }
 
-.bodyTitle{
-    color: #173a77;
-    text-align: center;
-    /* border: 2px solid red; */
+.bodyTitle {
+  color: #173a77;
+  text-align: center;
+  /* border: 2px solid red; */
 }
 
 .activeTitle {
-    text-decoration: underline;
+  text-decoration: underline;
+  
 }
 
 .nonActiveTitle {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .billPayment {
-    text-align: left;
-    color: #aa3a21;
+  text-align: left;
+  color: #aa3a21;
 }
 
 /* .border {
@@ -28,87 +29,93 @@
 } */
 
 .toForm {
-    color: #173a77;
-    margin-left: 130px;
+  color: #173a77;
+  margin-left: 130px;
 }
 
 .toFormConfirmation > p {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .fromForm {
-    color: #173a77;
-    margin-left: 130px;
+  color: #173a77;
+  margin-left: 130px;
 }
 
 .fromFormConfirmation > p {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 #nextButton {
-    margin-top: 100px;
-    width: 260px;
-    background-color: #e26448;
-    color: white;
-    font-weight: bold;
+  margin-top: 100px;
+  width: 260px;
+  background-color: #e26448;
+  color: white;
+  font-weight: bold;
 }
 
 #submitButton {
-    margin-top: 200px;
-    width: 260px;
-    background-color: #e26448;
-    color: white;
-    font-weight: bold;
+  margin-top: 200px;
+  width: 260px;
+  background-color: #e26448;
+  color: white;
+  font-weight: bold;
 }
 
 #cancelButton {
-    margin-top: 20px;
-    width: 260px;
-    background-color: #aa3a21;
-    color: white;
-    font-weight: bold;
+  margin-top: 20px;
+  width: 260px;
+  background-color: #aa3a21;
+  color: white;
+  font-weight: bold;
 }
 
 .paperHeight {
-    height: 120px;
-    text-align: left;
-    padding: 30px;
-    margin: 30px;
+  height: 120px;
+  text-align: left;
+  padding: 30px;
+  margin: 30px;
+  width: 80vw;
+  
+}
+
+.paperHeight:hover {
+  box-shadow: 5px 5px #cccccc;
 }
 
 .infoIcon {
-    color: #173a77;
-    float: right;
-    margin: 20px;
+  color: #173a77;
+  float: right;
+  margin-top: -20px;
 }
 
 #addPayee {
-    margin: 50px;
-    float: right;
-    width: 260px;
-    background-color: #e26448;
-    color: white;
-    font-weight: bold;
+  margin: 50px;
+  float: right;
+  width: 260px;
+  background-color: #e26448;
+  color: white;
+  font-weight: bold;
 }
 
 .buttonContainer {
-    float: right;
+  float: right;
 
-    margin: 30px;
+  margin: 30px;
 }
 
 #savePayeeButton {
-    margin-top: 60vh;
-    width: 260px;
-    background-color: #e26448;
-    color: white;
-    font-weight: bold;
+  margin-top: 60vh;
+  width: 260px;
+  background-color: #e26448;
+  color: white;
+  font-weight: bold;
 }
 
 #confirmButton {
-    margin-top: 20px;
-    width: 260px;
-    background-color: #aa3a21;
-    color: white;
-    font-weight: bold;
+  margin-top: 20px;
+  width: 260px;
+  background-color: #aa3a21;
+  color: white;
+  font-weight: bold;
 }
