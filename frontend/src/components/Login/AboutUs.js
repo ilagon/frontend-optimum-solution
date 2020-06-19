@@ -45,7 +45,7 @@ function AboutUs(props) {
   const { classes } = props;
 
   return (
-    <section className={classes.root}>
+    <section className={classes.root} id="AboutUs">
       <Container className={classes.container}>
           <Typography variant="h2" marked="center" className={classes.title} component="h2">
             About Us

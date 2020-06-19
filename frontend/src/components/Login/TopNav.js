@@ -12,10 +12,21 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     fontFamily: ['Avenir Heavy Oblique', 'Arial', 'sans serif'],
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    fontStyle: 'italic'
   },
   subtitle: {
     flexGrow: 1,
     fontFamily: ['Avenir Medium', 'Arial', 'sans serif'],
+  },
+  links: {
+    textDecoration: 'none',
+    color: 'white',
+    width: '5%',
+    flexWrap: 'wrap',
+    position: 'relative',
+
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -35,23 +46,33 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none'}}>
+      <AppBar position="fixed" style={{ background: '#AA3A21', boxShadow: 'none'}}>
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
+          <a href="#MainPage" className={classes.links}>
             Optimum DigiBank
+            </a>
           </Typography>
           
           <Typography className={classes.subtitle}>
+          <a href="#AboutUs" className={classes.links}>
             About Us
+            </a>
           </Typography>
           <Typography className={classes.subtitle}>
+          <a href="#PersonalBanking" className={classes.links}>
             Personal Banking
+            </a>
           </Typography>
           <Typography className={classes.subtitle}>
+          <a href="#FAQ" className={classes.links}>
             FAQ
+          </a>
           </Typography>
           <Typography className={classes.subtitle}>
-            Contact
+          <a href="#ContactUs" className={classes.links}>
+            Contact Us
+          </a>
           </Typography>
           
           <Button className={classes.submit} href="/Login">

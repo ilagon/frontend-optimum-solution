@@ -40,6 +40,10 @@ const styles = (theme) => ({
     height: 55,
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
+  },
+  location: {
+    height: '100%',
+    width: '100%'
   }
 });
 
@@ -47,7 +51,7 @@ function ContactUs(props) {
   const { classes } = props;
 
   return (
-    <section className={classes.root}>
+    <section className={classes.root} id="ContactUs">
       <Container className={classes.container}>
         <Typography variant="h2" marked="center" className={classes.title} component="h2">
           Contact Us
@@ -58,15 +62,10 @@ function ContactUs(props) {
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
-
               {/* <img src="..public/images/map.png" alt=""/> */}
               <Link href="https://www.google.com/maps/place/Optimum+Solutions/@1.3366694,103.9659299,15z/data=!4m5!3m4!1s0x0:0x3679bdeef327887!8m2!3d1.3366694!4d103.9659299">
-                
-                <img src="../images/map.png" alt="map"/>
-              
-              </Link> 
-           
-         
+                <img src="../images/map.png" alt="map" className={classes.location}/>
+              </Link>
             </Grid>
             <Grid item xs={12} md={6}>
               <div className={classes.item}>

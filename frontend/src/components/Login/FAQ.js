@@ -46,7 +46,7 @@ function FAQ(props) {
   const { classes } = props;
 
   return (
-    <section className={classes.root}>
+    <section className={classes.root} id="FAQ">
       <Container className={classes.container}>
           <Typography variant="h2" marked="center" className={classes.title} component="h2">
             Frequently Asked Questions

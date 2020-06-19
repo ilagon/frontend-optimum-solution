@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#AA3A21',
       fontSize: '2.5rem',
       fontWeight: '700',
-      fontStyle: 'italic'
+      fontStyle: 'italic',
     },
     form: {
       width: '100%', // Fix IE 11 issue.
@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     forgetButton: {
       color: '#173A77',
       fontStyle: 'bold'
+    },
+    link: {
+      textDecoration: "none"
     }
   }));
   
@@ -126,7 +129,9 @@ const useStyles = makeStyles((theme) => ({
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper} >
+          <a href="/" className={classes.link}>
           <h1 className={classes.title}>Optimum DigiBank</h1> 
+          </a>
           <Box display="flex" p={1} bgcolor="background.paper">
             <Box p={5}>
               <a href="/Login" className={classes.links}>LOGIN</a>

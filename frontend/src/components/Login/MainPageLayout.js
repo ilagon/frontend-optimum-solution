@@ -54,7 +54,7 @@ function MainPageLayout(props) {
   const { backgroundClassName, children, classes } = props;
 
   return (
-    <section className={classes.root}>
+    <section className={classes.root} id="MainPage">
       <Container className={classes.container}>
         {children}
         <div className={classes.backdrop} />

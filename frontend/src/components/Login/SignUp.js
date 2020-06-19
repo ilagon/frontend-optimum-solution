@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -55,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   forgetButton: {
     color: 'black',
     fontStyle: 'bold'
+  },
+  link: {
+    textDecoration: "none"
   }
 }));
 
@@ -105,7 +109,9 @@ export default function SignUp() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper} >
-          <h1 className={classes.title}>Optimum DigiBank</h1>
+        <a href="/" className={classes.link}>
+          <h1 className={classes.title}>Optimum DigiBank</h1> 
+          </a>
           <Box display="flex" p={1} bgcolor="background.paper">
             <Box p={5}>
               <a href="/Login" className={classes.links}>LOGIN</a>
@@ -220,7 +226,8 @@ export default function SignUp() {
                 className={classes.submit}
               >
                 Sign Up
-                </Button></div>
+                </Button>
+                </div>
           </form>
         </div>
       </Grid>
