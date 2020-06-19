@@ -1,11 +1,10 @@
-//FAQ.js, ProductValues.js 
+// FAQ.js, ProductValues.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-
 
 const styles = (theme) => ({
   root: {
@@ -48,10 +47,10 @@ function FAQ(props) {
   return (
     <section className={classes.root} id="FAQ">
       <Container className={classes.container}>
-          <Typography variant="h2" marked="center" className={classes.title} component="h2">
-            Frequently Asked Questions
-          </Typography>
-          <Grid>
+        <Typography variant="h2" marked="center" className={classes.title} component="h2">
+          Frequently Asked Questions
+        </Typography>
+        <Grid>
           <Typography variant="h5" component="h5" align="left" className={classes.qns}>
             How to apply for Credit Card?
           </Typography>
@@ -77,7 +76,7 @@ function FAQ(props) {
             Log in to Optimum Digibank with your User ID and Password. Click on CreditCard Status under Service.
             Please allow 5 to 7 working days to process the application.
           </Typography>
-          </Grid>
+        </Grid>
       </Container>
     </section>
   );

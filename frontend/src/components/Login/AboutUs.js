@@ -1,4 +1,4 @@
-//AboutUs.js
+// AboutUs.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -47,30 +47,30 @@ function AboutUs(props) {
   return (
     <section className={classes.root} id="AboutUs">
       <Container className={classes.container}>
-          <Typography variant="h2" marked="center" className={classes.title} component="h2">
-            About Us
-          </Typography>
-          <Typography variant="h4" marked="center" className={classes.subtitle} component="h2">
+        <Typography variant="h2" marked="center" className={classes.title} component="h2">
+          About Us
+        </Typography>
+        <Typography variant="h4" marked="center" className={classes.subtitle} component="h2">
           Everyone wants the best, Optimum believes you deserves nothing less.
-          </Typography>        
+        </Typography>
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
                 <Typography variant="h6" align="left">
-                Optimum has over 120 years of experience in Banking and Every generation In South East Asia knows about optimum.
-                We make the best effort for you, and we are in the business of creating. With more than 10,000 Employees and in all markets in South East Asia, we provide excellent services for everyone who trusts Optimum.
+                  Optimum has over 120 years of experience in Banking and Every generation In South East Asia knows about optimum.
+                  We make the best effort for you, and we are in the business of creating. With more than 10,000 Employees and in all markets in South East Asia, we provide excellent services for everyone who trusts Optimum.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
                 <Typography variant="h6" align="left">
-                <div>
-                As the leading banking services in South East Asia, we ensure your investments are in responsible hands. Every foresight and insights were made and executed especially for you.
-                <br/>
-                We go further than what is needed, with experiences and specialties in commodities, investments, and services because we value what you truly value.
-                </div>
+                  <div>
+                    As the leading banking services in South East Asia, we ensure your investments are in responsible hands. Every foresight and insights were made and executed especially for you.
+                    <br />
+                    We go further than what is needed, with experiences and specialties in commodities, investments, and services because we value what you truly value.
+                  </div>
                 </Typography>
               </div>
             </Grid>

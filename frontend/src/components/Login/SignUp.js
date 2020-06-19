@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios'
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
     color: '#173A77',
     fontWeight: '700',
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
     color: '#AA3A21',
     fontSize: '2.5rem',
     fontWeight: '700',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    color: 'black'
+    color: 'black',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -50,54 +50,52 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
     color: '#fff',
     '&:hover': {
-        backgroundColor: '#AA3A21'
+      backgroundColor: '#AA3A21',
     },
   },
   forgetButton: {
     color: 'black',
-    fontStyle: 'bold'
+    fontStyle: 'bold',
   },
   link: {
-    textDecoration: "none"
-  }
+    textDecoration: 'none',
+  },
 }));
-
 
 export default function SignUp() {
   const classes = useStyles();
 
-
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [cnfmPassword, setCnfmPassword] = useState('')
-  const [error, setError] = useState(false)
-  const [errorEmail, setEmailError] = useState(false)
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [cnfmPassword, setCnfmPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [errorEmail, setEmailError] = useState(false);
 
   const registerUser = (e) => {
     e.preventDefault();
-    if(cnfmPassword != password){
+    if (cnfmPassword != password) {
       return;
     }
-    axios.post("http://localhost:7001/users/register", {
-      name: name,
-      email: email,
-      password: password
+    axios.post('http://localhost:7001/users/register', {
+      name,
+      email,
+      password,
     })
       .then((res) => {
-        console.log(res)
-        if (res.data.message == "register success") {
-          window.location.href = "/SignUpResult"
+        console.log(res);
+        if (res.data.message == 'register success') {
+          window.location.href = '/SignUpResult';
         }
-        if (res.data.message == "Email already exist!") {
-          setEmailError(true)
+        if (res.data.message == 'Email already exist!') {
+          setEmailError(true);
         }
       })
       .catch((err) => {
-        console.log(err)
-        alert("Registration failed Please call out frontdesk")
-      })
-  }
+        console.log(err);
+        alert('Registration failed Please call out frontdesk');
+      });
+  };
 
   useEffect(() => {
     (cnfmPassword !== password) ? setError(true) : setError(false);
@@ -108,9 +106,9 @@ export default function SignUp() {
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper} >
-        <a href="/" className={classes.link}>
-          <h1 className={classes.title}>Optimum DigiBank</h1> 
+        <div className={classes.paper}>
+          <a href="/" className={classes.link}>
+            <h1 className={classes.title}>Optimum DigiBank</h1>
           </a>
           <Box display="flex" p={1} bgcolor="background.paper">
             <Box p={5}>
@@ -122,7 +120,7 @@ export default function SignUp() {
           </Box>
           <form className={classes.form} onSubmit={registerUser}>
             <TextField
-              inputProps={{ pattern: "[A-Za-z]+", title: "Letters characters only" }}
+              inputProps={{ pattern: '[A-Za-z]+', title: 'Letters characters only' }}
               margin="normal"
               required
               fullWidth
@@ -136,8 +134,8 @@ export default function SignUp() {
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   width: '100%',
-                  color: '#173A77'
-                }
+                  color: '#173A77',
+                },
               }}
               onChange={(e) => setName(e.target.value)}
             />
@@ -156,19 +154,19 @@ export default function SignUp() {
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   width: '100%',
-                  color: '#173A77'
-                }
+                  color: '#173A77',
+                },
               }}
               onChange={(e) => {
-                setEmail(e.target.value)
-                setEmailError(false)
+                setEmail(e.target.value);
+                setEmailError(false);
               }}
 
-              error={errorEmail ? true : false}
-              helperText={errorEmail ? "Email already registered! Please try a different email" : ''}
+              error={!!errorEmail}
+              helperText={errorEmail ? 'Email already registered! Please try a different email' : ''}
             />
             <TextField
-              inputProps={{ pattern: "(?=.*[A-Za-z]).{6,}", title: "More than 6 Character Alphanumeric character only allowed!" }}
+              inputProps={{ pattern: '(?=.*[A-Za-z]).{6,}', title: 'More than 6 Character Alphanumeric character only allowed!' }}
               margin="normal"
               required
               fullWidth
@@ -182,15 +180,15 @@ export default function SignUp() {
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   width: '100%',
-                  color: '#173A77'
-                }
+                  color: '#173A77',
+                },
               }}
               onChange={(e) => {
-                setPassword(e.target.value)
-                setError(false)
+                setPassword(e.target.value);
+                setError(false);
               }}
-              error={error ? true : false}
-              helperText={error ? "Password not the same" : ''}
+              error={!!error}
+              helperText={error ? 'Password not the same' : ''}
             />
             <TextField
               margin="normal"
@@ -207,15 +205,14 @@ export default function SignUp() {
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   width: '100%',
-                  color: '#173A77'
-                }
+                  color: '#173A77',
+                },
               }}
               onChange={(e) => {
-                setCnfmPassword(e.target.value)
-
+                setCnfmPassword(e.target.value);
               }}
-              helperText={error ? "Password not the same" : ''}
-              error={error ? true : false}
+              helperText={error ? 'Password not the same' : ''}
+              error={!!error}
             />
             <div align="center">
               <Button
@@ -226,8 +223,8 @@ export default function SignUp() {
                 className={classes.submit}
               >
                 Sign Up
-                </Button>
-                </div>
+              </Button>
+            </div>
           </form>
         </div>
       </Grid>

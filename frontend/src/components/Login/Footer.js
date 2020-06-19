@@ -9,7 +9,6 @@ import FaceBookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -55,10 +54,10 @@ export default function ButtonAppBar() {
                 <div className={classes.item}>
                   <Typography variant="h5" className={classes.title}>
                     Optimum Digibank
-            </Typography>
+                  </Typography>
                 </div>
               </Grid>
-              
+
               <Grid item xs={12} md={4}>
                 <Grid item>
                   <Typography className={classes.text}>
@@ -77,17 +76,17 @@ export default function ButtonAppBar() {
                   <Grid item className={classes.icons}>
                     <Typography className={classes.icon}>
                       <FaceBookIcon />
-                      </Typography>
-                      <Typography className={classes.icon}>
-                        <InstagramIcon />
-                      </Typography>
-                      <Typography className={classes.icon}>
+                    </Typography>
+                    <Typography className={classes.icon}>
+                      <InstagramIcon />
+                    </Typography>
+                    <Typography className={classes.icon}>
                       <YouTubeIcon />
                     </Typography>
                   </Grid>
                   <Typography className={classes.text}>
                     © 2020 Optimum DigiBank. All rights reserved.
-                </Typography>
+                  </Typography>
                 </div>
               </Grid>
             </Grid>

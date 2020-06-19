@@ -1,4 +1,4 @@
-//MainPage.js, ProductHero.js
+// MainPage.js, ProductHero.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -15,7 +15,7 @@ const styles = (theme) => ({
     backgroundImage: 'url(/images/bank1.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   },
   button: {
     margin: theme.spacing(3, 0, 2),
@@ -25,7 +25,7 @@ const styles = (theme) => ({
     width: '10rem',
     height: '2.5rem',
     '&:hover': {
-      backgroundColor: '#AA3A21'
+      backgroundColor: '#AA3A21',
     },
   },
   title: {
@@ -50,11 +50,11 @@ function MainPage(props) {
       </Typography>
       <Typography variant="h5" component="h5" align="center">
         <div>
-        We craft the best possibilities for you.
-        <br/>
-        Optimum Digital Bank prioritises in optimising your experiences.
-        <br/>
-        We will place the best opportunities into your finger tips.
+          We craft the best possibilities for you.
+          <br />
+          Optimum Digital Bank prioritises in optimising your experiences.
+          <br />
+          We will place the best opportunities into your finger tips.
         </div>
       </Typography>
       <Button
@@ -63,7 +63,7 @@ function MainPage(props) {
       >
         JOIN TODAY
       </Button>
- 
+
     </MainPageLayout>
   );
 }

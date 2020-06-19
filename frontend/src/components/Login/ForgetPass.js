@@ -11,149 +11,148 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        height: '100vh',
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: 'url(/images/loginPic.jpg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'absolute',
+  },
+  logo: {
+    color: '#AA3A21',
+    fontFamily: [
+      'Avenir Heavy Oblique',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+    ],
+  },
+  links: {
+    textDecoration: 'none',
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#173A77',
+    fontWeight: '700',
+    fontSize: '1.5rem',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#AA3A21',
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    fontStyle: 'italic',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    color: 'black',
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    height: '3.5rem',
+    backgroundColor: '#AA3A21',
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#AA3A21',
     },
-    image: {
-        backgroundImage: 'url(/images/loginPic.jpg)',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'absolute',
-     },
-    logo: {
-        color: '#AA3A21',
-        fontFamily: [
-            'Avenir Heavy Oblique',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-        ]
-    },
-    links: {
-        textDecoration: 'none',
-        fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-        color: '#173A77',
-        fontWeight: '700',
-        fontSize: '1.5rem'
-      },
-      paper: {
-        margin: theme.spacing(8, 4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      title: {
-        fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-        color: '#AA3A21',
-        fontSize: '2.5rem',
-        fontWeight: '700',
-        fontStyle: 'italic'
-      },
-      form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-        color: 'black'
-      },
-      submit: {
-        margin: theme.spacing(3, 0, 2),
-        height: '3.5rem',
-        backgroundColor: '#AA3A21',
-        fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-        color: '#fff',
-        '&:hover': {
-          backgroundColor: '#AA3A21'
-        },
-    },
-    backButton: {
-        color: '#173A77',
-        fontStyle: 'bold'
-      }
+  },
+  backButton: {
+    color: '#173A77',
+    fontStyle: 'bold',
+  },
 }));
 
 const ForgetPass = () => {
-    const classes = useStyles();
-    const [email, setEmail] = useState('')
-    const [error, setError] = useState(false)
-    const getPass = (e) => {
-        e.preventDefault();
+  const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(false);
+  const getPass = (e) => {
+    e.preventDefault();
 
-        axios.post('http://localhost:7001/users/forget_password', {
-            email: email
-        })
-            .then(function (res) {
-                if (res.data.message == "Email has been sent") {
-                    console.log("directing to email sent")
-                    window.location.href = "/EmailSent"
-                }
-                if(res.data.message == "Email not found"){
-                    setError(true)
-                }
-            })
-            .catch(function (error) {
-                alert("An error Occurred")
-                console.log(error)
-            });
-    }
+    axios.post('http://localhost:7001/users/forget_password', {
+      email,
+    })
+      .then((res) => {
+        if (res.data.message == 'Email has been sent') {
+          console.log('directing to email sent');
+          window.location.href = '/EmailSent';
+        }
+        if (res.data.message == 'Email not found') {
+          setError(true);
+        }
+      })
+      .catch((error) => {
+        alert('An error Occurred');
+        console.log(error);
+      });
+  };
 
-    return (
-        <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <div className={classes.paper} >
-          <h1 className={classes.title}>Optimum DigiBank</h1> 
-                    <form className={classes.form} onSubmit={getPass}>
-                        <Grid container spacing={2}>
+  return (
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <h1 className={classes.title}>Optimum DigiBank</h1>
+          <form className={classes.form} onSubmit={getPass}>
+            <Grid container spacing={2}>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    type="email"
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    onChange={(e) => {
-                                        setEmail(e.target.value)
-                                        setError(false)
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  type="email"
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  onChange={(e) => {
+                      setEmail(e.target.value);
+                      setError(false);
+                    }}
+                  InputLabelProps={{
+                      style: {
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        width: '100%',
+                        color: '#173A77',
+                      },
+                    }}
+                  error={!!error}
+                  helperText={error ? 'Email does not exist' : ''}
+                />
+              </Grid>
 
-                                    }}
-                                    InputLabelProps={{
-                                        style: {
-                                            whiteSpace: 'nowrap',
-                                            overflow: 'hidden',
-                                            width: '100%',
-                                            color: '#173A77'
-                                        }
-                                    }}
-                                    error={error ? true : false}
-                                    helperText={error ? "Email does not exist" : ''}
-                                />
-                            </Grid>
-
-                        </Grid>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            className={classes.submit}
-                            type="submit"
-                        >
-                            Submit
-                        </Button>
-                        <Grid container align="center">
-                        <Grid item xs>
-                        <Link href="/Login" variant="body2" className={classes.backButton}>
-                         Back to Login?
-                        </Link>
-                        </Grid>
-                        </Grid>
-                    </form>
-                    </div>
-        </Grid>
+            </Grid>
+            <Button
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+              type="submit"
+            >
+              Submit
+            </Button>
+            <Grid container align="center">
+              <Grid item xs>
+                <Link href="/Login" variant="body2" className={classes.backButton}>
+                  Back to Login?
+                  </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
       </Grid>
-    );
+    </Grid>
+  );
 };
 
 export default ForgetPass;

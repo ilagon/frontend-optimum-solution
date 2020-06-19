@@ -1,42 +1,44 @@
-import React,{useState,useEffect} from 'react'
-import axios from 'axios'
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Dashboard() {
+  const [name, setName] = useState('');
+  const config = {
+    method: 'get',
+    url: 'http://localhost:7001/users',
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+  };
 
-    const [name,setName] = useState('');
-    var config = {
-        method: 'get',
-        url: 'http://localhost:7001/users',
-        headers: { 
-          'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-        },
-      };
-      
-        useEffect(() => {
-            axios(config)
-            .then(function (response) {
-                setName(response.data.name)
-            })
-            .catch(function (error) {
-                console.log(error)
-                window.location.href = "/Login"
-            })
-            .then(function () {
-            });
-        })
+  useEffect(() => {
+    axios(config)
+      .then((response) => {
+        setName(response.data.name);
+      })
+      .catch((error) => {
+        console.log(error);
+        window.location.href = '/Login';
+      })
+      .then(() => {
+      });
+  });
 
-        const logout = () =>{
-            sessionStorage.removeItem("token");
-            window.location.href = "/logout"
-        }
-    return (
-        <div>
-            <title>A Dashboard</title>
-             <h1>You are {name}!</h1>
-            <button onClick={logout}>Logout</button>    
-        </div>
-    )
+  const logout = () => {
+    sessionStorage.removeItem('token');
+    window.location.href = '/logout';
+  };
+  return (
+    <div>
+      <title>A Dashboard</title>
+      <h1>
+        You are
+        {name}
+        !
+      </h1>
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
 }
 
-export default Dashboard
+export default Dashboard;

@@ -11,7 +11,6 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import EditIcon from '@material-ui/icons/Edit';
 import Box from '@material-ui/core/Box';
 
-
 const styles = (theme) => ({
   root: {
     height: '100%',
@@ -21,7 +20,7 @@ const styles = (theme) => ({
     backgroundImage: 'url(/images/bank2.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   },
   container: {
     marginTop: theme.spacing(10),
@@ -36,7 +35,7 @@ const styles = (theme) => ({
     backgroundColor: '#AA3A21',
     padding: '30px',
     borderRadius: 20,
-    position: 'left'
+    position: 'left',
   },
   item: {
     display: 'flex',
@@ -81,22 +80,22 @@ function PersonalBanking(props) {
                     <WorkIcon />
                     <Typography variant="h6" align="center">
                       EXPERIENCE
-                      </Typography>
+                    </Typography>
 
                     <Typography variant="body1" align="center">
                       We craft the absolute for you.
-                      </Typography>
+                    </Typography>
                   </Grid>
                   <Grid item xs={12} md={6}>
 
                     <AttachMoneyIcon />
                     <Typography variant="h6" align="center">
                       CONVENIENCE
-                      </Typography>
+                    </Typography>
 
                     <Typography variant="body1" align="center">
                       With our DigitalBank, you can worry less.
-                      </Typography>
+                    </Typography>
 
                   </Grid>
                   <Grid item xs={12} md={6}>
@@ -104,23 +103,22 @@ function PersonalBanking(props) {
                     <LockIcon />
                     <Typography variant="h6">
                       SECURE. SAFE ACCESS.
-                      </Typography>
+                    </Typography>
                     <Typography variant="body1" align="center">
                       Safety is not just our priority.
                       We Safeguard what is on your heart.
-                      </Typography>
+                    </Typography>
                   </Grid>
-
 
                   <Grid item xs={12} md={6}>
                     <EditIcon />
                     <Typography variant="h6" align="center">
                       EASY TO USE
-                      </Typography>
+                    </Typography>
 
                     <Typography variant="body1" align="center">
                       We support our customers all the way, even if it is about a reach of a pocket.
-                      </Typography>
+                    </Typography>
 
                   </Grid>
 
@@ -140,4 +138,4 @@ PersonalBanking.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PersonalBanking); 
+export default withStyles(styles)(PersonalBanking);

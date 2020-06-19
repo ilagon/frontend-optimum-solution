@@ -1,4 +1,4 @@
-//MainPageLayout.js MainPageLayou.js 
+// MainPageLayout.js MainPageLayou.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -59,7 +59,7 @@ function MainPageLayout(props) {
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        
+
       </Container>
     </section>
   );

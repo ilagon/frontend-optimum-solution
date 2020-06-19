@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import signUp from './components/Login/SignUp';
 import Login from './components/Login/Login';
-import './App.css'
+import './App.css';
 import ForgetPass from './components/Login/ForgetPass';
 import EmailSent from './components/Login/EmailSent';
 import SignUpResult from './components/Login/SignUpResult';
@@ -19,9 +19,8 @@ import ContactUs from './components/Login/ContactUs';
 import Footer from './components/Login/Footer';
 
 function App() {
-
   return (
-    <React.Fragment>
+    <>
       <Router>
         <div>
           <Switch>
@@ -40,21 +39,21 @@ function App() {
         </div>
       </Router>
 
-    </React.Fragment>
+    </>
 
-  )
+  );
 }
 
 const home = () => (
   <div>
-    <TopNav/>
-    <MainPage/>
-    <AboutUs/>
-    <PersonalBanking/>
-    <FAQ/>
-    <ContactUs/>
-    <Footer/>
+    <TopNav />
+    <MainPage />
+    <AboutUs />
+    <PersonalBanking />
+    <FAQ />
+    <ContactUs />
+    <Footer />
   </div>
 );
 
-export default App
+export default App;

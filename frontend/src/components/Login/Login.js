@@ -14,104 +14,103 @@ import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      height: '100vh',
-    },
-    image: {
-      backgroundImage: 'url(/images/loginPic.jpg)',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'absolute',
-    },
-    links: {
-      textDecoration: 'none',
-      fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-      color: '#173A77',
-      fontWeight: '700',
-      fontSize: '1.5rem'
-    },
-    paper: {
-      margin: theme.spacing(8, 4),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    title: {
-      fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-      color: '#AA3A21',
-      fontSize: '2.5rem',
-      fontWeight: '700',
-      fontStyle: 'italic',
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-      color: 'black'
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: 'url(/images/loginPic.jpg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'absolute',
+  },
+  links: {
+    textDecoration: 'none',
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#173A77',
+    fontWeight: '700',
+    fontSize: '1.5rem',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  title: {
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#AA3A21',
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    fontStyle: 'italic',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    color: 'black',
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#AA3A21',
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#fff',
+    '&:hover': {
       backgroundColor: '#AA3A21',
-      fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-      color: '#fff',
-      '&:hover': {
-        backgroundColor: '#AA3A21'
-      },
     },
-    forgetButton: {
-      color: '#173A77',
-      fontStyle: 'bold'
-    },
-    link: {
-      textDecoration: "none"
-    }
-  }));
-  
-  export default function SignInSide() {
-    const classes = useStyles();
-    const [email,setEmail] = useState('');
-    const [pass,setPass] = useState('');
-    const [error,setError] = useState(false);
-    const [message,setMessage] = useState('')
-    const [open, setOpen] = React.useState(false);
+  },
+  forgetButton: {
+    color: '#173A77',
+    fontStyle: 'bold',
+  },
+  link: {
+    textDecoration: 'none',
+  },
+}));
 
+export default function SignInSide() {
+  const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
+  const [open, setOpen] = React.useState(false);
 
-    const submit = (e) =>{
-      e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault();
 
-      axios.post('http://localhost:7001/users/login', {
-        email: email,
-        password: pass
-      })
-      .then(function (res) {
-        console.log(res)
-        setError(false)
-        if(res.data.message == "success"){
-           sessionStorage.setItem("token",res.data.token)
-            window.location.href = "/Dashboard"
-                  }
-        if(res.data.message == "Your Account has not been approved by the Administrator"){
-          setOpen(true);
-           setMessage('Account not approved by Administrator')
+    axios.post('http://localhost:7001/users/login', {
+      email,
+      password: pass,
+    })
+      .then((res) => {
+        console.log(res);
+        setError(false);
+        if (res.data.message == 'success') {
+          sessionStorage.setItem('token', res.data.token);
+          window.location.href = '/Dashboard';
         }
-       if(res.data.message == "Your account has been inactive"){
+        if (res.data.message == 'Your Account has not been approved by the Administrator') {
           setOpen(true);
-          setMessage('Your account has been deactivated')
-         }
+          setMessage('Account not approved by Administrator');
+        }
+        if (res.data.message == 'Your account has been inactive') {
+          setOpen(true);
+          setMessage('Your account has been deactivated');
+        }
       })
-      .catch(function (error) {
-        setError(true)
-        console.log(error)
+      .catch((error) => {
+        setError(true);
+        console.log(error);
       });
-    }
- 
-    return (
-      <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <div className={classes.paper} >
+  };
+
+  return (
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
           <a href="/" className={classes.link}>
-          <h1 className={classes.title}>Optimum DigiBank</h1> 
+            <h1 className={classes.title}>Optimum DigiBank</h1>
           </a>
           <Box display="flex" p={1} bgcolor="background.paper">
             <Box p={5}>
@@ -121,74 +120,78 @@ const useStyles = makeStyles((theme) => ({
               <a href="/SignUp" className={classes.links}>REGISTER</a>
             </Box>
           </Box>
-            <form className={classes.form} onSubmit={submit}>
-                    <Collapse in={open}>
-                <Alert
-                severity="info" 
-                  action={
-                    <IconButton
-                      aria-label="close"
-                      color="inherit"
-                      size="small"
-                      onClick={() => {
+          <form className={classes.form} onSubmit={submit}>
+            <Collapse in={open}>
+              <Alert
+                severity="info"
+                action={(
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
                         setOpen(false);
                       }}
-                    >
-                      <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                  }
-                >
-                  {message}
-                </Alert>
-              </Collapse>
-              <TextField
-                margin="normal"
-                type="email"
-                required
-                fullWidth
-                id="Email"
-                label="Email"
-                name="Email"
-                autoFocus
-                value ={email}
-                InputLabelProps={{
-                  style: {
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    width: '100%',
-                    color: '#173A77'
-              } }}
-                onChange ={(e) => {setEmail(e.target.value)
-                setError(false)
-                setOpen(false)
-                }}
-                error={error ? true : false}
-                helperText={error ?  "Incorrect Username or password": ''}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value ={pass}
-                InputLabelProps={{
-                  style: {
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    width: '100%',
-                    color: '#173A77'
-              } }}
-                onChange ={(e) => {setPass(e.target.value)
-                  setError(false)
-                  setOpen(false)
-                }}
-                error={error ? true : false}
-              />
-              <div align="center">
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                  )}
+              >
+                {message}
+              </Alert>
+            </Collapse>
+            <TextField
+              margin="normal"
+              type="email"
+              required
+              fullWidth
+              id="Email"
+              label="Email"
+              name="Email"
+              autoFocus
+              value={email}
+              InputLabelProps={{
+                style: {
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  width: '100%',
+                  color: '#173A77',
+                },
+              }}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError(false);
+                setOpen(false);
+              }}
+              error={!!error}
+              helperText={error ? 'Incorrect Username or password' : ''}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={pass}
+              InputLabelProps={{
+                style: {
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  width: '100%',
+                  color: '#173A77',
+                },
+              }}
+              onChange={(e) => {
+                setPass(e.target.value);
+                setError(false);
+                setOpen(false);
+              }}
+              error={!!error}
+            />
+            <div align="center">
               <Button
                 type="submit"
                 fullWidth
@@ -196,17 +199,18 @@ const useStyles = makeStyles((theme) => ({
                 className={classes.submit}
               >
                 Login
-              </Button></div>
-              <Grid container align="center">
-                <Grid item xs>
-                  <Link href="/ForgetPass" variant="body2" className={classes.forgetButton}>
-                    Forgot password?
-                  </Link>
-                </Grid>
+              </Button>
+            </div>
+            <Grid container align="center">
+              <Grid item xs>
+                <Link href="/ForgetPass" variant="body2" className={classes.forgetButton}>
+                  Forgot password?
+                </Link>
               </Grid>
-            </form>
-          </div>
-        </Grid>
+            </Grid>
+          </form>
+        </div>
       </Grid>
-    );
-  }
+    </Grid>
+  );
+}

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: ['Avenir Heavy Oblique', 'Arial', 'sans serif'],
     fontSize: '2.5rem',
     fontWeight: '700',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
   },
   subtitle: {
     flexGrow: 1,
@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
     width: '10rem',
     height: '2.5rem',
     '&:hover': {
-      backgroundColor: '#AA3A21'
+      backgroundColor: '#AA3A21',
     },
-  }
+  },
 }));
 
 export default function ButtonAppBar() {
@@ -46,35 +46,35 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" style={{ background: '#AA3A21', boxShadow: 'none'}}>
+      <AppBar position="fixed" style={{ background: '#AA3A21', boxShadow: 'none' }}>
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
-          <a href="#MainPage" className={classes.links}>
-            Optimum DigiBank
+            <a href="#MainPage" className={classes.links}>
+              Optimum DigiBank
             </a>
           </Typography>
-          
+
           <Typography className={classes.subtitle}>
-          <a href="#AboutUs" className={classes.links}>
-            About Us
-            </a>
-          </Typography>
-          <Typography className={classes.subtitle}>
-          <a href="#PersonalBanking" className={classes.links}>
-            Personal Banking
+            <a href="#AboutUs" className={classes.links}>
+              About Us
             </a>
           </Typography>
           <Typography className={classes.subtitle}>
-          <a href="#FAQ" className={classes.links}>
-            FAQ
-          </a>
+            <a href="#PersonalBanking" className={classes.links}>
+              Personal Banking
+            </a>
           </Typography>
           <Typography className={classes.subtitle}>
-          <a href="#ContactUs" className={classes.links}>
-            Contact Us
-          </a>
+            <a href="#FAQ" className={classes.links}>
+              FAQ
+            </a>
           </Typography>
-          
+          <Typography className={classes.subtitle}>
+            <a href="#ContactUs" className={classes.links}>
+              Contact Us
+            </a>
+          </Typography>
+
           <Button className={classes.submit} href="/Login">
             Login
           </Button>
