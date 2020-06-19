@@ -89,7 +89,6 @@ exports.user_login = (req, res) => {
                         if (doc.account_status == "Active") {
                             res.status(200).json({
                                 token,
-                                is_admin: doc.is_admin,
                                 message: "success"
                             })
                         }

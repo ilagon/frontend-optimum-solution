@@ -122,7 +122,7 @@ export default function SignUp() {
           </Box>
           <form className={classes.form} onSubmit={registerUser}>
             <TextField
-              inputProps={{ pattern: "[A-Za-z]+", title: "Letters characters only" }}
+              inputProps={{ pattern: "[A-Za-z ]+", title: "Letters characters only" }}
               margin="normal"
               required
               fullWidth
