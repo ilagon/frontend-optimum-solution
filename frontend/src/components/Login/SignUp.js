@@ -82,7 +82,6 @@ export default function SignUp() {
       password,
     })
       .then((res) => {
-        console.log(res);
         if (res.data.message === 'register success') {
           window.location.href = '/SignUpResult';
         }
@@ -90,8 +89,7 @@ export default function SignUp() {
           setEmailError(true);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         alert('Registration failed Please call out frontdesk');
       });
   };

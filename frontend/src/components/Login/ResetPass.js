@@ -82,7 +82,6 @@ export default function ResetPass() {
       password,
     })
       .then((res) => {
-        console.log(res);
         if (res.data.message === 'Password cannot be the same') {
           setError(true);
           setErrorText('Password cannot be the same as the old password');
@@ -91,9 +90,7 @@ export default function ResetPass() {
           window.location.href = '/ChangedPass';
         }
       })
-      .catch((err) => {
-        console.log(err);
-
+      .catch(() => {
         alert('Password not reset. An error Occurred');
       });
   };

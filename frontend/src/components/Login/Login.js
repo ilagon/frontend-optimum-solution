@@ -82,7 +82,6 @@ export default function SignInSide() {
       password: pass,
     })
       .then((res) => {
-        console.log(res);
         setError(false);
         if (res.data.message === 'success') {
           sessionStorage.setItem('token', res.data.token);
@@ -97,9 +96,8 @@ export default function SignInSide() {
           setMessage('Your account has been deactivated');
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setError(true);
-        console.log(err);
       });
   };
 

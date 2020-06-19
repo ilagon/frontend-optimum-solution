@@ -16,8 +16,7 @@ function Dashboard() {
       .then((response) => {
         setName(response.data.name);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         window.location.href = '/Login';
       })
       .then(() => {
@@ -34,9 +33,9 @@ function Dashboard() {
       <h1>
         You are
         {name}
-        !
+        !  <button type="button" onClick={logout}>Logout</button>
       </h1>
-      <button type="button" onClick={logout}>Logout</button>
+      <img src="https://media.giphy.com/media/j6aoUHK5YiJEc/source.gif" alt="image" />
     </div>
   );
 }
