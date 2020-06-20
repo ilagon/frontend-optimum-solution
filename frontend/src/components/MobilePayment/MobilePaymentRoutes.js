@@ -1,7 +1,5 @@
 import React from 'react';
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-import Sidebar from "./MobilePayment-SideBar";
-import Searchbar from "../common/Searchbar"
 
 import OneTimeTransferBody from "./OneTimeTransfer/OneTimeTransfer_Body";
 import OtherRecipients_FormBody from "./OtherRecipients/OtherRecipients_Body"
@@ -15,13 +13,10 @@ import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
 export default function MobilePaymentRoutes() {
 
     return (
-        <div style={{display: "flex", height: "100vh"}}>
-            <Sidebar/>
-            <Searchbar/>
-
+        <div style={{display: "flex", height: "100vh", width: "100vw"}}>
         <Router>
             <Switch>
-                <Route exact path="/" component={OneTimeTransferBody} />
+                <Route exact path="/MobilePayment" component={OneTimeTransferBody} />
                 <Route exact path="/MobilePayment/OtherRecipients" component={OtherRecipients_PayeeListBody} />
                 <Route path="/MobilePayment/AddPayee" component={OtherRecipients_AddPayeeBody} />
                 <Route path="/MobilePayment/OtherRecipients/Form" component={OtherRecipients_FormBody} />

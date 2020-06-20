@@ -19,6 +19,7 @@ import CreditCardIcon from '@material-ui/icons/CreditCard';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import "../Overview/Overview.css";
 import OneTimeTransferBody from "../MobilePayment/OneTimeTransfer/OneTimeTransfer_Body";
+import MobilePaymentRoutes from "../MobilePayment/MobilePaymentRoutes";
 import TransferMoneyPage from "../TransferMoney/transfer_money";
 import OverviewPage from "../Overview/OverviewPage";
 import {
@@ -108,9 +109,9 @@ export default function Dashboard() {
     </div>
 
     <Switch>
-      {/* <Route path="/" component={OneTimeTransferBody}></Route> */}
       <Route exact path="/" component={OverviewPage}></Route>
-      <Route path="/MobilePayment" component={OneTimeTransferBody}></Route>
+      {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
+      <Route path="/MobilePayment" component={MobilePaymentRoutes} />
       <Route path="/TransferMoney" component={TransferMoneyPage}></Route>
      
     </Switch>

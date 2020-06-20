@@ -4,14 +4,8 @@ import "../css/OtherRecipients.css";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import InfoIcon from "@material-ui/icons/Info";
-import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-import { blue } from "@material-ui/core/colors";
 import axios from "axios";
-import { store } from "../../../index";
 import { useDispatch } from "react-redux";
 import { storePayee } from "../../common/redux/actions/mobilePayment_storeInput";
 import { useHistory, Link, NavLink } from "react-router-dom";
@@ -66,13 +60,11 @@ export default function BodyContainer() {
   };
 
   return (
-    <div>
-      {isLoading ? (
         <main className="content">
           <div className={classes.appBarSpacer} />
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
             <Grid item sm={6} className="bodyTitle nonActiveTitle">
-              <a href="/" style={{ textDecoration: "none", color: "#173a77" }}>
+              <a href="/MobilePayment" style={{ textDecoration: "none", color: "#173a77" }}>
                 <h1>One Time Transfer</h1>
               </a>
             </Grid>
@@ -105,9 +97,5 @@ export default function BodyContainer() {
             </Button>
           </a>
         </main>
-      ) : (
-        <div>Loading..</div>
-      )}
-    </div>
   );
 }
