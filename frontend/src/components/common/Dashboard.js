@@ -117,12 +117,11 @@ export default function Dashboard() {
     </div>
 
     <Switch>
+      {/* <Route path="/" component={OneTimeTransferBody}></Route> */}
       <Route exact path="/" component={OverviewPage}></Route>
-      <Route exact path="/" component={OneTimeTransferBody}></Route>
-      <Route exact path="/" component={TransferMoneyPage}></Route>
-      <Route exact path="/" component={OneTimeTransferBody}></Route>
-      <Route exact path="/" component={OverviewPage}></Route>
-      <Route exact path="/" component={OverviewPage}></Route>
+      <Route path="/MobilePayment" component={OneTimeTransferBody}></Route>
+      <Route path="/TransferMoney" component={TransferMoneyPage}></Route>
+     
     </Switch>
     </Router>
   );

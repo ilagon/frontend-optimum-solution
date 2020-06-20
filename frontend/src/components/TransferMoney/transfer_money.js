@@ -16,24 +16,24 @@ const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
   }));
 
-  export default function TransferMoneyPage() {
+  // export default function TransferMoneyPage() {
     
-      return (
-        <div className={styles.root}>
-          <CssBaseline />
-          <Searchbar></Searchbar>
-          <SideBar></SideBar>
-          <Router>
-          <Switch>
-              <Route exact path='/' component={TransferMoneyHomePage} />
-              <Route path='/SubmitTransferPage' component={SubmitTransferPage} />
-          </Switch> 
-          </Router>
-        </div>
-      );
-  } 
+  //     return (
+  //       <div className={styles.root}>
+  //         <CssBaseline />
+  //         <Searchbar></Searchbar>
+  //         <SideBar></SideBar>
+  //         <Router>
+  //         <Switch>
+  //             <Route exact path='/' component={TransferMoneyHomePage} />
+  //             <Route path='/SubmitTransferPage' component={SubmitTransferPage} />
+  //         </Switch> 
+  //         </Router>
+  //       </div>
+  //     );
+  // } 
 
-  function TransferMoneyHomePage() {
+  export default function TransferMoneyHomePage() {
     const classes = useStyles();
     const history = createBrowserHistory();
       return (
@@ -46,17 +46,17 @@ const useStyles = makeStyles((theme) => ({
               <Grid item xs={12}>
               <div id={styles.TitleContainer}>
               
-                <NavLink className={styles.wrapper} activeClassName={styles.selected} to={'/OneTimeTransferForm'}>One Time Transfer</NavLink>
-                <NavLink className={styles.rapper} activeClassName={styles.selected} to={'/OtherReceipentsTransferForm'}>Other Receipients</NavLink>
+                <NavLink className={styles.wrapper} activeClassName={styles.selected} exact to={'/TransferMoney'}>One Time Transfer</NavLink>
+                <NavLink className={styles.rapper} activeClassName={styles.selected} to={'/TransferMoney/payee'}>Other Receipients</NavLink>
              
               <p className={styles.FormTitle}>Transfer Money</p>
               </div>
               </Grid>
             </Grid>
             <Switch>
-            <Route exact path='/' component={OneTimeTransferForm} />
-            <Route path='/OneTimeTransferForm' component={OneTimeTransferForm} />
-            <Route path='/OtherReceipentsTransferForm' component={OtherReceipentsTransferForm} />
+            <Route exact path='/TransferMoney' component={OneTimeTransferForm} />
+            <Route path='/TransferMoney/payee' component={OtherReceipentsTransferForm} />
+            <Route  path='/TransferMoney/Submit' component={SubmitTransferPage}/>
         </Switch>
           </Container>
           </Router>

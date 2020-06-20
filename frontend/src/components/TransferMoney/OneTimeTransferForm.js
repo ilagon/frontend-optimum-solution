@@ -171,7 +171,7 @@ export default function OneTimeTransferForm() {
               Please type in an amount less than <br></br>the balance amount
   </Typography>
           </div>
-          <Link to={'/SubmitTransferPage'}><ColorButton variant="contained" color="secondary" className={classes.margin}>
+          <Link to='/TransferMoney/submit'><ColorButton variant="contained" color="secondary" className={classes.margin}>
             Next
 </ColorButton></Link>
         </Grid>
