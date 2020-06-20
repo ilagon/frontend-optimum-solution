@@ -52,7 +52,7 @@ export default function Overview() {
 
   return (
     <div className="root">
-      <CssBaseline />
+      {/* <CssBaseline />
       <AppBar position="absolute" className="appBar">
         <Toolbar className="toolbar">
           <div className="search">
@@ -83,7 +83,7 @@ export default function Overview() {
         <List>{paymentListItems}</List>
         <Divider />
         <List>{serviceListItems}</List>
-      </Drawer>
+      </Drawer> */}
       <main className="content">
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className="container">
