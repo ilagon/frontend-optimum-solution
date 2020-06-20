@@ -226,3 +226,8 @@
 .MuiTablePagination-caption {
     font-size: 13px;
 }
+
+/* Styling for CreditcardStatusPage */
+.darkBlueColor {
+    color: #173A77 !important;
+}

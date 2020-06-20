@@ -40,7 +40,6 @@ export default function Overview() {
   const classes = useStyles();
 
   return (
-    <div className="root">
       <main className="content">
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className="container">
@@ -94,6 +93,5 @@ export default function Overview() {
           </Grid>
         </Container>
       </main>
-    </div>
   );
 }
