@@ -99,6 +99,7 @@ export default function BodyContainer() {
   );
 
   return (
+    <div className="root">
     <main className="content">
       <div className={classes.appBarSpacer} />
       <Grid container direction="row" justify="space-evenly" wrap="wrap">
@@ -118,5 +119,6 @@ export default function BodyContainer() {
         </Grid>
       </Grid>
     </main>
+    </div>
   );
 }

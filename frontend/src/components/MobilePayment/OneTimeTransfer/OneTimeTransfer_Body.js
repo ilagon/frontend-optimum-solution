@@ -178,8 +178,7 @@ export default function BodyContainer() {
     </div>
   );
   return (
-    <div>
-      {/* {isLoading ? ( */}
+    <div className="root">
         <main className="content">
           <div className={classes.appBarSpacer} />
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
@@ -210,9 +209,6 @@ export default function BodyContainer() {
             </Grid>
           </Grid>
         </main>
-      {/* ) : (
-        <div>Loading..</div>
-      )} */}
     </div>
   );
 }
