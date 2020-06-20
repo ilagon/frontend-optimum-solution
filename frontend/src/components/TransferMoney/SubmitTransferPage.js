@@ -55,6 +55,10 @@ export default function SubmitTransferPage() {
 
   const classes = useStyles();
 
+  const handleSubmit = () => {
+    window.location.href = "/Payment/Successful";
+  }
+
   return (
     <div className={styles.root}>
       <CssBaseline />
@@ -99,7 +103,7 @@ export default function SubmitTransferPage() {
         <Grid item xs={12} md={4} lg={5}>
         <p style={{ marginRight: "510px",whiteSpace:"nowrap",color: "#173a77", fontSize: "1.55em"}}>Platimum Card</p>
       
-        <Button variant="contained" color="secondary" className={classes.margin}>
+        <Button variant="contained" color="secondary" className={classes.margin} onClick={handleSubmit}>
             Submit
         </Button>
         <br></br>

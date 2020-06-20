@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
             <Switch>
             <Route exact path='/TransferMoney' component={OneTimeTransferForm} />
             <Route path='/TransferMoney/payee' component={OtherReceipentsTransferForm} />
-            <Route  path='/TransferMoney/Submit' component={SubmitTransferPage}/>
+            {/* <Route  path='/TransferMoney/Submit' component={SubmitTransferPage}/> */}
         </Switch>
           </Container>
           </Router>

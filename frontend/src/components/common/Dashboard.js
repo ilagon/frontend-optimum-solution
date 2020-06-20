@@ -28,6 +28,9 @@ import {
   Switch,
   NavLink
 } from "react-router-dom";
+import SubmitTransferPage from '../TransferMoney/SubmitTransferPage';
+import {PaymentSuccessfulPage} from "../ResultPage/PaymentSuccessful";
+import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
 
 
 export default function Dashboard() {
@@ -108,13 +111,14 @@ export default function Dashboard() {
       </main> */}
     </div>
 
-    <Switch>
       <Route exact path="/" component={OverviewPage}></Route>
       {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
       <Route path="/MobilePayment" component={MobilePaymentRoutes} />
-      <Route path="/TransferMoney" component={TransferMoneyPage}></Route>
+      <Route path="/TransferMoney" component={TransferMoneyPage}/>
+      <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
+      <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
+      <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
      
-    </Switch>
     </Router>
   );
 }

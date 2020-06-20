@@ -76,6 +76,10 @@ export default function OneTimeTransferForm() {
 
   const classes = useStyles();
 
+  const handleRoute= () => {
+    window.location.href ="/SubmitTransfer";
+  }
+
   return (
     <div>
       <CssBaseline />
@@ -171,9 +175,9 @@ export default function OneTimeTransferForm() {
               Please type in an amount less than <br></br>the balance amount
   </Typography>
           </div>
-          <Link to='/TransferMoney/submit'><ColorButton variant="contained" color="secondary" className={classes.margin}>
+          <ColorButton variant="contained" color="secondary" className={classes.margin} onClick={handleRoute}>
             Next
-</ColorButton></Link>
+</ColorButton>
         </Grid>
       </Grid>
     </div>
