@@ -31,6 +31,8 @@ export default function Overview() {
   const [countCustomerState, setCountCustomerState] = useState();
   const [customerState, setCustomerState] = useState({});
   const [idState, setIdState] = useState("");
+  const [searchState, setSearchState] = useState('');
+
 
   // Upon loading, useEffect will get called
   useEffect(() => {
@@ -51,6 +53,10 @@ export default function Overview() {
       .catch((error) => alert(error));
   };
 
+const handleSearchCustomerById = () => {
+  setSearchState(true);
+}
+
   // Ensure that the data gets re-rendered
   useEffect(() => {
     getSpecificCustomer();
@@ -62,6 +68,7 @@ export default function Overview() {
       .get(`http://localhost:9000/users/search/${idState}`)
       .then((response) => {
         setCustomerState(response.data.user);
+        console.log(response.data.user)
       })
       .catch((error) => alert(error));
   };
@@ -83,7 +90,9 @@ export default function Overview() {
           <Grid item xs={3} md={2} lg={3}>
             <Paper className={fixedHeightPaper} elevation="3">
               Total Customers
-              <span><Typography variant="h1">{countCustomerState}</Typography></span>
+              <span>
+                <Typography variant="h1">{countCustomerState}</Typography>
+              </span>
             </Paper>
           </Grid>
         </Grid>
@@ -91,46 +100,67 @@ export default function Overview() {
       <Container>
         <Grid container justify="center" className={classes.gridContainer}>
           <Grid item className={classes.gridItem}>
-            <TableContainer component={Paper}>
+            <Paper elevation="3">
+            <TableContainer>
               <Table className={classes.table}>
                 <TableHead>
-                  <Typography variant="h6">Customer Details</Typography>
+                  <Typography variant="h6" style={{letterSpacing:"3px", width:"max-content"}}>Customer List</Typography>
                   <Grid>
-                    <FontAwesomeIcon icon={faSearch} />
+                    <FontAwesomeIcon icon={faSearch} className={classes.searchIconStyle} />
                     <TextField
                       id="search-with-icon"
                       value={idState}
                       label="SEARCH"
-                      onChange={(event) => setIdState(event.target.value)}
+                      onChange={(event) => {setIdState(event.target.value); setSearchState(true);}}
                     />
+                    
                   </Grid>
                   <TableRow>
-                    <TableCell width="20%">Customer ID</TableCell>
-                    <TableCell width="10%">Account Status</TableCell>
-                    <TableCell width="20%">Email</TableCell>
-                    <TableCell width="15%">Balance</TableCell>
-                    <TableCell width="10%">CreditCard Type</TableCell>
-                    <TableCell width="10%">CreditCard Status</TableCell>
-                    <TableCell width="15%">CreditCard Limit</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="20%">Customer ID</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="10%">Account Status</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="20%">Email</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="15%">Balance</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="10%">CreditCard Type</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="10%">CreditCard Status</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="15%">CreditCard Limit</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCustomerState.map((row) => (
-                    <TableRow key={row._id}>
-                      <TableCell width="20%" component="th" scope="row">
-                        {row._id}
-                      </TableCell>
-                      <TableCell width="10%">{row.account_status}</TableCell>
-                      <TableCell width="20%">{row.email}</TableCell>
-                      <TableCell width="15%">10000</TableCell>
-                      <TableCell width="10%">Gold</TableCell>
-                      <TableCell width="10%">Inactive</TableCell>
-                      <TableCell width="15%">10000</TableCell>
-                    </TableRow>
-                  ))}
+                  {searchState
+                    ? customerState.map((row) => (
+                        <TableRow key={row._id}>
+                          <TableCell style={{letterSpacing:"2px"}} width="20%" component="th" scope="row">
+                            {row._id}
+                          </TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="10%">
+                            {row.account_status}
+                          </TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="20%">{row.email}</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="15%">10000</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="10%">Gold</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="10%">Inactive</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="15%">10000</TableCell>
+                        </TableRow>
+                      ))
+                    : allCustomerState.map((row) => (
+                        <TableRow key={row._id}>
+                          <TableCell style={{letterSpacing:"2px"}} width="20%" component="th" scope="row">
+                            {row._id}
+                          </TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="10%">
+                            {row.account_status}
+                          </TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="20%">{row.email}</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="15%">10000</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="10%">Gold</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="10%">Inactive</TableCell>
+                          <TableCell style={{letterSpacing:"2px"}} width="15%">10000</TableCell>
+                        </TableRow>
+                      ))}
                 </TableBody>
               </Table>
             </TableContainer>
+            </Paper>
           </Grid>
         </Grid>
       </Container>
@@ -138,6 +168,7 @@ export default function Overview() {
   );
 }
 
+// Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -169,10 +200,18 @@ const useStyles = makeStyles((theme) => ({
   },
 
   paper: {
-    padding: theme.spacing(2),
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    letterSpacing: "2px",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  searchIconStyle :{
+    marginTop: "25px",
+    marginLeft: "20px",
+    marginRight: "30px",
   },
 
   fixedHeight: {

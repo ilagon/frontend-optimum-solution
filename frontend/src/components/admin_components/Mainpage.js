@@ -9,7 +9,7 @@ import Sidebar from "./sidebar/Sidebar";
 
 export default function Mainpage() {
   return (
-    <div>
+    <>
       <Header />
       <Router>
         <Sidebar />
@@ -28,6 +28,6 @@ export default function Mainpage() {
           </Route>
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ApproveAccount from "./button/approvebutton/ApproveAccountButton";
 import DenyAccount from "./button/denybutton/DenyAccountButton";
-import Search from "./../admin_components/search/Search";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   Grid,
@@ -21,6 +20,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 // 10 Users per page
 
+// Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     paddingTop: 40,
@@ -28,6 +28,16 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  inner: {
+    display: "inline-block",
+  },
+
+  searchIconStyle :{
+    marginTop: "25px",
+    marginLeft: "20px",
+    marginRight: "30px",
+  },
+  
 }));
 
 export default function ApprovalStatus() {
@@ -75,11 +85,11 @@ export default function ApprovalStatus() {
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableHead>
-                <Typography variant="h6">
+                <Typography style={{letterSpacing:"3px", width:"max-content"}} variant="h6">
                   Customer Account Approval Status
                 </Typography>
                 <Grid>
-                  <FontAwesomeIcon icon={faSearch} />
+                  <FontAwesomeIcon icon={faSearch} className={classes.searchIconStyle} />
 
                   <TextField
                     id="search-with-icon"
@@ -89,24 +99,28 @@ export default function ApprovalStatus() {
                   />
                 </Grid>
                 <TableRow>
-                  <TableCell width="30%">Customer ID</TableCell>
-                  <TableCell width="30%">Email</TableCell>
-                  <TableCell width="25%">Approve / Deny Account</TableCell>
-                  <TableCell width="15%"></TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="30%">Customer ID</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="30%">Email</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="25%" align="right">
+                    Approve / Deny Account
+                  </TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="15%" align="left">
+                    
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {allCustomerState.map((row) => (
                   <TableRow key={row._id}>
-                    <TableCell width="30%" component="th" scope="row">
+                    <TableCell style={{letterSpacing:"2px"}} width="30%" component="th" scope="row">
                       {row._id}
                     </TableCell>
 
-                    <TableCell width="30%">{row.email}</TableCell>
-                    <TableCell width="25%">
+                    <TableCell style={{letterSpacing:"2px"}} width="30%">{row.email}</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="25%" align="right">
                       <ApproveAccount />
                     </TableCell>
-                    <TableCell width="15%">
+                    <TableCell style={{letterSpacing:"2px"}} width="15%" align="left">
                       <DenyAccount />
                     </TableCell>
                   </TableRow>

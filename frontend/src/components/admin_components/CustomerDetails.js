@@ -19,12 +19,18 @@ import axios from "axios";
 
 // 10 Users per page
 
+// Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     paddingTop: 40,
   },
   table: {
     minWidth: 650,
+  },
+  searchIconStyle :{
+    marginTop: "25px",
+    marginLeft: "20px",
+    marginRight: "30px",
   },
 }));
 
@@ -74,9 +80,9 @@ export default function CustomerDetails() {
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableHead>
-                <Typography variant="h6">Customer Details</Typography>
+                <Typography style={{letterSpacing:"3px", width:"max-content"}} variant="h6">Customer Details</Typography>
                 <Grid>
-                  <FontAwesomeIcon icon={faSearch} />
+                  <FontAwesomeIcon icon={faSearch} className={classes.searchIconStyle} />
                   <TextField
                     id="search-with-icon"
                     value={idState}
@@ -85,25 +91,25 @@ export default function CustomerDetails() {
                   />
                 </Grid>
                 <TableRow>
-                  <TableCell width="20%">Customer ID</TableCell>
-                  <TableCell width="10%">Name</TableCell>
-                  <TableCell width="20%">Email</TableCell>
-                  <TableCell width="30%">Address</TableCell>
-                  <TableCell width="25%">Contact No.</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}}width="20%">Customer ID</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="10%">Name</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="20%">Email</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="30%">Address</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="25%">Contact No.</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {allCustomerState.map((row) => (
                   <TableRow key={row._id}>
-                    <TableCell width="20%" component="th" scope="row">
+                    <TableCell style={{letterSpacing:"2px"}} width="20%" component="th" scope="row">
                       {row._id}
                     </TableCell>
-                    <TableCell width="10%">{row.name}</TableCell>
-                    <TableCell width="20%">{row.email}</TableCell>
-                    <TableCell width="30%">
+                    <TableCell style={{letterSpacing:"2px"}} width="10%">{row.name}</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="20%">{row.email}</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="30%">
                       63 Arch St. Goodlettsville, TN 37072
                     </TableCell>
-                    <TableCell width="25%">9283 9210</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="25%">9283 9210</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

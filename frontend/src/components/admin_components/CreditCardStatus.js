@@ -1,99 +1,123 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ApproveCreditCard from "./button/approvebutton/ApproveCreditCardButton";
 import DenyCreditCard from "./button/denybutton/DenyCreditCardButton";
-import Search from "./../admin_components/search/Search";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Table from "@material-ui/core/Table";
-import clsx from "clsx";
+import {
+  Grid,
+  Paper,
+  Container,
+  TableHead,
+  TableRow,
+  TableBody,
+  Table,
+  TableCell,
+  TableContainer,
+  Typography,
+  TextField,
+} from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-export default function CreditCardStatus() {
-  const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
-  return (
-    <div className={classes.root}>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="1g" className={classes.container}>
-          <Grid container spacing={3} justify="center">
-            <Grid item xs={12} md={3} lg={9}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Customer CreditCard Approval Status
-                <Search />
-                <Table>
-                  <TableRow>
-                    <TableCell>Customer ID</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Approval / Deny Account</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>
-                      <ApproveCreditCard />
-                    </TableCell>
-                    <TableCell>
-                      <DenyCreditCard />
-                    </TableCell>
-                  </TableRow>
-                </Table>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </main>
-    </div>
-  );
-}
-
+// Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
+  gridItem: {
+    paddingTop: 40,
   },
-
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+  table: {
+    minWidth: 650,
   },
-
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar,
-  },
-
-  title: {
-    flexGrow: 1,
-  },
-
-  appBarSpacer: theme.mixins.toolbar,
-
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  },
-
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-  },
-
-  fixedHeight: {
-    height: 240,
+  searchIconStyle :{
+    marginTop: "25px",
+    marginLeft: "20px",
+    marginRight: "30px",
   },
 }));
 
+export default function CreditCardStatus() {
+  const classes = useStyles();
+
+  const [allCustomerState, setAllCustomerState] = useState([]);
+  const [customerState, setCustomerState] = useState({});
+  const [idState, setIdState] = useState("");
+
+  // Upon loading, useEffect will get called
+  useEffect(() => {
+    getAllCustomer();
+  }, []);
+
+  const getAllCustomer = () => {
+    axios
+      .get(`http://localhost:9000/users/`)
+      .then((response) => {
+        // Retrieve from object => object => array (Users)
+        setAllCustomerState(response.data.Users);
+      })
+      // throws an error if there is no data
+      .catch((error) => alert(error));
+  };
+
+  // Ensure that the data gets re-rendered
+  useEffect(() => {
+    getSpecificCustomer();
+  }, [idState]);
+
+  // Searching for a specific customer
+  const getSpecificCustomer = () => {
+    axios
+      .get(`http://localhost:9000/users/search/${idState}`)
+      .then((response) => {
+        setCustomerState(response.data.user);
+      })
+      .catch((error) => alert(error));
+  };
+
+  return (
+    <Container>
+      <Grid container justify="center" className={classes.gridContainer}>
+        <Grid item className={classes.gridItem}>
+          <TableContainer component={Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                <Typography style={{letterSpacing:"3px", width:"max-content"}} variant="h6">Customer CreditCard Approval Status</Typography>
+                <Grid>
+                  <FontAwesomeIcon icon={faSearch} className={classes.searchIconStyle} />
+                  <TextField
+                    id="search-with-icon"
+                    value={idState}
+                    label="SEARCH"
+                    onChange={(event) => setIdState(event.target.value)}
+                  />
+                </Grid>
+                <TableRow>
+                  <TableCell style={{letterSpacing:"2px"}} width="30%">Customer ID</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="20%">Email</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="15%">CreditCard Type</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="15%" align='right'>Approve /</TableCell>
+                  <TableCell style={{letterSpacing:"2px"}} width="20%" align='left'>Deny CreditCard</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {allCustomerState.map((row) => (
+                  <TableRow key={row._id}>
+                    <TableCell style={{letterSpacing:"2px"}} width="30%" component="th" scope="row">
+                      {row._id}
+                    </TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="20%">{row.email}</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="15%">Platinum</TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="15%" align='right'>
+                      <ApproveCreditCard />
+                    </TableCell>
+                    <TableCell style={{letterSpacing:"2px"}} width="20%" align='left'>
+                      <DenyCreditCard />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+}
