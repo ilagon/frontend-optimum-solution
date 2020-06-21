@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import styles from "./css/TransferMoney.module.css";
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,10 +55,40 @@ const ColorButton = withStyles((theme) => ({
 export default function SubmitTransferPage() {
 
   const classes = useStyles();
+  var retrievedData = localStorage.getItem("transferDetails");
+  var states = JSON.parse(retrievedData);
 
-  const handleSubmit = () => {
-    window.location.href = "/Payment/Successful";
-  }
+  const handleSubmit = async () => {
+  axios
+  .post("http://localhost:9002/payment_history/addPayment", {
+    payment_type: "Transfer",
+    payment_amount: states.transferAmount,
+    transfer_number: 1,
+    creditcardId: states.senderCreditCardId,
+  })
+  .then((response) => {
+    console.log(response);
+    axios
+      .patch("http://localhost:9002/creditcards/updateBalance", {
+        creditcard_Id: states.senderCreditCardId,
+        creditcard_balance:
+        states.senderCreditCardBalance -
+          states.transferAmount,
+      })
+      .then((response2) => {
+        console.log(response2);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        
+      });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  window.location.href = "/Payment/Successful";
+};
 
   return (
     <div className={styles.root}>
@@ -90,20 +121,20 @@ export default function SubmitTransferPage() {
         <Grid item xs={12} md={8} lg={6}>
           <div className={styles.fromBody}>
           <p style={{whiteSpace:"nowrap",marginRight: "460px",color: "#173a77", fontSize: "1.55em"}}>Reference No.: 1234567</p>
-            <p style={{marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>Adrian</p>
+  <p style={{marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>{states.recipientName}</p>
           </div>
 
          
-            <p style={{ whiteSpace:"nowrap",marginRight: "480px",color: "#173a77", fontSize: "1.55em"}}>DBS Savings Account</p>
+            <p style={{ whiteSpace:"nowrap",marginRight: "480px",color: "#173a77", fontSize: "1.55em"}}>{states.recipentBank} Savings Account</p>
        
-            <p style={{ whiteSpace:"nowrap",marginRight: "570px",color: "#173a77", fontSize: "1.55em"}}>123 4 567890</p>
-            <p style={{ whiteSpace:"nowrap",marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>$20.00</p>
+            <p style={{ whiteSpace:"nowrap",marginRight: "570px",color: "#173a77", fontSize: "1.55em"}}>{states.recipentAccNo}</p>
+            <p style={{ whiteSpace:"nowrap",marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>${states.transferAmount}</p>
         </Grid>
         {/* Sender Details */}
         <Grid item xs={12} md={4} lg={5}>
-        <p style={{ marginRight: "510px",whiteSpace:"nowrap",color: "#173a77", fontSize: "1.55em"}}>Platimum Card</p>
+  <p style={{ marginRight: "510px",whiteSpace:"nowrap",color: "#173a77", fontSize: "1.55em"}}>{states.senderCreditCardType}</p>
       
-        <Button variant="contained" color="secondary" className={classes.margin} onClick={handleSubmit}>
+        <Button onClick={handleSubmit} variant="contained" color="secondary" className={classes.margin}>
             Submit
         </Button>
         <br></br>

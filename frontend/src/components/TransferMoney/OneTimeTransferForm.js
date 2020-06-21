@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import { Link, Router} from 'react-router-dom';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -63,11 +64,44 @@ export default function OneTimeTransferForm() {
     recipentAccNo: '',
     transferAmount: '',
     senderCreditCardType: '',
-    senderCreditCardBalance: ''
+    senderCreditCardBalance: '',
+    senderCreditCardID: ''
   });
+
+  var cards = [];
+
+  const getCreditCardBalance = async (creditCardType) => {
+    axios
+      .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+      .then((response) => {
+        console.log(response.data.creditcard);
+        response.data.creditcard.map((obj) => obj.creditcard_status==='Approved'? (
+          cards.push(obj)
+        ) :  cards = [])
+        var balance = 0.0;
+        if (cards!==[]){
+          for (const [index, value] of cards.entries()) {
+            if(creditCardType===value.creditcard_type)
+            balance=value.creditcard_balance;
+            setState({
+              ...state, 
+              senderCreditCardID: value.creditcard_num
+            });
+          }
+        }
+        return balance;
+    })
+      .catch((error) => console.log(error));
+  };
 
   const handleChange = (event) => {
     const name = event.target.name;
+    if(name==='senderCreditCardType'){
+      setState({
+        ...state, 
+        senderCreditCardBalance: getCreditCardBalance(event.target.value)
+      });
+    }
     setState({
       ...state,
       [name]: event.target.value,
@@ -78,6 +112,7 @@ export default function OneTimeTransferForm() {
 
   const handleRoute= () => {
     window.location.href ="/SubmitTransfer";
+    localStorage.setItem("transferDetails", JSON.stringify(state));
   }
 
   return (
@@ -104,6 +139,8 @@ export default function OneTimeTransferForm() {
               label="Name"
               placeholder="Name"
               multiline
+              onChange={handleChange}
+              inputProps={{name: 'recipientName'}}
             />
           </form>
 
@@ -132,6 +169,8 @@ export default function OneTimeTransferForm() {
               label="Account No."
               placeholder="Account No."
               multiline
+              onChange={handleChange}
+              inputProps={{name: 'recipentAccNo'}}
             />
             <br></br>
             <TextField
@@ -140,6 +179,8 @@ export default function OneTimeTransferForm() {
               label="Transfer Amount"
               placeholder="Transfer Amount"
               multiline
+              onChange={handleChange}
+              inputProps={{name: 'transferAmount'}}
             />
           </form>
         </Grid>
@@ -159,8 +200,11 @@ export default function OneTimeTransferForm() {
               }}
             >
               <option aria-label="None" value="" />
-              <option value='Platimum Card'>Platimum Card</option>
-              <option value='PlatiDad Card'>PlatiDad Card</option>
+              {cards.map((obj) => (
+              <option value={obj.creditcard_type}>
+                {obj.creditcard_type}
+              </option>
+            ))}
             </Select>
           </FormControl>
           <div className={classes.frontKeepLeft}>
@@ -168,11 +212,11 @@ export default function OneTimeTransferForm() {
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-              $300.00
+             {state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
-              Please type in an amount less than <br></br>the balance amount
+    {state.senderCreditCardBalance<state.transferAmount ? '' : 'Please type in an amount less than the balance amount'}
   </Typography>
           </div>
           <ColorButton variant="contained" color="secondary" className={classes.margin} onClick={handleRoute}>

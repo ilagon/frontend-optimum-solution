@@ -55,7 +55,19 @@ const ColorButton = withStyles((theme) => ({
 }))(Button);
 
 export default function OtherReceipentsTransferForm() {
+
+  const [payeeList, setPayeeList] = useState([]);
   const classes = useStyles();
+
+  const fetchData = async () => {
+    axios
+      .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
+      .then((response) => {
+        console.log(response.data);
+        setPayeeList(response.data.payee);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>

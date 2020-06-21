@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Searchbar from '../common/Searchbar';
-import SideBar from '../common/SideBar';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import styles from "./css/TransferMoney.module.css";
@@ -10,7 +8,6 @@ import OneTimeTransferForm from './OneTimeTransferForm';
 import OtherReceipentsTransferForm from './OtherReceipentsTransferForm';
 import { BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom';
 import SubmitTransferPage from './SubmitTransferPage';
-import { createBrowserHistory } from 'history';
 
 const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
@@ -35,10 +32,9 @@ const useStyles = makeStyles((theme) => ({
 
   export default function TransferMoneyHomePage() {
     const classes = useStyles();
-    const history = createBrowserHistory();
       return (
         <main className={styles.content}>
-        <Router history={history}>
+        <Router>
           <div className={classes.appBarSpacer} />
           <Container maxWidth="100%" className={styles.container} >
             <Grid container spacing={3}>

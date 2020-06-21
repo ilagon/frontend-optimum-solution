@@ -8,9 +8,8 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-import Searchbar from '../common/Searchbar';
-import SideBar from '../common/SideBar';
 import Container from '@material-ui/core/Container';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
@@ -62,8 +61,12 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export function AddPayeeForm() {
-  const [state, setState] = React.useState(0);
+export default function AddPayeeForm() {
+  const [state, setState] = React.useState({
+    payeeName: '',
+    payeeBank: '',
+    payeeAccNo:''
+  });
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -73,13 +76,23 @@ export function AddPayeeForm() {
     });
   };
 
+  const handleSave = async () => {
+    axios
+    .post("http://localhost:9002/payee/addPayee", {
+      name: state.payeeName,
+        number: state.payeeAccNo,
+        payee_type: "Transfer",
+        userId: "5ee8792db5be6439f4d8474e",
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
+
   const classes = useStyles();
 
   return (
     <div className={styles.root}>
       <CssBaseline />
-      <Searchbar></Searchbar>
-          <SideBar></SideBar>
       <main className={styles.content}>
             <div className={classes.appBarSpacer} />
             <Container maxWidth="100%" className={styles.container} >
@@ -110,6 +123,8 @@ export function AddPayeeForm() {
               label="Name"
               placeholder="Name"
               multiline
+              onChange={handleChange}
+              inputProps={{name: 'payeeName'}}
             />
           </form>
 
@@ -119,10 +134,10 @@ export function AddPayeeForm() {
               required
               className={styles.selectColor}
               native
-              value={state.recipentBank}
+              value={state.payeeBank}
               onChange={handleChange}
               inputProps={{
-                name: 'recipentBank'
+                name: 'payeeBank'
               }}
             >
               <option aria-label="None" value="" />
@@ -138,12 +153,14 @@ export function AddPayeeForm() {
               label="Account No."
               placeholder="Account No."
               multiline
+              onChange={handleChange}
+              inputProps={{name: 'payeeAccNo'}}
             />
           </form>
         </Grid>
         {/* Sender Details */}
         <Grid item xs={12} md={4} lg={5}>
-        <Button variant="contained" color="secondary" className={classes.margin}>
+        <Button OnClick={handleSave} variant="contained" color="secondary" className={classes.margin}>
             Save Payee
         </Button>
         <ColorButton variant="contained" color="secondary" className={classes.cancel}>

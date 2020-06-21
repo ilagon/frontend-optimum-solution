@@ -8,10 +8,9 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-import Searchbar from '../common/Searchbar';
-import SideBar from '../common/SideBar';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
@@ -62,24 +61,76 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
-export function AddPayeeReceipentForm() {
-  const [state, setState] = React.useState(0);
+export default function AddPayeeReceipentForm() {
+  const [state, setState] = React.useState({
+    recipientName: '',
+    recipentBank: '',
+    recipentAccNo: '',
+    transferAmount: '',
+    senderCreditCardType: '',
+    senderCreditCardBalance: '',
+    senderCreditCardID: ''
+  });
+
+  var retrievedData = localStorage.getItem("transferDetails");
+  var states = JSON.parse(retrievedData);
+setState({
+  ...state,
+  recipientName:states.receipientName,
+  recipentBank:states.recipentBank,
+  recipentAccNo:states.recipentAccNo
+});
+
+var cards = [];
+
+  const getCreditCardBalance = async (creditCardType) => {
+    axios
+      .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+      .then((response) => {
+        console.log(response.data.creditcard);
+        response.data.creditcard.map((obj) => obj.creditcard_status==='Approved'? (
+          cards.push(obj)
+        ) :  cards = [])
+        var balance = 0.0;
+        if (cards!==[]){
+          for (const [index, value] of cards.entries()) {
+            if(creditCardType===value.creditcard_type)
+            balance=value.creditcard_balance;
+            setState({
+              ...state, 
+              senderCreditCardID: value.creditcard_num
+            });
+          }
+        }
+        return balance;
+    })
+      .catch((error) => console.log(error));
+  };
 
   const handleChange = (event) => {
     const name = event.target.name;
+    if(name==='senderCreditCardType'){
+      setState({
+        ...state, 
+        senderCreditCardBalance: getCreditCardBalance(event.target.value)
+      });
+    }
     setState({
       ...state,
       [name]: event.target.value,
     });
   };
 
+  const nextHandler = (event) => {
+    localStorage.setItem("transferDetails", JSON.stringify(state));
+    window.location.href ="/SubmitTransfer";
+   };
+
   const classes = useStyles();
 
   return (
     <div className={styles.root}>
       <CssBaseline />
-      <Searchbar></Searchbar>
-          <SideBar></SideBar>
       <main className={styles.content}>
             <div className={classes.appBarSpacer} />
             <Container maxWidth="100%" className={styles.container} >
@@ -107,15 +158,15 @@ export function AddPayeeReceipentForm() {
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={6}>
           <div className={styles.fromBody}>
-            <p style={{marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>Adrian</p>
+            <p style={{marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>{state.recipientName}</p>
           </div>
 
          
-            <p style={{ whiteSpace:"nowrap",marginRight: "480px",color: "#173a77", fontSize: "1.55em"}}>DBS Savings Account</p>
+            <p style={{ whiteSpace:"nowrap",marginRight: "480px",color: "#173a77", fontSize: "1.55em"}}>{state.recipentBank} Savings Account</p>
        
 
           <form className={classes.root} noValidate autoComplete="on">
-          <p style={{ whiteSpace:"nowrap",marginRight: "560px",color: "#173a77", fontSize: "1.55em"}}>123 4 567890</p>
+          <p style={{ whiteSpace:"nowrap",marginRight: "560px",color: "#173a77", fontSize: "1.55em"}}>{states.recipentAccNo}</p>
              <br></br>
             <TextField
               required
@@ -123,6 +174,8 @@ export function AddPayeeReceipentForm() {
               label="Transfer Amount"
               placeholder="Transfer Amount"
               multiline
+              onChange={handleChange}
+              inputProps={{name: 'transferAmount'}}
             />
           </form>
         </Grid>
@@ -141,8 +194,11 @@ export function AddPayeeReceipentForm() {
               }}
             >
               <option aria-label="None" value="" />
-              <option value='Platimum Card'>Platimum Card</option>
-              <option value='PlatiDad Card'>PlatiDad Card</option>
+              {cards.map((obj) => (
+              <option value={obj.creditcard_type}>
+                {obj.creditcard_type}
+              </option>
+            ))}
             </Select>
           </FormControl>
           <div className={classes.frontKeepLeft}>
@@ -150,14 +206,14 @@ export function AddPayeeReceipentForm() {
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-              $300.00
+            {state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
-              Please type in an amount less than <br></br>the balance amount
+    {state.senderCreditCardBalance<state.transferAmount ? '' : 'Please type in an amount less than the balance amount'}
   </Typography>
           </div>
-        <Button variant="contained" color="secondary" className={classes.margin}>
+        <Button onClick={nextHandler} variant="contained" color="secondary" className={classes.margin}>
             Next
         </Button>
         <ColorButton variant="contained" color="secondary" className={classes.cancel}>
