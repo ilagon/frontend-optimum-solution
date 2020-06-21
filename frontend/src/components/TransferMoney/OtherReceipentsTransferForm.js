@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -59,15 +60,20 @@ export default function OtherReceipentsTransferForm() {
   const [payeeList, setPayeeList] = useState([]);
   const classes = useStyles();
 
-  const fetchData = async () => {
-    axios
-      .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
-      .then((response) => {
-        console.log(response.data);
-        setPayeeList(response.data.payee);
-      })
-      .catch((error) => console.log(error));
-  };
+  //const fetchData = async () => {
+  //  axios
+  //    .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
+  //    .then((response) => {
+  //      console.log(response.data);
+  //      setPayeeList(response.data.payee);
+  //    })
+  //    .catch((error) => console.log(error));
+ // };
+
+  //const addHandle= () => {
+  //  window.location.href ="/AddPayee";
+    //localStorage.setItem("transferDetails", JSON.stringify(state));
+ //}
 
   return (
     <div>

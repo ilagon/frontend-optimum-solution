@@ -58,6 +58,9 @@ export default function SubmitTransferPage() {
   var retrievedData = localStorage.getItem("transferDetails");
   var states = JSON.parse(retrievedData);
 
+  const cancelHandle = () => {
+    window.location.href ="/TransferMoney";
+  }
   const handleSubmit = async () => {
   axios
   .post("http://localhost:9002/payment_history/addPayment", {
@@ -77,17 +80,17 @@ export default function SubmitTransferPage() {
       })
       .then((response2) => {
         console.log(response2);
-        
+        window.location.href = "/Payment/Successful";
       })
       .catch((error) => {
         console.log(error);
-        
+        window.location.href = "/Payment/Unsuccessful";
       });
   })
   .catch((error) => {
     console.log(error);
+    window.location.href = "/Payment/Unsuccessful";
   });
-  window.location.href = "/Payment/Successful";
 };
 
   return (
@@ -139,7 +142,7 @@ export default function SubmitTransferPage() {
         </Button>
         <br></br>
         <br></br>
-        <ColorButton variant="contained" color="secondary" className={classes.cancel}>
+        <ColorButton onClick={cancelHandle} variant="contained" color="secondary" className={classes.cancel}>
             Cancel
         </ColorButton>
         </Grid>
