@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import SearchIcon from "@material-ui/icons/Search";
 import InputLabel from "@material-ui/core/InputLabel";
-import InputBase from "@material-ui/core/InputBase";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import UserMenu from "./UserMenu";
-import { paymentListItems, serviceListItems } from "./SideNavigation";
 import CreditBalance from "./CreditBalance";
 import CreditLimit from "./CreditLimit";
 import PaymentDetails from "./PaymentDetails";
@@ -51,39 +40,6 @@ export default function Overview() {
   const classes = useStyles();
 
   return (
-    <div className="root">
-      <CssBaseline />
-      <AppBar position="absolute" className="appBar">
-        <Toolbar className="toolbar">
-          <div className="search">
-            <div className="searchIcon">
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="SEARCH"
-              classes={{
-                root: "inputRoot",
-                input: "inputInput",
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-          <UserMenu />
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: "drawerPaperx",
-        }}
-      >
-        <Typography component="p" variant="h6" className="digiBankText">
-          Optimum DigiBank
-        </Typography>
-        <List>{paymentListItems}</List>
-        <Divider />
-        <List>{serviceListItems}</List>
-      </Drawer>
       <main className="content">
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className="container">
@@ -137,6 +93,5 @@ export default function Overview() {
           </Grid>
         </Container>
       </main>
-    </div>
   );
 }

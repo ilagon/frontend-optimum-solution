@@ -12,6 +12,7 @@ import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput"
 import { store } from "../../../index";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom'
 
 var cards = [];
 
@@ -177,8 +178,7 @@ export default function BodyContainer() {
     </div>
   );
   return (
-    <div>
-      {isLoading ? (
+    <div className="root">
         <main className="content">
           <div className={classes.appBarSpacer} />
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
@@ -209,9 +209,6 @@ export default function BodyContainer() {
             </Grid>
           </Grid>
         </main>
-      ) : (
-        <div>Loading..</div>
-      )}
     </div>
   );
 }

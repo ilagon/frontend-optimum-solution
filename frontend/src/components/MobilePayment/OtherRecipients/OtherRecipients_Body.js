@@ -166,38 +166,32 @@ export default function BodyContainer() {
   );
 
   return (
-    <div>
-      {isLoading ? (
-        <main className="content">
-          <div className={classes.appBarSpacer} />
-          <Grid container direction="row" justify="space-evenly" wrap="wrap">
-            <Grid item sm={6} className="bodyTitle nonActiveTitle">
-              <a href="/" style={{ textDecoration: "none", color: "#173a77" }}>
-                <h1>One Time Transfer</h1>
-              </a>
-            </Grid>
-            <Grid item sm={6} className="bodyTitle activeTitle">
-              <h1>Other Recipients</h1>
-            </Grid>
-            <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-              <h1>Bill Payment</h1>
-            </Grid>
-            <Grid
-              item
-              sm={6}
-              direction="row"
-              className={classes.gridMargin + " border"}
-            >
-              {formTo}
-            </Grid>
-            <Grid item sm={6} className={classes.gridMargin + " border"}>
-              {formFrom}
-            </Grid>
-          </Grid>
-        </main>
-      ) : (
-        <div>Loading..</div>
-      )}
-    </div>
+    <main className="content">
+      <div className={classes.appBarSpacer} />
+      <Grid container direction="row" justify="space-evenly" wrap="wrap">
+        <Grid item sm={6} className="bodyTitle nonActiveTitle">
+          <a href="/MobilePayment" style={{ textDecoration: "none", color: "#173a77" }}>
+            <h1>One Time Transfer</h1>
+          </a>
+        </Grid>
+        <Grid item sm={6} className="bodyTitle activeTitle">
+          <h1>Other Recipients</h1>
+        </Grid>
+        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+          <h1>Bill Payment</h1>
+        </Grid>
+        <Grid
+          item
+          sm={6}
+          direction="row"
+          className={classes.gridMargin + " border"}
+        >
+          {formTo}
+        </Grid>
+        <Grid item sm={6} className={classes.gridMargin + " border"}>
+          {formFrom}
+        </Grid>
+      </Grid>
+    </main>
   );
 }

@@ -1,8 +1,27 @@
 /* Styling for Side Navigation Bar */
-.overviewText {
+.navlink {
+    width: 100%;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    text-align: left;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: flex-start;
+    text-decoration: none;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: white;
+}
+
+.iconPadding{
+    margin-right: 25px;
+}
+.activeNavlink {
     background-color: #E8CE7C !important;
     color: black !important;
-    border-radius:  0 13px 13px 0 !important;
+    border-radius:  0 11px 11px 0 !important;
     font-weight: 600 !important;
 }
 
@@ -21,8 +40,9 @@
 
 
 /* Styling for Dashboard */
-.root {
+.root, #root {
     display: flex;
+    height: 100vh;
 }
 
 @media (min-width: 600px) {
@@ -116,7 +136,7 @@
 }
 
 .drawerPaperx {
-    padding-right: 40px !important;
+    padding-right: 12px !important;
     background-color: #AA3A21 !important;
     color: white !important;
     position: relative !important;
@@ -128,12 +148,12 @@
     flex-grow: 1;
     height: 100vh;
     overflow: auto;
+    background-color: #E5E8ED
 }
 
 .container {
     padding-top: 32px;
     padding-bottom: 32px;
-    background-color: #E5E8ED;
 }
 
 .paper, .fixedHeightPaper, .selectCreditCardPaper {
@@ -205,4 +225,9 @@
 
 .MuiTablePagination-caption {
     font-size: 13px;
+}
+
+/* Styling for CreditcardStatusPage */
+.darkBlueColor {
+    color: #173A77 !important;
 }

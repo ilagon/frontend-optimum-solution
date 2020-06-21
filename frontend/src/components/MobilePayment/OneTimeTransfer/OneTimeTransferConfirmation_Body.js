@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import { store } from "../../../index";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 export default function BodyContainer() {
   const history = useHistory();
@@ -99,24 +98,26 @@ export default function BodyContainer() {
   );
 
   return (
-    <main className="content">
-      <div className={classes.appBarSpacer} />
-      <Grid container direction="row" justify="space-evenly" wrap="wrap">
-        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-          <h1>Bill Payment Details</h1>
+    <div className="root">
+      <main className="content">
+        <div className={classes.appBarSpacer} />
+        <Grid container direction="row" justify="space-evenly" wrap="wrap">
+          <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+            <h1>Bill Payment Details</h1>
+          </Grid>
+          <Grid
+            item
+            sm={6}
+            direction="row"
+            className={classes.gridMargin + " border"}
+          >
+            {formTo}
+          </Grid>
+          <Grid item sm={6} className={classes.gridMargin + " border"}>
+            {formFrom}
+          </Grid>
         </Grid>
-        <Grid
-          item
-          sm={6}
-          direction="row"
-          className={classes.gridMargin + " border"}
-        >
-          {formTo}
-        </Grid>
-        <Grid item sm={6} className={classes.gridMargin + " border"}>
-          {formFrom}
-        </Grid>
-      </Grid>
-    </main>
+      </main>
+    </div>
   );
 }
