@@ -1,121 +1,35 @@
-.container {
-    background-color: #e5e8ed;
-    width: 60%;
-    height: 50%;
-    position: center;
-    font-family: Avenir, Arial;
-    top: 100px;
-    left: 600px;
-    letter-spacing: 0.1em;
-}
-.creditcard {
-    column-count: 3;
-  }
-  .FormTitle{
+.FormTitle{
     font-size: 1.5625em; /* 1em = 16px */
     margin-top: 20px;
     color: #AA3A21;
     position: relative;
     text-align: left;
     font-weight: bold;
-}
-.images{
-    width:350px;
-    margin-top:-70px;    
+    padding-left: 14px;
 }
 
-.TitleContainer1{
-margin-bottom:-48px; 
-margin-right:5em; 
-float: right;
+.ccImage {
+    width: 100%;
+    min-width: 330px;
+    max-width: 350px;
 }
 
-.PBVisaSilverCreditCard {
-    text-align:center;
-    margin-bottom:-28px;  
-    margin-left:200px;   
-}
-.Button1{
-    float:right;
-    color: #e26448;
-   }
-.images1{
-    width:350px;
-    margin-top:-100px;    
+.ccDescription {
+    justify-content: center;
+    color: #173A77 !important;
+    display: inline-grid;
+    align-content: center;
 }
 
-.TitleContainer2{
-margin-bottom:-80px; 
-margin-right:1em; 
-float: right;
+.ccSelectDiv {
+    display: inline-grid;
+    align-items: center;
+    justify-content: center;
 }
 
-.PBVisaGoldCreditCard {
-    text-align:center;
-    margin-bottom:-28px;  
-    margin-left:200px;   
+.ccSelectBtn {
+    background-color: #AA3A21 !important;
+    padding: 8px 60px !important;
+    color: white !important;
+    text-transform: none !important;
 }
-.Button2{
-    float:right;
-}
-
-.images2{
-    width:350px;
-    margin-top:-100px;    
-}
-
-.TitleContainer3{
-margin-bottom:-48px; 
-margin-right:5em; 
-float: right;
-}
-
-.PBVisaPlatinumCreditCard {
-    text-align:center;
-    margin-bottom:-28px;  
-    margin-left:250px;   
-}
-.Button3{
-    float:right;
-}
-
-.images3{
-    width:350px;
-    margin-top:-100px;    
-}
-
-.TitleContainer4{
-margin-bottom:-48px; 
-margin-right:10em; 
-float: right;
-}
-
-.PBVisaWomenCreditCard {
-    text-align:center;
-    margin-bottom:-28px;  
-    margin-left:220px;   
-}
-.Button4{
-    float:right;
-}
-
-.images4{
-    width:350px;
-    margin-top:-100px;    
-}
-
-.TitleContainer5{
-margin-bottom:-48px; 
-margin-right:8.5em; 
-float: right;
-}
-
-.PBVisaStudentCreditCard {
-    text-align:center;
-    margin-bottom:-28px;  
-    margin-left:220px;   
-}
-.Button5{
-    float:right;
-}
-
