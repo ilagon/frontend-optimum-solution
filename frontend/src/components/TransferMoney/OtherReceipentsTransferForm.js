@@ -57,52 +57,61 @@ const ColorButton = withStyles((theme) => ({
 
 export default function OtherReceipentsTransferForm() {
 
-  const [payeeList, setPayeeList] = useState([]);
+ const [payeeList, setPayeeList] = useState([]);
+ const [state, setState] = useState({
+  recipientName: '',
+  recipentBank: 'Optimum Digibank',
+  recipentAccNo: '',
+});
   const classes = useStyles();
 
-  //const fetchData = async () => {
-  //  axios
-  //    .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
-  //    .then((response) => {
-  //      console.log(response.data);
-  //      setPayeeList(response.data.payee);
-  //    })
-  //    .catch((error) => console.log(error));
- // };
+  const fetchData = async () => {
+    axios
+      .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
+      .then((response) => {
+        console.log(response.data);
+setPayeeList(response.data.payee);   
+      })
+      .catch((error) => console.log(error));
+  };
 
-  //const addHandle= () => {
-  //  window.location.href ="/AddPayee";
-    //localStorage.setItem("transferDetails", JSON.stringify(state));
- //}
+  const addHandle= () => {
+    window.location.href ="/AddPayee";
+ }
+
+ const selectPayee= (name, accNo) => {
+  setState({
+    ...state,
+    recipientName: name,
+    recipentAccNo: accNo});
+  localStorage.setItem("transferDetails", JSON.stringify(state));
+  window.location.href ="";
+}
 
   return (
     <div>
+      {fetchData}
       <CssBaseline />
       {/* Payee 1 */}
-      <Grid container spacing={3}>
+      {payeeList.map((obj) =>(
+        <Grid container spacing={3}>
         <Grid item xs={12}>
-        <Paper className={styles.paper}>
+        <Paper className={styles.paper} onClick={selectPayee(obj.name,obj.number)}>
         <div className={styles.textLeft}> 
         <Typography Typography component="h2" variant="h4" color="primary" gutterBottom>
-         Ain<br></br><br></br>UOB Savings Account 1235 6 78902
+         {obj.name}<br></br><br></br>Optimum DigiBank Savings Account {obj.number}
          <InfoRoundedIcon fontSize="inherit" className={styles.infoIcon}></InfoRoundedIcon>
         </Typography>
         </div>
               </Paper>
         </Grid>
       </Grid>
+      ))}
+      
       {/* Payee 2 */}
       <Grid container spacing={3}>
         <Grid item xs={12}>
-        <Paper className={styles.paper}>
-        <div className={styles.textLeft}> 
-        <Typography Typography component="h2" variant="h4" color="primary" gutterBottom>
-         Adrian<br></br><br></br>DBS Savings Account 1234 5 67890
-         <InfoRoundedIcon fontSize="inherit" className={styles.infoIcon}></InfoRoundedIcon>
-        </Typography>
-        </div>
-        </Paper>
-                {/* Payee Button */}
+              {/* Payee Button */}
                 <ColorButton variant="contained" color="secondary" className={classes.margin}>
             Add Payee
         </ColorButton>
