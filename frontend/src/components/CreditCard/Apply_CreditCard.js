@@ -9,7 +9,7 @@ import image2 from "../../images/creditcard-03.png";
 import image3 from "../../images/creditcard-04.png";
 import image4 from "../../images/creditcard-05.png";
 
-export default function CreditCardPage() {
+export default function ApplyCreditCardPage() {
   const [creditcards, setcreditcards] = useState([]);
   const [creditCardType, setCreditCardType] = useState('');
   const customerId = "5ee9cb4de3fc6f4de8012484";

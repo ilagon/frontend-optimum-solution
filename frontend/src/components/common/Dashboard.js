@@ -32,6 +32,7 @@ import SubmitTransferPage from '../TransferMoney/SubmitTransferPage';
 import {PaymentSuccessfulPage} from "../ResultPage/PaymentSuccessful";
 import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
 import CreditCardStatus from '../CreditCard/CreditcardStatusPage';
+import ApplyCreditCardPage from '../CreditCard/Apply_CreditCard';
 
 
 export default function Dashboard() {
@@ -119,6 +120,7 @@ export default function Dashboard() {
       <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
       <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
       <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
+      <Route exact path="/ApplyCreditCard" component={ApplyCreditCardPage}></Route>
       <Route exact path="/CreditCardStatus" component={CreditCardStatus}></Route>
     </Router>
   );
