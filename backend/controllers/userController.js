@@ -29,7 +29,7 @@ exports.user_register = (req, res) => {
           account_status: req.body.account_status,
           email: req.body.email,
           password: req.body.password,
-          is_admin: req.body.is_admin,
+          user_type: req.body.user_type,
         });
         bcrypt.hash(user.password, 10, function (err, hash) {
           user.password = hash;
@@ -56,8 +56,8 @@ exports.user_register = (req, res) => {
 };
 
 exports.users_get_all = (req, res) => {
-  User.findOne({ email: req.user.email })
-    .select("name email account_status _id is_admin")
+  User.find()
+    .select("name email account_status _id user_type")
     .exec()
     .then((docs) => {
       if (docs) {
