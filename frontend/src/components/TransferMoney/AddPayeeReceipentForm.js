@@ -94,12 +94,15 @@ var cards = [];
         var balance = 0.0;
         if (cards!==[]){
           for (const [index, value] of cards.entries()) {
-            if(creditCardType===value.creditcard_type)
+            if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
+            console.log(balance);
             setState({
               ...state, 
               senderCreditCardID: value.creditcard_num
             });
+            console.log(state.senderCreditCardID);
+          }
           }
         }
         return balance;
