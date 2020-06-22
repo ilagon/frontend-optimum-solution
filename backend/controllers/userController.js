@@ -77,7 +77,7 @@ exports.user_login = (req, res) => {
     });
   }
   User.findOne({ email: req.body.email })
-    .select("password account_status is_admin")
+    .select("password user_type account_status")
     .exec()
     .then((doc) => {
       if (doc) {
@@ -95,6 +95,7 @@ exports.user_login = (req, res) => {
             if (doc.account_status == "Active") {
               res.status(200).json({
                 token,
+                user_type: doc.user_type,
                 message: "success",
               });
             } else if (doc.account_status == "Pending") {
