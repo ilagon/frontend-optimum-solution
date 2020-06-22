@@ -19,13 +19,14 @@ export default function MobilePaymentRoutes() {
   }));
 
   const classes = useStyles();
+  
   return (
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>
       <Router>
         <main className="content">
           <div className={classes.appBarSpacer} />
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
-            <Grid item sm={6} className="bodyTitle">
+            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/MobilePayment") ? "1" : "0.5"}}>
               <a
                 href="/MobilePayment"
                 style={{textDecoration: "none", color: "#173a77"}}
@@ -33,7 +34,7 @@ export default function MobilePaymentRoutes() {
                 <h1>One Time Transfer</h1>
               </a>
             </Grid>
-            <Grid item sm={6} className="bodyTitle">
+            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/MobilePayment") ? "0.5" : "1"}}>
               <a
                 href="/MobilePayment/OtherRecipients"
                 style={{ textDecoration: "none", color: "#173a77" }}
