@@ -18,7 +18,6 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import "../Overview/Overview.css";
-import OneTimeTransferBody from "../MobilePayment/OneTimeTransfer/OneTimeTransfer_Body";
 import MobilePaymentRoutes from "../MobilePayment/MobilePaymentRoutes";
 import TransferMoneyPage from "../TransferMoney/transfer_money";
 import OverviewPage from "../Overview/OverviewPage";
@@ -33,6 +32,7 @@ import {PaymentSuccessfulPage} from "../ResultPage/PaymentSuccessful";
 import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
 import CreditCardStatus from '../CreditCard/CreditcardStatusPage';
 import ApplyCreditCardPage from '../CreditCard/ApplyCreditcardPage';
+import MobilePaymentConfirmationBody from "../MobilePayment/OneTimeTransfer/OneTimeTransferConfirmation_Body";
 
 
 export default function Dashboard() {

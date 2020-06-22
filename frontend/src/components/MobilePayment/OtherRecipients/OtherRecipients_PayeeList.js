@@ -60,42 +60,33 @@ export default function BodyContainer() {
   };
 
   return (
-        <main className="content">
-          <div className={classes.appBarSpacer} />
-          <Grid container direction="row" justify="space-evenly" wrap="wrap">
-            <Grid item sm={6} className="bodyTitle nonActiveTitle">
-              <a href="/MobilePayment" style={{ textDecoration: "none", color: "#173a77" }}>
-                <h1>One Time Transfer</h1>
-              </a>
-            </Grid>
-            <Grid item sm={6} className="bodyTitle activeTitle">
-              <h1>Other Recipients</h1>
-            </Grid>
-            <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-              <h1>Bill Payment</h1>
-            </Grid>
-            <Grid item sm={12}>
-              {payeeList.map((obj) => (
-                <Paper
-                  elevation={3}
-                  id={obj._id}
-                  className="paperHeight"
-                  onClick={(e) => handleOnClick(e)}
-                >
-                  <span>{obj.name}</span>
-                  <br />
-                  <br />
-                  <span>Mobile Bill</span>
-                  <InfoIcon className="infoIcon" />
-                </Paper>
-              ))}
-            </Grid>
-          </Grid>
-          <a href="/MobilePayment/AddPayee">
-            <Button id="addPayee" variant="contained">
-              Add Payee
-            </Button>
-          </a>
-        </main>
+    <div>
+      <Grid container direction="row" justify="space-evenly" wrap="wrap">
+        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+          <h1>Bill Payment</h1>
+        </Grid>
+        <Grid item sm={12}>
+          {payeeList.map((obj) => (
+            <Paper
+              elevation={3}
+              id={obj._id}
+              className="paperHeight"
+              onClick={(e) => handleOnClick(e)}
+            >
+              <span>{obj.name}</span>
+              <br />
+              <br />
+              <span>Mobile Bill</span>
+              <InfoIcon className="infoIcon" />
+            </Paper>
+          ))}
+        </Grid>
+      </Grid>
+      <a href="/MobilePayment/AddPayee">
+        <Button id="addPayee" variant="contained">
+          Add Payee
+        </Button>
+      </a>
+    </div>
   );
 }

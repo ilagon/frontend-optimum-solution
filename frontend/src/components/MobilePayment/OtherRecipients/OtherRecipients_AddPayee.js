@@ -104,6 +104,7 @@ export default function BodyContainer() {
         >
           <div className="buttonContainer">
             <div>
+              <a href="/MobilePayment/OtherRecipients" style={{textDecoration: "none"}}>
               <Button
                 id="savePayeeButton"
                 variant="contained"
@@ -111,12 +112,13 @@ export default function BodyContainer() {
               >
                 Save Payee
               </Button>
+              </a>
             </div>
             <div>
               <Button
                 id="cancelButton"
                 variant="contained"
-                onClick={() => history.push("/")}
+                onClick={() => history.push("/MobilePayment/OtherRecipients")}
               >
                 Cancel
               </Button>
