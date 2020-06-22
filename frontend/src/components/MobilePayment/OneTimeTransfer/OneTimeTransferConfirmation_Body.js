@@ -12,7 +12,7 @@ export default function BodyContainer() {
   const state = store.getState();
   console.log("store: " + state);
   console.log("cc id:" + state.mobilePayment.creditCard._id);
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     axios
       .post("http://localhost:9002/payment_history/addPayment", {
         payment_type: "Mobile Bill",

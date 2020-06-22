@@ -18,7 +18,7 @@ export default function BodyContainer() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       axios
         .get("http://localhost:9002/payee/mobile/5ee8792db5be6439f4d8474e")
         .then((response) => {

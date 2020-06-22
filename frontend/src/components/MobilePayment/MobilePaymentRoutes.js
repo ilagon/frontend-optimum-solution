@@ -28,7 +28,7 @@ export default function MobilePaymentRoutes() {
             <Grid item sm={6} className="bodyTitle">
               <a
                 href="/MobilePayment"
-                style={{ textDecoration: "none", color: "#173a77" }}
+                style={{textDecoration: "none", color: "#173a77"}}
               >
                 <h1>One Time Transfer</h1>
               </a>

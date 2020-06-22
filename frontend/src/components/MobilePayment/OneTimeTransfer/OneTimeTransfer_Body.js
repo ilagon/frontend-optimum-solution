@@ -27,7 +27,7 @@ export default function BodyContainer() {
   const history = useHistory();
 
   const handleFormInputs = () => {
-    if (amount != "" && Object.keys(creditCard).length != 0) {
+    if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
       dispatch(storeInput(phoneNumber, amount, creditCard));
       history.push("/MobilePayment/ConfirmationPage");
     } else alert("Please fill in the form");
@@ -41,7 +41,7 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       axios
         .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {

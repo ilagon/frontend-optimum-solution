@@ -28,7 +28,7 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       axios
         .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
