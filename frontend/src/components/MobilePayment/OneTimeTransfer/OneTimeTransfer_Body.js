@@ -108,6 +108,7 @@ export default function BodyContainer() {
       "&:hover": {
         backgroundColor: "#e26448",
       },
+      fontSize: "1.25em"
     },
   }));
 
