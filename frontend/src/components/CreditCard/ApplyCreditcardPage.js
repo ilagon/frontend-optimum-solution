@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./css/CreditCard.module.css";
+import styles from "./css/ApplyCreditcard.module.css";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import image from "../../images/creditcard-01.png";
@@ -20,7 +20,7 @@ export default function ApplyCreditCardPage() {
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
   const [creditCardType, setCreditCardType] = useState("");
-  const customerId = "5ee9cb4de3fc6f4de8012484";
+  const customerId = "5eeb358d2f67c7147836cdb9";
 
   useEffect(() => {
     axios
@@ -32,15 +32,31 @@ export default function ApplyCreditCardPage() {
       .catch((error) => console.log(error));
   }, []);
 
-  const handlecard_type = (e) => {
-    setCreditCardType(e.target.value);
-
-    creditcards.map((creditcard) => {
-      creditcard.creditcard_type === creditCardType
-        ? console.log("Display error message, User already has this card type.")
-        : console.log("Send creditCardType as prop");
-    });
+  const handlecard_Silver = () => {
+    console.log("handlecard_Silver called ");
+    setCreditCardType('Silver');
   };
+
+  const handlecard_Gold = () => {
+    console.log("handlecard_Gold called ");
+    setCreditCardType('Gold');
+  };
+
+  const handlecard_Platinum = () => {
+    console.log("handlecard_Platinum called ");
+    setCreditCardType('Platinum');
+  };
+
+  const handlecard_Women = () => {
+    console.log("handlecard_Women called ");
+    setCreditCardType('Women');
+  };
+
+  const handlecard_Student = () => {
+    console.log("handlecard_Student called ");
+    setCreditCardType('Student');
+  };
+
   return (
     <main className="content">
       <div className={classes.appBarSpacer} />
@@ -70,7 +86,7 @@ export default function ApplyCreditCardPage() {
               className={styles.ccSelectBtn}
               variant="contained"
               value="Silver"
-              onClick={handlecard_type}
+              onClick={handlecard_Silver}
             >
               Select
             </Button>
@@ -101,7 +117,7 @@ export default function ApplyCreditCardPage() {
               className={styles.ccSelectBtn}
               variant="contained"
               value="Gold"
-              onClick={handlecard_type}
+              onClick={handlecard_Gold}
             >
               Select
             </Button>
@@ -131,7 +147,7 @@ export default function ApplyCreditCardPage() {
               className={styles.ccSelectBtn}
               variant="contained"
               value="Platinum"
-              onClick={handlecard_type}
+              onClick={handlecard_Platinum}
             >
               Select
             </Button>
@@ -159,13 +175,12 @@ export default function ApplyCreditCardPage() {
               className={styles.ccSelectBtn}
               variant="contained"
               value="Women"
-              onClick={handlecard_type}
+              onClick={handlecard_Women}
             >
               Select
             </Button>
           </Grid>
         </Grid>
-
 
         <Grid container spacing={3}>
           {/* Creditcard Image */}
@@ -175,11 +190,12 @@ export default function ApplyCreditCardPage() {
           {/* Creditcard Description */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccDescription}>
             <h3 className={styles.PBVisaSilverCreditCard}>
-            PB Visa Student CreditCard
+              PB Visa Student CreditCard
             </h3>
             <p className={styles.TitleContainer1}>
-            With 2.5% low interest rate and an Eligibility Criteria of $22k Per Annum<br></br>
-          Enjoy rewarding rebates with every tap.
+              With 2.5% low interest rate and an Eligibility Criteria of $22k
+              Per Annum<br></br>
+              Enjoy rewarding rebates with every tap.
             </p>
           </Grid>
           {/* Select Button */}
@@ -188,10 +204,24 @@ export default function ApplyCreditCardPage() {
               className={styles.ccSelectBtn}
               variant="contained"
               value="Student"
-              onClick={handlecard_type}
+              onClick={handlecard_Student}
             >
               Select
             </Button>
+            {creditcards.map((creditcard) => {
+              console.log(
+                "Selected button: " +
+                  creditCardType
+              );
+              if (creditcard.creditcard_type === creditCardType) {
+                console.log(
+                  creditcard.creditcard_type + ", already exist in DB. "
+                );
+                return;
+              }
+            })
+            }
+            {console.log("")}
           </Grid>
         </Grid>
       </Container>
