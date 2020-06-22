@@ -76,6 +76,7 @@ export default function SignUp() {
     if (cnfmPassword !== password) {
       return;
     }
+    //mongodb+srv://optimum-leads:12345@optimumbatch7-1rg4n.mongodb.net/bankappphase2?retryWrites=true&w=majority
     axios.post('http://localhost:7001/users/register', {
       name,
       email,

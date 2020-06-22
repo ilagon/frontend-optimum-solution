@@ -78,6 +78,7 @@ export default function ResetPass() {
     if (cnfmPassword !== password) {
       return;
     }
+
     axios.patch(`http://localhost:7001/users/recover/${token}`, {
       password,
     })
