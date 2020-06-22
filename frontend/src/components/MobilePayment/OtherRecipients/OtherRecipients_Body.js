@@ -68,7 +68,7 @@ export default function BodyContainer() {
 
   const handleFormInputs = () => {
     if (amount != "" && Object.keys(creditCard).length != 0) {
-      dispatch(storeInput(amount, creditCard));
+      dispatch(storeInput(state.mobilePayment.payeeInfo.number, amount, creditCard));
       history.push("/MobilePayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };

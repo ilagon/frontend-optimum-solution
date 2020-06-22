@@ -2,8 +2,9 @@ export function storeInput(...formInputs) {
   return {
     type: "Create",
     payload: {
-      amount: formInputs[0],
-      creditCard: formInputs[1],
+      phoneNumber: formInputs[0],
+      amount: formInputs[1],
+      creditCard: formInputs[2],
     },
   };
 }
