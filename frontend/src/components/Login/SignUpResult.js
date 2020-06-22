@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,6 +43,12 @@ const useStyles = makeStyles(() => ({
 export default function SignUpResult() {
   const classes = useStyles();
 
+  useEffect(() => {
+    setTimeout(() => {
+      window.location.href = "/Login";
+    }, 1500);
+  })
+
   return (
     <div className={classes.root}>
       <Container id="logout" component="main" maxWidth="sm">
@@ -57,9 +63,7 @@ export default function SignUpResult() {
             Please wait 1-2 business days for admins to activate your account.
           </Typography>
           <Typography component="h2" variant="h6" className={classes.bodytxt}>
-            Click here to return to the
-            {' '}
-            <Link href="/Login" className={classes.bodytxt2}> Login Page </Link>
+            <Link href="/Login" className={classes.bodytxt2}>Click here if are not redirected after a few seconds</Link>
           </Typography>
         </div>
       </Container>
