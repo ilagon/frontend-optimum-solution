@@ -126,6 +126,10 @@ var cards = [];
     window.location.href ="/SubmitTransfer";
    };
 
+   const cancelHandler = (event) => {
+    window.location.href ="/TransferMoney/payee";
+   };
+
   const classes = useStyles();
 
   return (
@@ -216,7 +220,7 @@ var cards = [];
         <Button onClick={nextHandler} variant="contained" color="secondary" className={classes.margin}>
             Next
         </Button>
-        <ColorButton variant="contained" color="secondary" className={classes.cancel}>
+        <ColorButton onClick={cancelHandler} variant="contained" color="secondary" className={classes.cancel}>
             Cancel
         </ColorButton>
         </Grid>
