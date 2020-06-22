@@ -86,6 +86,7 @@ export default function AddPayeeForm() {
       })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
+      window.location.href ="/TransferMoney/payee";
   };
 
   const cancelHandler = (event) => {
@@ -164,7 +165,7 @@ export default function AddPayeeForm() {
         </Grid>
         {/* Sender Details */}
         <Grid item xs={12} md={4} lg={5}>
-        <Button OnClick={handleSave} variant="contained" color="secondary" className={classes.margin}>
+        <Button onClick={handleSave} variant="contained" color="secondary" className={classes.margin}>
             Save Payee
         </Button>
         <ColorButton onClick={cancelHandler} variant="contained" color="secondary" className={classes.cancel}>
