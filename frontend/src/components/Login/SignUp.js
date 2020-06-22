@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '700',
     fontSize: '1.5rem',
   },
+  deselect: {
+    textDecoration: 'none',
+    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
+    color: '#606E87',
+    fontWeight: '700',
+    fontSize: '1.5rem',
+  },
   paper: {
     margin: theme.spacing(8, 4),
     display: 'flex',
@@ -110,7 +117,7 @@ export default function SignUp() {
           </a>
           <Box display="flex" p={1} bgcolor="background.paper">
             <Box p={5}>
-              <a href="/Login" className={classes.links}>LOGIN</a>
+              <a href="/Login" className={classes.deselect}>LOGIN</a>
             </Box>
             <Box p={5}>
               <a href="/SignUp" className={classes.links}>REGISTER</a>
