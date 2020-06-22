@@ -32,7 +32,7 @@ import SubmitTransferPage from '../TransferMoney/SubmitTransferPage';
 import {PaymentSuccessfulPage} from "../ResultPage/PaymentSuccessful";
 import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
 import CreditCardStatus from '../CreditCard/CreditcardStatusPage';
-import ApplyCreditCardPage from '../CreditCard/Apply_CreditCard';
+import ApplyCreditCardPage from '../CreditCard/ApplyCreditcardPage';
 
 
 export default function Dashboard() {
@@ -96,12 +96,12 @@ export default function Dashboard() {
         <List>
         <ListSubheader className="navSubHeader">SERVICE</ListSubheader>
 
-        <NavLink className="navlink" activeClassName="activeNavlink" to="/ApplyCreditCard">
+        <NavLink className="navlink" activeClassName="activeNavlink" to="/apply-creditcard">
               <CreditCardIcon className="iconPadding" />
             <ListItemText primary="Apply for Credit Card" />
         </NavLink>
 
-        <NavLink className="navlink" activeClassName="activeNavlink" to="/CreditCardStatus">
+        <NavLink className="navlink" activeClassName="activeNavlink" to="/creditcard-status">
               <NotificationsIcon className="iconPadding" />
             <ListItemText primary="Credit Card Status" />
         </NavLink>
@@ -120,8 +120,8 @@ export default function Dashboard() {
       <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
       <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
       <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
-      <Route exact path="/ApplyCreditCard" component={ApplyCreditCardPage}></Route>
-      <Route exact path="/CreditCardStatus" component={CreditCardStatus}></Route>
+      <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
+      <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
     </Router>
   );
 }
