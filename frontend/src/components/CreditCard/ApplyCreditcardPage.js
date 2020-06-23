@@ -11,6 +11,13 @@ import image4 from "../../images/creditcard-05.png";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import CreditcardNamePage from './CreditcardNamePage';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -19,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ApplyCreditCardPage() {
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
-  const [creditCardType, setCreditCardType] = useState("");
-  const customerId = "5eeb358d2f67c7147836cdb9";
+  const [noExistingCard, setNoExistingCard] = useState(1);
+  const customerId = "5ee86a90e62e0a29d8c0a003";
 
   useEffect(() => {
     axios
@@ -33,31 +40,63 @@ export default function ApplyCreditCardPage() {
   }, []);
 
   const handlecard_Silver = () => {
-    console.log("handlecard_Silver called ");
-    setCreditCardType('Silver');
+    const cardType = 'Silver';
+    applyCC(cardType);
   };
 
   const handlecard_Gold = () => {
-    console.log("handlecard_Gold called ");
-    setCreditCardType('Gold');
+    const cardType = 'Gold';
+    applyCC(cardType);
   };
 
   const handlecard_Platinum = () => {
-    console.log("handlecard_Platinum called ");
-    setCreditCardType('Platinum');
+    const cardType = 'Platinum';
+    applyCC(cardType);
   };
 
   const handlecard_Women = () => {
-    console.log("handlecard_Women called ");
-    setCreditCardType('Women');
+    const cardType = 'Women';
+    applyCC(cardType);
   };
 
   const handlecard_Student = () => {
-    console.log("handlecard_Student called ");
-    setCreditCardType('Student');
+    const cardType = 'Student';
+    applyCC(cardType);
   };
 
+  const applyCC = (input) => {
+    let flag = 0;
+    creditcards.map((creditcard) => {
+      if (creditcard.creditcard_type === input) {
+        window.alert("Sorry! You already have an existing credit card of type: " + creditcard.creditcard_type);
+        // console.log("current iterating card: " + creditcard.creditcard_type);
+        // console.log("chosen button: " + input);
+        flag = 1;
+        setNoExistingCard(0);
+      }
+    })
+
+    
+    //if select creditcard button type is not in DB (Apply new CC)
+    if(flag === 0) {
+      axios.post("http://localhost:9002/creditcards/creditcardApplication", {
+        // creditcard_num: 757475754,
+        // creditcard_status: 'Pending',
+        // creditcard_limit: 0,
+        // creditcard_balance: 0,
+        creditcard_type: input,
+        userId: customerId,
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+
+    }
+
+  }
+
   return (
+    <Router>
+
     <main className="content">
       <div className={classes.appBarSpacer} />
       <Container maxWidth="md" className="container">
@@ -82,14 +121,17 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <NavLink to="/creditcard-name">
             <Button
-              className={styles.ccSelectBtn}
-              variant="contained"
-              value="Silver"
-              onClick={handlecard_Silver}
-            >
-              Select
-            </Button>
+                className={styles.ccSelectBtn}
+                variant="contained"
+                value="Silver"
+                onClick={handlecard_Silver}
+              >
+                Select
+              </Button>
+          </NavLink>
+
           </Grid>
         </Grid>
 
@@ -208,23 +250,15 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
-            {creditcards.map((creditcard) => {
-              console.log(
-                "Selected button: " +
-                  creditCardType
-              );
-              if (creditcard.creditcard_type === creditCardType) {
-                console.log(
-                  creditcard.creditcard_type + ", already exist in DB. "
-                );
-                return;
-              }
-            })
-            }
-            {console.log("")}
           </Grid>
         </Grid>
       </Container>
     </main>
+
+      { 
+        noExistingCard && 
+        <Route exact path="/apply-creditcard/creditcard-name" component={CreditcardNamePage}></Route>
+      }
+    </Router>
   );
 }

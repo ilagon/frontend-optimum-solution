@@ -5,7 +5,6 @@ const CreditCardSchema = new Schema ({
       _id: Schema.Types.ObjectId,
       creditcard_num: {
         type: Number,
-        unique: true,
         default: 0
       },
       creditcard_status: {

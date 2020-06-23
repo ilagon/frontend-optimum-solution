@@ -81,11 +81,11 @@ class ApplyCC extends React.Component {
         <main role='main'>
           <form action='#' className={useStyles.root}>
             <hr></hr>
-            <div className={styles.form-group}>
+            <div>
               < TextField id="standard-basic" label="Name to appear on card "valid={this.state.usernameValid} message={this.state.errorMsg.username} 
               value={this.state.username} onChange={(e) => this.updateUsername(e.target.value)} />
             </div>
-            <div className={styles.form-controls}>
+            <div>
               <ColorButton  className='button' type='submit' disabled={!this.state.formValid}>
                 Next
                 </ColorButton >
