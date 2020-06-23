@@ -35,7 +35,7 @@ import ApplyCreditCardPage from '../CreditCard/ApplyCreditcardPage';
 import MobilePaymentConfirmationBody from "../MobilePayment/OneTimeTransfer/OneTimeTransferConfirmation_Body";
 import AddPayeeForm from "../TransferMoney/AddPayeeForm";
 import AddPayeeReceipentForm from "../TransferMoney/AddPayeeReceipentForm";
-
+import TaxPaymentRoutes from "../TaxPayment/TaxPaymentRoutes";
 
 export default function Dashboard() {
 
@@ -126,6 +126,7 @@ export default function Dashboard() {
       <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
       <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
       <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
+      <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
     </Router>
   );
 }
