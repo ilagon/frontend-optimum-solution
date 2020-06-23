@@ -127,12 +127,11 @@ export default function ApplyCreditCardPage() {
                 className={styles.ccSelectBtn}
                 variant="contained"
                 value="Silver"
-               // onClick={handlecard_Silver}
+               onClick={handlecard_Silver}
               >
                 Select
               </Button>
           </Link>
-
           </Grid>
         </Grid>
 
@@ -156,6 +155,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/creditcard-name">
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -164,6 +164,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
 
@@ -186,6 +187,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/creditcard-name">
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -194,6 +196,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
 
@@ -214,6 +217,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/creditcard-name">
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -222,6 +226,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
 
@@ -243,6 +248,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/creditcard-name">
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -251,6 +257,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>
