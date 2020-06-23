@@ -8,17 +8,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
-import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput";
+import { storeInput } from "../../common/redux/actions/taxPayment_storeInput";
 import { store } from "../../../index";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  NavLink,
-} from "react-router-dom";
-
+import InputLabel from "@material-ui/core/InputLabel";
+import Container  from "@material-ui/core/Container";
 var cards = [];
 
 export default function BodyContainer() {
@@ -27,23 +22,19 @@ export default function BodyContainer() {
   const history = useHistory();
 
   const handleFormInputs = () => {
-    if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
-      dispatch(storeInput(phoneNumber, amount, creditCard));
-      history.push("/MobilePayment/ConfirmationPage");
-    } else alert("Please fill in the form");
+    dispatch(storeInput(phoneNumber, amount, creditCard));
+    history.push("/TaxPayment/ConfirmationPage");
   };
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [creditCard, setCreditCard] = useState({});
   const [isLoading, setLoading] = useState(false);
-  const [visible, setVisible] = useState("hidden");
-  const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = async () => {
       axios
-        .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+        .get("http://localhost:9002/creditcards/5ee9d8eea80b44418c8d8b6c")
         .then((response) => {
           cards = response.data.creditcard;
           setLoading(true);
@@ -53,27 +44,10 @@ export default function BodyContainer() {
     fetchData();
   });
 
-  const handleAmount = (value) => {
-    if (value > creditCard.creditcard_balance) {
-      setVisible("visible");
-      setNextButton(true);
-    } else {
-      setVisible("hidden");
-      setNextButton(false);
-    }
-  };
-
   const handleCreditCard = (e) => {
     cards.map((creditcard) => {
       if (creditcard.creditcard_type === e.target.value) {
         setCreditCard(creditcard);
-        if (amount > creditcard.creditcard_balance) {
-          setVisible("visible");
-          setNextButton(true);
-        } else {
-          setVisible("hidden");
-          setNextButton(false);
-        }
       }
     });
     console.log(creditCard);
@@ -94,22 +68,6 @@ export default function BodyContainer() {
       marginTop: theme.spacing(8),
       minWidth: 240,
     },
-
-    errorMessage: {
-      visibility: visible,
-    },
-
-    nextButton: {
-      marginTop: "100px",
-      width: "260px",
-      backgroundColor: "#e26448",
-      color: "white",
-      fontWeight: "bold",
-      "&:hover": {
-        backgroundColor: "#e26448",
-      },
-      fontSize: "1.25em"
-    },
   }));
 
   const classes = useStyles();
@@ -123,13 +81,7 @@ export default function BodyContainer() {
           className={classes.textBoxMargin}
           id="phoneNumberInput"
           label="Phone Number"
-          type="number"
           value={phoneNumber}
-          onInput={(e) => {
-            e.target.value = Math.max(0, parseInt(e.target.value))
-              .toString()
-              .slice(0, 8);
-          }}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </div>
@@ -139,12 +91,8 @@ export default function BodyContainer() {
           className={classes.textBoxMargin}
           id="amountInput"
           label="Amount"
-          type="number"
           value={amount}
-          onChange={(e) => {
-            setAmount(e.target.value);
-            handleAmount(e.target.value);
-          }}
+          onChange={(e) => setAmount(e.target.value)}
         />
       </div>
     </div>
@@ -154,7 +102,8 @@ export default function BodyContainer() {
     <div className="fromForm">
       <h1>From</h1>
       <div>
-        <FormControl variant="filled" className={classes.formControl}>
+        <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel htmlFor="creditCardSelect">Select CreditCard</InputLabel>
           <Select
             labelId="selectCreditCard"
             id="selectCreditCard"
@@ -170,35 +119,53 @@ export default function BodyContainer() {
       </div>
       <p>Current Balance</p>
       <p>${creditCard.creditcard_balance}</p>
-      <p className={classes.errorMessage + " errorMessage"}>
-        Please type in an amount less than the balance amount
-      </p>
+      <p>{amount<=creditCard.creditcard_balance || amount=== "" ? '' : 'Please type in an amount less than the balance amount'}</p>
+  
       <Button
-        className={classes.nextButton}
+        id="nextButton"
         variant="contained"
         onClick={() => handleFormInputs()}
-        disabled={nextButton}
       >
         Next
       </Button>
     </div>
   );
   return (
-    <Grid container direction="row" justify="space-evenly" wrap="wrap">
-      <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-        <h1>Bill Payment</h1>
-      </Grid>
-      <Grid
-        item
-        sm={6}
-        direction="row"
-        className={classes.gridMargin + " border"}
-      >
-        {formTo}
-      </Grid>
-      <Grid item sm={6} className={classes.gridMargin + " border"}>
-        {formFrom}
-      </Grid>
-    </Grid>
+    <div>
+      <div></div>
+      {isLoading ? (
+        <main className="content">
+          <div className={classes.appBarSpacer} />
+  
+      <Container maxWidth="lg" className="container" >
+          <Grid container direction="row" justify="space-evenly" wrap="wrap">
+            <Grid item sm={6} className="bodyTitle activeTitle">
+              <h1>One Time Transfer</h1>
+            </Grid>
+            <Grid item sm={6} className="bodyTitle nonActiveTitle">
+              <a href="/TaxPayment/OtherRecipients" style={{textDecoration: "none"}}>
+                <h1>Other Recipients</h1>
+              </a>
+            </Grid>
+            <Grid item sm={10} className={classes.gridMargin + " taxPayment"}>
+              <h1>Tax Payment</h1>
+            </Grid>
+            <Grid
+              item
+              sm={6}
+              direction="row"
+              className={classes.gridMargin + " border"}
+            >
+              {formTo}
+            </Grid>
+            <Grid item sm={6} className={classes.gridMargin + " border"}>
+              {formFrom}
+            </Grid>
+          </Grid></Container>
+        </main>
+      ) : (
+        <div>Loading..</div>
+      )}
+    </div>
   );
 }

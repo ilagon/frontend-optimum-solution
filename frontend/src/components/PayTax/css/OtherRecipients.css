@@ -7,7 +7,6 @@
 .bodyTitle{
     color: #173a77;
     text-align: center;
-    font-size: 1.5625em
     /* border: 2px solid red; */
 }
 
@@ -19,7 +18,7 @@
     opacity: 0.5;
 }
 
-.billPayment {
+.taxPayment {
     text-align: left;
     color: #aa3a21;
 }
@@ -31,7 +30,6 @@
 .toForm {
     color: #173a77;
     margin-left: 130px;
-    font-size: 1.25em;
 }
 
 .toFormConfirmation > p {
@@ -41,13 +39,19 @@
 .fromForm {
     color: #173a77;
     margin-left: 130px;
-    font-size: 1.25em;
 }
 
 .fromFormConfirmation > p {
     margin-top: 40px;
 }
 
+#nextButton {
+    margin-top: 100px;
+    width: 260px;
+    background-color: #e26448;
+    color: white;
+    font-weight: bold;
+}
 
 #submitButton {
     margin-top: 200px;
@@ -55,7 +59,6 @@
     background-color: #e26448;
     color: white;
     font-weight: bold;
-    font-size: 1.25em;
 }
 
 #cancelButton {
@@ -64,9 +67,49 @@
     background-color: #aa3a21;
     color: white;
     font-weight: bold;
-    font-size: 1.25em;
 }
 
-.errorMessage {
-    color: red;
+.paperHeight {
+    height: 120px;
+    text-align: left;
+    padding: 30px;
+    margin: 30px;
+    color: #772d17;
+}
+
+.infoIcon {
+    color: #173a77;
+    float: right;
+    margin-top: -60px;
+}
+
+#addPayee {
+    margin: 50px;
+    float: right;
+    width: 260px;
+    background-color: #e26448;
+    color: white;
+    font-weight: bold;
+}
+
+.buttonContainer {
+    float: right;
+
+    margin: 30px;
+}
+
+#savePayeeButton {
+    margin-top: 60vh;
+    width: 260px;
+    background-color: #e26448;
+    color: white;
+    font-weight: bold;
+}
+
+#confirmButton {
+    margin-top: 20px;
+    width: 260px;
+    background-color: #aa3a21;
+    color: white;
+    font-weight: bold;
 }

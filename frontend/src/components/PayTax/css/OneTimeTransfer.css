@@ -2,12 +2,13 @@
     flex-grow: 1;
     height: 100vh;
     overflow: auto;
+
 }
 
 .bodyTitle{
+    
     color: #173a77;
     text-align: center;
-    font-size: 1.5625em
     /* border: 2px solid red; */
 }
 
@@ -16,10 +17,11 @@
 }
 
 .nonActiveTitle {
+    color: lightcyan;
     opacity: 0.5;
 }
 
-.billPayment {
+.taxPayment {
     text-align: left;
     color: #aa3a21;
 }
@@ -31,7 +33,6 @@
 .toForm {
     color: #173a77;
     margin-left: 130px;
-    font-size: 1.25em;
 }
 
 .toFormConfirmation > p {
@@ -41,13 +42,19 @@
 .fromForm {
     color: #173a77;
     margin-left: 130px;
-    font-size: 1.25em;
 }
 
 .fromFormConfirmation > p {
     margin-top: 40px;
 }
 
+#nextButton {
+    margin-top: 100px;
+    width: 260px;
+    background-color: #e26448;
+    color: white;
+    font-weight: bold;
+}
 
 #submitButton {
     margin-top: 200px;
@@ -55,7 +62,6 @@
     background-color: #e26448;
     color: white;
     font-weight: bold;
-    font-size: 1.25em;
 }
 
 #cancelButton {
@@ -64,9 +70,12 @@
     background-color: #aa3a21;
     color: white;
     font-weight: bold;
-    font-size: 1.25em;
+}
+.container {
+
+    background-color: #E5E8ED;
+   
 }
 
-.errorMessage {
-    color: red;
-}
+
+

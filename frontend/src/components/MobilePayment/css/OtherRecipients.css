@@ -7,6 +7,7 @@
 .bodyTitle {
   color: #173a77;
   text-align: center;
+  font-size: 1.5625em
   /* border: 2px solid red; */
 }
 
@@ -31,6 +32,7 @@
 .toForm {
   color: #173a77;
   margin-left: 130px;
+  font-size: 1.25em;
 }
 
 .toFormConfirmation > p {
@@ -40,6 +42,7 @@
 .fromForm {
   color: #173a77;
   margin-left: 130px;
+  font-size: 1.25em;
 }
 
 .fromFormConfirmation > p {
@@ -52,6 +55,7 @@
   background-color: #e26448;
   color: white;
   font-weight: bold;
+  font-size: 1.25em;
 }
 
 #submitButton {
@@ -60,6 +64,7 @@
   background-color: #e26448;
   color: white;
   font-weight: bold;
+  font-size: 1.25em;
 }
 
 #cancelButton {
@@ -68,6 +73,7 @@
   background-color: #aa3a21;
   color: white;
   font-weight: bold;
+  font-size: 1.25em;
 }
 
 .paperHeight {
@@ -76,6 +82,7 @@
   padding: 30px;
   margin: 30px;
   width: 80vw;
+  font-size: 1.125em;
   
 }
 
@@ -96,6 +103,7 @@
   background-color: #e26448;
   color: white;
   font-weight: bold;
+  font-size: 1.25em;
 }
 
 .buttonContainer {
@@ -110,6 +118,7 @@
   background-color: #e26448;
   color: white;
   font-weight: bold;
+  font-size: 1.25em;
 }
 
 #confirmButton {
@@ -118,4 +127,5 @@
   background-color: #aa3a21;
   color: white;
   font-weight: bold;
+  font-size: 1.25em;
 }
