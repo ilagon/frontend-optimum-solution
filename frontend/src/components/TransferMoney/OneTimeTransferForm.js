@@ -56,29 +56,32 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
+var cards = [];
+
 export default function OneTimeTransferForm() {
   
   const [state, setState] = React.useState({
     recipientName: '',
     recipentBank: '',
     recipentAccNo: '',
-    transferAmount: 0.0,
+    transferAmount: '',
     senderCreditCardType: '',
-    senderCreditCardBalance: 0.0,
+    senderCreditCardBalance: '',
     senderCreditCardID: ''
   });
 
-  var cards = [];
-
-  const getCards = async() => {
+  function getCards(){
     axios
       .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
       .then((response) => {
         console.log(response.data.creditcard);
-        response.data.creditcard.map((obj) => obj.creditcard_status==='Approved'? (
+        response.data.creditcard.map((obj) => {
+          if (obj.creditcard_status==='Approved') {
           cards.push(obj)
-        ) :  cards = [])
-})
+          }
+});
+localStorage.setItem("UserCreditCards", JSON.stringify(cards));
+      })
 .catch((error) => console.log(error));
 };
 
@@ -123,7 +126,7 @@ export default function OneTimeTransferForm() {
 
   return (
     <div>
-      {getCards}
+      {cards===[] ? getCards() : ''}
       <CssBaseline />
       {/* Title */}
       <Grid container spacing={3}>
