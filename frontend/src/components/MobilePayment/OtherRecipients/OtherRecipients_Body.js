@@ -28,16 +28,20 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = () => {
+    function fetchData(){
       axios
         .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
-          cards = response.data.creditcard;
+          response.data.creditcard.map((obj) => {
+            if (obj.creditcard_status === "Approved")
+              cards.push(obj)
+          })
           setLoading(true);
         })
         .catch((error) => console.log(error));
-    };
-    fetchData();
+    }
+    if (cards.length === 0)
+      fetchData();
   });
 
   const handleAmount = (value) => {
