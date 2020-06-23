@@ -62,15 +62,15 @@ export default function OneTimeTransferForm() {
     recipientName: '',
     recipentBank: '',
     recipentAccNo: '',
-    transferAmount: '',
+    transferAmount: 0.0,
     senderCreditCardType: '',
-    senderCreditCardBalance: '',
+    senderCreditCardBalance: 0.0,
     senderCreditCardID: ''
   });
 
   var cards = [];
 
-  const getCreditCardBalance = async (creditCardType) => {
+  const getCards = async() => {
     axios
       .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
       .then((response) => {
@@ -78,6 +78,11 @@ export default function OneTimeTransferForm() {
         response.data.creditcard.map((obj) => obj.creditcard_status==='Approved'? (
           cards.push(obj)
         ) :  cards = [])
+})
+.catch((error) => console.log(error));
+};
+
+  const getCreditCardBalance = (creditCardType) => {
         var balance = 0.0;
         if (cards!==[]){
           for (const [index, value] of cards.entries()) {
@@ -93,8 +98,6 @@ export default function OneTimeTransferForm() {
           }
         }
         return balance;
-    })
-      .catch((error) => console.log(error));
   };
 
   const handleChange = (event) => {
@@ -120,6 +123,7 @@ export default function OneTimeTransferForm() {
 
   return (
     <div>
+      {getCards}
       <CssBaseline />
       {/* Title */}
       <Grid container spacing={3}>
@@ -219,7 +223,7 @@ export default function OneTimeTransferForm() {
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
-    {state.senderCreditCardBalance<state.transferAmount ? '' : 'Please type in an amount less than the balance amount'}
+    {state.senderCreditCardBalance<state.transferAmount ? 'Please type in an amount less than the balance amount' : ''}
   </Typography>
           </div>
           <ColorButton variant="contained" color="secondary" className={classes.margin} onClick={handleRoute}>
