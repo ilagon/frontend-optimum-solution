@@ -61,6 +61,8 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
+var cards = JSON.parse(localStorage.getItem("UserCreditCards"));
+
 export default function AddPayeeReceipentForm() {
   const [state, setState] = React.useState({
     recipientName: '',
@@ -81,34 +83,37 @@ setState({
   recipentAccNo:states.recipentAccNo
 });
 
-var cards = [];
+//function getCards(){
+ // axios
+ //   .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+ //   .then((response) => {
+ //     console.log(response.data.creditcard);
+ //     response.data.creditcard.map((obj) => {
+  //      if (obj.creditcard_status==='Approved') {
+  //      cards.push(obj)
+  //      }
+//});
+ //   })
+//.catch((error) => console.log(error));
+//};
 
-  const getCreditCardBalance = async (creditCardType) => {
-    axios
-      .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
-      .then((response) => {
-        console.log(response.data.creditcard);
-        response.data.creditcard.map((obj) => obj.creditcard_status==='Approved'? (
-          cards.push(obj)
-        ) :  cards = [])
-        var balance = 0.0;
-        if (cards!==[]){
-          for (const [index, value] of cards.entries()) {
-            if(creditCardType===value.creditcard_type){
-            balance=value.creditcard_balance;
-            console.log(balance);
-            setState({
-              ...state, 
-              senderCreditCardID: value.creditcard_num
-            });
-            console.log(state.senderCreditCardID);
-          }
-          }
+const getCreditCardBalance = (creditCardType) => {
+      var balance = 0.0;
+      if (cards!==[]){
+        for (const [index, value] of cards.entries()) {
+          if(creditCardType===value.creditcard_type){
+          balance=value.creditcard_balance;
+          console.log(balance);
+          setState({
+            ...state, 
+            senderCreditCardID: value.creditcard_num
+          });
+          console.log(state.senderCreditCardID);
         }
-        return balance;
-    })
-      .catch((error) => console.log(error));
-  };
+        }
+      }
+      return balance;
+};
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -217,7 +222,7 @@ var cards = [];
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
-    {state.senderCreditCardBalance<state.transferAmount ? '' : 'Please type in an amount less than the balance amount'}
+    {state.senderCreditCardBalance<state.transferAmount ? 'Please type in an amount less than the balance amount' : ''}
   </Typography>
           </div>
         <Button onClick={nextHandler} variant="contained" color="secondary" className={classes.margin}>
