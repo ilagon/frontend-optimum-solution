@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     background: "#d32f2f",
     color: "#fff",
+    right: "100px",
   },
 }));
 

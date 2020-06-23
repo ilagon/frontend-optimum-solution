@@ -79,7 +79,7 @@ export default function Header() {
   }, [openState]);
 
   return (
-    <AppBar position="static" className={classes.root}>
+    <AppBar position="fixed" className={classes.root}>
       <Toolbar className={classes.toolBarStyle}>
         <Button
           className={classes.menuButtonStyle}

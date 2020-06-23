@@ -16,6 +16,7 @@ import {
   Drawer,
   List,
 } from "@material-ui/core";
+import clsx from 'clsx';
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "15px",
     minWidth: "38px",
   },
+
+  drawerStyle: {
+    position: 'fixed',
+    whiteSpace: 'nowrap',
+  },
 }));
 
 export default function Sidebar() {
@@ -65,7 +71,8 @@ export default function Sidebar() {
   };
 
   return (
-    <Drawer variant="permanent">
+    // Wraps the Paper around the List
+    <Drawer variant="permanent" classes={{paper: clsx(classes.drawerStyle)}}>
       <List className={classes.root}>
         <Typography
           variant="h6"

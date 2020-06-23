@@ -14,6 +14,7 @@ import {
   TableContainer,
   Typography,
   TextField,
+  Button,
 } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -27,89 +28,145 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
-  searchIconStyle :{
+  searchIconStyle: {
     marginTop: "25px",
     marginLeft: "20px",
     marginRight: "30px",
+  },
+  containerStyle: {
+    marginTop: "100px",
+  },
+
+  gridContainerStyle: {
+    marginTop: "131px",
+    height: "81%",
+    marginLeft: "262px",
+    width: "85%",
   },
 }));
 
 export default function CreditCardStatus() {
   const classes = useStyles();
 
-  const [allCustomerState, setAllCustomerState] = useState([]);
-  const [customerState, setCustomerState] = useState({});
-  const [idState, setIdState] = useState("");
+  const [approveCreditCardState, setApproveCreditCardState] = useState();
+  const [allCreditCardState, setAllCreditCardState] = useState([]);
+  const [loadedState, setLoadedState] = useState(true);
 
-  // Upon loading, useEffect will get called
-  useEffect(() => {
-    getAllCustomer();
-  }, []);
 
-  const getAllCustomer = () => {
+    // Get all pending creditcard
+    const getAllCreditCard = () => {
+      axios
+        .get(`http://localhost:9000/creditcard/pending`)
+        .then((response) => {
+          // Retrieve from object => object => array (creditcard)
+          setAllCreditCardState(response.data.creditcard);
+        })
+        .catch((error) => alert(error));
+    };
+
+    // Upon loading, useEffect will get called
+    useEffect(() => {
+      getAllCreditCard();
+    }, []);
+
+
+  const getCreditCard = () => {
     axios
-      .get(`http://localhost:9000/users/`)
+      .patch(
+        `http://localhost:9000/creditcard/approve/${approveCreditCardState}`,
+        {
+          Data: {
+            creditcard_status: "active",
+          },
+        }
+      )
       .then((response) => {
-        // Retrieve from object => object => array (Users)
-        setAllCustomerState(response.data.Users);
+        console.log(response.data.creditcard.creditcard_status);
       })
-      // throws an error if there is no data
       .catch((error) => alert(error));
   };
 
-  // Ensure that the data gets re-rendered
   useEffect(() => {
-    getSpecificCustomer();
-  }, [idState]);
-
-  // Searching for a specific customer
-  const getSpecificCustomer = () => {
-    axios
-      .get(`http://localhost:9000/users/search/${idState}`)
-      .then((response) => {
-        setCustomerState(response.data.user);
-      })
-      .catch((error) => alert(error));
-  };
+    getCreditCard();
+  }, [approveCreditCardState]);
 
   return (
     <Container>
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item className={classes.gridItem}>
+      <Grid container justify="center" className={classes.gridContainerStyle}>
+        <Grid item className={classes.gridItem} xs={12}>
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableHead>
-                <Typography style={{letterSpacing:"3px", width:"max-content"}} variant="h6">Customer CreditCard Approval Status</Typography>
+                <Typography
+                  style={{ letterSpacing: "3px", width: "max-content" }}
+                  variant="h6"
+                >
+                  Customer CreditCard Approval Status
+                </Typography>
                 <Grid>
-                  <FontAwesomeIcon icon={faSearch} className={classes.searchIconStyle} />
-                  <TextField
-                    id="search-with-icon"
-                    value={idState}
-                    label="SEARCH"
-                    onChange={(event) => setIdState(event.target.value)}
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    className={classes.searchIconStyle}
                   />
+                  <TextField id="search-with-icon" label="SEARCH" />
                 </Grid>
                 <TableRow>
-                  <TableCell style={{letterSpacing:"2px"}} width="30%">Customer ID</TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="20%">Email</TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="15%">CreditCard Type</TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="15%" align='right'>Approve /</TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="20%" align='left'>Deny CreditCard</TableCell>
+                  <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                    Customer ID
+                  </TableCell>
+                  <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                    Email
+                  </TableCell>
+                  <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                    CreditCard Type
+                  </TableCell>
+                  <TableCell
+                    style={{ letterSpacing: "2px" }}
+                    width="25%"
+                    align="right"
+                  >
+                    Approve / Deny CreditCard
+                  </TableCell>
+                  <TableCell
+                    style={{ letterSpacing: "2px" }}
+                    width="10%"
+                    align="left"
+                  ></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allCustomerState.map((row) => (
+                {allCreditCardState.map((row, index) => (
                   <TableRow key={row._id}>
-                    <TableCell style={{letterSpacing:"2px"}} width="30%" component="th" scope="row">
+                    <TableCell
+                      style={{ letterSpacing: "2px" }}
+                      width="30%"
+                      component="th"
+                      scope="row"
+                    >
                       {row._id}
                     </TableCell>
-                    <TableCell style={{letterSpacing:"2px"}} width="20%">{row.email}</TableCell>
-                    <TableCell style={{letterSpacing:"2px"}} width="15%">Platinum</TableCell>
-                    <TableCell style={{letterSpacing:"2px"}} width="15%" align='right'>
-                      <ApproveCreditCard />
+
+                    <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                      {row.user.email}
                     </TableCell>
-                    <TableCell style={{letterSpacing:"2px"}} width="20%" align='left'>
-                      <DenyCreditCard />
+
+                    <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      {row.creditcard_type}
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      {console.log(row._id)}
+                      <Button
+                        variant="contained"
+                        value={row._id}
+                        onClick={(event) =>
+                          setApproveCreditCardState(event.target.value)
+                        }
+                      >
+                        Approve
+                      </Button>
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                      {/* <DenyCreditCard /> */}
                     </TableCell>
                   </TableRow>
                 ))}

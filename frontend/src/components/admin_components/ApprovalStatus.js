@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "20px",
     marginRight: "30px",
   },
+
+  containerStyle: {
+    marginTop: "100px",
+  }
   
 }));
 
@@ -80,8 +84,8 @@ export default function ApprovalStatus() {
 
   return (
     <Container>
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item className={classes.gridItem}>
+      <Grid container justify="center" className={classes.containerStyle}>
+        <Grid item className={classes.gridItem} xs={12}>
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableHead>
