@@ -37,6 +37,7 @@ import AddPayeeForm from "../TransferMoney/AddPayeeForm";
 import AddPayeeReceipentForm from "../TransferMoney/AddPayeeReceipentForm";
 import CreditCardName from '../CreditCard/CreditcardNamePage';
 
+import TaxPaymentRoutes from "../TaxPayment/TaxPaymentRoutes";
 
 export default function Dashboard() {
 
@@ -128,6 +129,7 @@ export default function Dashboard() {
         <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
         <Route exact path="/creditcard-name" component={CreditCardName}/>
         <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
+        <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
       </Switch>
     </Router>
   );

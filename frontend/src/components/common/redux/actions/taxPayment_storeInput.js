@@ -8,3 +8,12 @@ export function storeInput(...formInputs) {
     },
   };
 }
+
+export function storePayee(... formInputs){
+  return {
+    type: "StorePayee",
+    payload: {
+      payee: formInputs[0]
+    }
+  }
+}
