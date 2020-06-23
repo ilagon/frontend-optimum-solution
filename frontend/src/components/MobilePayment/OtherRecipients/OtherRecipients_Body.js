@@ -28,7 +28,7 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       axios
         .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
@@ -68,7 +68,7 @@ export default function BodyContainer() {
 
   const handleFormInputs = () => {
     if (amount != "" && Object.keys(creditCard).length != 0) {
-      dispatch(storeInput(amount, creditCard));
+      dispatch(storeInput(state.mobilePayment.payeeInfo.number, amount, creditCard));
       history.push("/MobilePayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };
@@ -169,17 +169,6 @@ export default function BodyContainer() {
     <main className="content">
       <div className={classes.appBarSpacer} />
       <Grid container direction="row" justify="space-evenly" wrap="wrap">
-        <Grid item sm={6} className="bodyTitle nonActiveTitle">
-          <a href="/MobilePayment" style={{ textDecoration: "none", color: "#173a77" }}>
-            <h1>One Time Transfer</h1>
-          </a>
-        </Grid>
-        <Grid item sm={6} className="bodyTitle activeTitle">
-          <h1>Other Recipients</h1>
-        </Grid>
-        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-          <h1>Bill Payment</h1>
-        </Grid>
         <Grid
           item
           sm={6}

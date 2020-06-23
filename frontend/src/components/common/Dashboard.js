@@ -18,7 +18,6 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import "../Overview/Overview.css";
-import OneTimeTransferBody from "../MobilePayment/OneTimeTransfer/OneTimeTransfer_Body";
 import MobilePaymentRoutes from "../MobilePayment/MobilePaymentRoutes";
 import TransferMoneyPage from "../TransferMoney/transfer_money";
 import OverviewPage from "../Overview/OverviewPage";
@@ -33,6 +32,9 @@ import {PaymentSuccessfulPage} from "../ResultPage/PaymentSuccessful";
 import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
 import CreditCardStatus from '../CreditCard/CreditcardStatusPage';
 import ApplyCreditCardPage from '../CreditCard/ApplyCreditcardPage';
+import MobilePaymentConfirmationBody from "../MobilePayment/OneTimeTransfer/OneTimeTransferConfirmation_Body";
+import AddPayeeForm from "../TransferMoney/AddPayeeForm";
+import AddPayeeReceipentForm from "../TransferMoney/AddPayeeReceipentForm";
 
 
 export default function Dashboard() {
@@ -117,7 +119,9 @@ export default function Dashboard() {
       {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
       <Route path="/MobilePayment" component={MobilePaymentRoutes} />
       <Route path="/TransferMoney" component={TransferMoneyPage}/>
+      <Route path="/AddPayee" component={AddPayeeForm}/>
       <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
+      <Route path="/TransferMoney/SetTransferFromPayeeList" component={AddPayeeReceipentForm}/>
       <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
       <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
       <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>

@@ -1,4 +1,5 @@
-import {React, useState} from 'react';
+import {useState} from 'react';
+import  React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -85,7 +86,7 @@ setPayeeList(response.data.payee);
     recipientName: name,
     recipentAccNo: accNo});
   localStorage.setItem("transferDetails", JSON.stringify(state));
-  window.location.href ="";
+  window.location.href ="/TransferMoney/SetTransferFromPayeeList";
 }
 
   return (
@@ -112,7 +113,7 @@ setPayeeList(response.data.payee);
       <Grid container spacing={3}>
         <Grid item xs={12}>
               {/* Payee Button */}
-                <ColorButton variant="contained" color="secondary" className={classes.margin}>
+                <ColorButton onClick={addHandle} variant="contained" color="secondary" className={classes.margin}>
             Add Payee
         </ColorButton>
         </Grid>

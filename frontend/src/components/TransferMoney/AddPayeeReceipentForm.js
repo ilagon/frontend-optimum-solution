@@ -94,12 +94,15 @@ var cards = [];
         var balance = 0.0;
         if (cards!==[]){
           for (const [index, value] of cards.entries()) {
-            if(creditCardType===value.creditcard_type)
+            if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
+            console.log(balance);
             setState({
               ...state, 
               senderCreditCardID: value.creditcard_num
             });
+            console.log(state.senderCreditCardID);
+          }
           }
         }
         return balance;
@@ -124,6 +127,10 @@ var cards = [];
   const nextHandler = (event) => {
     localStorage.setItem("transferDetails", JSON.stringify(state));
     window.location.href ="/SubmitTransfer";
+   };
+
+   const cancelHandler = (event) => {
+    window.location.href ="/TransferMoney/payee";
    };
 
   const classes = useStyles();
@@ -216,7 +223,7 @@ var cards = [];
         <Button onClick={nextHandler} variant="contained" color="secondary" className={classes.margin}>
             Next
         </Button>
-        <ColorButton variant="contained" color="secondary" className={classes.cancel}>
+        <ColorButton onClick={cancelHandler} variant="contained" color="secondary" className={classes.cancel}>
             Cancel
         </ColorButton>
         </Grid>

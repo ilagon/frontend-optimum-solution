@@ -10,9 +10,14 @@ import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput";
 import { store } from "../../../index";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
-import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink,
+} from "react-router-dom";
 
 var cards = [];
 
@@ -22,8 +27,8 @@ export default function BodyContainer() {
   const history = useHistory();
 
   const handleFormInputs = () => {
-    if ((amount != "") && (Object.keys(creditCard).length != 0)) {
-      dispatch(storeInput(amount, creditCard));
+    if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
+      dispatch(storeInput(phoneNumber, amount, creditCard));
       history.push("/MobilePayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };
@@ -36,7 +41,7 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       axios
         .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
@@ -103,6 +108,7 @@ export default function BodyContainer() {
       "&:hover": {
         backgroundColor: "#e26448",
       },
+      fontSize: "1.25em"
     },
   }));
 
@@ -178,37 +184,21 @@ export default function BodyContainer() {
     </div>
   );
   return (
-    <div className="root">
-        <main className="content">
-          <div className={classes.appBarSpacer} />
-          <Grid container direction="row" justify="space-evenly" wrap="wrap">
-            <Grid item sm={6} className="bodyTitle activeTitle">
-              <h1>One Time Transfer</h1>
-            </Grid>
-            <Grid item sm={6} className="bodyTitle nonActiveTitle">
-              <a
-                href="/MobilePayment/OtherRecipients"
-                style={{ textDecoration: "none", color: "#173a77" }}
-              >
-                <h1>Other Recipients</h1>
-              </a>
-            </Grid>
-            <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-              <h1>Bill Payment</h1>
-            </Grid>
-            <Grid
-              item
-              sm={6}
-              direction="row"
-              className={classes.gridMargin + " border"}
-            >
-              {formTo}
-            </Grid>
-            <Grid item sm={6} className={classes.gridMargin + " border"}>
-              {formFrom}
-            </Grid>
-          </Grid>
-        </main>
-    </div>
+    <Grid container direction="row" justify="space-evenly" wrap="wrap">
+      <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+        <h1>Bill Payment</h1>
+      </Grid>
+      <Grid
+        item
+        sm={6}
+        direction="row"
+        className={classes.gridMargin + " border"}
+      >
+        {formTo}
+      </Grid>
+      <Grid item sm={6} className={classes.gridMargin + " border"}>
+        {formFrom}
+      </Grid>
+    </Grid>
   );
 }

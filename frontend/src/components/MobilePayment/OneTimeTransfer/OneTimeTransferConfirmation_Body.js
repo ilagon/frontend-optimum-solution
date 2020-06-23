@@ -10,9 +10,9 @@ import axios from "axios";
 export default function BodyContainer() {
   const history = useHistory();
   const state = store.getState();
-  console.log(state);
+  console.log("store: " + state);
   console.log("cc id:" + state.mobilePayment.creditCard._id);
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     axios
       .post("http://localhost:9002/payment_history/addPayment", {
         payment_type: "Mobile Bill",
@@ -31,16 +31,16 @@ export default function BodyContainer() {
           })
           .then((response2) => {
             console.log(response2);
-            history.push("/Payment/Successful");
+            window.location.href="/Payment/Successful"
           })
           .catch((error) => {
             console.log(error);
-            history.push("/Payment/Unsuccessful");
+            window.location.href="/Payment/Unsuccessful"
           });
       })
       .catch((error) => {
         console.log(error);
-        history.push("/Payment/Unsuccessful");
+        window.location.href="/Payment/Unsuccessful"
       });
   };
 
@@ -89,7 +89,7 @@ export default function BodyContainer() {
         <Button
           id="cancelButton"
           variant="contained"
-          onClick={() => history.push("/Payment/Unsuccessful")}
+          onClick={() => window.location.href="/Payment/Unsuccessful"}
         >
           Cancel
         </Button>
@@ -98,8 +98,7 @@ export default function BodyContainer() {
   );
 
   return (
-    <div className="root">
-      <main className="content">
+      <main className="content" >
         <div className={classes.appBarSpacer} />
         <Grid container direction="row" justify="space-evenly" wrap="wrap">
           <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
@@ -118,6 +117,5 @@ export default function BodyContainer() {
           </Grid>
         </Grid>
       </main>
-    </div>
   );
 }

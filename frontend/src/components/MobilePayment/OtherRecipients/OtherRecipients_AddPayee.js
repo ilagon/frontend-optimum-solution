@@ -11,7 +11,6 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function BodyContainer() {
-
   const history = useHistory();
 
   const useStyles = makeStyles((theme) => ({
@@ -35,15 +34,20 @@ export default function BodyContainer() {
   const [phoneNumber, setPhoneNumber] = useState();
 
   const handleSavePayee = () => {
-    axios
-      .post("http://localhost:9002/payee/addPayee", {
-        name: name,
-        number: phoneNumber,
-        payee_type: "MobileBill",
-        userId: "5ee8792db5be6439f4d8474e",
-      })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    if (name != undefined && phoneNumber != undefined) {
+      axios
+        .post("http://localhost:9002/payee/addPayee", {
+          name: name,
+          number: phoneNumber,
+          payee_type: "MobileBill",
+          userId: "5ee8792db5be6439f4d8474e",
+        })
+        .then((response) => {
+          console.log(response);
+          history.push("/MobilePayment/OtherRecipients");
+        })
+        .catch((error) => console.log(error));
+    } else alert("Please complete the form!");
   };
 
   const classes = useStyles();
@@ -116,7 +120,7 @@ export default function BodyContainer() {
               <Button
                 id="cancelButton"
                 variant="contained"
-                onClick={() => history.push("/")}
+                onClick={() => history.push("/MobilePayment/OtherRecipients")}
               >
                 Cancel
               </Button>
