@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme)=>({
     margin: theme.spacing(1),
     width: '25ch',
   },
-  
+  appBarSpacer: theme.mixins.toolbar,
 }));
 
 function ValidationMessage(props) {
@@ -41,6 +41,7 @@ function ValidationMessage(props) {
 }
 
 class ApplyCC extends React.Component {
+  
   state = {
     username: '', usernameValid: false,
     formValid: false,
@@ -74,11 +75,13 @@ class ApplyCC extends React.Component {
 
   render() {
     return (
+      <main className="content">
+      <div className={useStyles.appBarSpacer} />
       <div className={styles.CCApp}>
         <header>
           Credit Card Application
         </header>
-        <main role='main'>
+        {/* <main role='main'> */}
           <form action='#' className={useStyles.root}>
             <hr></hr>
             <div>
@@ -91,8 +94,9 @@ class ApplyCC extends React.Component {
                 </ColorButton >
             </div>
           </form>
-        </main>
+        {/* </main> */}
       </div>
+      </main>
     );
   }
 }
