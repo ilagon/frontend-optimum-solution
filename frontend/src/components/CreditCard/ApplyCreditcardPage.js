@@ -16,7 +16,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  NavLink
+  NavLink,
+  Link
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -95,7 +96,7 @@ export default function ApplyCreditCardPage() {
   }
 
   return (
-    <Router>
+    <React.Fragment>
 
     <main className="content">
       <div className={classes.appBarSpacer} />
@@ -121,16 +122,16 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <NavLink to="/creditcard-name">
+          <Link to="/creditcard-name">
             <Button
                 className={styles.ccSelectBtn}
                 variant="contained"
                 value="Silver"
-                onClick={handlecard_Silver}
+               // onClick={handlecard_Silver}
               >
                 Select
               </Button>
-          </NavLink>
+          </Link>
 
           </Grid>
         </Grid>
@@ -255,10 +256,10 @@ export default function ApplyCreditCardPage() {
       </Container>
     </main>
 
-      { 
+      {/* { 
         noExistingCard && 
         <Route exact path="/apply-creditcard/creditcard-name" component={CreditcardNamePage}></Route>
-      }
-    </Router>
+      } */}
+    </React.Fragment>
   );
 }
