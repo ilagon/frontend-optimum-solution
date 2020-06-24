@@ -23,13 +23,13 @@ router.get("/search/reject", creditcardController.creditcard_search_by_cardStatu
 
 
 //credit card approval approve function
-router.patch("/approve/:cardId", creditcardController.creditcard_search_by_cardStatus_approve);
+//router.patch("/approve/:cardId", creditcardController.creditcard_search_by_cardStatus_approve);
 
 //credit card create
 router.post("/create",creditcardController.creditcard_create);
 
 //credit card approval reject function
-router.patch("/reject/:cardId", creditcardController.creditcard_search_by_cardStatus_reject);
+//router.patch("/reject/:cardId", creditcardController.creditcard_search_by_cardStatus_reject);
 
 //reset credit balance to credit limit
 router.patch("/resetBalance", creditcardController.reset_credit_balance);

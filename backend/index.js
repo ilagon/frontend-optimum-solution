@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const creditcardRoutes = require('./routes/creditcard');
+const approveDenyRoutes = require('./routes/approvedeny');
 const cors = require("cors");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 //Routes
 app.use("/users", userRoutes); //Using userRoutes file
 app.use("/creditcard", creditcardRoutes); //using customerRoutes file
+app.use("/approvedeny",approveDenyRoutes);
 
 app.listen(PORT, () => console.log(`Server is running in port: ${PORT}`));
 
