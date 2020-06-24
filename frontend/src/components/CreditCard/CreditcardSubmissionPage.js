@@ -17,11 +17,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ApplyCreditcardSubmit() {
+  
+    const [custEmail, setCustEmail] = useState([]);
+    const customerId = "5ef3155ba7ea2e3db870382f";
+    
+    useEffect(() => {
+      axios.get("http://localhost:9002/users/" + customerId)
+      .then(function (response, data) {
+        setCustEmail(response.data.user.email);
+      })
+      .catch(error => console.log(error))
+    }, [])
+  
+
+
   const classes = useStyles();
   const referenceNum = "1234567";
   let {name} = useParams();
   const creditcardName = name;
-  const email = "hannah@gmail.com";
+  // const email = "hannah@gmail.com";
 
   const handleChange = (e) => {
   };
@@ -36,7 +50,7 @@ export default function ApplyCreditcardSubmit() {
                 <h2 className="darkRedColor">Credit Card Application</h2>
                 <p className="darkBlueColor">Ref No.: {referenceNum}</p>
                 <p className="darkBlueColor">{creditcardName}</p>
-                <p className="darkBlueColor">{email}</p>
+                <p className="darkBlueColor">{custEmail}</p>
               </Grid>
             </Grid>
             <Link to="/apply-creditcard/creditcard-confirm">
