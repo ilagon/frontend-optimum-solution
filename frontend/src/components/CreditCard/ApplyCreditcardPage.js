@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ApplyCreditCardPage() {
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
+  const [test, setTest] = useState("Student"); //Test state for conditional rendering of select buttons
   // const [cardExists, setCardExists] = useState(0);
   const customerId = "5ee86a90e62e0a29d8c0a003";
 
@@ -93,7 +94,7 @@ export default function ApplyCreditCardPage() {
 
   return (
     <React.Fragment>
-
+      
     <main className="content">
       <div className={classes.appBarSpacer} />
       <Container maxWidth="md" className="container">
@@ -119,7 +120,8 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
+            {test /* Replace test with creditCards.creditcard_type */ != "Silver" ? 
+            <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
             <Button
                 className={styles.ccSelectBtn}
                 variant="contained"
@@ -127,8 +129,17 @@ export default function ApplyCreditCardPage() {
                onClick={handlecard_Silver}
               >
                 Select
-              </Button>
-          </Link>
+              </Button> 
+              </Link>
+              :
+              <Button
+                className={styles.ccSelectBtn}
+                variant="contained"
+                value="Silver"
+               onClick={handlecard_Silver}
+               disabled
+              >Select</Button>
+              }
           </Grid>
         </Grid>
 
@@ -152,7 +163,8 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <Link to="/apply-creditcard/creditcard-name"  className={styles.ccLink}>
+          {test /* Replace test with creditCards.creditcard_type */ != "Gold" ? 
+            <Link to="/apply-creditcard/creditcard-name"  className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -162,6 +174,18 @@ export default function ApplyCreditCardPage() {
               Select
             </Button>
             </Link>
+              :
+              <Button
+              className={styles.ccSelectBtn}
+              variant="contained"
+              value="Gold"
+              onClick={handlecard_Gold}
+              disabled
+            >
+              Select
+            </Button>
+              }
+          
           </Grid>
         </Grid>
 
@@ -184,16 +208,29 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <Link to="/apply-creditcard/creditcard-name"  className={styles.ccLink}>
-            <Button
-              className={styles.ccSelectBtn}
-              variant="contained"
-              value="Platinum"
-              onClick={handlecard_Platinum}
-            >
-              Select
-            </Button>
-            </Link>
+          {test /* Replace test with creditCards.creditcard_type */ != "Platinum" ? 
+             <Link to="/apply-creditcard/creditcard-name"  className={styles.ccLink}>
+             <Button
+               className={styles.ccSelectBtn}
+               variant="contained"
+               value="Platinum"
+               onClick={handlecard_Platinum}
+             >
+               Select
+             </Button>
+             </Link>
+              :
+              <Button
+               className={styles.ccSelectBtn}
+               variant="contained"
+               value="Platinum"
+               onClick={handlecard_Platinum}
+               disabled
+             >
+               Select
+             </Button>
+              }
+         
           </Grid>
         </Grid>
 
@@ -214,7 +251,8 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
+          {test /* Replace test with creditCards.creditcard_type */ != "Women" ? 
+            <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -224,6 +262,18 @@ export default function ApplyCreditCardPage() {
               Select
             </Button>
             </Link>
+              :
+              <Button
+              className={styles.ccSelectBtn}
+              variant="contained"
+              value="Women"
+              onClick={handlecard_Women}
+              disabled
+            >
+              Select
+            </Button>
+              }
+          
           </Grid>
         </Grid>
 
@@ -245,7 +295,8 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
+          {test /* Replace test with creditCards.creditcard_type */ != "Student" ? 
+            <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -255,6 +306,18 @@ export default function ApplyCreditCardPage() {
               Select
             </Button>
             </Link>
+              :
+              <Button
+              className={styles.ccSelectBtn}
+              variant="contained"
+              value="Student"
+              onClick={handlecard_Student}
+              disabled
+            >
+              Select
+            </Button>
+              }
+          
           </Grid>
         </Grid>
       </Container>
