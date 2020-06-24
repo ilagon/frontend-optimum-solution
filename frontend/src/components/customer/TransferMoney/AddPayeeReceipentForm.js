@@ -104,15 +104,23 @@ const getCreditCardBalance = (creditCardType) => {
           if(creditCardType===value.creditcard_type){
           balance=value.creditcard_balance;
           console.log(balance);
-          setState({
-            ...state, 
-            senderCreditCardID: value.creditcard_num
-          });
-          console.log(state.senderCreditCardID);
         }
         }
       }
       return balance;
+};
+
+const getCreditCardID = (creditCardType) => {
+  var creditCardID = '';
+  if (cards.length!=0){
+    for (const [index, value] of cards.entries()) {
+      if(creditCardType===value.creditcard_type){
+     creditCardID=value._id;
+      console.log(creditCardID);
+    }
+    }
+  }
+  return creditCardID;
 };
 
   const handleChange = (event) => {
@@ -131,9 +139,11 @@ const getCreditCardBalance = (creditCardType) => {
       setState({
         ...state, 
         senderCreditCardBalance: getCreditCardBalance(event.target.value),
+        senderCreditCardBalance: getCreditCardID(event.target.value),
         [name]: event.target.value,
       });
       console.log(state.senderCreditCardBalance);
+      console.log(state.senderCreditCardID);
   };
 
   const nextHandler = (event) => {
@@ -225,7 +235,7 @@ const getCreditCardBalance = (creditCardType) => {
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-            {state.senderCreditCardBalance}
+            {state.senderCreditCardBalance==='' ? '' : '$' + state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>

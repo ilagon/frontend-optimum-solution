@@ -128,11 +128,12 @@ sessionStorage.setItem("UserCreditCards", JSON.stringify(cards));
     console.log(event.target.value);
       setState({
         ...state, 
-        senderCreditCardBalance: '$' + getCreditCardBalance(event.target.value),
+        senderCreditCardBalance: getCreditCardBalance(event.target.value),
         senderCreditCardID: getCreditCardID(event.target.value),
         [name]: event.target.value,
       });
       console.log(state.senderCreditCardBalance);
+      console.log(state.senderCreditCardID);
   };
 
   const classes = useStyles();
@@ -240,7 +241,7 @@ sessionStorage.setItem("UserCreditCards", JSON.stringify(cards));
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-             {state.senderCreditCardBalance}
+             {state.senderCreditCardBalance==='' ? '' : '$' + state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
