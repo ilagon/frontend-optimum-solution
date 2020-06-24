@@ -92,7 +92,11 @@ export default function SignInSide() {
         setError(false);
         if (res.data.message === 'success') {
           sessionStorage.setItem('token', res.data.token);
-          window.location.href = '/Dashboard';
+          if(res.data.user_type === "Admin"){
+            window.location.href = '/Admin';
+          } else{
+            window.location.href = '/Dashboard';
+          }
         }
         if (res.data.message === 'Your Account has not been approved by the Administrator') {
           setOpen(true);

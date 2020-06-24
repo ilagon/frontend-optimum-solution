@@ -69,6 +69,11 @@ export default function Header() {
     }
   }
 
+  function handleLogout(){
+    sessionStorage.removeItem("token");
+    window.location.href="/Logout"
+  }
+
   // return focus to the button when transitioning from closed to open
   const openPreviously = useRef(openState);
   useEffect(() => {
@@ -147,7 +152,7 @@ export default function Header() {
                         style={{ marginLeft: "60px" }}
                       />
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleLogout}>
                       Logout
                       <FontAwesomeIcon
                         icon={faDoorOpen}
