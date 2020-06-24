@@ -14,6 +14,12 @@ export default function formReducer(state = initialState, action) {
         amount: action.payload.amount,
         creditCard: action.payload.creditCard
       };
+
+      case "StorePayee":
+        return {
+          ...state,
+          payeeInfo: action.payload.payee
+        }
     default:
       return state;
   }

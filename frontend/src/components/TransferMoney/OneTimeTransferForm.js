@@ -80,6 +80,7 @@ export default function OneTimeTransferForm() {
           cards.push(obj)
           }
 });
+console.log(cards);
 localStorage.setItem("UserCreditCards", JSON.stringify(cards));
       })
 .catch((error) => console.log(error));

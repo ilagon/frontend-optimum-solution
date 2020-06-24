@@ -17,7 +17,8 @@ import {
   Route,
   Switch,
   NavLink,
-  Link
+  Link,
+  Prompt
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ApplyCreditCardPage() {
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
-  const [noExistingCard, setNoExistingCard] = useState(1);
+  // const [cardExists, setCardExists] = useState(0);
   const customerId = "5ee86a90e62e0a29d8c0a003";
 
   useEffect(() => {
@@ -69,11 +70,10 @@ export default function ApplyCreditCardPage() {
     let flag = 0;
     creditcards.map((creditcard) => {
       if (creditcard.creditcard_type === input) {
-        window.alert("Sorry! You already have an existing credit card of type: " + creditcard.creditcard_type);
-        // console.log("current iterating card: " + creditcard.creditcard_type);
-        // console.log("chosen button: " + input);
+        window.alert("Sorry! You already have an existing credit card of type " + input);
+        window.location.reload(); 
+        // setCardExists(1);
         flag = 1;
-        setNoExistingCard(0);
       }
     })
 
@@ -81,10 +81,6 @@ export default function ApplyCreditCardPage() {
     //if select creditcard button type is not in DB (Apply new CC)
     if(flag === 0) {
       axios.post("http://localhost:9002/creditcards/creditcardApplication", {
-        // creditcard_num: 757475754,
-        // creditcard_status: 'Pending',
-        // creditcard_limit: 0,
-        // creditcard_balance: 0,
         creditcard_type: input,
         userId: customerId,
       })
@@ -101,6 +97,7 @@ export default function ApplyCreditCardPage() {
     <main className="content">
       <div className={classes.appBarSpacer} />
       <Container maxWidth="md" className="container">
+
         <p className={styles.FormTitle}>Credit Card Application</p>
 
         <Grid container spacing={3}>
@@ -122,17 +119,16 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
-          <Link to="/creditcard-name">
+          <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
             <Button
                 className={styles.ccSelectBtn}
                 variant="contained"
                 value="Silver"
-               // onClick={handlecard_Silver}
+               onClick={handlecard_Silver}
               >
                 Select
               </Button>
           </Link>
-
           </Grid>
         </Grid>
 
@@ -156,6 +152,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/apply-creditcard/creditcard-name"  className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -164,6 +161,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
 
@@ -186,6 +184,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/apply-creditcard/creditcard-name"  className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -194,6 +193,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
 
@@ -214,6 +214,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -222,6 +223,7 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
 
@@ -243,6 +245,7 @@ export default function ApplyCreditCardPage() {
           </Grid>
           {/* Select Button */}
           <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
+          <Link to="/apply-creditcard/creditcard-name" className={styles.ccLink}>
             <Button
               className={styles.ccSelectBtn}
               variant="contained"
@@ -251,15 +254,12 @@ export default function ApplyCreditCardPage() {
             >
               Select
             </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>
     </main>
 
-      {/* { 
-        noExistingCard && 
-        <Route exact path="/apply-creditcard/creditcard-name" component={CreditcardNamePage}></Route>
-      } */}
     </React.Fragment>
   );
 }
