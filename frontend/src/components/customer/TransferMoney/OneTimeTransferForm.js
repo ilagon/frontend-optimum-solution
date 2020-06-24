@@ -81,7 +81,7 @@ export default function OneTimeTransferForm() {
           }
 });
 console.log(cards);
-localStorage.setItem("UserCreditCards", JSON.stringify(cards));
+sessionStorage.setItem("UserCreditCards", JSON.stringify(cards));
       })
 .catch((error) => console.log(error));
 };
@@ -104,6 +104,19 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
         return balance;
   };
 
+  const getCreditCardID = (creditCardType) => {
+    var creditCardID = '';
+    if (cards.length!=0){
+      for (const [index, value] of cards.entries()) {
+        if(creditCardType===value.creditcard_type){
+       creditCardID=value._id;
+        console.log(creditCardID);
+      }
+      }
+    }
+    return creditCardID;
+};
+
   const handleChange = (event) => {
     const name = event.target.name;
     console.log(name);
@@ -120,7 +133,8 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
     console.log(event.target.value);
       setState({
         ...state, 
-        senderCreditCardBalance: getCreditCardBalance(event.target.value),
+        senderCreditCardBalance: '$' + getCreditCardBalance(event.target.value),
+        senderCreditCardID: getCreditCardID(event.target.value),
         [name]: event.target.value,
       });
       console.log(state.senderCreditCardBalance);
@@ -130,7 +144,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   const handleRoute= () => {
     window.location.href ="/SubmitTransfer";
-    localStorage.setItem("transferDetails", JSON.stringify(state));
+    sessionStorage.setItem("transferDetails", JSON.stringify(state));
   }
 
   return (
@@ -231,7 +245,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-             ${state.senderCreditCardBalance}
+             {state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>

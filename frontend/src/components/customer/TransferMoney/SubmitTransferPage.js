@@ -55,7 +55,7 @@ const ColorButton = withStyles((theme) => ({
 export default function SubmitTransferPage() {
 
   const classes = useStyles();
-  var retrievedData = localStorage.getItem("transferDetails");
+  var retrievedData = sessionStorage.getItem("transferDetails");
   var states = JSON.parse(retrievedData);
 
   const cancelHandle = () => {
