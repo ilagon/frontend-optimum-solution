@@ -93,11 +93,6 @@ sessionStorage.setItem("UserCreditCards", JSON.stringify(cards));
             if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
             console.log(balance);
-            setState({
-              ...state, 
-              senderCreditCardID: value.creditcard_num
-            });
-            console.log(state.senderCreditCardID);
           }
           }
         }
