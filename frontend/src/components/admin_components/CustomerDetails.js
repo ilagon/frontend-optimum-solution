@@ -63,6 +63,8 @@ export default function CustomerDetails() {
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
+        
+
       })
       // throws an error if there is no data
       .catch((error) => alert(error));

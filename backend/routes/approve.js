@@ -4,7 +4,7 @@ const router = express.Router();
 const creditcardController = require("../controllers/creditcard");
 
 //credit card approval approve function
-router.patch("/approve/:cardId", creditcardController.creditcard_search_by_cardStatus_approve);
+router.patch("/approve/:cardId", creditcardController.creditcard_approve);
 
 
 

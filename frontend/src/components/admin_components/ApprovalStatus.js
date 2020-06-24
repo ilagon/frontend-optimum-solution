@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ApproveAccount from "./button/approvebutton/ApproveAccountButton";
+import ApproveAccountButton from "./button/approvebutton/ApproveAccountButton";
 import DenyAccount from "./button/denybutton/DenyAccountButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
@@ -14,6 +14,7 @@ import {
   TableContainer,
   Typography,
   TextField,
+  Button,
 } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -22,26 +23,26 @@ import axios from "axios";
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
-  gridItem: {
-    paddingTop: 40,
-  },
-  table: {
-    minWidth: 650,
-  },
-  inner: {
-    display: "inline-block",
-  },
-
-  searchIconStyle :{
+  searchIconStyle: {
     marginTop: "25px",
     marginLeft: "20px",
     marginRight: "30px",
   },
+  gridContainerStyle: {
+    marginTop: "131px",
+    height: "81%",
+    marginLeft: "262px",
+    width: "85%",
+  },
 
   containerStyle: {
-    marginTop: "100px",
-  }
-  
+    maxWidth: "inherit",
+  },
+
+  tableContainerStyle: {
+    height: "165%",
+    minHeight: "80vh",
+  },
 }));
 
 export default function ApprovalStatus() {
@@ -58,10 +59,12 @@ export default function ApprovalStatus() {
 
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/`)
+      .get(`http://localhost:9000/pending/pending`)
+
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
+        console.log(response.data);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
@@ -82,55 +85,92 @@ export default function ApprovalStatus() {
       .catch((error) => alert(error));
   };
 
+  const handleId = event => {
+    setIdState(event.target.value)
+  }
+
   return (
-    <Container>
-      <Grid container justify="center" className={classes.containerStyle}>
-        <Grid item className={classes.gridItem} xs={12}>
-          <TableContainer component={Paper}>
-            <Table className={classes.table}>
-              <TableHead>
-                <Typography style={{letterSpacing:"3px", width:"max-content"}} variant="h6">
-                  Customer Account Approval Status
-                </Typography>
-                <Grid>
-                  <FontAwesomeIcon icon={faSearch} className={classes.searchIconStyle} />
+    <Container className={classes.containerStyle} fixed>
+      <Grid container justify="center" className={classes.gridContainerStyle}>
+        <Grid item xs={12}>
+          <TableContainer style={{ height: "100%" }}>
+            <Paper style={{ height: "inherit", minWidth: "750px" }} elevation>
+              <Table style={{ minWidth: "750px" }}>
+                <TableHead>
+                  <Typography
+                    style={{ letterSpacing: "3px", width: "max-content" }}
+                    variant="h6"
+                  >
+                    Customer Account Approval Status
+                  </Typography>
+                  <Grid>
+                    <FontAwesomeIcon
+                      icon={faSearch}
+                      className={classes.searchIconStyle}
+                    />
 
-                  <TextField
-                    id="search-with-icon"
-                    value={idState}
-                    label="SEARCH"
-                    onChange={(event) => setIdState(event.target.value)}
-                  />
-                </Grid>
-                <TableRow>
-                  <TableCell style={{letterSpacing:"2px"}} width="30%">Customer ID</TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="30%">Email</TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="25%" align="right">
-                    Approve / Deny Account
-                  </TableCell>
-                  <TableCell style={{letterSpacing:"2px"}} width="15%" align="left">
-                    
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {allCustomerState.map((row) => (
-                  <TableRow key={row._id}>
-                    <TableCell style={{letterSpacing:"2px"}} width="30%" component="th" scope="row">
-                      {row._id}
+                    <TextField
+                      id="search-with-icon"
+                      value={idState}
+                      label="SEARCH"
+                      onChange={(event) => setIdState(event.target.value)}
+                    />
+                  </Grid>
+                  <TableRow>
+                    <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                      Customer ID
                     </TableCell>
-
-                    <TableCell style={{letterSpacing:"2px"}} width="30%">{row.email}</TableCell>
-                    <TableCell style={{letterSpacing:"2px"}} width="25%" align="right">
-                      <ApproveAccount />
+                    <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                      Email
                     </TableCell>
-                    <TableCell style={{letterSpacing:"2px"}} width="15%" align="left">
-                      <DenyAccount />
+                    <TableCell
+                      style={{ letterSpacing: "2px" }}
+                      width="25%"
+                      align="right"
+                    >
+                      Approve / Deny Account
                     </TableCell>
+                    <TableCell
+                      style={{ letterSpacing: "2px" }}
+                      width="15%"
+                      align="left"
+                    ></TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {allCustomerState.map((row) => (
+                    <TableRow key={row._id}>
+                      <TableCell
+                        style={{ letterSpacing: "2px" }}
+                        width="30%"
+                        component="th"
+                        scope="row"
+                      >
+                        {row._id}
+                      </TableCell>
+
+                      <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                        {row.email}
+                      </TableCell>
+                      <TableCell
+                        style={{ letterSpacing: "2px" }}
+                        width="25%"
+                        align="right"
+                      >
+                        <ApproveAccountButton approvedValue={row._id} onHandleSaveID={handleId}/>
+                      </TableCell>
+                      <TableCell
+                        style={{ letterSpacing: "2px" }}
+                        width="15%"
+                        align="left"
+                      >
+                        <DenyAccount />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
           </TableContainer>
         </Grid>
       </Grid>

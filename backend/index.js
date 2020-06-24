@@ -5,6 +5,7 @@ const userRoutes = require('./routes/user');
 const creditcardRoutes = require('./routes/creditcard');
 const approveRoutes = require('./routes/approve');
 const denyRoutes = require('./routes/deny');
+const pendingRoutes = require('./routes/pending')
 const cors = require("cors");
 
 const app = express();
@@ -30,8 +31,10 @@ app.use(bodyParser.json());
 //Routes
 app.use("/users", userRoutes); //Using userRoutes file
 app.use("/creditcard", creditcardRoutes); //using customerRoutes file
-app.use("/approve",approveRoutes);
-app.use("/deny",denyRoutes);
+
+app.use("/approve",approveRoutes); // Approve the creditcard application of a customer
+app.use("/deny",denyRoutes); // Deny the creditcard application of a customer
+app.use("/pending", pendingRoutes) // To be able to retrieve all pending customer
 
 app.listen(PORT, () => console.log(`Server is running in port: ${PORT}`));
 
