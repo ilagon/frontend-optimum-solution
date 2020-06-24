@@ -107,18 +107,23 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
   const handleChange = (event) => {
     const name = event.target.name;
     console.log(name);
-    console.log(event.target.value);
-    if(name==='senderCreditCardType'){
-      setState({
-        ...state, 
-        senderCreditCardBalance: getCreditCardBalance(event.target.value)
-      });
-      console.log(senderCreditCardBalance);
-    }
+  
     setState({
       ...state,
       [name]: event.target.value,
     });
+  };
+
+  const creditCardChange = (event) => {
+    const name = event.target.name;
+    console.log(name);
+    console.log(event.target.value);
+      setState({
+        ...state, 
+        senderCreditCardBalance: getCreditCardBalance(event.target.value),
+        [name]: event.target.value,
+      });
+      console.log(state.senderCreditCardBalance);
   };
 
   const classes = useStyles();
