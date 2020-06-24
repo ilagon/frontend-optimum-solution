@@ -56,7 +56,7 @@ export default function CreditCardStatus() {
     // Get all pending creditcard
     const getAllCreditCard = () => {
       axios
-        .get(`http://localhost:9000/creditcard/pending`)
+        .get(`http://localhost:7001/creditcard/pending`)
         .then((response) => {
           // Retrieve from object => object => array (creditcard)
           setAllCreditCardState(response.data.creditcard);
@@ -73,10 +73,10 @@ export default function CreditCardStatus() {
   const getCreditCard = () => {
     axios
       .patch(
-        `http://localhost:9000/creditcard/approve/${approveCreditCardState}`,
+        `http://localhost:7001/creditcard/approve/${approveCreditCardState}`,
         {
           Data: {
-            creditcard_status: "active",
+            creditcard_status: "Active",
           },
         }
       )

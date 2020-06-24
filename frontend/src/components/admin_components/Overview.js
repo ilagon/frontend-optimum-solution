@@ -42,7 +42,7 @@ export default function Overview() {
   // Retrieve all the customers
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/`)
+      .get(`http://localhost:7001/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
@@ -54,7 +54,7 @@ export default function Overview() {
   };
 
   const getCustomerStatus = () => {
-    axios.get(`http://localhost:9000/users/`,{
+    axios.get(`http://localhost:7001/users/`,{
       data: {
         account_status: "pending"
       } 
@@ -75,7 +75,7 @@ export default function Overview() {
   // Searching for a specific customer
   const getSpecificCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/search/${idState}`)
+      .get(`http://localhost:7001/users/search/${idState}`)
       .then((response) => {
         setCustomerState(response.data.user);
         console.log(response.data.user);

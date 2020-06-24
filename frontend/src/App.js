@@ -51,7 +51,6 @@ function App() {
             <Route path="/Admin" exact component={AdminPage} />
             <Route path="/Dashboard" exact component={Dashboard}/>
             <Route path="/Logout" exact component={Logout} />
-
           </Switch>
         </div>
       </Router>
