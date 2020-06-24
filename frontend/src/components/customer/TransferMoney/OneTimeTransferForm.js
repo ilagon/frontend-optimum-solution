@@ -213,7 +213,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               className={styles.selectColor}
               native
               value={state.senderCreditCard}
-              onChange={handleChange}
+              onChange={creditCardChange}
               inputProps={{
                 name: 'senderCreditCardType'
               }}
