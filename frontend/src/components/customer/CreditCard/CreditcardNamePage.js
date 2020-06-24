@@ -9,6 +9,7 @@ import {
   BrowserRouter as Router,
   Link,
 } from "react-router-dom";
+import CreditcardSubmission from './CreditcardSubmissionPage';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -35,11 +36,13 @@ export default function ApplyCC() {
                 label="Name to appear on card"
                 size="small"
                 className="cardNameInput"
+                onChange={handleChange}
               />
             </Grid>
           </Grid>
-          <Link to="/apply-creditcard/creditcard-submit">
-            <Button variant="contained" id="cardNameBtn" onClick={handleChange}>
+          {/* <Link to="/apply-creditcard/creditcard-submit"> */}
+          <Link to = {`/apply-creditcard/creditcard-submit/${name}`}>
+            <Button variant="contained" id="cardNameBtn">
               Next
             </Button>
           </Link>

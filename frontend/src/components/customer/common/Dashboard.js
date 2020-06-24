@@ -130,7 +130,7 @@ export default function Dashboard() {
         <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
         <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
         <Route exact path="/apply-creditcard/creditcard-name" component={CreditCardName}/>
-        <Route exact path="/apply-creditcard/creditcard-submit" component={CreditCardSubmit}></Route>
+        <Route exact path="/apply-creditcard/creditcard-submit/:name" component={CreditCardSubmit}></Route>
         <Route exact path="/apply-creditcard/creditcard-confirm" component={CreditCardConfirm}></Route>
         <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
         <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>

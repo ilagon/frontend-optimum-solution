@@ -9,6 +9,7 @@ import "../Overview/Overview.css";
 import {
   BrowserRouter as Router,
   Link,
+  useParams
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
 export default function ApplyCreditcardSubmit() {
   const classes = useStyles();
   const referenceNum = "1234567";
-  const creditcardName = "Hannah";
+  let {name} = useParams();
+  const creditcardName = name;
   const email = "hannah@gmail.com";
 
   const handleChange = (e) => {
   };
-
 
     return (
       <React.Fragment>
