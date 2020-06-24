@@ -81,7 +81,7 @@ export default function OneTimeTransferForm() {
           }
 });
 console.log(cards);
-sessionStorage.setItem("UserCreditCards", JSON.stringify(cards));
+localStorage.setItem("UserCreditCards", JSON.stringify(cards));
       })
 .catch((error) => console.log(error));
 };
@@ -140,7 +140,7 @@ sessionStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   const handleRoute= () => {
     window.location.href ="/SubmitTransfer";
-    sessionStorage.setItem("transferDetails", JSON.stringify(state));
+    localStorage.setItem("transferDetails", JSON.stringify(state));
   }
 
   return (
