@@ -88,7 +88,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   const getCreditCardBalance = (creditCardType) => {
         var balance = 0.0;
-        if (cards!==[]){
+        if (cards.length!=0){
           for (const [index, value] of cards.entries()) {
             if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
@@ -106,11 +106,14 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   const handleChange = (event) => {
     const name = event.target.name;
+    console.log(name);
+    console.log(event.target.value);
     if(name==='senderCreditCardType'){
       setState({
         ...state, 
         senderCreditCardBalance: getCreditCardBalance(event.target.value)
       });
+      console.log(senderCreditCardBalance);
     }
     setState({
       ...state,
@@ -127,7 +130,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   return (
     <div>
-      {cards===[] ? getCards() : ''}
+      {cards.length===0 ? getCards() : ''}
       <CssBaseline />
       {/* Title */}
       <Grid container spacing={3}>
@@ -223,7 +226,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-             {state.senderCreditCardBalance}
+             ${state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
