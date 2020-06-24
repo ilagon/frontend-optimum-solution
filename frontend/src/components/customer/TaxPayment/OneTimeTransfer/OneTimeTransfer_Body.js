@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput";
-import { store } from "../../../index";
+import { store } from "../../../../index";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import {
@@ -29,7 +29,7 @@ export default function BodyContainer() {
   const handleFormInputs = () => {
     if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
       dispatch(storeInput(phoneNumber, amount, creditCard));
-      history.push("/MobilePayment/ConfirmationPage");
+      history.push("/TaxPayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };
 
@@ -40,10 +40,11 @@ export default function BodyContainer() {
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
 
+
   useEffect(() => {
     function fetchData(){
       axios
-        .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+        .get("http://localhost:9002/creditcards/5ee9d8eea80b44418c8d8b6c")
         .then((response) => {
           response.data.creditcard.map((obj) => {
             if (obj.creditcard_status === "Approved")
@@ -56,6 +57,7 @@ export default function BodyContainer() {
     if (cards.length === 0)
       fetchData();
   });
+
 
   const handleAmount = (value) => {
     if (value > creditCard.creditcard_balance) {
@@ -189,8 +191,8 @@ export default function BodyContainer() {
   );
   return (
     <Grid container direction="row" justify="space-evenly" wrap="wrap">
-      <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-        <h1>Bill Payment</h1>
+      <Grid item sm={10} className={classes.gridMargin + " taxPayment"}>
+        <h1>Tax Payment</h1>
       </Grid>
       <Grid
         item

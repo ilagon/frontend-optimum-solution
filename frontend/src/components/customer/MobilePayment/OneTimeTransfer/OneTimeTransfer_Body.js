@@ -7,20 +7,33 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-import { store } from "../../../index";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { storeInput } from "../../common/redux/actions/taxPayment_storeInput";
+import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput";
+import { store } from "../../../../index";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink,
+} from "react-router-dom";
 
 var cards = [];
 
 export default function BodyContainer() {
   const dispatch = useDispatch();
-  const state = store.getState();
+  console.log(store.getState());
   const history = useHistory();
-  console.log("state"+state);
 
+  const handleFormInputs = () => {
+    if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
+      dispatch(storeInput(phoneNumber, amount, creditCard));
+      history.push("/MobilePayment/ConfirmationPage");
+    } else alert("Please fill in the form");
+  };
+
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [creditCard, setCreditCard] = useState({});
   const [isLoading, setLoading] = useState(false);
@@ -28,16 +41,20 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = () => {
+    function fetchData(){
       axios
-        .get("http://localhost:9002/creditcards/5ee9d8eea80b44418c8d8b6c")
+        .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
-          cards = response.data.creditcard;
+          response.data.creditcard.map((obj) => {
+            if (obj.creditcard_status === "Approved")
+              cards.push(obj)
+          })
           setLoading(true);
         })
         .catch((error) => console.log(error));
-    };
-    fetchData();
+    }
+    if (cards.length === 0)
+      fetchData();
   });
 
   const handleAmount = (value) => {
@@ -66,13 +83,6 @@ export default function BodyContainer() {
     console.log(creditCard);
   };
 
-  const handleFormInputs = () => {
-    if (amount != "" && Object.keys(creditCard).length != 0) {
-      dispatch(storeInput(state.taxPayment.payeeInfo.number, amount, creditCard));
-      history.push("/TaxPayment/ConfirmationPage");
-    } else alert("Please fill in the form");
-  };
-
   const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
 
@@ -81,11 +91,11 @@ export default function BodyContainer() {
     },
 
     textBoxMargin: {
-      marginTop: theme.spacing(0),
+      marginTop: theme.spacing(5),
     },
 
     formControl: {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(8),
       minWidth: 240,
     },
 
@@ -102,6 +112,7 @@ export default function BodyContainer() {
       "&:hover": {
         backgroundColor: "#e26448",
       },
+      fontSize: "1.25em"
     },
   }));
 
@@ -111,8 +122,20 @@ export default function BodyContainer() {
     <div className="toForm">
       <h1>To</h1>
       <div>
-        <p>{state.taxPayment.payeeInfo.name}</p>
-        <p>Tax Payment</p>
+        <TextField
+          required
+          className={classes.textBoxMargin}
+          id="phoneNumberInput"
+          label="Phone Number"
+          type="number"
+          value={phoneNumber}
+          onInput={(e) => {
+            e.target.value = Math.max(0, parseInt(e.target.value))
+              .toString()
+              .slice(0, 8);
+          }}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
       </div>
       <div>
         <TextField
@@ -164,23 +187,22 @@ export default function BodyContainer() {
       </Button>
     </div>
   );
-
   return (
-    <main className="content">
-      <div className={classes.appBarSpacer} />
-      <Grid container direction="row" justify="space-evenly" wrap="wrap">
-        <Grid
-          item
-          sm={6}
-          direction="row"
-          className={classes.gridMargin + " border"}
-        >
-          {formTo}
-        </Grid>
-        <Grid item sm={6} className={classes.gridMargin + " border"}>
-          {formFrom}
-        </Grid>
+    <Grid container direction="row" justify="space-evenly" wrap="wrap">
+      <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+        <h1>Bill Payment</h1>
       </Grid>
-    </main>
+      <Grid
+        item
+        sm={6}
+        direction="row"
+        className={classes.gridMargin + " border"}
+      >
+        {formTo}
+      </Grid>
+      <Grid item sm={6} className={classes.gridMargin + " border"}>
+        {formFrom}
+      </Grid>
+    </Grid>
   );
 }

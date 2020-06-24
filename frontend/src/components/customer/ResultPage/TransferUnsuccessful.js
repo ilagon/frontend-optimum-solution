@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/TransferUnsuccessful.css";
-import image from "../../images/redcross.png";
+import image from "../images/redcross.png";
 
 export function TransferUnSuccessfulPage() {
   return (

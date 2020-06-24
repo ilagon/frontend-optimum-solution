@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "../css/OneTimeTransfer.css";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { store } from "../../../index";
+import { store } from "../../../../index";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -11,23 +11,23 @@ export default function BodyContainer() {
   const history = useHistory();
   const state = store.getState();
   console.log("store: " + state);
-  console.log("cc id:" + state.mobilePayment.creditCard._id);
+  console.log("cc id:" + state.taxPayment.creditCard._id);
   const handleSubmit = () => {
     axios
       .post("http://localhost:9002/payment_history/addPayment", {
-        payment_type: "Mobile Bill",
-        payment_amount: state.mobilePayment.amount,
+        payment_type: "Tax",
+        payment_amount: state.taxPayment.amount,
         transfer_number: 1,
-        creditcardId: state.mobilePayment.creditCard._id,
+        creditcardId: state.taxPayment.creditCard._id,
       })
       .then((response) => {
         console.log(response);
         axios
           .patch("http://localhost:9002/creditcards/updateBalance", {
-            creditcard_Id: state.mobilePayment.creditCard._id,
+            creditcard_Id: state.taxPayment.creditCard._id,
             creditcard_balance:
-              state.mobilePayment.creditCard.creditcard_balance -
-              state.mobilePayment.amount,
+              state.taxPayment.creditCard.creditcard_balance -
+              state.taxPayment.amount,
           })
           .then((response2) => {
             console.log(response2);
@@ -66,16 +66,16 @@ export default function BodyContainer() {
   const formTo = (
     <div className="toForm toFormConfirmation">
       <h1>To</h1>
-      <p>Reference Number: {state.mobilePayment.phoneNumber}</p>
-      <p>Mobile Bill</p>
-      <p>$ {state.mobilePayment.amount}</p>
+      <p>Reference Number: {state.taxPayment.phoneNumber}</p>
+      <p>Income Tax</p>
+      <p>$ {state.taxPayment.amount}</p>
     </div>
   );
 
   const formFrom = (
     <div className="fromForm fromFormConfirmation">
       <h1>From</h1>
-      <p>{state.mobilePayment.creditCard.creditcard_type}</p>
+      <p>{state.taxPayment.creditCard.creditcard_type}</p>
       <div>
         <Button
           id="submitButton"
@@ -101,8 +101,8 @@ export default function BodyContainer() {
       <main className="content" >
         <div className={classes.appBarSpacer} />
         <Grid container direction="row" justify="space-evenly" wrap="wrap">
-          <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
-            <h1>Bill Payment Details</h1>
+          <Grid item sm={10} className={classes.gridMargin + " taxPayment"}>
+            <h1>Tax Payment Details</h1>
           </Grid>
           <Grid
             item
