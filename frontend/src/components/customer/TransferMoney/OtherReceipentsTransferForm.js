@@ -92,7 +92,7 @@ console.log(payeeList);
 
   return (
     <div>
-      {fetchData()}
+      {payeeList.length===0 ? fetchData() : ''}
       <CssBaseline />
       {/* Payee 1 */}
       {payeeList.map((obj) =>(
