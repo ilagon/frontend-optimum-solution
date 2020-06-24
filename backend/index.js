@@ -27,8 +27,8 @@ mongoose.connect(
 app.use(cors());
 
 //body parser transposes request into language DB can understand
-app.use(bodyparser.urlencoded({ extended: true }));
-app.use(bodyparser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //From Ain: accept incoming change
 //Routes
