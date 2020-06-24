@@ -228,6 +228,58 @@
 }
 
 /* Styling for CreditcardStatusPage */
-.darkBlueColor {
+.darkBlueColor, #cardName {
     color: #173A77 !important;
+}
+
+.darkRedColor {
+    color: #AA3A21 !important;
+}
+
+#cardName-label {
+    font-size: 14px !important;
+    color: #173A77 !important;
+}
+
+.cardNameInput {
+    width: 300px;
+    margin-top: 28px !important;
+}
+
+#cardNameBtn {
+    background-color: #AA3A21;
+    color: white;
+    text-transform: none;
+    width: 250px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+}
+#cardApplyBtn {
+    background-color: #AA3A21;
+    color: white;
+    text-transform: none;
+    width: 250px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 17%;
+    right: 5%;
+}
+
+#cardCancelBtn {
+    background-color: salmon;
+    color: white;
+    text-transform: none;
+    width: 250px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 7%;
+    right: 5%;
 }
