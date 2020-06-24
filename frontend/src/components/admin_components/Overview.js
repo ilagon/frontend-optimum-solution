@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Reset from "./button/resetbutton/ResetButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Search from "./search/Search";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Table from "@material-ui/core/Table";
+import {
+  Grid,
+  Paper,
+  Container,
+  TableCell,
+  TableBody,
+  TableHead,
+  TableRow,
+  Table,
+  TableContainer,
+  Typography,
+  TextField,
+} from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import axios from "axios";
 // 5 users per page
@@ -20,108 +25,250 @@ export default function Overview() {
   // clsx
   //A tiny (228B) utility for constructing className strings conditionally.
   //Also serves as a faster & smaller drop-in replacement for the classnames module
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedHeightPaper = clsx(classes.paperStyle, classes.heightStyle);
 
   const [allCustomerState, setAllCustomerState] = useState([]);
   const [countCustomerState, setCountCustomerState] = useState();
+  const [customerState, setCustomerState] = useState({});
+  const [idState, setIdState] = useState("");
+  const [searchState, setSearchState] = useState("");
+
 
   // Upon loading, useEffect will get called
   useEffect(() => {
     getAllCustomer();
   }, []);
 
+  // Retrieve all the customers
   const getAllCustomer = () => {
     axios
       .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
+        // Retrieve the number of customer
         setCountCustomerState(response.data.count);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
   };
 
-  return (
-    <Grid container justify = "center">
+  const getCustomerStatus = () => {
+    axios.get(`http://localhost:9000/users/`,{
+      data: {
+        account_status: "pending"
+      } 
+    }
+    
+    ).then(response=>console.log(response.data))
+  }
 
-    <div className={classes.root}>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="1g" className={classes.container}>
+  const handleSearchCustomerById = () => {
+    setSearchState(true);
+  };
+
+  // Ensure that the data gets re-rendered
+  useEffect(() => {
+    getSpecificCustomer();
+  }, [idState]);
+
+  // Searching for a specific customer
+  const getSpecificCustomer = () => {
+    axios
+      .get(`http://localhost:9000/users/search/${idState}`)
+      .then((response) => {
+        setCustomerState(response.data.user);
+        console.log(response.data.user);
+      })
+      .catch((error) => alert(error));
+  };
+
+  return (
+      <div className={classes.appBarSpacer}>
+        <Container maxWidth="lg" className={classes.containerStyle}>
           <Grid container spacing={3} justify="center">
-            <Grid item xs={3} md={2} lg={3}>
+            <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper} elevation="3">
                 Pending Customer Status
               </Paper>
             </Grid>
-            <Grid item xs={3} md={2} lg={3}>
+            <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper} elevation="3">
                 Pending CreditCard Approval
               </Paper>
             </Grid>
-            <Grid item xs={3} md={2} lg={3}>
+            <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper} elevation="3">
                 Total Customers
-                <span>{countCustomerState}</span>
+                <span>
+                  <Typography variant="h1">{countCustomerState}</Typography>
+                </span>
               </Paper>
             </Grid>
           </Grid>
-          <Grid container spacing={3} justify="center">
-            <Grid item xs={6}>
-              <Paper elevation="3">
-                <Table>
+          <Grid item xs={12} style={{paddingTop:"50px"}}>
+            <Paper elevation="3">
+              <TableContainer>
+                <Table className={classes.table}>
                   <TableHead>
-                    <TableRow>Customer List</TableRow>
+                    <Typography
+                      variant="h6"
+                      style={{ letterSpacing: "3px", width: "max-content" }}
+                    >
+                      Customer List
+                    </Typography>
+                    <Grid>
+                      <FontAwesomeIcon
+                        icon={faSearch}
+                        className={classes.searchIconStyle}
+                      />
+                      <TextField
+                        id="search-with-icon"
+                        value={idState}
+                        label="SEARCH"
+                        onChange={(event) => {
+                          setIdState(event.target.value);
+                          setSearchState(true);
+                        }}
+                      />
+                    </Grid>
                     <TableRow>
-                      <Search />
+                      <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                        Customer ID
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="10%">
+                        Account Status
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                        Email
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                        Balance
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="10%">
+                        CreditCard Type
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="10%">
+                        CreditCard Status
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                        CreditCard Limit
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <TableRow>
-                      <TableCell>Customer ID</TableCell>
-                      <TableCell>Account Status</TableCell>
-                      <TableCell>Email</TableCell>
-                      <TableCell>Balance</TableCell>
-                      <TableCell>CreditCard Type</TableCell>
-                      <TableCell>CreditCard Status</TableCell>
-                      <TableCell>CreditCard Limit</TableCell>
-                    </TableRow>
-                  </TableBody>
-                  <TableBody>
-                    {allCustomerState.map((user) => (
-                      <TableRow>
-                        <TableCell>{user._id}</TableCell>
-                        <TableCell>{user.account_status}</TableCell>
-                        <TableCell>{user.email}</TableCell>
-                      </TableRow>
-                    ))}
+                    {searchState
+                      ? customerState.map((row) => (
+                          <TableRow key={row._id}>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="20%"
+                              component="th"
+                              scope="row"
+                            >
+                              {row._id}
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="10%"
+                            >
+                              {row.account_status}
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="20%"
+                            >
+                              {row.email}
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="15%"
+                            >
+                              10000
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="10%"
+                            >
+                              Gold
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="10%"
+                            >
+                              Inactive
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="15%"
+                            >
+                              10000
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      : allCustomerState.map((row) => (
+                          <TableRow key={row._id}>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="20%"
+                              component="th"
+                              scope="row"
+                            >
+                              {row._id}
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="10%"
+                            >
+                              {row.account_status}
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="20%"
+                            >
+                              {row.email}
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="15%"
+                            >
+                              10000
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="10%"
+                            >
+                              Gold
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="10%"
+                            >
+                              Inactive
+                            </TableCell>
+                            <TableCell
+                              style={{ letterSpacing: "2px" }}
+                              width="15%"
+                            >
+                              10000
+                            </TableCell>
+                          </TableRow>
+                        ))}
                   </TableBody>
                 </Table>
-              </Paper>
-            </Grid>
+              </TableContainer>
+            </Paper>
           </Grid>
         </Container>
-      </main>
-      <Box pt={4}>
-        <Reset></Reset>
-      </Box>
-    </div>
-    </Grid>
+      </div>
   );
 }
 
+
+// Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-  },
-
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar,
   },
 
   title: {
@@ -130,78 +277,34 @@ const useStyles = makeStyles((theme) => ({
 
   appBarSpacer: theme.mixins.toolbar,
 
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  },
-
-  container: {
+  containerStyle: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    marginTop: "100px",
   },
 
-  paper: {
-    padding: theme.spacing(2),
+  paperStyle: {
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    letterSpacing: "2px",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
-  fixedHeight: {
+  searchIconStyle: {
+    marginTop: "25px",
+    marginLeft: "20px",
+    marginRight: "30px",
+  },
+
+  heightStyle: {
     height: 240,
   },
+  gridItem: {
+    paddingTop: 40,
+  },
+  table: {
+    minWidth: 650,
+  },
 }));
-
-{
-  /* <Grid container direction='row' justify='flex-start' alignItems="center" spacing={3} className={classes.grid}>
-    <Grid item xs={4} md={4}>
-        <Paper className={classes.paper}>Pending Customer Status</Paper>
-    </Grid>
-    <Grid item xs={4} md={4}>
-        <Paper className={classes.paper}>Pending CreditCard Approval</Paper>
-    </Grid>
-    <Grid item xs={4} md={4}>
-        <Paper className={classes.paper}>Total Customers</Paper>
-    </Grid>
-</Grid> */
-}
-
-// xs, sm, md, lg, xl are screen sizes
-// this will dynamically resize the size of the grid
-// as you make the browser small -> big or vice versa
-// if the row adds up to 12, then all of it will
-// be on the same row, otherwise it will get printed out
-// on th next row
-
-// function SpacingGrid() {
-//     const [spacing, setSpacing] = React.useState(2);
-//     const classes = useStyles();
-
-//     const handleChange = (event) => {
-//         setSpacing(Number(event.target.value));
-//     };
-
-//     return (
-//         <Grid container className={classes.root} spacing={2}>
-//             <Grid item xs={12}>
-//                 <Grid container justify="center" spacing={spacing}>
-//                     {[0, 1, 2].map((value) => (
-//                         <Grid key={value} item>
-//                             <Paper className={classes.paper} />
-//                         </Grid>
-//                     ))}
-//                 </Grid>
-//             </Grid>
-//             <Grid item xs={12}>
-//                 <Paper className={classes.control}>
-//                     <Grid container>
-//                         <Grid item>
-
-//                         </Grid>
-//                     </Grid>
-//                 </Paper>
-//             </Grid>
-//         </Grid>
-//     );
-// }

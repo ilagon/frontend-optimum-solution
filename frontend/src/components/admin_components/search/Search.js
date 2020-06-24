@@ -23,6 +23,7 @@ export default function Search() {
   );
 }
 
+// Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
