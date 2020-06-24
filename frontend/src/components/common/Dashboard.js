@@ -30,12 +30,14 @@ import {
 import SubmitTransferPage from '../TransferMoney/SubmitTransferPage';
 import {PaymentSuccessfulPage} from "../ResultPage/PaymentSuccessful";
 import {PaymentUnSuccessfulPage} from "../ResultPage/PaymentUnsuccessful";
-import CreditCardStatus from '../CreditCard/CreditcardStatusPage';
-import ApplyCreditCardPage from '../CreditCard/ApplyCreditcardPage';
 import MobilePaymentConfirmationBody from "../MobilePayment/OneTimeTransfer/OneTimeTransferConfirmation_Body";
 import AddPayeeForm from "../TransferMoney/AddPayeeForm";
 import AddPayeeReceipentForm from "../TransferMoney/AddPayeeReceipentForm";
+import CreditCardStatus from '../CreditCard/CreditcardStatusPage';
+import ApplyCreditCardPage from '../CreditCard/ApplyCreditcardPage';
 import CreditCardName from '../CreditCard/CreditcardNamePage';
+import CreditCardSubmit from '../CreditCard/CreditcardSubmissionPage';
+import CreditCardConfirm from '../CreditCard/CreditcardConfirmationPage';
 
 import TaxPaymentRoutes from "../TaxPayment/TaxPaymentRoutes";
 
@@ -127,7 +129,9 @@ export default function Dashboard() {
         <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
         <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
         <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
-        <Route exact path="/creditcard-name" component={CreditCardName}/>
+        <Route exact path="/apply-creditcard/creditcard-name" component={CreditCardName}/>
+        <Route exact path="/apply-creditcard/creditcard-submit" component={CreditCardSubmit}></Route>
+        <Route exact path="/apply-creditcard/creditcard-confirm" component={CreditCardConfirm}></Route>
         <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
         <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
       </Switch>
