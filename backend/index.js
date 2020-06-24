@@ -1,11 +1,11 @@
 //From Ain: Accept incoming change (Login and Admin Module integration)
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const userRoutes = require('./routes/user');
-const creditcardRoutes = require('./routes/creditcard');
-const approveRoutes = require('./routes/approve');
-const denyRoutes = require('./routes/deny');
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const userRoutes = require("./routes/user");
+const creditcardRoutes = require("./routes/creditcard");
+const approveRoutes = require("./routes/approve");
+const denyRoutes = require("./routes/deny");
 const cors = require("cors");
 
 const app = express();
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 //Routes
 app.use("/users", userRoutes); //Using userRoutes file
 app.use("/creditcard", creditcardRoutes); //using customerRoutes file
-app.use("/approve",approveRoutes);
-app.use("/deny",denyRoutes);
+app.use("/approve", approveRoutes);
+app.use("/deny", denyRoutes);
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 module.exports = app;
