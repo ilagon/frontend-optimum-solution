@@ -10,15 +10,13 @@ import image3 from "../images/creditcard-04.png";
 import image4 from "../images/creditcard-05.png";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import CreditcardNamePage from "./CreditcardNamePage";
+import { useDispatch } from "react-redux";
+import { storeInput } from "../common/redux/actions/applyCreditcard_storeInput";
+import { store } from "../../../index";
 import {
   BrowserRouter as Router,
-  Route,
-  Switch,
-  NavLink,
   Link,
-  Prompt,
+  useHistory
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +24,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ApplyCreditCardPage() {
+  const dispatch = useDispatch();
+  console.log(store.getState());
+  const history = useHistory();
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
   const [customerCardTypes, setCustomerCardTypes] = useState([]);
-  const [cardtype, setCardType] = useState();
+  // const [cardtype, setCardType] = useState();
   const customerId = "5ee86a90e62e0a29d8c0a003";
   var arr = [];
 
@@ -48,23 +49,28 @@ export default function ApplyCreditCardPage() {
   }, []);
 
   const handlecard_Silver = () => {
-    setCardType('Silver');
+    dispatch(storeInput("", "Silver"));
+    history.push("/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Gold = () => {
-    setCardType('Gold');
+    dispatch(storeInput("", "Gold"));
+    history.push("/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Platinum = () => {
-    setCardType('Platinum');
+    dispatch(storeInput("", "Platinum"));
+    history.push("/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Women = () => {
-    setCardType('Women');
+    dispatch(storeInput("", "Women"));
+    history.push("/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Student = () => {
-    setCardType('Student');
+    dispatch(storeInput("", "Student"));
+    history.push("/apply-creditcard/creditcard-name");
   };
 
   return (

@@ -6,10 +6,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../Overview/Overview.css";
+import { store } from "../../../index";
 import {
   BrowserRouter as Router,
   Link,
-  useParams
+  useParams,
+  useHistory
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ApplyCreditcardSubmit() {
+  const history = useHistory();
+  const state = store.getState();
   const classes = useStyles();
   const referenceNum = "1234567";
-  let {name} = useParams();
-  const creditcardName = name;
+  const creditcardName = state.applyCreditcard.creditcardName;
+  const creditcardType = state.applyCreditcard.selectedCardType;
   const email = "hannah@gmail.com";
-  let {cctype} = useParams();
-  const creditcardType = cctype;
   const customerId = "5ee86a90e62e0a29d8c0a003";
 
   const handleChange = () => {
