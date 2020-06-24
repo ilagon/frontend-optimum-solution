@@ -97,7 +97,7 @@ export default function ApplyCreditCardPage() {
 
   return (
     <React.Fragment>
-
+      
     <main className="content">
       <div className={classes.appBarSpacer} />
       <Container maxWidth="md" className="container">
