@@ -22,8 +22,22 @@ export default function ApplyCreditcardSubmit() {
   let {name} = useParams();
   const creditcardName = name;
   const email = "hannah@gmail.com";
+  let {cctype} = useParams();
+  const creditcardType = cctype;
+  const customerId = "5ee86a90e62e0a29d8c0a003";
 
-  const handleChange = (e) => {
+  const handleChange = () => {
+  };
+
+  const applyCC = () => {
+    //selected creditcard type is not in DB (Apply new CC)
+    axios
+      .post("http://localhost:9002/creditcards/creditcardApplication", {
+        creditcard_type: creditcardType,
+        userId: customerId,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
     return (
@@ -43,7 +57,7 @@ export default function ApplyCreditcardSubmit() {
               <Button
                 variant="contained"
                 id="cardApplyBtn"
-                onClick={handleChange}
+                onClick={applyCC}
               >
                 Apply
               </Button>
