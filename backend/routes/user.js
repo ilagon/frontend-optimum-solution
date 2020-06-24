@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const { auth, authReset } = require("../middleware/auth");
 const UserController = require("../controllers/user");
 
 //s1
-router.post("/register", UserController.user_register);
-router.post("/login", UserController.user_login);
-router.post("/forget_password", UserController.forgot_password);
-router.patch("/recover/:token", authReset, UserController.resetPassword);
+router.post("/register", UserController.user_register); //A checked
+router.post("/login", UserController.user_login); //A checked
+router.post("/forget_password", UserController.forgot_password); //A checked
+router.patch("/recover/:token", authReset, UserController.resetPassword); //A checked
 
 //s2
 router.get("/", UserController.user_get_all); //view customer details
