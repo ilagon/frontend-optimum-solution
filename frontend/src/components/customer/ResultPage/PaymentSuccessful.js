@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/PaymentSuccessful.css";
-import image from "../../images/greentick.png";
+import image from "../images/greentick.png";
 
 export function PaymentSuccessfulPage() {
   return (

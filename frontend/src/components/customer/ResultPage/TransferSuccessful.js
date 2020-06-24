@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/TransferSuccessful.css";
-import image from "../../images/greenPlane.png";
+import image from "../images/greenPlane.png";
 
 export function TransferSuccessfulPage() {
   return (

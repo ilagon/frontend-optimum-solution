@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { storeInput } from "../../common/redux/actions/mobilePayment_storeInput";
-import { store } from "../../../index";
+import { store } from "../../../../index";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import {

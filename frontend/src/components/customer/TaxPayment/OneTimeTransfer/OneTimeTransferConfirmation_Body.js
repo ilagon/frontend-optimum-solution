@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "../css/OneTimeTransfer.css";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { store } from "../../../index";
+import { store } from "../../../../index";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 

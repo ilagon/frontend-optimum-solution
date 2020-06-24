@@ -7,7 +7,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-import { store } from "../../../index";
+import { store } from "../../../../index";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { storeInput } from "../../common/redux/actions/taxPayment_storeInput";

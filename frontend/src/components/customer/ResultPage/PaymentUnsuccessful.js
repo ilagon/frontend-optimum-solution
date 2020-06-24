@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/PaymentUnsuccessful.css";
-import image from "../../images/redcross.png";
+import image from "../images/redcross.png";
 
 export function PaymentUnSuccessfulPage() {
   return (
