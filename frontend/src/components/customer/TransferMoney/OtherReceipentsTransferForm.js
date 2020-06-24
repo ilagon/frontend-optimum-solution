@@ -81,7 +81,7 @@ console.log(payeeList);
     window.location.href ="/AddPayee";
  }
 
- const selectPayee= (name, accNo) => {
+ function selectPayee(name, accNo){
   setState({
     ...state,
     recipientName: name,
