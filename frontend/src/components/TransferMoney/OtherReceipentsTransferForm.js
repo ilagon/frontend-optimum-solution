@@ -66,12 +66,13 @@ export default function OtherReceipentsTransferForm() {
 });
   const classes = useStyles();
 
-  const fetchData = async () => {
+  function fetchData(){
     axios
       .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
       .then((response) => {
         console.log(response.data);
-setPayeeList(response.data.payee);   
+setPayeeList(response.data.payee); 
+console.log(payeeList);
       })
       .catch((error) => console.log(error));
   };
@@ -91,7 +92,7 @@ setPayeeList(response.data.payee);
 
   return (
     <div>
-      {fetchData}
+      {fetchData()}
       <CssBaseline />
       {/* Payee 1 */}
       {payeeList.map((obj) =>(
