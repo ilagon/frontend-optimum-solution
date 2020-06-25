@@ -55,17 +55,16 @@ exports.user_register = (req, res) => {
 
 
 exports.users_get_all = (req, res) => {
-    User.findOne({email:req.user.email}).select("name email account_status _id is_admin").exec()
+    User.findOne({ email: req.user.email }).select("name email account_status _id is_admin").exec()
         .then(docs => {
-           if(docs){
-               console.log(docs)
-               res.status(200).json(docs);
-           }
+            if (docs) {
+                console.log(docs)
+                res.status(200).json(docs);
+            }
         }).catch(err => {
             res.status(500).json({ error: err })
         })
 }
-
 
 exports.user_login = (req, res) => {
     if (!req.body.email || !req.body.password) {
@@ -172,14 +171,14 @@ exports.forgot_password = (req, res) => {
                     </p>`
                 };
                 mg.messages().send(data, function (error, body) {
-                 
+
                     if (error) {
                         console.log(error)
                         return res.status(401).json({
                             error: error
                         })
                     }
-                    else{
+                    else {
                         console.log(body.message)
                         User.updateOne(
                             { email: req.body.email },
@@ -196,7 +195,7 @@ exports.forgot_password = (req, res) => {
                         })
                     }
                 });
-              
+
             }
             else {
                 res.status(200).json({
@@ -282,12 +281,12 @@ exports.resetPassword = (req, res) => {
 }
 
 
-exports.resetAuth = (req,res) => {
+exports.resetAuth = (req, res) => {
     User.findOne(req.param.token)
-    .exec()
-    .then((res) => {
-        if(res){
-            console.log(res)
-        }
-    })
+        .exec()
+        .then((res) => {
+            if (res) {
+                console.log(res)
+            }
+        })
 }

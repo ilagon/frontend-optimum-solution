@@ -8,7 +8,7 @@ const mongoose = require("mongoose")
 const userRoutes = require("./routes/userRoutes")
 const customerRoutes = require("./routes/customerRoutes")
 const cors = require("cors")
-
+//express is a web server framework to host
 const app = express();
 const PORT = process.env.PORT || 7001;
 //mongo connection - mongoose is a library to simplify syntax to mongo DB
@@ -18,10 +18,12 @@ mongoose.Promise = global.Promise; // gets a response from DB fail or success
 //connect to the schema
 //mongodb://localhost/bankAppPhase2
 mongoose.connect("mongodb+srv://optimum-leads:12345@optimumbatch7-1rg4n.mongodb.net/bankappphase2?retryWrites=true&w=majority", {
+    // need for updated mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
+// Cross-Origin Resource Sharing, basically it allows cross-domain communication from the browser
+//lets u accept resource from any port
 app.use(cors());
 
 //body parser transposes request into language DB can understand
