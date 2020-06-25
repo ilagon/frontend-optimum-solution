@@ -10,7 +10,6 @@ import { store } from "../../../index";
 import {
   BrowserRouter as Router,
   Link,
-  useParams,
   useHistory
 } from "react-router-dom";
 
@@ -26,6 +25,9 @@ export default function ApplyCreditcardSubmit() {
   const referenceNum = "1234567";
   const creditcardName = state.applyCreditcard.creditcardName;
   const creditcardType = state.applyCreditcard.selectedCardType;
+  console.log("state.applyCreditcard.selectedCardType");
+  console.log(state.applyCreditcard.selectedCardType);
+
   const customerId = "5ee86a90e62e0a29d8c0a003"; 
   const [custEmail, setCustEmail] = useState();
   var arr = [];
@@ -33,13 +35,11 @@ export default function ApplyCreditcardSubmit() {
   useEffect(() => {
     axios.get("http://localhost:9002/users/" + customerId)
     .then((res) => {        
-    console.log(res);
-    console.log(res.data.user);
-      let test = res.data.user;
+    console.log("Success");
+      const test = res.data.user;
         setCustEmail(test.email);
        })
     .catch(error => console.log(error));
-    console.log(custEmail);
   }, [])
 
   const handleChange = () => {

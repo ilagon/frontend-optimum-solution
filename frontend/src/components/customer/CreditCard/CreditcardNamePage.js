@@ -5,22 +5,33 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../Overview/Overview.css";
+import { useDispatch } from "react-redux";
+import { storeInput } from "../common/redux/actions/applyCreditcard_storeInput";
+import { store } from "../../../index";
 import {
   BrowserRouter as Router,
   Link,
+  useHistory
 } from "react-router-dom";
-import CreditcardSubmission from './CreditcardSubmissionPage';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
 }));
 
 export default function ApplyCC() {
+  const dispatch = useDispatch();
+  console.log(store.getState());
+  const state = store.getState();
+  const cardType = state.applyCreditcard.selectedCardType;
+  const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState("");
 
-  const handleChange = (e) => {
-    setName(e.target.value);
+  const handleFormInputs = () => {
+    console.log("cardType")
+    console.log(cardType)
+    dispatch(storeInput(name, cardType));
+    history.push("/apply-creditcard/creditcard-submit");
   };
 
   return (
@@ -36,13 +47,12 @@ export default function ApplyCC() {
                 label="Name to appear on card"
                 size="small"
                 className="cardNameInput"
-                onChange={handleChange}
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
           </Grid>
-          {/* <Link to="/apply-creditcard/creditcard-submit"> */}
-          <Link to = {`/apply-creditcard/creditcard-submit/${name}`}>
-            <Button variant="contained" id="cardNameBtn">
+          <Link to = "/apply-creditcard/creditcard-submit">
+            <Button variant="contained" id="cardNameBtn" onClick={() => handleFormInputs()}>
               Next
             </Button>
           </Link>

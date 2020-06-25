@@ -28,20 +28,18 @@ export default function BodyContainer() {
   const [nextButton, setNextButton] = useState(false);
 
   useEffect(() => {
-    function fetchData(){
+    function fetchData() {
       axios
         .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
           response.data.creditcard.map((obj) => {
-            if (obj.creditcard_status === "Approved")
-              cards.push(obj)
-          })
+            if (obj.creditcard_status === "Approved") cards.push(obj);
+          });
           setLoading(true);
         })
         .catch((error) => console.log(error));
     }
-    if (cards.length === 0)
-      fetchData();
+    if (cards.length === 0) fetchData();
   });
 
   const handleAmount = (value) => {
@@ -72,7 +70,9 @@ export default function BodyContainer() {
 
   const handleFormInputs = () => {
     if (amount != "" && Object.keys(creditCard).length != 0) {
-      dispatch(storeInput(state.mobilePayment.payeeInfo.number, amount, creditCard));
+      dispatch(
+        storeInput(state.mobilePayment.payeeInfo.number, amount, creditCard)
+      );
       history.push("/MobilePayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };
@@ -106,6 +106,7 @@ export default function BodyContainer() {
       "&:hover": {
         backgroundColor: "#e26448",
       },
+      fontSize: "1.25em"
     },
   }));
 
@@ -137,7 +138,7 @@ export default function BodyContainer() {
 
   const formFrom = (
     <div className="fromForm">
-      .<h1>From</h1>
+      <h1>From</h1>
       <div>
         <FormControl variant="filled" className={classes.formControl}>
           <Select
@@ -171,8 +172,10 @@ export default function BodyContainer() {
 
   return (
     <main className="content">
-      <div className={classes.appBarSpacer} />
       <Grid container direction="row" justify="space-evenly" wrap="wrap">
+        <Grid item sm={10} className={classes.gridMargin + " billPayment"}>
+          <h1>Bill Payment</h1>
+        </Grid>
         <Grid
           item
           sm={6}

@@ -113,7 +113,11 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
         ...state, 
         senderCreditCardBalance: getCreditCardBalance(event.target.value)
       });
+<<<<<<< HEAD
       console.log(state.senderCreditCardBalance);
+=======
+      console.log(getCreditCardBalance);
+>>>>>>> 991bff7026b48f5ec6ab28958378cf858a73bc27
     }
     setState({
       ...state,
