@@ -37,15 +37,15 @@ router.post("/create", creditcardController.creditcard_create); //A checked
 //router.patch("/reject/:cardId", creditcardController.creditcard_search_by_cardStatus_reject);
 
 //reset credit balance to credit limit
-router.patch("/resetBalance", creditcardController.reset_credit_balance);
+router.patch("/resetBalance", creditcardController.reset_credit_balance); //A will review later
 
 //overview customer list search by card id
-router.get("/:cardId", creditcardController.creditcard_search_by_cardid);
+router.get("/:cardId", creditcardController.creditcard_search_by_cardid); // A checked
 
 //credit card approval approve function
 router.patch("/approve/:cardId", creditcardController.creditcard_approve); // A you need to pass the creditcard_type in the body
 
 //credit card approval reject function
-router.patch("/reject/:cardId", creditcardController.creditcard_deny);
+router.patch("/reject/:cardId", creditcardController.creditcard_deny); // A checked
 
 module.exports = router;

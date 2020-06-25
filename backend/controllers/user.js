@@ -281,7 +281,7 @@ exports.resetAuth = (req, res) => {
 
 //view customer details
 exports.user_get_all = (req, res) => {
-  User.find()
+  User.find({ user_type: "Customer" })
     .select("name email account_status user_type")
     .exec()
     .then((docs) => {
@@ -309,8 +309,67 @@ exports.user_get_all = (req, res) => {
 
 //view customer details search by ID
 exports.user_get_by_id = (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   User.findById(id)
+    .select("name email account_status user_type")
+    .exec()
+    .then((doc) => {
+      console.log("From db", doc);
+      if (doc) {
+        if (doc.user_type == "Customer") {
+          res.status(200).json({
+            user: doc,
+          });
+        } else {
+          res
+            .status(404)
+            .json({ message: "Don't go looking for an admin you dodo" });
+        }
+      } else {
+        res.status(404).json({
+          message: "No valid entry found",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+//get user by email
+exports.users_get_by_email = (req, res) => {
+  const email = req.body.email;
+  User.find({ email: email })
+    .select("name email account_status user_type _id")
+    .exec()
+    .then((doc) => {
+      console.log("From db", doc);
+      if (doc) {
+        if (doc.user_type == "Customer") {
+          res.status(200).json({
+            user: doc,
+          });
+        } else {
+          res
+            .status(404)
+            .json({ message: "Don't go looking for an admin you dodo" });
+        }
+      } else {
+        res.status(404).json({ message: "No valid entry found!" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
+
+exports.user_pending = (req, res) => {
+  User.find({ account_status: "Pending" })
+
     .select("name email account_status user_type")
     .exec()
     .then((docs) => {
@@ -333,40 +392,24 @@ exports.user_get_by_id = (req, res) => {
     });
 };
 
-//get user by email
-exports.users_get_by_email = (req, res) => {
-  const email = req.params.email;
-  User.find({ email: email })
-    .select("name email account_status is_admin _id")
-    .exec()
-    .then((doc) => {
-      console.log("From db", doc);
-      if (doc) {
-        res.status(200).json({
-          user: doc,
-        });
-      } else {
-        res.status(404).json({ message: "No valid entry found!" });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
-};
-
 //get user by name
 exports.users_get_by_name = (req, res) => {
-  const name = req.params.name;
+  const name = req.body.name;
   User.find({ name: name })
-    .select("name email account_status is_admin _id")
+    .select("name email account_status user_type _id")
     .exec()
     .then((doc) => {
       console.log("From db", doc);
       if (doc) {
-        res.status(200).json({
-          user: doc,
-        });
+        if (doc.user_type == "Customer") {
+          res.status(200).json({
+            user: doc,
+          });
+        } else {
+          res
+            .status(404)
+            .json({ message: "Don't go looking for an admin you dodo" });
+        }
       } else {
         res.status(404).json({ message: "No valid entry found!" });
       }
@@ -378,11 +421,11 @@ exports.users_get_by_name = (req, res) => {
 };
 
 exports.user_delete = (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   User.deleteOne({ _id: id })
     .exec()
     .then(() => {
-      res.status(200).json({ message: "User delete" });
+      res.status(200).json({ message: "User deleted" });
     })
     .catch((err) => {
       console.log(err);
@@ -394,7 +437,7 @@ exports.user_delete = (req, res) => {
 
 //account activate
 exports.update_activate_account = (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   User.updateOne(
     { _id: id },
     {
@@ -418,7 +461,7 @@ exports.update_activate_account = (req, res) => {
 
 //account deny
 exports.update_deactivate_account = (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   User.updateOne(
     { _id: id },
     {
