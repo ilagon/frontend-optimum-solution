@@ -42,6 +42,18 @@ const useStyles = makeStyles((theme) => ({
     height: "165%",
     minHeight: "80vh",
   },
+
+  approveButtonStyle: {
+    background: "#00a152",
+    color: "#fff",
+    left: "41%",
+  },
+
+  denyButtonStyle: {
+    background: "#d32f2f",
+    color: "#fff",
+    right: "100%",
+  },
 }));
 
 export default function CreditCardStatus() {
@@ -92,6 +104,14 @@ export default function CreditCardStatus() {
   useEffect(() => {
     getDenyCreditCard();
   }, [denyCreditCardState]);
+
+  const onClickApprove = (event) => {
+    setApproveCreditCardState(event.target.value);
+  };
+
+  const onClickDeny = (event) => {
+    setDenyCreditCardState(event.target.value);
+  };
 
   return (
     <Container className={classes.containerStyle} fixed>
@@ -157,25 +177,35 @@ export default function CreditCardStatus() {
                       <TableCell style={{ letterSpacing: "2px" }} width="15%">
                         {row.creditcard_type}
                       </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      <TableCell
+                        style={{
+                          letterSpacing: "2px",
+                        }}
+                        width="15%"
+                      >
                         {console.log(row._id)}
                         <Button
+                          className={classes.approveButtonStyle}
                           variant="contained"
                           value={row._id}
-                          onClick={(event) =>
-                            setApproveCreditCardState(event.target.value)
-                          }
+                          onClick={onClickApprove}
+                          disableRipple
                         >
                           Approve
                         </Button>
                       </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                      <TableCell
+                        style={{
+                          letterSpacing: "2px",
+                        }}
+                        width="20%"
+                      >
                         <Button
+                          className={classes.denyButtonStyle}
                           variant="contained"
                           value={row._id}
-                          onClick={(event) =>
-                            setDenyCreditCardState(event.target.value)
-                          }
+                          onClick={onClickDeny}
+                          disableRipple
                         >
                           Deny
                         </Button>

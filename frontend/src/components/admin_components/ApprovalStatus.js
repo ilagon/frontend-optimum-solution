@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ApproveAccountButton from "./button/approvebutton/ApproveAccountButton";
-import DenyAccount from "./button/denybutton/DenyAccountButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   Grid,
@@ -43,6 +41,18 @@ const useStyles = makeStyles((theme) => ({
     height: "165%",
     minHeight: "80vh",
   },
+
+  approveButtonStyle: {
+    background: "#00a152",
+    color: "#fff",
+    right: "100px",
+  },
+
+  denyButtonStyle: {
+    background: "#d32f2f",
+    color: "#fff",
+    right: "120px",
+  },
 }));
 
 export default function ApprovalStatus() {
@@ -50,7 +60,7 @@ export default function ApprovalStatus() {
 
   const [allCustomerState, setAllCustomerState] = useState([]);
   const [customerState, setCustomerState] = useState({});
-  const [idState, setIdState] = useState("");
+  const [idState, setIdState] = useState();
 
   // Upon loading, useEffect will get called
   useEffect(() => {
@@ -70,11 +80,6 @@ export default function ApprovalStatus() {
       .catch((error) => alert(error));
   };
 
-  // Ensure that the data gets re-rendered
-  useEffect(() => {
-    getSpecificCustomer();
-  }, [idState]);
-
   // Searching for a specific customer
   const getSpecificCustomer = () => {
     axios
@@ -85,9 +90,41 @@ export default function ApprovalStatus() {
       .catch((error) => alert(error));
   };
 
-  const handleId = event => {
-    setIdState(event.target.value)
-  }
+  const handleId = (event) => {
+    setIdState(event.target.value);
+  };
+
+  const approveCustomer = () => {
+    axios
+      .patch(`http://localhost:9000/users/${idState}/activate`)
+      .then((response) => {
+        console.log(response.data.Users);
+      })
+      .catch((error) => alert(error));
+  };
+
+  useEffect(() => {
+    approveCustomer();
+    denyCustomer();
+    getSpecificCustomer();
+  }, [idState]);
+
+  const denyCustomer = () => {
+    axios
+      .patch(`http://localhost:9000/users/${idState}/deactivate`)
+      .then((response) => {
+        console.log(response.data.Users);
+      })
+      .catch((error) => alert(error));
+  };
+
+  const onClickApprove = (event) => {
+    setIdState(event.target.value);
+  };
+
+  const onClickDeny = (event) => {
+    setIdState(event.target.value);
+  };
 
   return (
     <Container className={classes.containerStyle} fixed>
@@ -157,14 +194,30 @@ export default function ApprovalStatus() {
                         width="25%"
                         align="right"
                       >
-                        <ApproveAccountButton approvedValue={row._id} onHandleSaveID={handleId}/>
+                        <Button
+                          className={classes.approveButtonStyle}
+                          variant="contained"
+                          value={row._id}
+                          onClick={onClickApprove}
+                          disableRipple
+                        >
+                          Approve
+                        </Button>
                       </TableCell>
                       <TableCell
                         style={{ letterSpacing: "2px" }}
                         width="15%"
                         align="left"
                       >
-                        <DenyAccount />
+                        <Button
+                          className={classes.denyButtonStyle}
+                          variant="contained"
+                          value={row._id}
+                          onClick={onClickDeny}
+                          disableRipple
+                        >
+                          Deny
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
