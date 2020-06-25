@@ -67,13 +67,13 @@ export default function SubmitTransferPage() {
     payment_type: "Transfer",
     payment_amount: states.transferAmount,
     transfer_number: 1,
-    creditcardId: states.senderCreditCardID,
+    creditcardId: states.senderCreditCardId,
   })
   .then((response) => {
     console.log(response);
     axios
       .patch("http://localhost:9002/creditcards/updateBalance", {
-        creditcard_Id: states.senderCreditCardID,
+        creditcard_Id: states.senderCreditCardId,
         creditcard_balance:
         states.senderCreditCardBalance -
           states.transferAmount,

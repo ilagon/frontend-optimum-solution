@@ -81,7 +81,7 @@ console.log(payeeList);
     window.location.href ="/AddPayee";
  }
 
- function selectPayee(name, accNo){
+ const selectPayee= (name, accNo) => {
   setState({
     ...state,
     recipientName: name,
@@ -92,7 +92,7 @@ console.log(payeeList);
 
   return (
     <div>
-      {payeeList.length===0 ? fetchData() : ''}
+      {fetchData()}
       <CssBaseline />
       {/* Payee 1 */}
       {payeeList.map((obj) =>(

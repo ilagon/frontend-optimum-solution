@@ -93,47 +93,32 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
             if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
             console.log(balance);
+            setState({
+              ...state, 
+              senderCreditCardID: value.creditcard_num
+            });
+            console.log(state.senderCreditCardID);
           }
           }
         }
         return balance;
   };
 
-  const getCreditCardID = (creditCardType) => {
-    var creditCardID = '';
-    if (cards.length!=0){
-      for (const [index, value] of cards.entries()) {
-        if(creditCardType===value.creditcard_type){
-       creditCardID=value._id;
-        console.log(creditCardID);
-      }
-      }
-    }
-    return creditCardID;
-};
-
   const handleChange = (event) => {
     const name = event.target.name;
     console.log(name);
-  
+    console.log(event.target.value);
+    if(name==='senderCreditCardType'){
+      setState({
+        ...state, 
+        senderCreditCardBalance: getCreditCardBalance(event.target.value)
+      });
+      console.log(senderCreditCardBalance);
+    }
     setState({
       ...state,
       [name]: event.target.value,
     });
-  };
-
-  const creditCardChange = (event) => {
-    const name = event.target.name;
-    console.log(name);
-    console.log(event.target.value);
-      setState({
-        ...state, 
-        senderCreditCardBalance: getCreditCardBalance(event.target.value),
-        senderCreditCardID: getCreditCardID(event.target.value),
-        [name]: event.target.value,
-      });
-      console.log(state.senderCreditCardBalance);
-      console.log(state.senderCreditCardID);
   };
 
   const classes = useStyles();
@@ -223,7 +208,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               className={styles.selectColor}
               native
               value={state.senderCreditCard}
-              onChange={creditCardChange}
+              onChange={handleChange}
               inputProps={{
                 name: 'senderCreditCardType'
               }}
@@ -241,7 +226,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-             {state.senderCreditCardBalance==='' ? '' : '$' + state.senderCreditCardBalance}
+             ${state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
