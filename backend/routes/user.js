@@ -5,14 +5,14 @@ const { auth, authReset } = require("../middleware/auth");
 const UserController = require("../controllers/user");
 
 //s1
-router.post("/register", UserController.user_register); //A checked
-router.post("/login", UserController.user_login); //A checked
-router.post("/forget_password", UserController.forgot_password); //A checked
-router.patch("/recover/:token", authReset, UserController.resetPassword); //A checked
+router.post("/register", UserController.user_register); // A checked
+router.post("/login", UserController.user_login); // A checked
+router.post("/forget_password", UserController.forgot_password); // A checked
+router.patch("/recover/:token", authReset, UserController.resetPassword); // A checked
 
 //s2
 //view customer details
-router.get("/", UserController.user_get_all); //A checked
+router.get("/", UserController.user_get_all); // A checked
 //search customer by email
 router.get("/search/email", UserController.users_get_by_email); // A checked
 //search customer by name
