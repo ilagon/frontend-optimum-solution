@@ -6,10 +6,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../Overview/Overview.css";
+import { store } from "../../../index";
 import {
   BrowserRouter as Router,
   Link,
-  useParams
+  useParams,
+  useHistory
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ApplyCreditcardSubmit() {
+<<<<<<< HEAD
   
     const [custEmail, setCustEmail] = useState([]);
     const customerId = "5ef3155ba7ea2e3db870382f";
@@ -36,8 +39,29 @@ export default function ApplyCreditcardSubmit() {
   let {name} = useParams();
   const creditcardName = name;
   // const email = "hannah@gmail.com";
+=======
+  const history = useHistory();
+  const state = store.getState();
+  const classes = useStyles();
+  const referenceNum = "1234567";
+  const creditcardName = state.applyCreditcard.creditcardName;
+  const creditcardType = state.applyCreditcard.selectedCardType;
+  const email = "hannah@gmail.com";
+  const customerId = "5ee86a90e62e0a29d8c0a003";
+>>>>>>> 70c386967075efbf9558c1966571042b2f18e7e0
 
-  const handleChange = (e) => {
+  const handleChange = () => {
+  };
+
+  const applyCC = () => {
+    //selected creditcard type is not in DB (Apply new CC)
+    axios
+      .post("http://localhost:9002/creditcards/creditcardApplication", {
+        creditcard_type: creditcardType,
+        userId: customerId,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
     return (
@@ -57,7 +81,7 @@ export default function ApplyCreditcardSubmit() {
               <Button
                 variant="contained"
                 id="cardApplyBtn"
-                onClick={handleChange}
+                onClick={applyCC}
               >
                 Apply
               </Button>
