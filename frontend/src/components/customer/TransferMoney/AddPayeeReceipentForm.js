@@ -78,7 +78,7 @@ export default function AddPayeeReceipentForm() {
   var states = JSON.parse(retrievedData);
 
   cards = JSON.parse(localStorage.getItem("UserCreditCards"));
- 
+  console.log(cards);
   function applySelectedPayeeDetails(){
 setState({
   ...state,
@@ -86,6 +86,7 @@ setState({
   recipentBank:states.recipentBank,
   recipentAccNo:states.recipentAccNo
 });
+console.log(state);
   }
 
 //function getCards(){
