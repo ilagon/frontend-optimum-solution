@@ -61,7 +61,7 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
-var cards = JSON.parse(localStorage.getItem("UserCreditCards"));
+var cards = [];
 
 export default function AddPayeeReceipentForm() {
   const [state, setState] = React.useState({
@@ -77,6 +77,8 @@ export default function AddPayeeReceipentForm() {
   var retrievedData = localStorage.getItem("transferDetails");
   var states = JSON.parse(retrievedData);
 
+  cards = JSON.parse(localStorage.getItem("UserCreditCards"));
+ 
   function applySelectedPayeeDetails(){
 setState({
   ...state,
@@ -224,11 +226,11 @@ const getCreditCardID = (creditCardType) => {
               }}
             >
               <option aria-label="None" value="" />
-              {cards.map((obj) => (
+              {cards !== [] ? cards.map((obj) => (
               <option value={obj.creditcard_type}>
                 {obj.creditcard_type}
               </option>
-            ))}
+            )) : ''}
             </Select>
           </FormControl>
           <div className={classes.frontKeepLeft}>

@@ -95,7 +95,7 @@ console.log(payeeList);
       {payeeList.length===0 ? fetchData() : ''}
       <CssBaseline />
       {/* Payee 1 */}
-      {payeeList.length!=0 ? payeeList.map((obj) =>(
+      {payeeList.length!==0 ? payeeList.map((obj) =>(
         <Grid container spacing={3}>
         <Grid item xs={12}>
         <Paper className={styles.paper} onClick={() => selectPayee(obj.name,obj.number)}>
