@@ -25,8 +25,21 @@ export default function ApplyCreditcardSubmit() {
   const referenceNum = "1234567";
   const creditcardName = state.applyCreditcard.creditcardName;
   const creditcardType = state.applyCreditcard.selectedCardType;
-  const email = "hannah@gmail.com";
-  const customerId = "5ee86a90e62e0a29d8c0a003";
+  const customerId = "5ee86a90e62e0a29d8c0a003"; 
+  const [custEmail, setCustEmail] = useState();
+  var arr = [];
+  
+  useEffect(() => {
+    axios.get("http://localhost:9002/users/" + customerId)
+    .then((res) => {        
+    console.log(res);
+    console.log(res.data.user);
+      let test = res.data.user;
+        setCustEmail(test.email);
+       })
+    .catch(error => console.log(error));
+    console.log(custEmail);
+  }, [])
 
   const handleChange = () => {
   };
@@ -52,7 +65,7 @@ export default function ApplyCreditcardSubmit() {
                 <h2 className="darkRedColor">Credit Card Application</h2>
                 <p className="darkBlueColor">Ref No.: {referenceNum}</p>
                 <p className="darkBlueColor">{creditcardName}</p>
-                <p className="darkBlueColor">{email}</p>
+                <p className="darkBlueColor">{custEmail}</p>
               </Grid>
             </Grid>
             <Link to="/apply-creditcard/creditcard-confirm">

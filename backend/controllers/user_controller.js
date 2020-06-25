@@ -52,31 +52,31 @@ exports.user_get_all= (req, res) => {
     })
 }
 
-// exports.user_get_by_id = (req, res) => {
-//     const id = req.params.userId;
-//     User.findById(id)
-//     .select("name email account_status user_type _id")
-//     .exec()
-//     .then(docs => {
-//         console.log("From db", doc);
-//         if(doc){
-//             res.status(200).json({
-//                 user: doc
-//             })
-//         } else{
-//             res.status(404).json({
-//                 message: "No valid entry found"
-//             })
-//         }
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json({
-//             error: err
-//         })
+exports.user_get_by_id = (req, res) => {
+    const id = req.params.userId;
+    User.findById(id)
+    .select("name email account_status user_type _id")
+    .exec()
+    .then(doc => {
+        console.log("From db", doc);
+        if(doc){
+            res.status(200).json({
+                user: doc
+            })
+        } else{
+            res.status(404).json({
+                message: "No valid entry found"
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
         
-//     })
-// }
+    })
+}
 
 // exports.user_delete = (req, res) => {
 //     const id = req.params.userId;
