@@ -106,7 +106,7 @@ const getCreditCardBalance = (creditCardType) => {
           console.log(balance);
           setState({
             ...state, 
-            senderCreditCardID: value.creditcard_num
+            senderCreditCardID: value._id
           });
           console.log(state.senderCreditCardID);
         }
@@ -117,16 +117,21 @@ const getCreditCardBalance = (creditCardType) => {
 
   const handleChange = (event) => {
     const name = event.target.name;
-    if(name==='senderCreditCardType'){
-      setState({
-        ...state, 
-        senderCreditCardBalance: getCreditCardBalance(event.target.value)
-      });
-    }
+    
     setState({
       ...state,
       [name]: event.target.value,
     });
+  };
+
+  const CreditCardChange = (event) => {
+    const name = event.target.name;
+    
+      setState({
+        ...state, 
+        senderCreditCardBalance: getCreditCardBalance(event.target.value),
+        [name]: event.target.value,
+      });
   };
 
   const nextHandler = (event) => {
@@ -200,7 +205,7 @@ const getCreditCardBalance = (creditCardType) => {
               className={styles.selectColor}
               native
               value={state.senderCreditCard}
-              onChange={handleChange}
+              onChange={CreditCardChange}
               inputProps={{
                 name: 'senderCreditCardType'
               }}

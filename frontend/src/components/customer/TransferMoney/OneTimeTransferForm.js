@@ -93,16 +93,25 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
             if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
             console.log(balance);
-            setState({
-              ...state, 
-              senderCreditCardID: value._id
-            });
-            console.log(state.senderCreditCardID);
           }
           }
         }
         return balance;
   };
+
+  const getCreditCardID = (creditCardType) => {
+    var creditCardID = '';
+    if (cards.length!=0){
+      for (const [index, value] of cards.entries()) {
+        if(creditCardType===value.creditcard_type){
+       creditCardID=value._id;
+        console.log(creditCardID);
+      }
+      }
+    }
+    return creditCardID;
+  };
+  
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -123,6 +132,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
       setState({
         ...state, 
         senderCreditCardBalance: getCreditCardBalance(event.target.value),
+        senderCreditCardID: getCreditCardID(event.target.value),
         [name]: event.target.value,
       });
       console.log(state.senderCreditCardBalance);
