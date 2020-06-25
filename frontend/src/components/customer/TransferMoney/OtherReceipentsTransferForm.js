@@ -95,20 +95,20 @@ console.log(payeeList);
       {fetchData()}
       <CssBaseline />
       {/* Payee 1 */}
-      {payeeList.map((obj) =>(
+      {payeeList.length!=0 ? payeeList.map((obj) =>(
         <Grid container spacing={3}>
         <Grid item xs={12}>
-        <Paper className={styles.paper} onClick={selectPayee(obj.name,obj.number)}>
+        <Paper className={styles.paper} onClick={() => selectPayee(obj.name,obj.number)}>
         <div className={styles.textLeft}> 
         <Typography Typography component="h2" variant="h4" color="primary" gutterBottom>
-         {obj.name}<br></br><br></br>Optimum DigiBank Savings Account {obj.number}
+        {obj.name}<br></br><br></br>Optimum DigiBank Savings Account {obj.number}
          <InfoRoundedIcon fontSize="inherit" className={styles.infoIcon}></InfoRoundedIcon>
         </Typography>
         </div>
               </Paper>
         </Grid>
       </Grid>
-      ))}
+   )) : 'No Payee is added. To start adding payee, please press on the Add Payee button located below.'}   
       
       {/* Payee 2 */}
       <Grid container spacing={3}>
