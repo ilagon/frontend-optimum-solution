@@ -124,9 +124,8 @@ exports.creditcard_search_by_userid = (req, res) => {
 };
 
 //overview page user search by card status "Approved""
-exports.creditcard_search_by_cardStatus_approve = (req, res) => {
-  const approve = "Approved";
-  CreditCard.find({ creditcard_status: approve })
+exports.creditcard_search_by_cardStatus_active = (req, res) => {
+  CreditCard.find({ creditcard_status: "Active" })
     .populate("user", ["email", "account_status"])
     .exec()
     .then((docs) => {
@@ -161,8 +160,7 @@ exports.creditcard_search_by_cardStatus_approve = (req, res) => {
 
 //overview page user search by card status "Rejected"
 exports.creditcard_search_by_cardStatus_reject = (req, res) => {
-  const reject = "Reject";
-  CreditCard.find({ creditcard_status: reject })
+  CreditCard.find({ creditcard_status: "Rejected" })
     .populate("user", ["email", "account_status"])
     .exec()
     .then((docs) => {
@@ -196,8 +194,7 @@ exports.creditcard_search_by_cardStatus_reject = (req, res) => {
 };
 
 exports.creditcard_pending = (req, res) => {
-  const pending = "Pending";
-  CreditCard.find({ creditcard_status: pending })
+  CreditCard.find({ creditcard_status: "Pending" })
     .populate("user", ["email", "account_status"])
     .exec()
     .then((docs) => {
@@ -231,7 +228,7 @@ exports.creditcard_pending = (req, res) => {
 };
 
 //credit card pending search
-exports.creditcard_pending_searh_id = (req, res) => {
+exports.creditcard_pending_search_id = (req, res) => {
   const id = req.params.cardId;
 
   CreditCard.find({ creditcard_status: "Pending", _id: id })
@@ -270,8 +267,43 @@ exports.creditcard_pending_searh_id = (req, res) => {
 //credit card approval approve
 exports.creditcard_approve = (req, res) => {
   const id = req.params.cardId;
-
-  CreditCard.updateOne({ _id: id }, { $set: { creditcard_status: "Active" } })
+  const creditcard_type = req.body.creditcard_type;
+  CreditCard.updateOne(
+    { _id: id },
+    { $set: { creditcard_status: "Active" } },
+    (docs) => {
+      if (creditcard_type == "Platinum") {
+        CreditCard.updateOne(
+          { _id: id },
+          { $set: { creditcard_limit: 10000, creditcard_balance: 10000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Gold") {
+        CreditCard.updateOne(
+          { _id: id },
+          { $set: { creditcard_limit: 20000, creditcard_balance: 20000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Silver") {
+        CreditCard.updateOne(
+          { _id: id },
+          { $set: { creditcard_limit: 30000, creditcard_balance: 30000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Women") {
+        CreditCard.updateOne(
+          { _id: id },
+          { $set: { creditcard_limit: 40000, creditcard_balance: 40000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Student") {
+        CreditCard.updateOne(
+          { _id: id },
+          { $set: { creditcard_limit: 50000, creditcard_balance: 50000 } }
+        ).exec();
+      }
+    }
+  )
     .exec()
     .then((result) => {
       console.log(result);
@@ -311,7 +343,7 @@ exports.reset_credit_balance = (req, res) => {
   const creditLimit = req.body.creditcard_limit;
 
   CreditCard.updateMany(
-    { creditcard_status: "Approved" },
+    { creditcard_status: "Active" },
     { $set: { creditcard_balance: creditLimit } }
   )
     .exec()

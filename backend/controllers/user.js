@@ -279,31 +279,6 @@ exports.resetAuth = (req, res) => {
 
 //s2
 
-//addes contact number and address
-exports.user_register = (req, res) => {
-  const user = new User({
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    account_status: req.body.account_status,
-    email: req.body.email,
-    password: req.body.password,
-    user_type: req.body.user_type,
-  });
-  user
-    .save()
-    .then((result) => {
-      console.log(result);
-      res.status(201).json({
-        message: "User created",
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
-
 //view customer details
 exports.user_get_all = (req, res) => {
   User.find()
