@@ -243,7 +243,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               Current Balance
     </Typography>
             <Typography component="p" variant="h4" color="primary">
-             ${state.senderCreditCardBalance}
+            {state.senderCreditCardBalance==='' ? '' : '$' + state.senderCreditCardBalance}
   </Typography>
   <Typography component="h2" variant="h5" color="secondary">
     <br></br>
