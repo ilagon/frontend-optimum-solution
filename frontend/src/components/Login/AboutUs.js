@@ -46,18 +46,16 @@ function AboutUs(props) {
 
   return (
     <section className={classes.root} id="AboutUs">
-      <Container className={classes.container}>
-        <Typography variant="h2" marked="center" className={classes.title} component="h2">
-          About Us
-        </Typography>
-        <Typography variant="h4" marked="center" className={classes.subtitle} component="h2">
+      <Container id="AboutUs1" className={classes.container}>
+        <Typography id="AboutUs2" variant="h2" marked="center" className={classes.title} component="h2">About Us</Typography>
+        <Typography id="AboutUs3" variant="h4" marked="center" className={classes.subtitle} component="h2">
           Everyone wants the best, Optimum believes you deserves nothing less.
         </Typography>
         <div>
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
-                <Typography variant="h6" align="left">
+                <Typography id="AboutUs4" variant="h6" align="left">
                   Optimum has over 120 years of experience in Banking and
                   every generation In South East Asia knows about optimum.
                   We make the best effort for you,
@@ -69,7 +67,7 @@ function AboutUs(props) {
             </Grid>
             <Grid item xs={12} md={6}>
               <div className={classes.item}>
-                <Typography variant="h6" align="left">
+                <Typography id="AboutUs5" variant="h6" align="left">
                   <div>
                     As the leading banking services in South East Asia,
                     we ensure your investments are in responsible hands.

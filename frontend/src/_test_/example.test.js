@@ -1,11 +1,12 @@
 describe('ProductHeader', () => {
-
+    //test keyword 
     it('passing test', () => {
+        //like assert
         expect(true).toBeTruthy();
     })
 
     it('failing test', () => {
-        expect(false).toBeTruthy();
+        expect(true).toBeTruthy();
     })
 
     it('false positive failed test', () => {

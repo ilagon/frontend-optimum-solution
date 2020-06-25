@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,13 +56,13 @@ export default function SignUpResult() {
         <div className={classes.paper}>
           <CheckSharpIcon style={{ color: '388e3c', fontSize: 120 }} />
 
-          <Typography component="h1" variant="h4" className={classes.title}>
+          <Typography id="change1" component="h1" variant="h4" className={classes.title}>
             Password successfully reset!
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id="change2" component="h2" variant="h6" className={classes.bodytxt}>
             You will receive an email regarding this update.
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id="change3" component="h2" variant="h6" className={classes.bodytxt}>
             <Link href="/Login" className={classes.bodytxt2}>Click here if are not redirected after a few seconds</Link>
           </Typography>
         </div>

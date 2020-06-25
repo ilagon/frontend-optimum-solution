@@ -17,6 +17,7 @@ describe('counter', () => {
 })
 
 describe('with name prop', () => {
+    //shallow used to constrain urself to test component as a unit
     const wrapper = shallow(<Counter name='Frankie' />);
     test('render with name', () => {
         expect(wrapper.find('.name').text()).toBe('hi, Frankie')
