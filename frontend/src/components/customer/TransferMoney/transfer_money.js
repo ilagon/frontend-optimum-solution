@@ -1,13 +1,11 @@
 import React from 'react';
 import { makeStyles} from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import styles from "./css/TransferMoney.module.css";
 import OneTimeTransferForm from './OneTimeTransferForm';
 import OtherReceipentsTransferForm from './OtherReceipentsTransferForm';
 import { BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom';
-import SubmitTransferPage from './SubmitTransferPage';
 
 const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
