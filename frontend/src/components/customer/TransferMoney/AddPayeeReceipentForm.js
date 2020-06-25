@@ -75,7 +75,8 @@ export default function AddPayeeReceipentForm() {
   var retrievedData = localStorage.getItem("transferDetails");
   var states = JSON.parse(retrievedData);
 
-  var cards = JSON.parse(localStorage.getItem("UserCreditCards"));
+  var retrievedData2 = localStorage.getItem("UserCreditCards");
+  var cards = JSON.parse(retrievedData2);
   console.log(cards);
 
   function applySelectedPayeeDetails(){
@@ -162,6 +163,7 @@ const getCreditCardID = (creditCardType) => {
   return (
     <div className={styles.root}>
       {state.recipientName==='' ? applySelectedPayeeDetails() : ''}
+      {console.log(state)}
       <CssBaseline />
       <main className={styles.content}>
             <div className={classes.appBarSpacer} />
