@@ -22,10 +22,10 @@ router.get("/search/userId", UserController.user_get_by_id); // A checked
 //search for pending customers
 router.get("/pending", UserController.user_pending); // A checked
 //delete users
-router.delete("/:userId", UserController.user_delete); //In review
+router.delete("/delete", UserController.user_delete); // A checked
 //account activate
-router.patch("/activate/:userId", UserController.update_activate_account); // A checked
+router.patch("/activate", UserController.update_activate_account); // A checked
 //account deactivate
-router.patch("/deactivate/:userId", UserController.update_deactivate_account); // A checked
+router.patch("/deactivate", UserController.update_deactivate_account); // A checked
 
 module.exports = router;
