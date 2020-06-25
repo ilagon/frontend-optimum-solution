@@ -17,6 +17,8 @@ import PersonalBanking from './components/Login/PersonalBanking';
 import FAQ from './components/Login/FAQ';
 import ContactUs from './components/Login/ContactUs';
 import Footer from './components/Login/Footer';
+import { CssBaseline } from '@material-ui/core';
+import AdminPage from "./components/admin_components/Mainpage"; 
 
 function App() {
   const home = () => (
@@ -29,11 +31,13 @@ function App() {
       <ContactUs />
       <Footer />
     </div>
+
   );
 
   return (
     <>
       <Router>
+        <CssBaseline/>
         <div>
           <Switch>
             <Route path="/" exact component={home} />
@@ -44,9 +48,9 @@ function App() {
             <Route path="/SignUpResult" exact component={SignUpResult} />
             <Route path="/ChangedPass" exact component={ChangedPass} />
             <Route path="/ResetPass/recover/:token" exact component={ResetPass} />
-            <Route path="/Dashboard" exact component={Dashboard} />
+            <Route path="/Admin" exact component={AdminPage} />
+            <Route path="/Dashboard" exact component={Dashboard}/>
             <Route path="/Logout" exact component={Logout} />
-
           </Switch>
         </div>
       </Router>

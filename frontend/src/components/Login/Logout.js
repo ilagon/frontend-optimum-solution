@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -35,6 +35,12 @@ const useStyles = makeStyles(() => ({
 export default function Logout() {
   const classes = useStyles();
 
+  useEffect(() => {
+    setTimeout(() => {
+      window.location.href = "/Login";
+    }, 1500);
+  })
+
   return (
     <div className={classes.root}>
       <Container id="logout" component="main" maxWidth="sm">
@@ -47,7 +53,7 @@ export default function Logout() {
             Thank you for banking with us!
           </Typography>
           <Typography component="h2" variant="h6">
-            <Link href="/Login" className={classes.bodytxt}>Back to Login</Link>
+            <Link href="/Login" className={classes.bodytxt}>Click here if are not redirected after a few seconds</Link>
           </Typography>
         </div>
 
