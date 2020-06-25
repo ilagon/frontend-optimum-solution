@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CreditCardStatus() {
   const classes = useStyles();
 
-  const [approveCreditCardState, setApproveCreditCardState] = useState();
+  //const [approveCreditCardState, setApproveCreditCardState] = useState();
   const [allCreditCardState, setAllCreditCardState] = useState([]);
   const [loadedState, setLoadedState] = useState(true);
 
@@ -67,28 +67,24 @@ export default function CreditCardStatus() {
     // Upon loading, useEffect will get called
     useEffect(() => {
       getAllCreditCard();
-    }, []);
+    });
 
 
-  const getCreditCard = () => {
+  const getCreditCard = (e) => {
     axios
       .patch(
-        `http://localhost:7001/creditcard/approve/${approveCreditCardState}`,
+        `http://localhost:7001/creditcard/approve/${e.target.value}`,
         {
-          Data: {
+          data: {
             creditcard_status: "Active",
           },
         }
       )
-      .then((response) => {
-        console.log(response.data.creditcard.creditcard_status);
+      .catch(err => {
+        console.log(err);
       })
-      .catch((error) => alert(error));
   };
 
-  useEffect(() => {
-    getCreditCard();
-  }, [approveCreditCardState]);
 
   return (
     <Container>
@@ -135,7 +131,8 @@ export default function CreditCardStatus() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allCreditCardState.map((row, index) => (
+                {console.log(allCreditCardState)}
+                {allCreditCardState.map((row) => (
                   <TableRow key={row._id}>
                     <TableCell
                       style={{ letterSpacing: "2px" }}
@@ -158,8 +155,9 @@ export default function CreditCardStatus() {
                       <Button
                         variant="contained"
                         value={row._id}
-                        onClick={(event) =>
-                          setApproveCreditCardState(event.target.value)
+                        onClick={
+                          //setApproveCreditCardState(event.target.value)
+                          getCreditCard
                         }
                       >
                         Approve
