@@ -309,7 +309,7 @@ exports.user_get_all = (req, res) => {
 
 //view customer details search by ID
 exports.user_get_by_id = (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   User.findById(id)
     .select("name email account_status user_type")
     .exec()
@@ -335,9 +335,9 @@ exports.user_get_by_id = (req, res) => {
 
 //get user by email
 exports.users_get_by_email = (req, res) => {
-  const email = req.params.email;
+  const email = req.body.email;
   User.find({ email: email })
-    .select("name email account_status is_admin _id")
+    .select("name email account_status user_type _id")
     .exec()
     .then((doc) => {
       console.log("From db", doc);
@@ -355,11 +355,36 @@ exports.users_get_by_email = (req, res) => {
     });
 };
 
+exports.user_pending = (req, res) => {
+  User.find({ account_status: "Pending" })
+
+    .select("name email account_status user_type")
+    .exec()
+    .then((docs) => {
+      console.log("From db", docs);
+      if (docs) {
+        res.status(200).json({
+          user: docs,
+        });
+      } else {
+        res.status(404).json({
+          message: "No valid entry found",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
 //get user by name
 exports.users_get_by_name = (req, res) => {
-  const name = req.params.name;
+  const name = req.body.name;
   User.find({ name: name })
-    .select("name email account_status is_admin _id")
+    .select("name email account_status user_type _id")
     .exec()
     .then((doc) => {
       console.log("From db", doc);
@@ -378,7 +403,7 @@ exports.users_get_by_name = (req, res) => {
 };
 
 exports.user_delete = (req, res) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   User.deleteOne({ _id: id })
     .exec()
     .then(() => {

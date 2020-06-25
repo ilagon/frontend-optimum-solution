@@ -13,17 +13,19 @@ router.patch("/recover/:token", authReset, UserController.resetPassword); //A ch
 //s2
 //view customer details
 router.get("/", UserController.user_get_all); //A checked
-//view customer by email
-router.get("/find/:email", UserController.users_get_by_email); //change email name userid to body not params
-//view customer by email
-router.get("/:name", UserController.users_get_by_name);
-//view customer details by id
-router.get("/search/:userId", UserController.user_get_by_id);
-//view customer by name
-router.delete("/:userId", UserController.user_delete);
+//search customer by email
+router.get("/search/email", UserController.users_get_by_email); // A checked
+//search customer by name
+router.get("/search/name", UserController.users_get_by_name); // A checked
+//search customer by id
+router.get("/search/userId", UserController.user_get_by_id); // A checked
+//search for pending customers
+router.get("/pending", UserController.user_pending); // A checked
+//delete users
+router.delete("/:userId", UserController.user_delete); //In review
 //account activate
-router.patch("/:userId/activate", UserController.update_activate_account);
+router.patch("/activate/:userId", UserController.update_activate_account); // A checked
 //account deactivate
-router.patch("/:userId/deactivate", UserController.update_deactivate_account);
+router.patch("/deactivate/:userId", UserController.update_deactivate_account); // A checked
 
 module.exports = router;

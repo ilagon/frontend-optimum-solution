@@ -271,7 +271,7 @@ exports.creditcard_approve = (req, res) => {
   CreditCard.updateOne(
     { _id: id },
     { $set: { creditcard_status: "Active" } },
-    (docs) => {
+    () => {
       if (creditcard_type == "Platinum") {
         CreditCard.updateOne(
           { _id: id },
@@ -340,11 +340,9 @@ exports.creditcard_deny = (req, res) => {
 
 //reset credit balance to credit limit
 exports.reset_credit_balance = (req, res) => {
-  const creditLimit = req.body.creditcard_limit;
-
   CreditCard.updateMany(
     { creditcard_status: "Active" },
-    { $set: { creditcard_balance: creditLimit } }
+    { $set: { creditcard_balance: creditcard_limit } }
   )
     .exec()
     .then((result) => {
