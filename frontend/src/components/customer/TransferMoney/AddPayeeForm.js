@@ -14,7 +14,7 @@ import axios from "axios";
 const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
   formControl: {
-    minWidth: 560,
+    minWidth: 480,
     float: 'left',
     marginLeft: '50px'
   },
@@ -27,22 +27,31 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(7),
-      width: '70ch',
       color: '#173A77',
       float: 'left'
     },
   },
   margin: {
-    width: '70%',
+    width: "260px",
     height: '70px',
     marginLeft: '300px',
     margin: theme.spacing(2),
-    marginTop: '400px'
+    marginTop: '400px',
+    backgroundColor: "#e26448",
+    "&:hover": {
+      backgroundColor: "#e26448",
+    },
+    fontSize: "1.25em",
+    color: "white",
+    fontWeight: "bold",
   },
   cancel: {
-    width: '70%',
+    width: "260px",
     height: '70px',
     marginLeft: '300px',
+    fontSize: "1.25em",
+    color: "white",
+    fontWeight: "bold",
   },
   frontKeepLeft: {
     float: 'left',
@@ -114,7 +123,7 @@ export default function AddPayeeForm() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <div className={styles.formBody}>
-            <p style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>To</p>
+            <h1 style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77"}}>To</h1>
           </div>
         </Grid>
       </Grid>
@@ -147,7 +156,6 @@ export default function AddPayeeForm() {
             >
               <option aria-label="None" value="" />
               <option value='Optimum Digibank'>Optimum Digibank</option>
-              <option value='Optimum Digibank'>whatever fuck bank you can think of</option>
             </Select>
           </FormControl>
 

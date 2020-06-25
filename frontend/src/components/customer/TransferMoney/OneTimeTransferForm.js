@@ -184,7 +184,6 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
             >
               <option aria-label="None" value="" />
               <option value='Optimum Digibank'>Optimum Digibank</option>
-              <option value='Optimum Digibank'>whatever fuck bank you can think of</option>
             </Select>
           </FormControl>
 
