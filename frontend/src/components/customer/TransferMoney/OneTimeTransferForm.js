@@ -14,21 +14,19 @@ import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    minWidth: 560,
-    float: 'left',
-    marginLeft: '50px'
+    minWidth: 240,
+   marginRight: '439px',
+   float: 'right'
   },
   formControl2: {
     margin: theme.spacing(6),
-    minWidth: 650,
+    minWidth: 240,
     float: 'left',
     marginLeft: '5px'
   },
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(7),
-      width: '70ch',
-      color: '#173A77',
       float: 'left'
     },
   },
@@ -39,22 +37,20 @@ const useStyles = makeStyles((theme) => ({
     float: 'left',
     marginLeft: '5px'
   },
-  frontKeepLeft: {
-    float: 'left',
-    margin: theme.spacing(2),
-    marginLeft: '5px'
-  },
-}));
 
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText('#AA3A21'),
-    backgroundColor: '#AA3A21',
-    '&:hover': {
-      backgroundColor: '#AA3A21',
+  nextButton: {
+    marginTop: "100px",
+    width: "260px",
+    backgroundColor: "#e26448",
+    color: "white",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#e26448",
     },
+    fontSize: "1.25em"
   },
-}))(Button);
+ 
+}));
 
 var cards = [];
 
@@ -153,16 +149,16 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <div className={styles.formBody}>
-            <p style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>To</p>
+            <h1 style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77"}}>To</h1>
           </div>
-          <div>
-            <p style={{ float: "right", marginRight: "740px", marginTop: "60px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>From</p><br />
+          <div className={styles.formBody2}>
+            <h1 style={{ float: "right", marginRight: "700px", marginTop: "60px", fontWeight: "bold", color: "#173a77"}}>From</h1><br />
           </div>
         </Grid>
       </Grid>
       {/* Receipent Details */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8} lg={6}>
+        <Grid item xs={12} lg={6}>
           <form className={classes.root} noValidate autoComplete="on">
             <TextField
               required
@@ -179,7 +175,6 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
             <InputLabel htmlFor="bankSelect">Select Bank</InputLabel>
             <Select
               required
-              className={styles.selectColor}
               native
               value={state.recipentBank}
               onChange={handleChange}
@@ -194,6 +189,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
           </FormControl>
 
           <form className={classes.root} noValidate autoComplete="on">
+          <div>
             <TextField
               required
               id="accNum"
@@ -203,7 +199,8 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               onChange={handleChange}
               inputProps={{name: 'recipentAccNo'}}
             />
-            <br></br>
+            </div>
+            <div>
             <TextField
               required
               id="transferAmt"
@@ -213,6 +210,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
               onChange={handleChange}
               inputProps={{name: 'transferAmount'}}
             />
+            </div>
           </form>
         </Grid>
         {/* Sender Details */}
@@ -222,7 +220,6 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
             <InputLabel htmlFor="creditCardSelect">Select CreditCard</InputLabel>
             <Select
               required
-              className={styles.selectColor}
               native
               value={state.senderCreditCard}
               onChange={CreditCardChange}
@@ -238,21 +235,14 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
             ))}
             </Select>
           </FormControl>
-          <div className={classes.frontKeepLeft}>
-            <Typography component="h2" variant="h4" color="primary" gutterBottom>
-              Current Balance
-    </Typography>
-            <Typography component="p" variant="h4" color="primary">
-            {state.senderCreditCardBalance==='' ? '' : '$' + state.senderCreditCardBalance}
-  </Typography>
-  <Typography component="h2" variant="h5" color="secondary">
-    <br></br>
-    {state.senderCreditCardBalance<state.transferAmount ? 'Please type in an amount less than the balance amount' : ''}
-  </Typography>
+          <div className={styles.frontKeepLeft}>
+            <p>Current Balance</p>
+            <p>{state.senderCreditCardBalance==='' ? '' : '$' + state.senderCreditCardBalance}</p>
+  <p className={styles.errorMessage}><br></br>{state.senderCreditCardBalance<state.transferAmount ? 'Please type in an amount less than the balance amount' : ''}</p>
           </div>
-          <ColorButton variant="contained" color="secondary" className={classes.margin} onClick={handleRoute}>
+          <Button variant="contained" className={classes.nextButton} onClick={handleRoute}>
             Next
-</ColorButton>
+</Button>
         </Grid>
       </Grid>
     </div>

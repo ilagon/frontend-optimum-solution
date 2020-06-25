@@ -1,7 +1,7 @@
 .wrapper {
-        margin-left: 80px;
+        margin-left: 200px;
       text-decoration: none;
-      font-size: 60px; /* 1em = 16px */
+      font-size: 45px; /* 1em = 16px */
     color:  #B9B9B9;
     position: relative;
     text-align: left;
@@ -12,7 +12,7 @@
     }
 
 .rapper{
-    font-size: 60px; /* 1em = 16px */
+    font-size: 45px; /* 1em = 16px */
     text-decoration: none;
     color: #B9B9B9 ;
     text-align: right;
@@ -20,15 +20,25 @@
     flex-grow: 1;
     white-space: nowrap;
     width: 100%;
-    margin: auto 200px;
+    margin: auto 500px;
 }
+
+.frontKeepLeft{
+    
+   margin-right: 500px;
+    color: #173a77;
+    font-size: 1.25em;
+  }
 
 .selected{
     text-decoration: underline;
     color:  #173A77;
   }
-  
 
+.errorMessage {
+    color: red;
+}
+  
 .FormTitle {
     font-size: 28px;
     color: #AA3A21 !important;
@@ -62,7 +72,12 @@
 
 .formBody {
     margin-left: 60px;
-    float: left
+    float: left;
+    font-size: 1.25em;
+}
+
+.formBody2 {
+    font-size: 1.25em;
 }
 
 .content {

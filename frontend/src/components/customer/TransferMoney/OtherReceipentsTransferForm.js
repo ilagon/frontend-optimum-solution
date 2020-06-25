@@ -44,17 +44,18 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     marginLeft: '5px'
   },
-}));
-
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText('#AA3A21'),
-    backgroundColor: '#AA3A21',
-    '&:hover': {
-      backgroundColor: '#AA3A21',
+  addButton: {
+   float: 'right',
+    width: "260px",
+    backgroundColor: "#e26448",
+    color: "white",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#e26448",
     },
+    fontSize: "1.25em"
   },
-}))(Button);
+}));
 
 export default function OtherReceipentsTransferForm() {
 
@@ -115,9 +116,9 @@ console.log(payeeList);
       <Grid container spacing={3}>
         <Grid item xs={12}>
               {/* Payee Button */}
-                <ColorButton onClick={addHandle} variant="contained" color="secondary" className={classes.margin}>
+                <Button onClick={addHandle} variant="contained" className={classes.addButton}>
             Add Payee
-        </ColorButton>
+        </Button>
         </Grid>
         </Grid>
 

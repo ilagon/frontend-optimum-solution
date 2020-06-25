@@ -24,22 +24,32 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   margin: {
-    width: '80%',
+    width: "260px",
     height: '70px',
     marginRight: '900px',
-
-    marginTop: '200px'
+    color: "white",
+    fontWeight: "bold",
+    marginTop: '200px',
+    backgroundColor: "#e26448",
+    "&:hover": {
+      backgroundColor: "#e26448",
+    },
+    fontSize: "1.25em"
   },
   cancel: {
-    width: '80%',
+    width: "260px",
     height: '70px',
     marginRight: '900px',
+    fontSize: "1.25em",
+    color: "white",
+    fontWeight: "bold",
   },
   frontKeepLeft: {
     float: 'left',
     margin: theme.spacing(2),
     marginLeft: '5px'
   },
+
 }));
 
 const ColorButton = withStyles((theme) => ({
@@ -112,23 +122,23 @@ export default function SubmitTransferPage() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <div className={styles.formBody}>
-            <p style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>To</p>
+            <h1 style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77"}}>To</h1>
           </div>
-          <div className={styles.formFromBody}>
-            <p style={{ marginLeft: "180px", marginTop: "60px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>From</p><br />
+          <div className={styles.formBody2}>
+            <h1 style={{ float: "right", marginRight: "700px", marginTop: "60px", fontWeight: "bold", color: "#173a77"}}>From</h1><br />
           </div>
         </Grid>
       </Grid>
       {/* Receipent Details */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8} lg={6}>
-          <div className={styles.fromBody}>
-          <p style={{whiteSpace:"nowrap",marginRight: "460px",color: "#173a77", fontSize: "1.55em"}}>Reference No.: 1234567</p>
-  <p style={{marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>{states.recipientName}</p>
-          </div>
+        <Grid item xs={12} md={7} lg={6}>
+        
+          <p style={{whiteSpace:"nowrap",marginRight: "400px",color: "#173a77", fontSize: "1.55em"}}>Reference No.: 1234567</p>
+  <p style={{color: "#173a77", fontSize: "1.55em"}}>{states.recipientName}</p>
+        
 
          
-            <p style={{ whiteSpace:"nowrap",marginRight: "480px",color: "#173a77", fontSize: "1.55em"}}>{states.recipentBank} Savings Account</p>
+            <p style={{ whiteSpace:"nowrap",marginRight: "400px",color: "#173a77", fontSize: "1.55em"}}>{states.recipentBank} Savings Account</p>
        
             <p style={{ whiteSpace:"nowrap",marginRight: "570px",color: "#173a77", fontSize: "1.55em"}}>{states.recipentAccNo}</p>
             <p style={{ whiteSpace:"nowrap",marginRight: "630px",color: "#173a77", fontSize: "1.55em"}}>${states.transferAmount}</p>
