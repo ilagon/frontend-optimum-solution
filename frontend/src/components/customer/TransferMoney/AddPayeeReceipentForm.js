@@ -61,8 +61,6 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
-var cards = [];
-
 export default function AddPayeeReceipentForm() {
   const [state, setState] = React.useState({
     recipientName: '',
@@ -77,8 +75,9 @@ export default function AddPayeeReceipentForm() {
   var retrievedData = localStorage.getItem("transferDetails");
   var states = JSON.parse(retrievedData);
 
-  cards = JSON.parse(localStorage.getItem("UserCreditCards"));
+  var cards = JSON.parse(localStorage.getItem("UserCreditCards"));
   console.log(cards);
+
   function applySelectedPayeeDetails(){
 setState({
   ...state,
