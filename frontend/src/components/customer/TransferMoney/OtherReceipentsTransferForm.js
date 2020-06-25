@@ -79,6 +79,7 @@ console.log(payeeList);
 
   const addHandle= () => {
     window.location.href ="/AddPayee";
+    //window.location.href ="/SetTransferFromPayeeList";
  }
 
  const selectPayee= (name, accNo) => {
@@ -87,7 +88,7 @@ console.log(payeeList);
     recipientName: name,
     recipentAccNo: accNo});
   localStorage.setItem("transferDetails", JSON.stringify(state));
-  window.location.href ="/TransferMoney/SetTransferFromPayeeList";
+  window.location.href ="/SetTransferFromPayeeList";
 }
 
   return (

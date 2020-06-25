@@ -125,7 +125,7 @@ export default function Dashboard() {
         <Route path="/TransferMoney" component={TransferMoneyPage}/>
         <Route path="/AddPayee" component={AddPayeeForm}/>
         <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
-        <Route path="/TransferMoney/SetTransferFromPayeeList" component={AddPayeeReceipentForm}/>
+        <Route path="/SetTransferFromPayeeList" component={AddPayeeReceipentForm}/>
         <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
         <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
         <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
