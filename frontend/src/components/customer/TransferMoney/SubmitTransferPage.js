@@ -90,16 +90,16 @@ export default function SubmitTransferPage() {
       })
       .then((response2) => {
         console.log(response2);
-        window.location.href = "/Payment/Successful";
+        window.location.href = "/Transfer/Successful";
       })
       .catch((error) => {
         console.log(error);
-        window.location.href = "/Payment/Unsuccessful";
+        window.location.href = "/Transfer/Unsuccessful";
       });
   })
   .catch((error) => {
     console.log(error);
-    window.location.href = "/Payment/Unsuccessful";
+    window.location.href = "/Transfer/Unsuccessful";
   });
 };
 

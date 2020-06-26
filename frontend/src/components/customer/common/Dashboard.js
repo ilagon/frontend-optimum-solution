@@ -41,6 +41,9 @@ import CreditCardConfirm from '../CreditCard/CreditcardConfirmationPage';
 
 import TaxPaymentRoutes from "../TaxPayment/TaxPaymentRoutes";
 
+import {TransferSuccessfulPage} from '../ResultPage/TransferSuccessful';
+import {TransferUnSuccessfulPage} from '../ResultPage/TransferUnsuccessful';
+
 export default function Dashboard() {
 
   return (
@@ -128,6 +131,8 @@ export default function Dashboard() {
         <Route path="/SetTransferFromPayeeList" component={AddPayeeReceipentForm}/>
         <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
         <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
+        <Route path="/Transfer/Successful" component={TransferSuccessfulPage} />
+        <Route path="/Transfer/Unsuccessful" component={TransferUnSuccessfulPage} />
         <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
         <Route exact path="/apply-creditcard/creditcard-name" component={CreditCardName}/>
         <Route exact path="/apply-creditcard/creditcard-submit" component={CreditCardSubmit}></Route>
