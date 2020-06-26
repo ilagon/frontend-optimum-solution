@@ -69,7 +69,7 @@ export default function ApprovalStatus() {
 
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/`)
+      .get(`http://localhost:9000/users/pending`)
 
       .then((response) => {
         // Retrieve from object => object => array (Users)
@@ -96,7 +96,7 @@ export default function ApprovalStatus() {
 
   const approveCustomer = () => {
     axios
-      .patch(`http://localhost:9000/users/${idState}/activate`)
+      .patch(`http://localhost:9000/users/activate`)
       .then((response) => {
         console.log(response.data.Users);
       })
@@ -105,7 +105,7 @@ export default function ApprovalStatus() {
 
   const denyCustomer = () => {
     axios
-      .patch(`http://localhost:9000/users/${idState}/deactivate`)
+      .patch(`http://localhost:9000/users/deactivate`)
       .then((response) => {
         console.log(response.data.Users);
       })

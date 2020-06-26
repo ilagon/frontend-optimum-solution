@@ -184,7 +184,7 @@ export default function Overview() {
                         component="th"
                         scope="row"
                       >
-                        {row._id}
+                        {row.user._id}
                       </TableCell>
                       <TableCell style={{ letterSpacing: "2px" }} width="12%">
                         {row.user.account_status}
