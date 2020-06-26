@@ -46,7 +46,7 @@ router.get("/search/cardId", creditcardController.creditcard_search_by_cardid); 
 router.get("/search/userId", creditcardController.creditcard_search_by_userid); // A checked
 
 //ain testing shit
-router.get("/search/testing", creditcardController.ain_testing); // A checked
+router.get("/search/testing", creditcardController.ain_testing); // A testing, it doesn't work yet
 
 //credit card approval approve function
 router.patch("/approve", creditcardController.creditcard_approve); // A you need to pass the creditcard_type in the body

@@ -13,7 +13,7 @@ exports.creditcard_create = (req, res) => {
 
       const creditcard = new CreditCard({
         _id: mongoose.Types.ObjectId(),
-//Accept current change
+        //Accept current change
         creditcard_status: req.body.creditcard_status,
         creditcard_limit: req.body.creditcard_limit,
         creditcard_type: req.body.creditcard_type,
@@ -30,7 +30,7 @@ exports.creditcard_create = (req, res) => {
         createdCust: {
           cardId: result._id,
 
-//accept current change
+          //accept current change
           creditcard_status: result.creditcard_status,
           creditcard_limit: result.creditcard_limit,
           creditcard_type: result.creditcard_type,
@@ -90,7 +90,7 @@ exports.creditcard_search_by_cardid = (req, res) => {
       } else {
         res.status(404).json({
           message: "No valid entry found",
-//accept current change
+          //accept current change
         });
       }
     })
@@ -380,7 +380,7 @@ exports.creditcard_deny = (req, res) => {
 //reset credit balance to credit limit
 exports.reset_credit_balance = (req, res) => {
   CreditCard.updateMany(
-//accept current change
+    //accept current change
     { creditcard_status: "Active" },
     { $set: { creditcard_balance: creditcard_limit } }
   )
