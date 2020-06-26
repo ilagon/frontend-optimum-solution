@@ -47,32 +47,32 @@ function FAQ(props) {
   return (
     <section className={classes.root} id="FAQ">
       <Container className={classes.container}>
-        <Typography variant="h2" marked="center" className={classes.title} component="h2">
+        <Typography id ="FAQ1" variant="h2" marked="center" className={classes.title} component="h2">
           Frequently Asked Questions
         </Typography>
         <Grid>
-          <Typography variant="h5" component="h5" align="left" className={classes.qns}>
+          <Typography id ="FAQ2" variant="h5" component="h5" align="left" className={classes.qns}>
             How to apply for Credit Card?
           </Typography>
-          <Typography variant="body1" align="left" className={classes.ans}>
+          <Typography id ="FAQ3" variant="body1" align="left" className={classes.ans}>
             Simply login to your Optimum DigiBank Internet Banking to apply.
           </Typography>
-          <Typography variant="h5" component="h5" align="left" className={classes.qns}>
+          <Typography id ="FAQ4" variant="h5" component="h5" align="left" className={classes.qns}>
             What is the minimum income level to apply for Credit Card?
           </Typography>
-          <Typography variant="body1" align="left" className={classes.ans}>
+          <Typography id ="FAQ5" variant="body1" align="left" className={classes.ans}>
             To qualify, you’ll need to earn a minimum annual income of S$30,000.
           </Typography>
-          <Typography variant="h5" component="h5" align="left" className={classes.qns}>
+          <Typography id ="FAQ6" variant="h5" component="h5" align="left" className={classes.qns}>
             What is eligibility for Credit Card Application?
           </Typography>
-          <Typography variant="body1" align="left" className={classes.ans}>
+          <Typography id ="FAQ7" variant="body1" align="left" className={classes.ans}>
             You will need to be above 21 years and earn a gross annual income of S$30k.
           </Typography>
-          <Typography variant="h5" component="h5" align="left" className={classes.qns}>
+          <Typography id ="FAQ8" variant="h5" component="h5" align="left" className={classes.qns}>
             How to check Credit Card Application Status?
           </Typography>
-          <Typography variant="body1" align="left" className={classes.ans}>
+          <Typography id ="FAQ9" variant="body1" align="left" className={classes.ans}>
             Log in to Optimum Digibank with your User ID and Password.
             Click on CreditCard Status under Service.
             Please allow 5 to 7 working days to process the application.

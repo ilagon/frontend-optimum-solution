@@ -45,10 +45,10 @@ function MainPage(props) {
 
   return (
     <MainPageLayout backgroundClassName={classes.background}>
-      <Typography variant="h2" marked="center" className={classes.title} component="h2">
+      <Typography id ="MainPage1" variant="h2" marked="center" className={classes.title} component="h2">
         Choose the right bank today
       </Typography>
-      <Typography variant="h5" component="h5" align="center">
+      <Typography id ="MainPage2" variant="h5" component="h5" align="center">
         <div>
           We craft the best possibilities for you.
           <br />

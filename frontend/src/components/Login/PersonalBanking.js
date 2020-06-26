@@ -65,11 +65,11 @@ function PersonalBanking(props) {
           <Grid item xs={12} md={6}>
 
             <Box className={classes.box} align="center">
-              <Typography variant="h2" className={classes.title} component="h2">
+              <Typography id ="PersonalBanking1" variant="h2" className={classes.title} component="h2">
                 Personal Banking
               </Typography>
 
-              <Typography variant="h4" className={classes.subtitle} component="h2">
+              <Typography id ="PersonalBanking2" variant="h4" className={classes.subtitle} component="h2">
                 Considering your daily purchases? Optimum got your back.
               </Typography>
 
@@ -78,22 +78,22 @@ function PersonalBanking(props) {
 
                   <Grid item xs={12} md={6}>
                     <WorkIcon />
-                    <Typography variant="h6" align="center">
+                    <Typography id ="PersonalBanking3" variant="h6" align="center">
                       EXPERIENCE
                     </Typography>
 
-                    <Typography variant="body1" align="center">
+                    <Typography id ="PersonalBanking4" variant="body1" align="center">
                       We craft the absolute for you.
                     </Typography>
                   </Grid>
                   <Grid item xs={12} md={6}>
 
                     <AttachMoneyIcon />
-                    <Typography variant="h6" align="center">
+                    <Typography id ="PersonalBanking5" variant="h6" align="center">
                       CONVENIENCE
                     </Typography>
 
-                    <Typography variant="body1" align="center">
+                    <Typography id ="PersonalBanking6" variant="body1" align="center">
                       With our DigitalBank, you can worry less.
                     </Typography>
 
@@ -101,10 +101,10 @@ function PersonalBanking(props) {
                   <Grid item xs={12} md={6}>
 
                     <LockIcon />
-                    <Typography variant="h6">
+                    <Typography id ="PersonalBanking7" variant="h6">
                       SECURE. SAFE ACCESS.
                     </Typography>
-                    <Typography variant="body1" align="center">
+                    <Typography id ="PersonalBanking8" variant="body1" align="center">
                       Safety is not just our priority.
                       We Safeguard what is on your heart.
                     </Typography>
@@ -112,11 +112,11 @@ function PersonalBanking(props) {
 
                   <Grid item xs={12} md={6}>
                     <EditIcon />
-                    <Typography variant="h6" align="center">
+                    <Typography id ="PersonalBanking9" variant="h6" align="center">
                       EASY TO USE
                     </Typography>
 
-                    <Typography variant="body1" align="center">
+                    <Typography id ="PersonalBanking10" variant="body1" align="center">
                       We support our customers all the way, even if it is about a reach of a pocket.
                     </Typography>
 

@@ -72,3 +72,5 @@ MainPageLayout.propTypes = {
 };
 
 export default withStyles(styles)(MainPageLayout);
+
+

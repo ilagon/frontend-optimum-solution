@@ -163,7 +163,7 @@ export default function ResetPass() {
               </Button>
             </div>
 
-            <Typography component="h6" variant="h6" className={classes.bodytxt}>
+            <Typography id ="ResetPass1" component="h6" variant="h6" className={classes.bodytxt}>
               Click here to return to the
               {' '}
               <Link href="/Login" className={classes.bodytxt2}> Login Page </Link>

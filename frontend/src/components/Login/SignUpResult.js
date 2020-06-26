@@ -56,13 +56,13 @@ export default function SignUpResult() {
         <div className={classes.paper}>
           <CheckSharpIcon style={{ color: '388e3c', fontSize: 120 }} />
 
-          <Typography component="h1" variant="h4" className={classes.title}>
+          <Typography id ="SignUpResult1" component="h1" variant="h4" className={classes.title}>
             Email successfully registered!
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id ="SignUpResult2" component="h2" variant="h6" className={classes.bodytxt}>
             Please wait 1-2 business days for admins to activate your account.
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id ="SignUpResult3" component="h2" variant="h6" className={classes.bodytxt}>
             <Link href="/Login" className={classes.bodytxt2}>Click here if are not redirected after a few seconds</Link>
           </Typography>
         </div>
