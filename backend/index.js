@@ -7,7 +7,7 @@ const creditcardRoutes = require("./routes/creditcard");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 7001;
+const PORT = process.env.PORT || 9000;
 //mongo connection - mongoose is a library to simplify syntax to mongo DB
 mongoose.Promise = global.Promise; // gets a response from DB fail or success
 
