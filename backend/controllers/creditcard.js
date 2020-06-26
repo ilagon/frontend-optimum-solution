@@ -74,7 +74,7 @@ exports.creditcard_get_all = (req, res) => {
 
 //overview page user search by card id
 exports.creditcard_search_by_cardid = (req, res) => {
-  const cardId = req.params.cardId;
+  const cardId = req.body.cardId;
   CreditCard.findById(cardId)
     .populate("user", ["email", "account_status"])
     .exec()
@@ -99,8 +99,7 @@ exports.creditcard_search_by_cardid = (req, res) => {
 };
 
 exports.creditcard_search_by_userid = (req, res) => {
-  const id = req.params._id;
-  CreditCard.findOne({ "User.$_id": id })
+  CreditCard.find({ user: req.body.userId })
     .populate("user", ["email", "account_status"])
     .exec()
     .then((docs) => {
@@ -114,6 +113,38 @@ exports.creditcard_search_by_userid = (req, res) => {
           message: "No valid entry found",
         });
       }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+//ain testing
+exports.ain_testing = (req, res) => {
+  const email = req.body.email;
+  CreditCard.find()
+    // CreditCard.findOne({ email: req.body.email })
+    .populate("user", ["email", "account_status"])
+    .exec()
+    .then((docs) => {
+      const response = {
+        count: docs.length,
+        CreditCard: docs.map((doc) => {
+          return {
+            creditcard_status: doc.creditcard_status,
+            creditcard_limit: doc.creditcard_limit,
+            creditcard_balance: doc.creditcard_balance,
+            creditcard_type: doc.creditcard_type,
+            user: doc.user,
+            email: doc.user.email,
+            account_status: doc.user.account_status,
+          };
+        }),
+      };
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log(err);
@@ -266,7 +297,7 @@ exports.creditcard_pending_search_id = (req, res) => {
 
 //credit card approval approve
 exports.creditcard_approve = (req, res) => {
-  const id = req.params.cardId;
+  const id = req.body.cardId;
   const creditcard_type = req.body.creditcard_type;
   CreditCard.updateOne(
     { _id: id },
@@ -319,7 +350,7 @@ exports.creditcard_approve = (req, res) => {
 
 //credit card approval deny
 exports.creditcard_deny = (req, res) => {
-  const id = req.params.cardId;
+  const id = req.body.cardId;
 
   CreditCard.updateOne(
     { creditcard_status: "Pending", _id: id },
