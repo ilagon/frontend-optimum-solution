@@ -10,7 +10,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
@@ -34,32 +33,32 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   margin: {
-    width: '80%',
+    width: "260px",
     height: '70px',
     marginLeft: '250px',
     margin: theme.spacing(2),
-    marginTop: '200px'
+    marginTop: '200px',
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "#e26448",
+    "&:hover": {
+      backgroundColor: "#e26448",
+    },
+    fontSize: "1.25em"
   },
   cancel: {
-    width: '80%',
+    width: "260px",
     height: '70px',
     marginLeft: '250px',
+    fontSize: "1.25em",
+    color: "white",
+    fontWeight: "bold",
   },
   frontKeepLeft: {
     float: 'left',
     marginLeft: '5px'
   },
 }));
-
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText('#AA3A21'),
-    backgroundColor: '#AA3A21',
-    '&:hover': {
-      backgroundColor: '#AA3A21',
-    },
-  },
-}))(Button);
 
 export default function AddPayeeReceipentForm() {
   const [state, setState] = React.useState({
@@ -105,7 +104,7 @@ console.log(state);
 
 const getCreditCardBalance = (creditCardType) => {
       var balance = 0.0;
-      if (cards.length!=0){
+      if (cards.length!==0){
         for (const [index, value] of cards.entries()) {
           if(creditCardType===value.creditcard_type){
           balance=value.creditcard_balance;
@@ -118,7 +117,7 @@ const getCreditCardBalance = (creditCardType) => {
 
 const getCreditCardID = (creditCardType) => {
   var creditCardID = '';
-  if (cards.length!=0){
+  if (cards.length!==0){
     for (const [index, value] of cards.entries()) {
       if(creditCardType===value.creditcard_type){
      creditCardID=value._id;
@@ -181,10 +180,10 @@ const getCreditCardID = (creditCardType) => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <div className={styles.formBody}>
-            <p style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>To</p>
+            <h1 style={{ float: "left", marginTop: "50px", fontWeight: "bold", color: "#173a77"}}>To</h1>
           </div>
-          <div className={styles.formFromBody}>
-            <p style={{ marginLeft: "180px", marginTop: "60px", fontWeight: "bold", color: "#173a77", fontSize: "1.25em" }}>From</p><br />
+          <div className={styles.formBody2}>
+            <h1 style={{ marginLeft: "180px", marginTop: "60px", fontWeight: "bold", color: "#173a77"}}>From</h1><br />
           </div>
         </Grid>
       </Grid>
@@ -219,7 +218,6 @@ const getCreditCardID = (creditCardType) => {
             <InputLabel htmlFor="creditCardSelect">Select CreditCard</InputLabel>
             <Select
               required
-              className={styles.selectColor}
               native
               value={state.senderCreditCard}
               onChange={CreditCardChange}
@@ -247,12 +245,12 @@ const getCreditCardID = (creditCardType) => {
     {state.senderCreditCardBalance<state.transferAmount ? 'Please type in an amount less than the balance amount' : ''}
   </Typography>
           </div>
-        <Button onClick={nextHandler} variant="contained" color="secondary" className={classes.margin}>
+        <Button onClick={nextHandler} variant="contained" className={classes.margin}>
             Next
         </Button>
-        <ColorButton onClick={cancelHandler} variant="contained" color="secondary" className={classes.cancel}>
+        <Button onClick={cancelHandler} variant="contained" className={classes.cancel}>
             Cancel
-        </ColorButton>
+        </Button>
         </Grid>
       </Grid>
       </div>

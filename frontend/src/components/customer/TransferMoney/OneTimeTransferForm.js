@@ -82,7 +82,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   const getCreditCardBalance = (creditCardType) => {
         var balance = 0.0;
-        if (cards.length!=0){
+        if (cards.length!==0){
           for (const [index, value] of cards.entries()) {
             if(creditCardType===value.creditcard_type){
             balance=value.creditcard_balance;
@@ -95,7 +95,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   const getCreditCardID = (creditCardType) => {
     var creditCardID = '';
-    if (cards.length!=0){
+    if (cards.length!==0){
       for (const [index, value] of cards.entries()) {
         if(creditCardType===value.creditcard_type){
        creditCardID=value._id;
