@@ -37,14 +37,14 @@ export default function Overview() {
   // Upon loading, useEffect will get called
   useEffect(() => {
     getAllCustomer();
+    getTotalCustomer();
     getPendingCreditCardStatus();
     getPendingCustomer();
-    getTotalCustomer();
-  }, []);
+  });
 
   const getTotalCustomer = () => {
     axios
-      .get(`http://localhost:7001/users/`)
+      .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve the number of customer
         setCountCustomerState(response.data.count);
@@ -78,7 +78,7 @@ export default function Overview() {
 
   const getPendingCustomer = () => {
     axios
-      .get(`http://localhost:9000/pending/pending`)
+      .get(`http://localhost:9000/users/pending`)
       .then((response) => {
         // Retrieve the number of pending customer
         setPendingCustomerState(response.data.count);
