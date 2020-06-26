@@ -40,12 +40,18 @@ router.post("/create", creditcardController.creditcard_create); //A checked
 router.patch("/resetBalance", creditcardController.reset_credit_balance); //A will review later
 
 //overview customer list search by card id
-router.get("/:cardId", creditcardController.creditcard_search_by_cardid); // A checked
+router.get("/search/cardId", creditcardController.creditcard_search_by_cardid); // A checked
+
+//overview customer list search by user id
+router.get("/search/userId", creditcardController.creditcard_search_by_userid); // A checked
+
+//ain testing shit
+router.get("/search/testing", creditcardController.ain_testing); // A testing, it doesn't work yet
 
 //credit card approval approve function
-router.patch("/approve/:cardId", creditcardController.creditcard_approve); // A you need to pass the creditcard_type in the body
+router.patch("/approve", creditcardController.creditcard_approve); // A you need to pass the creditcard_type in the body
 
 //credit card approval reject function
-router.patch("/reject/:cardId", creditcardController.creditcard_deny); // A checked
+router.patch("/reject", creditcardController.creditcard_deny); // A checked
 
 module.exports = router;

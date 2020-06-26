@@ -92,7 +92,7 @@ export default function Sidebar() {
           <ListItemIcon className={classes.iconStyle}>
             <FontAwesomeIcon icon={faHome} color="white" />
           </ListItemIcon>
-          <Link to="/" style={{ textDecoration: "none", textTransform:"uppercase" }}>
+          <Link to="/Admin" style={{ textDecoration: "none", textTransform:"uppercase" }}>
             <ListItemText
               // ListItemText uses the default Typography Settings
               disableTypography

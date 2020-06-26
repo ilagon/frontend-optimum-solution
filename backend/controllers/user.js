@@ -369,20 +369,22 @@ exports.users_get_by_email = (req, res) => {
 
 exports.user_pending = (req, res) => {
   User.find({ account_status: "Pending" })
-
     .select("name email account_status user_type")
     .exec()
     .then((docs) => {
-      console.log("From db", docs);
-      if (docs) {
-        res.status(200).json({
-          user: docs,
-        });
-      } else {
-        res.status(404).json({
-          message: "No valid entry found",
-        });
-      }
+      const response = {
+        count: docs.length,
+        Users: docs.map((doc) => {
+          return {
+            _id: doc._id,
+            name: doc.name,
+            email: doc.email,
+            user_type: doc.user_type,
+            account_status: doc.account_status,
+          };
+        }),
+      };
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log(err);
@@ -474,6 +476,33 @@ exports.update_deactivate_account = (req, res) => {
     .then((result) => {
       console.log(result);
       res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+exports.user_active = (req, res) => {
+  User.find({ account_status: "Active", user_type: "Customer" })
+    .select("name email account_status user_type")
+    .exec()
+    .then((docs) => {
+      const response = {
+        count: docs.length,
+        Users: docs.map((doc) => {
+          return {
+            _id: doc._id,
+            name: doc.name,
+            email: doc.email,
+            user_type: doc.user_type,
+            account_status: doc.account_status,
+          };
+        }),
+      };
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log(err);

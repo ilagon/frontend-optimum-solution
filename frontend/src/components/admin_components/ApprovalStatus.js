@@ -69,7 +69,7 @@ export default function ApprovalStatus() {
 
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/pending/pending`)
+      .get(`http://localhost:9000/users/pending`)
 
       .then((response) => {
         // Retrieve from object => object => array (Users)
@@ -83,7 +83,7 @@ export default function ApprovalStatus() {
   // Searching for a specific customer
   const getSpecificCustomer = () => {
     axios
-      .get(`http://localhost:7001/users/search/${idState}`)
+      .get(`http://localhost:9000/users/search/${idState}`)
       .then((response) => {
         setCustomerState(response.data.user);
       })
@@ -96,22 +96,16 @@ export default function ApprovalStatus() {
 
   const approveCustomer = () => {
     axios
-      .patch(`http://localhost:9000/users/${idState}/activate`)
+      .patch(`http://localhost:9000/users/activate`)
       .then((response) => {
         console.log(response.data.Users);
       })
       .catch((error) => alert(error));
   };
 
-  useEffect(() => {
-    approveCustomer();
-    denyCustomer();
-    getSpecificCustomer();
-  }, [idState]);
-
   const denyCustomer = () => {
     axios
-      .patch(`http://localhost:9000/users/${idState}/deactivate`)
+      .patch(`http://localhost:9000/users/deactivate`)
       .then((response) => {
         console.log(response.data.Users);
       })

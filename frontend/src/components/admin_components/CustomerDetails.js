@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
+  Button,
   Grid,
   TableBody,
   Table,
@@ -59,26 +60,21 @@ export default function CustomerDetails() {
   // Retrieve all the customers
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:7001/users/`)
+      .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
-        
-
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
   };
 
   // Ensure that the data gets re-rendered
-  useEffect(() => {
-    getSpecificCustomer();
-  }, [idState]);
 
   // Searching for a specific customer
   const getSpecificCustomer = () => {
     axios
-      .get(`http://localhost:7001/users/search/${idState}`)
+      .get(`http://localhost:9000/users/search/${idState}`)
       .then((response) => {
         setCustomerState(response.data.user);
       })

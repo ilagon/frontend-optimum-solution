@@ -88,9 +88,6 @@ export default function CreditCardStatus() {
       .catch((error) => alert(error));
   };
 
-  useEffect(() => {
-    getApproveCreditCard();
-  }, [approveCreditCardState]);
 
   const getDenyCreditCard = () => {
     axios
@@ -99,11 +96,7 @@ export default function CreditCardStatus() {
         console.log(response.data.creditcard.creditcard_status);
       })
   };
-
-  useEffect(() => {
-    getDenyCreditCard();
-  }, [denyCreditCardState]);
-
+  
   const onClickApprove = (event) => {
     setApproveCreditCardState(event.target.value);
   };
