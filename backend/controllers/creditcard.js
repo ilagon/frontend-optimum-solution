@@ -379,10 +379,43 @@ exports.creditcard_deny = (req, res) => {
 
 //reset credit balance to credit limit
 exports.reset_credit_balance = (req, res) => {
+  const creditcard_type = req.body.creditcard_type;
   CreditCard.updateMany(
     //accept current change
     { creditcard_status: "Active" },
-    { $set: { creditcard_balance: creditcard_limit } }
+    { $set: {} },
+    () => {
+      if (creditcard_type == "Platinum") {
+        CreditCard.updateMany(
+          { creditcard_status: "Active", creditcard_type: "Platinum" },
+          { $set: { creditcard_balance: 10000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Gold") {
+        CreditCard.updateMany(
+          { creditcard_status: "Active", creditcard_type: "Gold" },
+          { $set: { creditcard_balance: 20000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Silver") {
+        CreditCard.updateMany(
+          { creditcard_status: "Active", creditcard_type: "Silver" },
+          { $set: { creditcard_balance: 30000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Women") {
+        CreditCard.updateMany(
+          { creditcard_status: "Active", creditcard_type: "Women" },
+          { $set: { ccreditcard_balance: 40000 } }
+        ).exec();
+      }
+      if (creditcard_type == "Student") {
+        CreditCard.updateMany(
+          { creditcard_status: "Active", creditcard_type: "Student" },
+          { $set: { creditcard_balance: 50000 } }
+        ).exec();
+      }
+    }
   )
     .exec()
     .then((result) => {
