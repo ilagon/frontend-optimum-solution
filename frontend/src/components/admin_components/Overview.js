@@ -37,9 +37,9 @@ export default function Overview() {
   // Upon loading, useEffect will get called
   useEffect(() => {
     getAllCustomer();
+    getPendingCustomer();
     getTotalCustomer();
     getPendingCreditCardStatus();
-    getPendingCustomer();
   });
 
   const getTotalCustomer = () => {
@@ -70,7 +70,6 @@ export default function Overview() {
       .then((response) => {
         // Retrieve the number of pending creditcard
         setPendingCreditCardState(response.data.count);
-        console.log(response.data.count);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));

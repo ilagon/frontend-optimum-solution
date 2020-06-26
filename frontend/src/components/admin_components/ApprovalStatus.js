@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#00a152",
     color: "#fff",
     right: "100px",
+    margin: "5px 5px 5px 5px"
   },
 
   denyButtonStyle: {
@@ -64,21 +65,27 @@ export default function ApprovalStatus() {
 
   // Upon loading, useEffect will get called
   useEffect(() => {
-    getAllCustomer();
-  }, []);
-
-  const getAllCustomer = () => {
+    //getAllCustomer();
     axios
-      .get(`http://localhost:9000/users/`)
-
+      .get(`http://localhost:9000/users/pending`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setAllCustomerState(response.data.Users);
-        console.log(response.data);
       })
       // throws an error if there is no data
       .catch((error) => alert(error));
-  };
+  });
+
+  // const getAllCustomer = () => {
+  //   axios
+  //     .get(`http://localhost:9000/users/pending`)
+  //     .then((response) => {
+  //       // Retrieve from object => object => array (Users)
+  //       setAllCustomerState(response.data.Users);
+  //     })
+  //     // throws an error if there is no data
+  //     .catch((error) => alert(error));
+  // };
 
   // Searching for a specific customer
   const getSpecificCustomer = () => {
@@ -94,30 +101,38 @@ export default function ApprovalStatus() {
     setIdState(event.target.value);
   };
 
-  const approveCustomer = () => {
+  const approveCustomer = (id) => {
     axios
-      .patch(`http://localhost:9000/users/${idState}/activate`)
-      .then((response) => {
-        console.log(response.data.Users);
+      .patch(`http://localhost:9000/users/activate`, {
+        userId: id,
+        status: "Active"
       })
-      .catch((error) => alert(error));
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
   };
 
-  const denyCustomer = () => {
+  const denyCustomer = (id) => {
     axios
-      .patch(`http://localhost:9000/users/${idState}/deactivate`)
+      .patch(`http://localhost:9000/users/deactivate`, {
+        userId: id
+      })
       .then((response) => {
         console.log(response.data.Users);
       })
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   const onClickApprove = (event) => {
-    setIdState(event.target.value);
+    //setIdState(event.target.value);
+    // let id = document.getElementById(`${event.target.value}`).value;
+     approveCustomer(event.target.value);
   };
 
   const onClickDeny = (event) => {
-    setIdState(event.target.value);
+    //setIdState(event.target.value);
+    denyCustomer(event.target.value);
   };
 
   return (
@@ -176,6 +191,7 @@ export default function ApprovalStatus() {
                         width="30%"
                         component="th"
                         scope="row"
+                        id={row._id}
                       >
                         {row._id}
                       </TableCell>
@@ -188,30 +204,25 @@ export default function ApprovalStatus() {
                         width="25%"
                         align="right"
                       >
-                        <Button
+                        <button
                           className={classes.approveButtonStyle}
                           variant="contained"
                           value={row._id}
                           onClick={onClickApprove}
-                          disableRipple
+                          
                         >
                           Approve
-                        </Button>
-                      </TableCell>
-                      <TableCell
-                        style={{ letterSpacing: "2px" }}
-                        width="15%"
-                        align="left"
-                      >
-                        <Button
+                        </button>
+                    
+                        <button
                           className={classes.denyButtonStyle}
                           variant="contained"
                           value={row._id}
                           onClick={onClickDeny}
-                          disableRipple
+                          
                         >
                           Deny
-                        </Button>
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}

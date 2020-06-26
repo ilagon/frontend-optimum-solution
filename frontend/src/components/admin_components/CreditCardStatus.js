@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ApproveCreditCard from "./button/approvebutton/ApproveCreditCardButton";
-import DenyCreditCard from "./button/denybutton/DenyCreditCardButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   Grid,
@@ -79,9 +77,12 @@ export default function CreditCardStatus() {
     getAllCreditCard();
   }, []);
 
-  const getApproveCreditCard = () => {
+  const getApproveCreditCard = (id, type) => {
     axios
-      .patch(`http://localhost:9000/approve/approve/${approveCreditCardState}`)
+      .patch(`http://localhost:9000/creditcard/approve/`, {
+        cardId: id,
+        card_type: type
+      })
       .then((response) => {
         console.log(response.data.creditcard.creditcard_status);
       })
@@ -98,7 +99,9 @@ export default function CreditCardStatus() {
   };
   
   const onClickApprove = (event) => {
-    setApproveCreditCardState(event.target.value);
+    let cardType = document.getElementById(`${event.target.value}type`).value;
+    //setApproveCreditCardState(event.target.value);
+    getApproveCreditCard(event.target.value, cardType);
   };
 
   const onClickDeny = (event) => {
@@ -166,7 +169,7 @@ export default function CreditCardStatus() {
                         {row.user.email}
                       </TableCell>
 
-                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      <TableCell id={`${row._id}type`} style={{ letterSpacing: "2px" }} width="15%">
                         {row.creditcard_type}
                       </TableCell>
                       <TableCell
