@@ -484,3 +484,30 @@ exports.update_deactivate_account = (req, res) => {
       });
     });
 };
+
+exports.user_active = (req, res) => {
+  User.find({ account_status: "Active", user_type: "Customer" })
+    .select("name email account_status user_type")
+    .exec()
+    .then((docs) => {
+      const response = {
+        count: docs.length,
+        Users: docs.map((doc) => {
+          return {
+            _id: doc._id,
+            name: doc.name,
+            email: doc.email,
+            user_type: doc.user_type,
+            account_status: doc.account_status,
+          };
+        }),
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};

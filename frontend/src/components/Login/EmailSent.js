@@ -49,19 +49,19 @@ export default function EmailSent() {
 
         <div className={classes.paper}>
           <MailOutlineIcon style={{ color: 'AA3A21', fontSize: 120 }} />
-          <Typography component="h1" variant="h2" className={classes.title}>
+          <Typography id ="EmailSent1" component="h1" variant="h2" className={classes.title}>
             Email Sent!
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id ="EmailSent2" component="h2" variant="h6" className={classes.bodytxt}>
             We&apos;ve sent you an email with a link to reset your password
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id ="EmailSent3" component="h2" variant="h6" className={classes.bodytxt}>
             Didn&apos;t get the email or not your email address?
             {' '}
             <Link href="/ForgetPass" className={classes.bodytxt2}>Try again.</Link>
 
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id ="EmailSent4" component="h2" variant="h6" className={classes.bodytxt}>
             Click here to return to the
             {' '}
             <Link href="/Login" className={classes.bodytxt2}> Login Page </Link>

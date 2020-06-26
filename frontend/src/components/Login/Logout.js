@@ -46,13 +46,13 @@ export default function Logout() {
       <Container id="logout" component="main" maxWidth="sm">
 
         <div className={classes.paper}>
-          <Typography component="h1" variant="h2" className={classes.title}>
+          <Typography id ="Logout1" component="h1" variant="h2" className={classes.title}>
             Logout
           </Typography>
-          <Typography component="h2" variant="h6" className={classes.bodytxt}>
+          <Typography id ="Logout2" component="h2" variant="h6" className={classes.bodytxt}>
             Thank you for banking with us!
           </Typography>
-          <Typography component="h2" variant="h6">
+          <Typography id ="Logout3" component="h2" variant="h6">
             <Link href="/Login" className={classes.bodytxt}>Click here if are not redirected after a few seconds</Link>
           </Typography>
         </div>

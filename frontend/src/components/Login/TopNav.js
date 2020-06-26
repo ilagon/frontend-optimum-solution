@@ -48,28 +48,28 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="fixed" style={{ background: '#AA3A21', boxShadow: 'none' }}>
         <Toolbar>
-          <Typography variant="h5" className={classes.title}>
+          <Typography id ="TopNav1" variant="h5" className={classes.title}>
             <a href="#MainPage" className={classes.links}>
               Optimum DigiBank
             </a>
           </Typography>
 
-          <Typography className={classes.subtitle}>
+          <Typography id ="TopNav2" className={classes.subtitle}>
             <a href="#AboutUs" className={classes.links}>
               About Us
             </a>
           </Typography>
-          <Typography className={classes.subtitle}>
+          <Typography id ="TopNav3" className={classes.subtitle}>
             <a href="#PersonalBanking" className={classes.links}>
               Personal Banking
             </a>
           </Typography>
-          <Typography className={classes.subtitle}>
+          <Typography id ="TopNav4" className={classes.subtitle}>
             <a href="#FAQ" className={classes.links}>
               FAQ
             </a>
           </Typography>
-          <Typography className={classes.subtitle}>
+          <Typography id ="TopNav5" className={classes.subtitle}>
             <a href="#ContactUs" className={classes.links}>
               Contact Us
             </a>
