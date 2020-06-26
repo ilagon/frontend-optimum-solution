@@ -21,6 +21,8 @@ router.get("/search/name", UserController.users_get_by_name); // A checked
 router.get("/search/userId", UserController.user_get_by_id); // A checked
 //search for pending customers
 router.get("/pending", UserController.user_pending); // A checked
+//search for active customers
+router.get("/active", UserController.user_active); // A checked
 //delete users
 router.delete("/delete", UserController.user_delete); // A checked
 //account activate

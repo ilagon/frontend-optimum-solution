@@ -44,7 +44,7 @@ export default function Overview() {
 
   const getTotalCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/`)
+      .get(`http://localhost:9000/users/active`)
       .then((response) => {
         // Retrieve the number of customer
         setCountCustomerState(response.data.count);
@@ -129,7 +129,7 @@ export default function Overview() {
           </Grid>
           <Grid item xs={12} md={4} lg={4}>
             <Paper className={fixedHeightPaper} elevation="3">
-              Total Customers
+              Total Active Customers
               <span>
                 <Typography variant="h1">{countCustomerState}</Typography>
               </span>
