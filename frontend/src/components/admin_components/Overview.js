@@ -29,23 +29,23 @@ export default function Overview() {
 
   const [allCustomerState, setAllCustomerState] = useState([]);
   const [countCustomerState, setCountCustomerState] = useState();
-  const [customerState, setCustomerState] = useState({});
-  const [idState, setIdState] = useState("");
-  const [searchState, setSearchState] = useState("");
-
+  const [pendingCreditCardState, setPendingCreditCardState] = useState();
+  const [pendingCustomerState, setPendingCustomerState] = useState();
+  // const [idState, setIdState] = useState("");
+  // const [searchState, setSearchState] = useState("");
 
   // Upon loading, useEffect will get called
   useEffect(() => {
     getAllCustomer();
+    getPendingCreditCardStatus();
+    getPendingCustomer();
+    getTotalCustomer();
   }, []);
 
-  // Retrieve all the customers
-  const getAllCustomer = () => {
+  const getTotalCustomer = () => {
     axios
       .get(`http://localhost:7001/users/`)
       .then((response) => {
-        // Retrieve from object => object => array (Users)
-        setAllCustomerState(response.data.Users);
         // Retrieve the number of customer
         setCountCustomerState(response.data.count);
       })
@@ -53,217 +53,168 @@ export default function Overview() {
       .catch((error) => alert(error));
   };
 
-  const getCustomerStatus = () => {
-    axios.get(`http://localhost:7001/users/`,{
-      data: {
-        account_status: "pending"
-      } 
-    }
-    
-    ).then(response=>console.log(response.data))
-  }
-
-  const handleSearchCustomerById = () => {
-    setSearchState(true);
-  };
-
-  // Ensure that the data gets re-rendered
-  useEffect(() => {
-    getSpecificCustomer();
-  }, [idState]);
-
-  // Searching for a specific customer
-  const getSpecificCustomer = () => {
+  // Retrieve all the customers
+  const getAllCustomer = () => {
     axios
-      .get(`http://localhost:7001/users/search/${idState}`)
+      .get(`http://localhost:9000/creditcard`)
       .then((response) => {
-        setCustomerState(response.data.user);
-        console.log(response.data.user);
+        // Retrieve from object => object => array (Users)
+        setAllCustomerState(response.data.creditcard);
       })
+      // throws an error if there is no data
+      .catch((error) => alert(error));
+  };
+  const getPendingCreditCardStatus = () => {
+    axios
+      .get(`http://localhost:9000/creditcard/pending`)
+      .then((response) => {
+        // Retrieve the number of pending creditcard
+        setPendingCreditCardState(response.data.count);
+        console.log(response.data.count);
+      })
+      // throws an error if there is no data
       .catch((error) => alert(error));
   };
 
+  const getPendingCustomer = () => {
+    axios
+      .get(`http://localhost:9000/pending/pending`)
+      .then((response) => {
+        // Retrieve the number of pending customer
+        setPendingCustomerState(response.data.count);
+      })
+      // throws an error if there is no data
+      .catch((error) => alert(error));
+  };
+
+  // const handleSearchCustomerById = () => {
+  //   setSearchState(true);
+  // };
+
+  // // Ensure that the data gets re-rendered
+  // useEffect(() => {
+  //   getSpecificCustomer();
+  // }, [idState]);
+
+  // // Searching for a specific customer
+  // const getSpecificCustomer = () => {
+  //   axios
+  //     .get(`http://localhost:9000/users/search/${idState}`)
+  //     .then((response) => {
+  //       setCustomerState(response.data.user);
+  //       console.log(response.data.user);
+  //     })
+  //     .catch((error) => alert(error));
+  // };
+
   return (
-      <div className={classes.appBarSpacer}>
-        <Container maxWidth="lg" className={classes.containerStyle}>
-          <Grid container spacing={3} justify="center">
-            <Grid item xs={12} md={4} lg={4}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Pending Customer Status
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={4}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Pending CreditCard Approval
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={4}>
-              <Paper className={fixedHeightPaper} elevation="3">
-                Total Customers
-                <span>
-                  <Typography variant="h1">{countCustomerState}</Typography>
-                </span>
-              </Paper>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} style={{paddingTop:"50px"}}>
-            <Paper elevation="3">
-              <TableContainer>
-                <Table className={classes.table}>
-                  <TableHead>
-                    <Typography
-                      variant="h6"
-                      style={{ letterSpacing: "3px", width: "max-content" }}
-                    >
-                      Customer List
-                    </Typography>
-                    <Grid>
-                      <FontAwesomeIcon
-                        icon={faSearch}
-                        className={classes.searchIconStyle}
-                      />
-                      <TextField
-                        id="search-with-icon"
-                        value={idState}
-                        label="SEARCH"
-                        onChange={(event) => {
-                          setIdState(event.target.value);
-                          setSearchState(true);
-                        }}
-                      />
-                    </Grid>
-                    <TableRow>
-                      <TableCell style={{ letterSpacing: "2px" }} width="20%">
-                        Customer ID
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="10%">
-                        Account Status
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="20%">
-                        Email
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
-                        Balance
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="10%">
-                        CreditCard Type
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="10%">
-                        CreditCard Status
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
-                        CreditCard Limit
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {searchState
-                      ? customerState.map((row) => (
-                          <TableRow key={row._id}>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="20%"
-                              component="th"
-                              scope="row"
-                            >
-                              {row._id}
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="10%"
-                            >
-                              {row.account_status}
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="20%"
-                            >
-                              {row.email}
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="15%"
-                            >
-                              10000
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="10%"
-                            >
-                              Gold
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="10%"
-                            >
-                              Inactive
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="15%"
-                            >
-                              10000
-                            </TableCell>
-                          </TableRow>
-                        ))
-                      : allCustomerState.map((row) => (
-                          <TableRow key={row._id}>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="20%"
-                              component="th"
-                              scope="row"
-                            >
-                              {row._id}
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="10%"
-                            >
-                              {row.account_status}
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="20%"
-                            >
-                              {row.email}
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="15%"
-                            >
-                              10000
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="10%"
-                            >
-                              Gold
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="10%"
-                            >
-                              Inactive
-                            </TableCell>
-                            <TableCell
-                              style={{ letterSpacing: "2px" }}
-                              width="15%"
-                            >
-                              10000
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+    <div className={classes.divStyle}>
+      <Container maxWidth="lg" className={classes.gridContainerStyle}>
+        <Grid container spacing={3} justify="center" style={{ width: "130%" }}>
+          <Grid item xs={12} md={4} lg={4}>
+            <Paper className={fixedHeightPaper} elevation="3">
+              Pending Customer Status
+              <span>
+                <Typography variant="h1">{pendingCustomerState}</Typography>
+              </span>
             </Paper>
           </Grid>
-        </Container>
-      </div>
+          <Grid item xs={12} md={4} lg={4}>
+            <Paper className={fixedHeightPaper} elevation="3">
+              Pending CreditCard Approval
+              <span>
+                <Typography variant="h1">{pendingCreditCardState}</Typography>
+              </span>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
+            <Paper className={fixedHeightPaper} elevation="3">
+              Total Customers
+              <span>
+                <Typography variant="h1">{countCustomerState}</Typography>
+              </span>
+            </Paper>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} style={{ paddingTop: "3%" }}>
+          <Paper elevation="3" style={{ width: "128%" }}>
+            <TableContainer>
+              <Table className={classes.table}>
+                <TableHead>
+                  <Typography variant="h6" style={{ letterSpacing: "3px" }}>
+                    Customer List
+                  </Typography>
+                  <Grid>
+                    <FontAwesomeIcon
+                      icon={faSearch}
+                      className={classes.searchIconStyle}
+                    />
+                    <TextField id="search-with-icon" label="SEARCH" />
+                  </Grid>
+                  <TableRow>
+                    <TableCell style={{ letterSpacing: "2px" }} width="12%">
+                      Customer ID
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="13%">
+                      Account Status
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      Email
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="11%">
+                      Balance
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      CreditCard Type
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                      CreditCard Status
+                    </TableCell>
+                    <TableCell style={{ letterSpacing: "2px" }} width="19%">
+                      CreditCard Limit
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {allCustomerState.map((row) => (
+                    <TableRow key={row._id}>
+                      <TableCell
+                        style={{ letterSpacing: "2px" }}
+                        width="20%"
+                        component="th"
+                        scope="row"
+                      >
+                        {row._id}
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="12%">
+                        {row.user.account_status}
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="13%">
+                        {row.user.email}
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="11%">
+                        {row.creditcard_balance}
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                        {row.creditcard_type}
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                        {row.creditcard_status}
+                      </TableCell>
+                      <TableCell style={{ letterSpacing: "2px" }} width="19%">
+                        {row.creditcard_limit}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </Grid>
+      </Container>
+    </div>
   );
 }
-
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
@@ -275,12 +226,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
-  appBarSpacer: theme.mixins.toolbar,
+  divStyle: {
+    width: "100%",
+  },
 
-  containerStyle: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    marginTop: "100px",
+  gridContainerStyle: {
+    marginTop: "7%",
+    marginLeft: "14%",
   },
 
   paperStyle: {
@@ -303,8 +255,5 @@ const useStyles = makeStyles((theme) => ({
   },
   gridItem: {
     paddingTop: 40,
-  },
-  table: {
-    minWidth: 650,
   },
 }));
