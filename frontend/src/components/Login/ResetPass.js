@@ -79,7 +79,7 @@ export default function ResetPass() {
       return;
     }
 
-    axios.patch(`http://localhost:7001/users/recover/${token}`, {
+    axios.patch(`http://localhost:9000/users/recover/${token}`, {
       password,
     })
       .then((res) => {
