@@ -141,7 +141,7 @@ export default function Overview() {
               <Table className={classes.table}>
                 <TableHead>
                   <Typography variant="h6" style={{ letterSpacing: "3px" }}>
-                    Customer List
+                    Customers with Creditcard
                   </Typography>
                   <Grid>
                     <FontAwesomeIcon
