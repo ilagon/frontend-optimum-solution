@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#00a152",
     color: "#fff",
     left: "41%",
+    margin: "5px 5px 5px 5px"
   },
 
   denyButtonStyle: {
@@ -62,31 +63,38 @@ export default function CreditCardStatus() {
   const [allCreditCardState, setAllCreditCardState] = useState([]);
 
   // Get all pending creditcard
-  const getAllCreditCard = () => {
-    axios
-      .get(`http://localhost:9000/creditcard/pending`)
-      .then((response) => {
-        // Retrieve from object => object => array (creditcard)
-        setAllCreditCardState(response.data.creditcard);
-      })
-      .catch((error) => alert(error));
-  };
+  // const getAllCreditCard = () => {
+  //   axios
+  //     .get(`http://localhost:9000/creditcard/pending`)
+  //     .then((response) => {
+  //       // Retrieve from object => object => array (creditcard)
+  //       setAllCreditCardState(response.data.creditcard);
+  //     })
+  //     .catch((error) => alert(error));
+  // };
 
   // Upon loading, useEffect will get called
   useEffect(() => {
-    getAllCreditCard();
-  }, []);
+    //getAllCreditCard();
+    axios
+    .get(`http://localhost:9000/creditcard/pending`)
+    .then((response) => {
+      // Retrieve from object => object => array (creditcard)
+      setAllCreditCardState(response.data.creditcard);
+    })
+    .catch((error) => console.log(error));
+  });
 
   const getApproveCreditCard = (id, type) => {
     axios
       .patch(`http://localhost:9000/creditcard/approve/`, {
         cardId: id,
-        card_type: type
+        creditcard_type: type
       })
       .then((response) => {
-        console.log(response.data.creditcard.creditcard_status);
+        //console.log(response.data.creditcard.creditcard_status);
       })
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
 
@@ -99,9 +107,10 @@ export default function CreditCardStatus() {
   };
   
   const onClickApprove = (event) => {
-    let cardType = document.getElementById(`${event.target.value}type`).value;
+    let cardType = document.getElementById(`${event.target.value}type`).innerText;
     //setApproveCreditCardState(event.target.value);
     getApproveCreditCard(event.target.value, cardType);
+    //console.log(cardType);
   };
 
   const onClickDeny = (event) => {
@@ -176,34 +185,28 @@ export default function CreditCardStatus() {
                         style={{
                           letterSpacing: "2px",
                         }}
-                        width="15%"
+                        //width="15%"
+                        align="right"
                       >
-                        {console.log(row._id)}
-                        <Button
+                        {/* {console.log(row._id)} */}
+                        <button
                           className={classes.approveButtonStyle}
                           variant="contained"
                           value={row._id}
                           onClick={onClickApprove}
-                          disableRipple
+                          //disableRipple
                         >
                           Approve
-                        </Button>
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          letterSpacing: "2px",
-                        }}
-                        width="20%"
-                      >
-                        <Button
+                        </button>
+                        <button
                           className={classes.denyButtonStyle}
                           variant="contained"
                           value={row._id}
                           onClick={onClickDeny}
-                          disableRipple
+                          //disableRipple
                         >
                           Deny
-                        </Button>
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}

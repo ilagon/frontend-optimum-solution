@@ -209,17 +209,14 @@ export default function ApprovalStatus() {
                           variant="contained"
                           value={row._id}
                           onClick={onClickApprove}
-                          
                         >
                           Approve
                         </button>
-                    
                         <button
                           className={classes.denyButtonStyle}
                           variant="contained"
                           value={row._id}
                           onClick={onClickDeny}
-                          
                         >
                           Deny
                         </button>
