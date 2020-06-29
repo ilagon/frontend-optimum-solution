@@ -14,7 +14,7 @@ export default function BodyContainer() {
   console.log("cc id:" + state.taxPayment.creditCard._id);
   const handleSubmit = () => {
     axios
-      .post("http://localhost:9002/payment_history/addPayment", {
+      .post("http://localhost:9000/payment_history/addPayment", {
         payment_type: "Tax",
         payment_amount: state.taxPayment.amount,
         transfer_number: 1,
@@ -23,7 +23,7 @@ export default function BodyContainer() {
       .then((response) => {
         console.log(response);
         axios
-          .patch("http://localhost:9002/creditcards/updateBalance", {
+          .patch("http://localhost:9000/creditcards/updateBalance", {
             creditcard_Id: state.taxPayment.creditCard._id,
             creditcard_balance:
               state.taxPayment.creditCard.creditcard_balance -
@@ -31,16 +31,16 @@ export default function BodyContainer() {
           })
           .then((response2) => {
             console.log(response2);
-            window.location.href="/Payment/Successful"
+            window.location.href="/Customer/Payment/Successful"
           })
           .catch((error) => {
             console.log(error);
-            window.location.href="/Payment/Unsuccessful"
+            window.location.href="/Customer/Payment/Unsuccessful"
           });
       })
       .catch((error) => {
         console.log(error);
-        window.location.href="/Payment/Unsuccessful"
+        window.location.href="/Customer/Payment/Unsuccessful"
       });
   };
 

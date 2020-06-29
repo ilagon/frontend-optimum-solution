@@ -23,7 +23,7 @@ export default function BodyContainer() {
 
   const handleFormInputs = () => {
     dispatch(storeInput(phoneNumber, amount, creditCard));
-    history.push("/TaxPayment/ConfirmationPage");
+    history.push("/Customer/TaxPayment/ConfirmationPage");
   };
 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -34,7 +34,7 @@ export default function BodyContainer() {
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get("http://localhost:9002/creditcards/5ee9d8eea80b44418c8d8b6c")
+        .get("http://localhost:9000/creditcards/5ee9d8eea80b44418c8d8b6c")
         .then((response) => {
           cards = response.data.creditcard;
           setLoading(true);
@@ -143,7 +143,7 @@ export default function BodyContainer() {
               <h1>One Time Transfer</h1>
             </Grid>
             <Grid item sm={6} className="bodyTitle nonActiveTitle">
-              <a href="/TaxPayment/OtherRecipients" style={{textDecoration: "none"}}>
+              <a href="/Customer/TaxPayment/OtherRecipients" style={{textDecoration: "none"}}>
                 <h1>Other Recipients</h1>
               </a>
             </Grid>

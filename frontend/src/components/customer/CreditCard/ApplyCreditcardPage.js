@@ -35,7 +35,7 @@ export default function ApplyCreditCardPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9002/creditcards/" + customerId)
+      .get("http://localhost:9000/creditcards/" + customerId)
       .then((res) => {
         setcreditcards(res.data.creditcard);
         let test = res.data.creditcard;

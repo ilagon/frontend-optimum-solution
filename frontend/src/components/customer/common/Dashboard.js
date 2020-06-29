@@ -47,7 +47,6 @@ import { TransferUnSuccessfulPage } from "../ResultPage/TransferUnsuccessful";
 export default function Dashboard() {
   return (
     <Router>
-<<<<<<< HEAD
       <div className="root1" style={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" className="appBar">
@@ -64,15 +63,6 @@ export default function Dashboard() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-=======
-    <div className="root" style={{display:"flex"}}>
-      <CssBaseline />
-      <AppBar position="absolute" className="appBar">
-        <Toolbar className="toolbar">
-          <div className="search">
-            <div className="searchIcon">
-              <SearchIcon />
->>>>>>> 1a9c5ccb1a0a7ccffb1ea51f7d7497433b5f92fa
             </div>
             <UserMenu />
           </Toolbar>
@@ -92,7 +82,7 @@ export default function Dashboard() {
               className="navlink"
               activeClassName="activeNavlink"
               exact
-              to="/"
+              to="/Customer"
             >
               <HomeIcon className="iconPadding" />
               <ListItemText primary="Overview" />
@@ -103,7 +93,7 @@ export default function Dashboard() {
             <NavLink
               className="navlink"
               activeClassName="activeNavlink"
-              to="/MobilePayment"
+              to="/Customer/MobilePayment"
             >
               <PhoneIphoneIcon className="iconPadding" />
               <ListItemText primary="Mobile Bills" />
@@ -112,7 +102,7 @@ export default function Dashboard() {
             <NavLink
               className="navlink"
               activeClassName="activeNavlink"
-              to="/TransferMoney"
+              to="/Customer/TransferMoney"
             >
               <SyncAltIcon className="iconPadding" />
               <ListItemText primary="Transfer Money" />
@@ -121,7 +111,7 @@ export default function Dashboard() {
             <NavLink
               className="navlink"
               activeClassName="activeNavlink"
-              to="/TaxPayment"
+              to="/Customer/TaxPayment"
             >
               <DescriptionIcon className="iconPadding" />
               <ListItemText primary="Pay Tax" />
@@ -134,7 +124,7 @@ export default function Dashboard() {
             <NavLink
               className="navlink"
               activeClassName="activeNavlink"
-              to="/apply-creditcard"
+              to="/Customer/apply-creditcard"
             >
               <CreditCardIcon className="iconPadding" />
               <ListItemText primary="Apply for Credit Card" />
@@ -143,7 +133,7 @@ export default function Dashboard() {
             <NavLink
               className="navlink"
               activeClassName="activeNavlink"
-              to="/creditcard-status"
+              to="/Customer/creditcard-status"
             >
               <NotificationsIcon className="iconPadding" />
               <ListItemText primary="Credit Card Status" />
@@ -154,82 +144,58 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className="container"></Container>
       </main> */}
-<<<<<<< HEAD
         <Switch>
-          <Route exact path="/" component={OverviewPage}></Route>
+          <Route exact path="/Customer" component={OverviewPage}></Route>
           {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
-          <Route path="/MobilePayment" component={MobilePaymentRoutes} />
-          <Route path="/TransferMoney" component={TransferMoneyPage} />
-          <Route path="/AddPayee" component={AddPayeeForm} />
-          <Route path="/SubmitTransfer" component={SubmitTransferPage} />
+          <Route path="/Customer/MobilePayment" component={MobilePaymentRoutes} />
+          <Route path="/Customer/TransferMoney" component={TransferMoneyPage} />
+          <Route path="/Customer/AddPayee" component={AddPayeeForm} />
+          <Route path="/Customer/SubmitTransfer" component={SubmitTransferPage} />
           <Route
-            path="/SetTransferFromPayeeList"
+            path="/Customer/SetTransferFromPayeeList"
             component={AddPayeeReceipentForm}
           />
-          <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
+          <Route path="/Customer/Payment/Successful" component={PaymentSuccessfulPage} />
           <Route
-            path="/Payment/Unsuccessful"
+            path="/Customer/Payment/Unsuccessful"
             component={PaymentUnSuccessfulPage}
           />
           <Route
-            path="/Transfer/Successful"
+            path="/Customer/Transfer/Successful"
             component={TransferSuccessfulPage}
           />
           <Route
-            path="/Transfer/Unsuccessful"
+            path="/Customer/Transfer/Unsuccessful"
             component={TransferUnSuccessfulPage}
           />
           <Route
             exact
-            path="/apply-creditcard"
+            path="/Customer/apply-creditcard"
             component={ApplyCreditCardPage}
           ></Route>
           <Route
             exact
-            path="/apply-creditcard/creditcard-name"
+            path="/Customer/apply-creditcard/creditcard-name"
             component={CreditCardName}
           />
           <Route
             exact
-            path="/apply-creditcard/creditcard-submit"
+            path="/Customer/apply-creditcard/creditcard-submit"
             component={CreditCardSubmit}
           ></Route>
           <Route
             exact
-            path="/apply-creditcard/creditcard-confirm"
+            path="/Customer/apply-creditcard/creditcard-confirm"
             component={CreditCardConfirm}
           ></Route>
           <Route
             exact
-            path="/creditcard-status"
+            path="/Customer/creditcard-status"
             component={CreditCardStatus}
           ></Route>
-          <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
+          <Route path="/Customer/TaxPayment" component={TaxPaymentRoutes}></Route>
         </Switch>
       </div>
-=======
-    
-      <Switch>
-        <Route exact path="/" component={OverviewPage}></Route>
-        {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
-        <Route path="/MobilePayment" component={MobilePaymentRoutes} />
-        <Route path="/TransferMoney" component={TransferMoneyPage}/>
-        <Route path="/AddPayee" component={AddPayeeForm}/>
-        <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
-        <Route path="/SetTransferFromPayeeList" component={AddPayeeReceipentForm}/>
-        <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
-        <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
-        <Route path="/Transfer/Successful" component={TransferSuccessfulPage} />
-        <Route path="/Transfer/Unsuccessful" component={TransferUnSuccessfulPage} />
-        <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
-        <Route exact path="/apply-creditcard/creditcard-name" component={CreditCardName}/>
-        <Route exact path="/apply-creditcard/creditcard-submit" component={CreditCardSubmit}></Route>
-        <Route exact path="/apply-creditcard/creditcard-confirm" component={CreditCardConfirm}></Route>
-        <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
-        <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
-      </Switch>
-    </div>
->>>>>>> 1a9c5ccb1a0a7ccffb1ea51f7d7497433b5f92fa
     </Router>
   );
 }

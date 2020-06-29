@@ -30,7 +30,7 @@ export default function BodyContainer() {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get("http://localhost:9002/creditcards/5ee9d8eea80b44418c8d8b6c")
+        .get("http://localhost:9000/creditcards/5ee9d8eea80b44418c8d8b6c")
         .then((response) => {
           cards = response.data.creditcard;
           setLoading(true);
@@ -69,7 +69,7 @@ export default function BodyContainer() {
   const handleFormInputs = () => {
     if (amount != "" && Object.keys(creditCard).length != 0) {
       dispatch(storeInput(state.taxPayment.payeeInfo.number, amount, creditCard));
-      history.push("/TaxPayment/ConfirmationPage");
+      history.push("/Customer/TaxPayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };
 

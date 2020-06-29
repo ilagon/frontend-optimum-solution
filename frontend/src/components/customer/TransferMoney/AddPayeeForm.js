@@ -87,7 +87,7 @@ export default function AddPayeeForm() {
 
   const handleSave = async () => {
     axios
-    .post("http://localhost:9002/payee/addPayee", {
+    .post("http://localhost:9000/payee/addPayee", {
       name: state.payeeName,
         number: state.payeeAccNo,
         payee_type: "Transfer",
@@ -95,11 +95,11 @@ export default function AddPayeeForm() {
       })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
-      window.location.href ="/TransferMoney/payee";
+      window.location.href ="/Customer/TransferMoney/payee";
   };
 
   const cancelHandler = (event) => {
-    window.location.href ="/TransferMoney/payee";
+    window.location.href ="/Customer/TransferMoney/payee";
    };
 
   const classes = useStyles();

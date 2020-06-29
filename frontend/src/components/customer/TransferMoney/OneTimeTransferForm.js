@@ -66,7 +66,7 @@ export default function OneTimeTransferForm() {
 
   function getCards(){
     axios
-      .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+      .get("http://localhost:9000/creditcards/5ee8792db5be6439f4d8474e")
       .then((response) => {
         console.log(response.data.creditcard);
         response.data.creditcard.map((obj) => {
@@ -135,7 +135,7 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
   const classes = useStyles();
 
   const handleRoute= () => {
-    window.location.href ="/SubmitTransfer";
+    window.location.href ="/Customer/SubmitTransfer";
     localStorage.setItem("transferDetails", JSON.stringify(state));
   }
 

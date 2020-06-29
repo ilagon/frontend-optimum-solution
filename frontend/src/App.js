@@ -53,7 +53,7 @@ function App() {
               component={ResetPass}
             />
             <Route path="/Admin" exact component={AdminPage} />
-            <Route path="/Customer" exact component={CustDashboard} />
+            <Route path="/Customer" component={CustDashboard} />
             <Route path="/Logout" exact component={Logout} />
           </Switch>
         </div>

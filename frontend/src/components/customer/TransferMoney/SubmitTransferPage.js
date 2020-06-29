@@ -69,11 +69,11 @@ export default function SubmitTransferPage() {
   var states = JSON.parse(retrievedData);
 
   const cancelHandle = () => {
-    window.location.href ="/TransferMoney";
+    window.location.href ="/Customer/TransferMoney";
   }
   const handleSubmit = async () => {
   axios
-  .post("http://localhost:9002/payment_history/addPayment", {
+  .post("http://localhost:9000/payment_history/addPayment", {
     payment_type: "Transfer",
     payment_amount: states.transferAmount,
     transfer_number: 1,
@@ -82,7 +82,7 @@ export default function SubmitTransferPage() {
   .then((response) => {
     console.log(response);
     axios
-      .patch("http://localhost:9002/creditcards/updateBalance", {
+      .patch("http://localhost:9000/creditcards/updateBalance", {
         creditcard_Id: states.senderCreditCardID,
         creditcard_balance:
         states.senderCreditCardBalance -
@@ -90,16 +90,16 @@ export default function SubmitTransferPage() {
       })
       .then((response2) => {
         console.log(response2);
-        window.location.href = "/Transfer/Successful";
+        window.location.href = "/Customer/Transfer/Successful";
       })
       .catch((error) => {
         console.log(error);
-        window.location.href = "/Transfer/Unsuccessful";
+        window.location.href = "/Customer/Transfer/Unsuccessful";
       });
   })
   .catch((error) => {
     console.log(error);
-    window.location.href = "/Transfer/Unsuccessful";
+    window.location.href = "/Customer/Transfer/Unsuccessful";
   });
 };
 

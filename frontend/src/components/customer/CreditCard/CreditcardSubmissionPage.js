@@ -33,7 +33,7 @@ export default function ApplyCreditcardSubmit() {
   var arr = [];
   
   useEffect(() => {
-    axios.get("http://localhost:9002/users/" + customerId)
+    axios.get("http://localhost:9000/users/" + customerId)
     .then((res) => {        
     console.log("Success");
       const test = res.data.user;
@@ -48,7 +48,7 @@ export default function ApplyCreditcardSubmit() {
   const applyCC = () => {
     //selected creditcard type is not in DB (Apply new CC)
     axios
-      .post("http://localhost:9002/creditcards/creditcardApplication", {
+      .post("http://localhost:9000/creditcards/creditcardApplication", {
         creditcard_type: creditcardType,
         userId: customerId,
       })

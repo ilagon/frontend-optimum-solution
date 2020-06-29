@@ -26,17 +26,17 @@ export default function TaxPaymentRoutes() {
         <main className="content">
           <div className={classes.appBarSpacer} />
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
-            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/TaxPayment") ? "1" : "0.5"}}>
+            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/Customer/TaxPayment") ? "1" : "0.5"}}>
               <a
-                href="/TaxPayment"
+                href="/Customer/TaxPayment"
                 style={{textDecoration: "none", color: "#173a77"}}
               >
                 <h1>One Time Transfer</h1>
               </a>
             </Grid>
-            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/TaxPayment") ? "0.5" : "1"}}>
+            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/Customer/TaxPayment") ? "0.5" : "1"}}>
               <a
-                href="/TaxPayment/OtherRecipients"
+                href="/Customer/TaxPayment/OtherRecipients"
                 style={{ textDecoration: "none", color: "#173a77" }}
               >
                 <h1>Other Recipients</h1>
@@ -46,24 +46,24 @@ export default function TaxPaymentRoutes() {
           <Switch>
             <Route
               exact
-              path="/TaxPayment"
+              path="/Customer/TaxPayment"
               component={OneTimeTransferBody}
             />
             <Route
               exact
-              path="/TaxPayment/OtherRecipients"
+              path="/Customer/TaxPayment/OtherRecipients"
               component={OtherRecipients_PayeeListBody}
             />
             <Route
-              path="/TaxPayment/AddPayee"
+              path="/Customer/TaxPayment/AddPayee"
               component={OtherRecipients_AddPayeeBody}
             />
             <Route
-              path="/TaxPayment/OtherRecipients/Form"
+              path="/Customer/TaxPayment/OtherRecipients/Form"
               component={OtherRecipients_FormBody}
             />
             <Route
-              path="/TaxPayment/ConfirmationPage"
+              path="/Customer/TaxPayment/ConfirmationPage"
               component={TaxPaymentConfirmationBody}
             />
           </Switch>

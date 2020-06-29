@@ -40,16 +40,16 @@ const useStyles = makeStyles((theme) => ({
               <Grid item xs={12}>
               <div id={styles.TitleContainer}>
               
-                <NavLink className={styles.wrapper} activeClassName={styles.selected} exact to={'/TransferMoney'}>One Time Transfer</NavLink>
-                <NavLink className={styles.rapper} activeClassName={styles.selected} to={'/TransferMoney/payee'}>Other Receipients</NavLink>
+                <NavLink className={styles.wrapper} activeClassName={styles.selected} exact to={'/Customer/TransferMoney'}>One Time Transfer</NavLink>
+                <NavLink className={styles.rapper} activeClassName={styles.selected} to={'/Customer/TransferMoney/payee'}>Other Receipients</NavLink>
              
               <p className={styles.FormTitle}>Transfer Money</p>
               </div>
               </Grid>
             </Grid>
             <Switch>
-            <Route exact path='/TransferMoney' component={OneTimeTransferForm} />
-            <Route path='/TransferMoney/payee' component={OtherReceipentsTransferForm} />
+            <Route exact path='/Customer/TransferMoney' component={OneTimeTransferForm} />
+            <Route path='/Customer/TransferMoney/payee' component={OtherReceipentsTransferForm} />
             {/* <Route  path='/TransferMoney/Submit' component={SubmitTransferPage}/> */}
         </Switch>
           </Container>

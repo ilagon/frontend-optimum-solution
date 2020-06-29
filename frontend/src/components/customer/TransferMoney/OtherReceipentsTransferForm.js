@@ -69,7 +69,7 @@ export default function OtherReceipentsTransferForm() {
 
   function fetchData(){
     axios
-      .get("http://localhost:9002/payee/transfer/5ee8792db5be6439f4d8474e")
+      .get("http://localhost:9000/payee/transfer/5ee8792db5be6439f4d8474e")
       .then((response) => {
         console.log(response.data);
 setPayeeList(response.data.payee); 
@@ -79,7 +79,7 @@ console.log(payeeList);
   };
 
   const addHandle= () => {
-    window.location.href ="/AddPayee";
+    window.location.href ="/Customer/AddPayee";
     //window.location.href ="/SetTransferFromPayeeList";
  }
 
@@ -89,7 +89,7 @@ console.log(payeeList);
     recipientName: name,
     recipentAccNo: accNo});
   localStorage.setItem("transferDetails", JSON.stringify(state));
-  window.location.href ="/SetTransferFromPayeeList";
+  window.location.href ="/Customer/SetTransferFromPayeeList";
 }
 
   return (
