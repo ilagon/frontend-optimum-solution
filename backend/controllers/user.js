@@ -82,6 +82,7 @@ exports.user_login = (req, res) => {
                 token,
                 user_type: doc.user_type,
                 name: doc.name,
+                _id: doc._id,
                 message: "success",
               });
             } else if (doc.account_status == "Pending") {
