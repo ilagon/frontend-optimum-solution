@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Payee = require("../models/payee_model");
-const User = require("../models/user_model");
+const User = require("../models/user");
 
 exports.add_Payee = (req, res) => {
   User.findById(req.body.userId)
@@ -38,64 +38,64 @@ exports.add_Payee = (req, res) => {
 };
 
 exports.payee_get_by_userId_MobileBill = (req, res) => {
-    const userId = req.params.userId;
-    Payee.find({user:userId, payee_type:"MobileBill"})
-      .select("name number payee_type user _id")
-      .exec()
-      .then((doc) => {
-        console.log("From db", doc);
-        if (doc) {
-          res.status(200).json({
-            payee: doc,
-          });
-        } else {
-          res.status(404).json({ message: "No valid entry found!" });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({ error: err });
-      });
-  };
+  const userId = req.params.userId;
+  Payee.find({ user: userId, payee_type: "MobileBill" })
+    .select("name number payee_type user _id")
+    .exec()
+    .then((doc) => {
+      console.log("From db", doc);
+      if (doc) {
+        res.status(200).json({
+          payee: doc,
+        });
+      } else {
+        res.status(404).json({ message: "No valid entry found!" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
 
-  exports.payee_get_by_userId_Transfer = (req, res) => {
-    const userId = req.params.userId;
-    Payee.find({user:userId, payee_type:"Transfer"})
-      .select("name number payee_type user _id")
-      .exec()
-      .then((doc) => {
-        console.log("From db", doc);
-        if (doc) {
-          res.status(200).json({
-            payee: doc,
-          });
-        } else {
-          res.status(404).json({ message: "No valid entry found!" });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({ error: err });
-      });
-  };
+exports.payee_get_by_userId_Transfer = (req, res) => {
+  const userId = req.params.userId;
+  Payee.find({ user: userId, payee_type: "Transfer" })
+    .select("name number payee_type user _id")
+    .exec()
+    .then((doc) => {
+      console.log("From db", doc);
+      if (doc) {
+        res.status(200).json({
+          payee: doc,
+        });
+      } else {
+        res.status(404).json({ message: "No valid entry found!" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
 
-  exports.payee_get_by_userId_PayTax = (req, res) => {
-    const userId = req.params.userId;
-    Payee.find({user:userId, payee_type:"PayTax"})
-      .select("name number payee_type user _id")
-      .exec()
-      .then((doc) => {
-        console.log("From db", doc);
-        if (doc) {
-          res.status(200).json({
-            payee: doc,
-          });
-        } else {
-          res.status(404).json({ message: "No valid entry found!" });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({ error: err });
-      });
-  };
+exports.payee_get_by_userId_PayTax = (req, res) => {
+  const userId = req.params.userId;
+  Payee.find({ user: userId, payee_type: "PayTax" })
+    .select("name number payee_type user _id")
+    .exec()
+    .then((doc) => {
+      console.log("From db", doc);
+      if (doc) {
+        res.status(200).json({
+          payee: doc,
+        });
+      } else {
+        res.status(404).json({ message: "No valid entry found!" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};

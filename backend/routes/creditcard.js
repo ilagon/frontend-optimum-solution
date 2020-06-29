@@ -45,7 +45,7 @@ router.get("/search/cardId", creditcardController.creditcard_search_by_cardid); 
 //overview customer list search by user id
 router.get("/search/userId", creditcardController.creditcard_search_by_userid); // A checked
 
-//ain testing shit
+//ain testing
 router.get("/search/testing", creditcardController.ain_testing); // A testing, it doesn't work yet
 
 //credit card approval approve function
@@ -53,5 +53,13 @@ router.patch("/approve", creditcardController.creditcard_approve); // A you need
 
 //credit card approval reject function
 router.patch("/reject", creditcardController.creditcard_deny); // A checked
+
+//customer module
+router.get("/cust/searchById", creditcardController.creditcard_get_by_userId); // A checked
+router.post(
+  "/creditcardApplication",
+  creditcardController.creditcard_application
+); // A checked
+router.patch("/updateBalance", creditcardController.update_balance); // A checked
 
 module.exports = router;
