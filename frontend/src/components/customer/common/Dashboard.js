@@ -48,7 +48,7 @@ export default function Dashboard() {
 
   return (
     <Router>
-    <div className="root">
+    <div className="root" style={{display:"flex"}}>
       <CssBaseline />
       <AppBar position="absolute" className="appBar">
         <Toolbar className="toolbar">
@@ -120,7 +120,7 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className="container"></Container>
       </main> */}
-    </div>
+    
       <Switch>
         <Route exact path="/" component={OverviewPage}></Route>
         {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
@@ -140,6 +140,7 @@ export default function Dashboard() {
         <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
         <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
       </Switch>
+    </div>
     </Router>
   );
 }

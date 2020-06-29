@@ -40,7 +40,7 @@
 
 
 /* Styling for Dashboard */
-.root, #root {
+.root {
     display: flex;
     height: 100vh;
 }
