@@ -11,7 +11,7 @@ import image4 from "../images/creditcard-05.png";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
-import { storeInput } from "../common/redux/actions/applyCreditcard_storeInput";
+import { storeInput } from "../../redux/actions/applyCreditcard_storeInput";
 import { store } from "../../../index";
 import {
   BrowserRouter as Router,

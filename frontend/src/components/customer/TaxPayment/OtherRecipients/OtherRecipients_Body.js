@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { store } from "../../../../index";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { storeInput } from "../../common/redux/actions/taxPayment_storeInput";
+import { storeInput } from "../../../redux/actions/taxPayment_storeInput";
 import axios from "axios";
 
 var cards = [];

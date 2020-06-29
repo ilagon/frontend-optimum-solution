@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {userInfo} from '../redux/actions/userInfoActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [error, setError] = useState(false);
@@ -92,6 +95,8 @@ export default function SignInSide() {
         setError(false);
         if (res.data.message === 'success') {
           sessionStorage.setItem('token', res.data.token);
+          sessionStorage.setItem('name', res.data.name);
+          sessionStorage.setItem('_id', res.data._id);
           if(res.data.user_type === "Admin"){
             window.location.href = '/Admin';
           } else{

@@ -44,8 +44,8 @@ export default function UserMenu() {
   };
 
   const logout = () => {
-    sessionStorage.removeItem('token');
-    window.location.href = "/Login";
+    sessionStorage.clear();
+    window.location.href = "/Logout";
   }
 
   return (

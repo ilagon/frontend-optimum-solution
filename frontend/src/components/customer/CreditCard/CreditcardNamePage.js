@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../Overview/Overview.css";
 import { useDispatch } from "react-redux";
-import { storeInput } from "../common/redux/actions/applyCreditcard_storeInput";
+import { storeInput } from "../../redux/actions/applyCreditcard_storeInput";
 import { store } from "../../../index";
 import {
   BrowserRouter as Router,

@@ -46,6 +46,7 @@ export default function Header() {
   const classes = useStyles();
 
   const [openState, setOpenState] = useState();
+  const [name, setName] = useState();
   const referenceAnchor = useRef(null);
 
   const handleOnClickDropdown = () => {
@@ -70,13 +71,18 @@ export default function Header() {
   }
 
   function handleLogout(){
-    sessionStorage.removeItem("token");
+    sessionStorage.clear()
     window.location.href="/Logout"
   }
+  // useEffect(() => {
+  //   setName(JSON.parse(sessionStorage.getItem('name')));
+  // });
 
   // return focus to the button when transitioning from closed to open
   const openPreviously = useRef(openState);
   useEffect(() => {
+    let name = sessionStorage.getItem('name');
+    setName(name);
     if (openPreviously.current === true && openState === false) {
       referenceAnchor.current.focus();
     }
@@ -100,7 +106,7 @@ export default function Header() {
             color="#0e4686"
             pull="left"
           />
-          Janice Wong
+          {name}
 
           <FontAwesomeIcon
             icon={faCaretDown}
