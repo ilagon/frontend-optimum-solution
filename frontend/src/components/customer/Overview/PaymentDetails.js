@@ -49,7 +49,7 @@ export default function PaymentDetails(props) {
   const creditCardId = props.creditCardId;
   const customerId = props.customerId;
 
-    axios.get("http://localhost:9002/payment_history/" + creditCardId)
+    axios.get("http://localhost:9000/payment_history/" + creditCardId)
     .then(res => {
       setRows([...res.data.Users]);
     })

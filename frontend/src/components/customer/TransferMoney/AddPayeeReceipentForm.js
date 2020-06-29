@@ -150,11 +150,11 @@ const getCreditCardID = (creditCardType) => {
 
   const nextHandler = (event) => {
     localStorage.setItem("transferDetails", JSON.stringify(state));
-    window.location.href ="/SubmitTransfer";
+    window.location.href ="/Customer/SubmitTransfer";
    };
 
    const cancelHandler = (event) => {
-    window.location.href ="/TransferMoney/payee";
+    window.location.href ="/Customer/TransferMoney/payee";
    };
 
   const classes = useStyles();

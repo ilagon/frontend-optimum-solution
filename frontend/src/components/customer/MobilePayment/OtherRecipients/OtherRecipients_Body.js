@@ -30,7 +30,7 @@ export default function BodyContainer() {
   useEffect(() => {
     function fetchData() {
       axios
-        .get("http://localhost:9002/creditcards/5ee8792db5be6439f4d8474e")
+        .get("http://localhost:9000/creditcards/5ee8792db5be6439f4d8474e")
         .then((response) => {
           response.data.creditcard.map((obj) => {
             if (obj.creditcard_status === "Approved") cards.push(obj);
@@ -73,7 +73,7 @@ export default function BodyContainer() {
       dispatch(
         storeInput(state.mobilePayment.payeeInfo.number, amount, creditCard)
       );
-      history.push("/MobilePayment/ConfirmationPage");
+      history.push("/Customer/MobilePayment/ConfirmationPage");
     } else alert("Please fill in the form");
   };
 

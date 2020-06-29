@@ -21,7 +21,7 @@ export default function CreditCardStatus() {
     const customerId = "5eeb358d2f67c7147836cdb9";
     
     useEffect(() => {
-      axios.get("http://localhost:9002/creditcards/" + customerId)
+      axios.get("http://localhost:9000/creditcards/" + customerId)
       .then(res => {
         setcreditcards(res.data.creditcard);
       })

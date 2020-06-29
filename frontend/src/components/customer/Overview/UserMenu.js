@@ -43,6 +43,11 @@ export default function UserMenu() {
     setAnchorEl(null);
   };
 
+  const logout = () => {
+    sessionStorage.removeItem('token');
+    window.location.href = "/Login";
+  }
+
   return (
     <div>
       <Button
@@ -77,7 +82,7 @@ export default function UserMenu() {
             <SettingsIcon fontSize="small" className="userMenuIcon"/>
         </StyledMenuItem>
         <StyledMenuItem>
-          <ListItemText primary="Logout" />
+          <ListItemText primary="Logout" onClick={logout} />
             <MeetingRoomIcon fontSize="small" className="userMenuIcon" />
         </StyledMenuItem>
       </StyledMenu>

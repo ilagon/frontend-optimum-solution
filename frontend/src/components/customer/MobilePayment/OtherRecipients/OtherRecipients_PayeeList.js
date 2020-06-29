@@ -20,7 +20,7 @@ export default function BodyContainer() {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get("http://localhost:9002/payee/mobile/5ee8792db5be6439f4d8474e")
+        .get("http://localhost:9000/payee/mobile/5ee8792db5be6439f4d8474e")
         .then((response) => {
           console.log(response);
           payeeList = response.data.payee;
@@ -56,7 +56,7 @@ export default function BodyContainer() {
         dispatch(storePayee(obj));
       }
     });
-    history.push("/MobilePayment/OtherRecipients/Form");
+    history.push("/Customer/MobilePayment/OtherRecipients/Form");
   };
 
   return (
@@ -82,7 +82,7 @@ export default function BodyContainer() {
           ))}
         </Grid>
       </Grid>
-      <a href="/MobilePayment/AddPayee">
+      <a href="/Customer/MobilePayment/AddPayee">
         <Button id="addPayee" variant="contained">
           Add Payee
         </Button>

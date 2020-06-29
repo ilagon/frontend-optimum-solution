@@ -20,7 +20,7 @@ export default function BodyContainer() {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get("http://localhost:9002/payee/tax/5ee9d8eea80b44418c8d8b6c")
+        .get("http://localhost:9000/payee/tax/5ee9d8eea80b44418c8d8b6c")
         .then((response) => {
           console.log(response);
           payeeList = response.data.payee;
@@ -56,7 +56,7 @@ export default function BodyContainer() {
         dispatch(storePayee(obj));
       }
     });
-    history.push("/TaxPayment/OtherRecipients/Form");
+    history.push("/Customer/TaxPayment/OtherRecipients/Form");
   };
 
   return (
@@ -82,7 +82,7 @@ export default function BodyContainer() {
           ))}
         </Grid>
       </Grid>
-      <a href="/TaxPayment/AddPayee">
+      <a href="/Customer/TaxPayment/AddPayee">
         <Button id="addPayee" variant="contained">
           Add Payee
         </Button>

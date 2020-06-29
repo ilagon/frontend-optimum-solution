@@ -77,7 +77,7 @@ export default function BodyContainer() {
           <h1>Other Recipients</h1>
         </Grid>
         <Grid item sm={6} className="bodyTitle nonActiveTitle">
-        <a href="/TaxPayment/OtherRecipients" style={{textDecoration: "none"}}>
+        <a href="/Customer/TaxPayment/OtherRecipients" style={{textDecoration: "none"}}>
                 <h1>One Time Transfereee</h1>
               </a>
         </Grid>

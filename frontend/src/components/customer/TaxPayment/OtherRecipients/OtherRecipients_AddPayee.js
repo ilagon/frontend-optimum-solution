@@ -36,7 +36,7 @@ export default function BodyContainer() {
   const handleSavePayee = () => {
     if (name != undefined && phoneNumber != undefined) {
       axios
-        .post("http://localhost:9002/payee/addPayee", {
+        .post("http://localhost:9000/payee/addPayee", {
           name: name,
           number: phoneNumber,
           payee_type: "PayTax",
@@ -44,7 +44,7 @@ export default function BodyContainer() {
         })
         .then((response) => {
           console.log(response);
-          history.push("/TaxPayment/OtherRecipients");
+          history.push("/Customer/TaxPayment/OtherRecipients");
         })
         .catch((error) => console.log(error));
     } else alert("Please complete the form!");
@@ -120,7 +120,7 @@ export default function BodyContainer() {
               <Button
                 id="cancelButton"
                 variant="contained"
-                onClick={() => history.push("/TaxPayment/OtherRecipients")}
+                onClick={() => history.push("/Customer/TaxPayment/OtherRecipients")}
               >
                 Cancel
               </Button>

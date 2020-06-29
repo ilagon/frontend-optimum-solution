@@ -28,7 +28,7 @@ export default function MobilePaymentRoutes() {
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
             <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/MobilePayment") ? "1" : "0.5"}}>
               <a
-                href="/MobilePayment"
+                href="/Customer/MobilePayment"
                 style={{textDecoration: "none", color: "#173a77"}}
               >
                 <h1>One Time Transfer</h1>
@@ -36,7 +36,7 @@ export default function MobilePaymentRoutes() {
             </Grid>
             <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/MobilePayment") ? "0.5" : "1"}}>
               <a
-                href="/MobilePayment/OtherRecipients"
+                href="/Customer/MobilePayment/OtherRecipients"
                 style={{ textDecoration: "none", color: "#173a77" }}
               >
                 <h1>Other Recipients</h1>
@@ -46,24 +46,24 @@ export default function MobilePaymentRoutes() {
           <Switch>
             <Route
               exact
-              path="/MobilePayment"
+              path="/Customer/MobilePayment"
               component={OneTimeTransferBody}
             />
             <Route
               exact
-              path="/MobilePayment/OtherRecipients"
+              path="/Customer/MobilePayment/OtherRecipients"
               component={OtherRecipients_PayeeListBody}
             />
             <Route
-              path="/MobilePayment/AddPayee"
+              path="/Customer/MobilePayment/AddPayee"
               component={OtherRecipients_AddPayeeBody}
             />
             <Route
-              path="/MobilePayment/OtherRecipients/Form"
+              path="/Customer/MobilePayment/OtherRecipients/Form"
               component={OtherRecipients_FormBody}
             />
             <Route
-              path="/MobilePayment/ConfirmationPage"
+              path="/Customer/MobilePayment/ConfirmationPage"
               component={MobilePaymentConfirmationBody}
             />
           </Switch>

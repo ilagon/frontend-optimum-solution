@@ -51,7 +51,7 @@ export default function BodyContainer() {
         dispatch(storePayee(obj));
       }
     });
-    history.push("/MobilePayment/OtherRecipients/Form");
+    history.push("/Customer/MobilePayment/OtherRecipients/Form");
   };
   return (
     <main className="content">
