@@ -28,7 +28,7 @@ exports.add_Payee = (req, res) => {
           number: result.number,
           payee_type: result.payee_type,
           user: result.user,
-          creditcard: creditcard,
+          creditcard: result.creditcard,
         },
       });
     })
@@ -63,7 +63,7 @@ exports.payee_get_by_userId_MobileBill = (req, res) => {
 exports.payee_get_by_userId_Transfer = (req, res) => {
   const userId = req.params.userId;
   Payee.find({ user: userId, payee_type: "Transfer" })
-    .select("name number payee_type user _id credit")
+    .select("name number payee_type user creditcard _id")
     .exec()
     .then((doc) => {
       console.log("From db", doc);

@@ -62,7 +62,7 @@ exports.user_login = (req, res) => {
     });
   }
   User.findOne({ email: req.body.email })
-    .select("password user_type account_status")
+    .select("password user_type account_status name _id")
     .exec()
     .then((doc) => {
       if (doc) {

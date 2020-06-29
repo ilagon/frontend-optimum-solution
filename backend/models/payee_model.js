@@ -11,13 +11,13 @@ const PayeeSchema = new Schema({
 
   number: {
     type: Number,
-    required: true,
+    default: 0,
   },
 
   payee_type: {
     type: String,
     enum: ["Transfer", "MobileBill", "PayTax"],
-    default: "None",
+    require: true,
   },
 
   user: {
