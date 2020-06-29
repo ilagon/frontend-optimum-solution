@@ -9,7 +9,7 @@ import SignUpResult from './components/Login/SignUpResult';
 import ChangedPass from './components/Login/ChangedPass';
 import ResetPass from './components/Login/ResetPass';
 import Logout from './components/Login/Logout';
-import Dashboard from './components/Login/dashboard';
+//import Dashboard from './components/Login/dashboard';
 import TopNav from './components/Login/TopNav';
 import MainPage from './components/Login/MainPage';
 import AboutUs from './components/Login/AboutUs';
@@ -19,6 +19,7 @@ import ContactUs from './components/Login/ContactUs';
 import Footer from './components/Login/Footer';
 import { CssBaseline } from '@material-ui/core';
 import AdminPage from "./components/admin_components/Mainpage"; 
+import CustDashboard from "./components/customer/common/Dashboard";
 
 function App() {
   const home = () => (
@@ -49,7 +50,7 @@ function App() {
             <Route path="/ChangedPass" exact component={ChangedPass} />
             <Route path="/ResetPass/recover/:token" exact component={ResetPass} />
             <Route path="/Admin" exact component={AdminPage} />
-            <Route path="/Dashboard" exact component={Dashboard}/>
+            <Route path="/Customer" exact component={CustDashboard}/>
             <Route path="/Logout" exact component={Logout} />
           </Switch>
         </div>

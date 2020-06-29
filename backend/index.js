@@ -1,4 +1,4 @@
-//From Ain: Accept incoming change (Login and Admin Module integration)
+//From Ain: Accept current change
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -28,7 +28,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//From Ain: accept incoming change
 //Routes
 app.use("/users", userRoutes); //Using userRoutes file
 app.use("/creditcard", creditcardRoutes); //using customerRoutes file
