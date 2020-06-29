@@ -47,8 +47,7 @@ import { TransferUnSuccessfulPage } from "../ResultPage/TransferUnsuccessful";
 export default function Dashboard() {
   return (
     <Router>
-<<<<<<< HEAD
-      <div className="root1" style={{ display: "flex" }}>
+      <div className="root" style={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" className="appBar">
           <Toolbar className="toolbar">
@@ -64,15 +63,6 @@ export default function Dashboard() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-=======
-    <div className="root" style={{display:"flex"}}>
-      <CssBaseline />
-      <AppBar position="absolute" className="appBar">
-        <Toolbar className="toolbar">
-          <div className="search">
-            <div className="searchIcon">
-              <SearchIcon />
->>>>>>> 1a9c5ccb1a0a7ccffb1ea51f7d7497433b5f92fa
             </div>
             <UserMenu />
           </Toolbar>
