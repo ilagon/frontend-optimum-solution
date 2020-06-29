@@ -47,6 +47,7 @@ import { TransferUnSuccessfulPage } from "../ResultPage/TransferUnsuccessful";
 export default function Dashboard() {
   return (
     <Router>
+<<<<<<< HEAD
       <div className="root1" style={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" className="appBar">
@@ -63,6 +64,15 @@ export default function Dashboard() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
+=======
+    <div className="root" style={{display:"flex"}}>
+      <CssBaseline />
+      <AppBar position="absolute" className="appBar">
+        <Toolbar className="toolbar">
+          <div className="search">
+            <div className="searchIcon">
+              <SearchIcon />
+>>>>>>> 1a9c5ccb1a0a7ccffb1ea51f7d7497433b5f92fa
             </div>
             <UserMenu />
           </Toolbar>
@@ -144,6 +154,7 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className="container"></Container>
       </main> */}
+<<<<<<< HEAD
         <Switch>
           <Route exact path="/" component={OverviewPage}></Route>
           {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
@@ -196,6 +207,29 @@ export default function Dashboard() {
           <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
         </Switch>
       </div>
+=======
+    
+      <Switch>
+        <Route exact path="/" component={OverviewPage}></Route>
+        {/* <Route path="/MobilePayment" component={OneTimeTransferBody}></Route> */}
+        <Route path="/MobilePayment" component={MobilePaymentRoutes} />
+        <Route path="/TransferMoney" component={TransferMoneyPage}/>
+        <Route path="/AddPayee" component={AddPayeeForm}/>
+        <Route path='/SubmitTransfer' component={SubmitTransferPage}/>
+        <Route path="/SetTransferFromPayeeList" component={AddPayeeReceipentForm}/>
+        <Route path="/Payment/Successful" component={PaymentSuccessfulPage} />
+        <Route path="/Payment/Unsuccessful" component={PaymentUnSuccessfulPage} />
+        <Route path="/Transfer/Successful" component={TransferSuccessfulPage} />
+        <Route path="/Transfer/Unsuccessful" component={TransferUnSuccessfulPage} />
+        <Route exact path="/apply-creditcard" component={ApplyCreditCardPage}></Route>
+        <Route exact path="/apply-creditcard/creditcard-name" component={CreditCardName}/>
+        <Route exact path="/apply-creditcard/creditcard-submit" component={CreditCardSubmit}></Route>
+        <Route exact path="/apply-creditcard/creditcard-confirm" component={CreditCardConfirm}></Route>
+        <Route exact path="/creditcard-status" component={CreditCardStatus}></Route>
+        <Route path="/TaxPayment" component={TaxPaymentRoutes}></Route>
+      </Switch>
+    </div>
+>>>>>>> 1a9c5ccb1a0a7ccffb1ea51f7d7497433b5f92fa
     </Router>
   );
 }

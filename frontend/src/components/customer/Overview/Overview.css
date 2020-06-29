@@ -39,10 +39,17 @@
 }
 
 /* Styling for Dashboard */
+<<<<<<< HEAD
 /*.root1 {
   display: flex;
   height: 100vh;
 }*/
+=======
+.root {
+    display: flex;
+    height: 100vh;
+}
+>>>>>>> 1a9c5ccb1a0a7ccffb1ea51f7d7497433b5f92fa
 
 @media (min-width: 600px) {
   .search {
