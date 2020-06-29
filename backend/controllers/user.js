@@ -81,6 +81,7 @@ exports.user_login = (req, res) => {
               res.status(200).json({
                 token,
                 user_type: doc.user_type,
+                name: doc.name,
                 message: "success",
               });
             } else if (doc.account_status == "Pending") {
@@ -88,7 +89,7 @@ exports.user_login = (req, res) => {
                 message:
                   "Your Account has not been approved by the Administrator",
               });
-            } else if (doc.account_status == "inactive") {
+            } else if (doc.account_status == "Inactive") {
               res.status(200).json({
                 message: "Your account has been inactive",
               });
