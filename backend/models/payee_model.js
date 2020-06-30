@@ -25,12 +25,6 @@ const PayeeSchema = new Schema({
     ref: "User",
     require: true,
   },
-
-  creditcard: {
-    type: Schema.Types.ObjectId,
-    ref: "CreditCard",
-    require: true,
-  },
 });
 
 module.exports = mongoose.model("Payee", PayeeSchema);

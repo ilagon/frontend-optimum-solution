@@ -3,7 +3,7 @@ const Payee = require("../models/payee_model");
 const User = require("../models/user");
 
 exports.add_Payee = (req, res) => {
-  User.findById(req.body.userId, req.body.creditcardId)
+  User.findById(req.body.userId)
     .then((user) => {
       if (!user) {
         return res.status(404).json({ message: "User not found!" });
@@ -13,8 +13,7 @@ exports.add_Payee = (req, res) => {
         name: req.body.name,
         number: req.body.number,
         payee_type: req.body.payee_type,
-        user: req.body.userId, //my userid
-        creditcard: req.body.creditcardId, //the creditcard id I'm transferring to
+        user: req.body.userId,
       });
       return payee.save();
     })
@@ -28,7 +27,6 @@ exports.add_Payee = (req, res) => {
           number: result.number,
           payee_type: result.payee_type,
           user: result.user,
-          creditcard: result.creditcard,
         },
       });
     })
@@ -42,7 +40,7 @@ exports.add_Payee = (req, res) => {
 exports.payee_get_by_userId_MobileBill = (req, res) => {
   const userId = req.params.userId;
   Payee.find({ user: userId, payee_type: "MobileBill" })
-    .select("name number payee_type user creditcard _id")
+    .select("name number payee_type user _id")
     .exec()
     .then((doc) => {
       console.log("From db", doc);
@@ -63,7 +61,7 @@ exports.payee_get_by_userId_MobileBill = (req, res) => {
 exports.payee_get_by_userId_Transfer = (req, res) => {
   const userId = req.params.userId;
   Payee.find({ user: userId, payee_type: "Transfer" })
-    .select("name number payee_type user creditcard _id")
+    .select("name number payee_type user _id")
     .exec()
     .then((doc) => {
       console.log("From db", doc);
