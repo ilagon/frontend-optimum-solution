@@ -34,7 +34,7 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const userName = sessionStorage.getItem('name');
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -59,7 +59,7 @@ export default function UserMenu() {
       >
       <ListItemIcon className="userName">
         <AccountCircleIcon className="userMenuPerson"/>
-         Ethan Khoo
+         {userName}
          <ArrowDropDownIcon className="userMenuArrow"/>
       </ListItemIcon>
       </Button>

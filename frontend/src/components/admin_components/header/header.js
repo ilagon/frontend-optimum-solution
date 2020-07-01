@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const userName = useSelector(state => state.userInfo);
+  const userName = useSelector(state => state.userInfo.name);
   const [openState, setOpenState] = useState();
   //const [name, setName] = useState();
   const referenceAnchor = useRef(null);

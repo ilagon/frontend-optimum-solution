@@ -1,8 +1,15 @@
-export const userInfo = (state = null, action) => {
+let initialValue = {
+    name: "",
+    id: ""
+}
+
+export const userInfo = (state = initialValue, action) => {
     switch (action.type) {
         case "LOGIN":
-            return state = action.payload;            
-    
+            return {
+                name: action.name,
+                id: action.id            
+            }
         default:
             return state;
     }
