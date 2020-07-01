@@ -27,7 +27,11 @@ export default function BodyContainer() {
   const history = useHistory();
 
   const handleFormInputs = () => {
-    if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
+    if (
+      amount != "" &&
+      Object.keys(creditCard).length != 0 &&
+      phoneNumber != ""
+    ) {
       dispatch(storeInput(phoneNumber, amount, creditCard));
       history.push("/Customer/TaxPayment/ConfirmationPage");
     } else alert("Please fill in the form");
@@ -39,30 +43,26 @@ export default function BodyContainer() {
   const [isLoading, setLoading] = useState(false);
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
-  let jsonID = sessionStorage.getItem('_id');
+  let jsonID = sessionStorage.getItem("_id");
   let id = jsonID;
   console.log(id);
-  
 
   useEffect(() => {
-    function fetchData(){
+    function fetchData() {
       axios
-        .get(`http://localhost:9000/cust/searchById/`, {
-          userId: id
+        .get(`http://localhost:9000/creditcards/cust/searchById/`, {
+          userId: id,
         })
         .then((response) => {
           response.data.creditcard.map((obj) => {
-            if (obj.creditcard_status === "Approved")
-              cards.push(obj)
-          })
+            if (obj.creditcard_status === "Approved") cards.push(obj);
+          });
           setLoading(true);
         })
         .catch((error) => console.log(error));
     }
-    if (cards.length === 0)
-      fetchData();
+    if (cards.length === 0) fetchData();
   });
-
 
   const handleAmount = (value) => {
     if (value > creditCard.creditcard_balance) {
@@ -119,7 +119,7 @@ export default function BodyContainer() {
       "&:hover": {
         backgroundColor: "#e26448",
       },
-      fontSize: "1.25em"
+      fontSize: "1.25em",
     },
   }));
 
@@ -143,9 +143,7 @@ export default function BodyContainer() {
           }}
           onChange={(e) => setPhoneNumber(e.target.value)}
         /> */}
-        <label>
-          Account Name: State Of Ain
-        </label>
+        <label>Account Name: State Of Ain</label>
       </div>
       <div>
         <TextField
