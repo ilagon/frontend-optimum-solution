@@ -183,13 +183,13 @@ export default function Overview() {
                         component="th"
                         scope="row"
                       >
-                        {row.user._id}
+                        {row._id}
                       </TableCell>
                       <TableCell style={{ letterSpacing: "2px" }} width="12%">
-                        {row.user.account_status}
+                        {row.account_status}
                       </TableCell>
                       <TableCell style={{ letterSpacing: "2px" }} width="13%">
-                        {row.user.email}
+                        {row.email}
                       </TableCell>
                       <TableCell style={{ letterSpacing: "2px" }} width="11%">
                         {row.creditcard_balance}
