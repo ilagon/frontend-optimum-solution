@@ -19,14 +19,17 @@ import {
   NavLink,
 } from "react-router-dom";
 
-
 export default function BodyContainer() {
   const dispatch = useDispatch();
   console.log(store.getState());
   const history = useHistory();
 
   const handleFormInputs = () => {
-    if (amount != "" && Object.keys(creditCard).length != 0 && phoneNumber != "") {
+    if (
+      amount != "" &&
+      Object.keys(creditCard).length != 0 &&
+      phoneNumber != ""
+    ) {
       dispatch(storeInput(phoneNumber, amount, creditCard));
       history.push("/Customer/TaxPayment/ConfirmationPage");
     } else alert("Please fill in the form");
@@ -38,31 +41,27 @@ export default function BodyContainer() {
   const [isLoading, setLoading] = useState(false);
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
-  let id = sessionStorage.getItem('_id');
+  let id = sessionStorage.getItem("_id");
   console.log(id);
   let cards = [];
-  
 
   useEffect(() => {
-     function fetchData(){
+    function fetchData() {
       axios
         .get(`http://localhost:9000/creditcard/cust/searchById/`, {
-          userId: id
+          userId: id,
         })
         .then((response) => {
           response.data.creditcard.map((obj) => {
             console.log(obj);
-            if (obj.creditcard_status === "Active")
-              cards.push(obj)
-          })
+            if (obj.creditcard_status === "Active") cards.push(obj);
+          });
           setLoading(true);
         })
         .catch((error) => console.log(error));
     }
-     if (cards.length === 0)
-       fetchData();
+    if (cards.length === 0) fetchData();
   });
-
 
   const handleAmount = (value) => {
     if (value > creditCard.creditcard_balance) {
@@ -119,7 +118,7 @@ export default function BodyContainer() {
       "&:hover": {
         backgroundColor: "#e26448",
       },
-      fontSize: "1.25em"
+      fontSize: "1.25em",
     },
   }));
 
@@ -143,9 +142,7 @@ export default function BodyContainer() {
           }}
           onChange={(e) => setPhoneNumber(e.target.value)}
         /> */}
-        <label>
-          Account Name: State Of Ain
-        </label>
+        <label>Account Name: State Of Ain</label>
       </div>
       <div>
         <TextField

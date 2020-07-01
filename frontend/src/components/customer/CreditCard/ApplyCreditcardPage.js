@@ -13,11 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
 import { storeInput } from "../../redux/actions/applyCreditcard_storeInput";
 import { store } from "../../../index";
-import {
-  BrowserRouter as Router,
-  Link,
-  useHistory
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -35,7 +31,9 @@ export default function ApplyCreditCardPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/creditcards/" + customerId)
+      .get("http://localhost:9000/creditcards/cust/searchById", {
+        userId: customerId,
+      })
       .then((res) => {
         setcreditcards(res.data.creditcard);
         let test = res.data.creditcard;

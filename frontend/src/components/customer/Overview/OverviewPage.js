@@ -20,18 +20,19 @@ export default function Overview() {
   const [creditcards, setcreditcards] = useState([]);
   const [balance, setBalance] = useState(0);
   const [creditLimit, setCreditLimit] = useState(0);
-  const [creditCardId, setCreditCardId] = useState('');
-  const customerId = sessionStorage.getItem('_id');
-  
+  const [creditCardId, setCreditCardId] = useState("");
+  const customerId = sessionStorage.getItem("_id");
+
   useEffect(() => {
-    axios.get("http://localhost:9000/creditcards/cust/searchById", {
-      userId: customerId
-    })
-    .then(res => {
-      setcreditcards(res.data.creditcard);
-    })
-    .catch(error => console.log(error))
-  }, [])
+    axios
+      .get("http://localhost:9000/creditcards/cust/searchById", {
+        userId: customerId,
+      })
+      .then((res) => {
+        setcreditcards(res.data.creditcard);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleChangeCC = (e) => {
     setBalance(creditcards[e.target.value].creditcard_balance);
@@ -42,58 +43,57 @@ export default function Overview() {
   const classes = useStyles();
 
   return (
-      <main className="content">
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className="container">
-          <Grid container spacing={3}>
-            {/* Select CreditCard Dropdown */}
-            <Grid item xs={6}>
-              <Paper className="selectCreditCardPaper" elevation="3">
-                <FormControl variant="filled" className="formControl">
-                  <InputLabel htmlFor="creditCardSelect">
-                    Select CreditCard
-                  </InputLabel>
-                  <Select
-                    className="creditCardDd"
-                    native
-                    onChange={handleChangeCC}
-                  >
-                    <option value="0"></option>
-                    {
-                    creditcards.map((creditcard, index) => (
-                      <option
-                        value={index}
-                        key={creditcard._id}
-                      >
-                        {creditcard.creditcard_type} {creditcard.creditcard_num}
-                      </option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Paper>
-            </Grid>
+    <main className="content">
+      <div className={classes.appBarSpacer} />
+      <Container maxWidth="lg" className="container">
+        <Grid container spacing={3}>
+          {/* Select CreditCard Dropdown */}
+          <Grid item xs={6}>
+            <Paper className="selectCreditCardPaper" elevation="3">
+              <FormControl variant="filled" className="formControl">
+                <InputLabel htmlFor="creditCardSelect">
+                  Select CreditCard
+                </InputLabel>
+                <Select
+                  className="creditCardDd"
+                  native
+                  onChange={handleChangeCC}
+                >
+                  <option value="0"></option>
+                  {creditcards.map((creditcard, index) => (
+                    <option value={index} key={creditcard._id}>
+                      {creditcard.creditcard_type} {creditcard.creditcard_num}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Paper>
           </Grid>
-          <Grid container spacing={3}>
-            {/* Credit Balance Amount */}
-            <Grid item xs={12} md={8} lg={6}>
-              <Paper className="fixedHeightPaper" elevation="3">
-                <CreditBalance balance={balance} />
-              </Paper>
-            </Grid>
-            {/* Credit Limit */}
-            <Grid item xs={12} md={4} lg={6}>
-              <Paper className="fixedHeightPaper" elevation="3">
-                <CreditLimit limit={creditLimit}/>
-              </Paper>
-            </Grid>
-            {/* Payment Details */}
-            <Grid item xs={12}>
-              <Paper className="paper" elevation="3">
-                <PaymentDetails creditCardId={creditCardId} customerId ={customerId}/>
-              </Paper>
-            </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          {/* Credit Balance Amount */}
+          <Grid item xs={12} md={8} lg={6}>
+            <Paper className="fixedHeightPaper" elevation="3">
+              <CreditBalance balance={balance} />
+            </Paper>
           </Grid>
-        </Container>
-      </main>
+          {/* Credit Limit */}
+          <Grid item xs={12} md={4} lg={6}>
+            <Paper className="fixedHeightPaper" elevation="3">
+              <CreditLimit limit={creditLimit} />
+            </Paper>
+          </Grid>
+          {/* Payment Details */}
+          <Grid item xs={12}>
+            <Paper className="paper" elevation="3">
+              <PaymentDetails
+                creditCardId={creditCardId}
+                customerId={customerId}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    </main>
   );
 }
