@@ -24,7 +24,9 @@ export default function Overview() {
   const customerId = sessionStorage.getItem('_id');
   
   useEffect(() => {
-    axios.get("http://localhost:9000/creditcards/" + customerId)
+    axios.get("http://localhost:9000/creditcards/cust/searchById", {
+      userId: customerId
+    })
     .then(res => {
       setcreditcards(res.data.creditcard);
     })
