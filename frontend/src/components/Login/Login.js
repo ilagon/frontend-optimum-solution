@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {userInfo} from '../redux/actions/userInfoActions';
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,6 +84,8 @@ export default function SignInSide() {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const [open, setOpen] = React.useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [customer, setCust] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
@@ -95,13 +98,16 @@ export default function SignInSide() {
         setError(false);
         if (res.data.message === 'success') {
           sessionStorage.setItem('token', res.data.token);
-          sessionStorage.setItem('name', res.data.name);
-          sessionStorage.setItem('_id', res.data._id);
-          if(res.data.user_type === "Admin"){
-            window.location.href = '/Admin';
-          } else{
-            window.location.href = '/Dashboard';
-          }
+          dispatch(userInfo(res.data.name));
+          // sessionStorage.setItem('name', res.data.name);
+          // sessionStorage.setItem('_id', res.data._id);
+           if(res.data.user_type === "Admin"){
+          //   window.location.href = '/Admin';
+          setAdmin(true);
+           } else{
+          //   window.location.href = '/Dashboard';
+            setCust(true);
+           }
         }
         if (res.data.message === 'Your Account has not been approved by the Administrator') {
           setOpen(true);
@@ -214,6 +220,7 @@ export default function SignInSide() {
               >
                 Login
               </Button>
+              {admin ? <Redirect to="/Admin"/> : null}
             </div>
             <Grid container align="center">
               <Grid item xs>

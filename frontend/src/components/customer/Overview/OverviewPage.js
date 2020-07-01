@@ -21,7 +21,7 @@ export default function Overview() {
   const [balance, setBalance] = useState(0);
   const [creditLimit, setCreditLimit] = useState(0);
   const [creditCardId, setCreditCardId] = useState('');
-  const customerId = "5eeb358d2f67c7147836cdb9";
+  const customerId = JSON.parse(sessionStorage.getItem('_id'));
   
   useEffect(() => {
     axios.get("http://localhost:9000/creditcards/" + customerId)

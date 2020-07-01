@@ -20,6 +20,7 @@ import {
   faCaretDown,
   faDoorOpen,
 } from "@fortawesome/free-solid-svg-icons";
+import {useSelector} from 'react-redux';
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
@@ -44,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-
+  const userName = useSelector(state => state.userInfo);
   const [openState, setOpenState] = useState();
-  const [name, setName] = useState();
+  //const [name, setName] = useState();
   const referenceAnchor = useRef(null);
 
   const handleOnClickDropdown = () => {
@@ -81,8 +82,8 @@ export default function Header() {
   // return focus to the button when transitioning from closed to open
   const openPreviously = useRef(openState);
   useEffect(() => {
-    let name = sessionStorage.getItem('name');
-    setName(name);
+    // let name = sessionStorage.getItem('name');
+    // setName(name);
     if (openPreviously.current === true && openState === false) {
       referenceAnchor.current.focus();
     }
@@ -106,7 +107,7 @@ export default function Header() {
             color="#0e4686"
             pull="left"
           />
-          {name}
+          {userName}
 
           <FontAwesomeIcon
             icon={faCaretDown}
