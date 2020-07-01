@@ -1,88 +1,88 @@
-import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
-import IconButton from '@material-ui/core/IconButton';
-import Collapse from '@material-ui/core/Collapse';
-import CloseIcon from '@material-ui/icons/Close';
-import axios from 'axios';
-import {useDispatch} from 'react-redux';
-import {userInfo} from '../redux/actions/userInfoActions';
-import {Redirect} from 'react-router-dom';
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
+import IconButton from "@material-ui/core/IconButton";
+import Collapse from "@material-ui/core/Collapse";
+import CloseIcon from "@material-ui/icons/Close";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { userInfo } from "../redux/actions/userInfoActions";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
-    backgroundImage: 'url(/images/loginPic.jpg)',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'absolute',
+    backgroundImage: "url(/images/loginPic.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "absolute",
   },
   links: {
-    textDecoration: 'none',
-    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-    color: '#173A77',
-    fontWeight: '700',
-    fontSize: '1.5rem',
+    textDecoration: "none",
+    fontFamily: ["Avenir Heavy", "Arial", "sans serif"],
+    color: "#173A77",
+    fontWeight: "700",
+    fontSize: "1.5rem",
   },
   deselect: {
-    textDecoration: 'none',
-    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-    color: '#606E87',
-    fontWeight: '700',
-    fontSize: '1.5rem',
+    textDecoration: "none",
+    fontFamily: ["Avenir Heavy", "Arial", "sans serif"],
+    color: "#606E87",
+    fontWeight: "700",
+    fontSize: "1.5rem",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   title: {
-    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-    color: '#AA3A21',
-    fontSize: '2.5rem',
-    fontWeight: '700',
-    fontStyle: 'italic',
+    fontFamily: ["Avenir Heavy", "Arial", "sans serif"],
+    color: "#AA3A21",
+    fontSize: "2.5rem",
+    fontWeight: "700",
+    fontStyle: "italic",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    color: 'black',
+    color: "black",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#AA3A21',
-    fontFamily: ['Avenir Heavy', 'Arial', 'sans serif'],
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#AA3A21',
+    backgroundColor: "#AA3A21",
+    fontFamily: ["Avenir Heavy", "Arial", "sans serif"],
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#AA3A21",
     },
   },
   forgetButton: {
-    color: '#173A77',
-    fontStyle: 'bold',
+    color: "#173A77",
+    fontStyle: "bold",
   },
   link: {
-    textDecoration: 'none',
+    textDecoration: "none",
   },
 }));
 
 export default function SignInSide() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [open, setOpen] = React.useState(false);
   const [admin, setAdmin] = useState(false);
   const [customer, setCust] = useState(false);
@@ -90,32 +90,36 @@ export default function SignInSide() {
   const submit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:9000/users/login', {
-      email,
-      password: pass,
-    })
+    axios
+      .post("http://localhost:9000/users/login", {
+        email,
+        password: pass,
+      })
       .then((res) => {
         setError(false);
-        if (res.data.message === 'success') {
-          sessionStorage.setItem('token', res.data.token);
+        if (res.data.message === "success") {
+          sessionStorage.setItem("token", res.data.token);
           dispatch(userInfo(res.data.name, res.data._id));
-          sessionStorage.setItem('name', res.data.name);
-          sessionStorage.setItem('_id', res.data._id);
-           if(res.data.user_type === "Admin"){
-          //   window.location.href = '/Admin';
-          setAdmin(true);
-           } else{
-          //   window.location.href = '/Dashboard';
+          sessionStorage.setItem("name", res.data.name);
+          sessionStorage.setItem("_id", res.data._id);
+          if (res.data.user_type === "Admin") {
+            //   window.location.href = '/Admin';
+            setAdmin(true);
+          } else {
+            //   window.location.href = '/Dashboard';
             setCust(true);
-           }
+          }
         }
-        if (res.data.message === 'Your Account has not been approved by the Administrator') {
+        if (
+          res.data.message ===
+          "Your Account has not been approved by the Administrator"
+        ) {
           setOpen(true);
-          setMessage('Account not approved by Administrator');
+          setMessage("Account not approved by Administrator");
         }
-        if (res.data.message === 'Your account has been inactive') {
+        if (res.data.message === "Your account has been inactive") {
           setOpen(true);
-          setMessage('Your account has been deactivated');
+          setMessage("Your account has been deactivated");
         }
       })
       .catch(() => {
@@ -134,17 +138,21 @@ export default function SignInSide() {
           </a>
           <Box display="flex" p={1} bgcolor="background.paper">
             <Box p={5}>
-              <a href="/Login" className={classes.links}>LOGIN</a>
+              <a href="/Login" className={classes.links}>
+                LOGIN
+              </a>
             </Box>
             <Box p={5}>
-              <a href="/SignUp" className={classes.deselect}>REGISTER</a>
+              <a href="/SignUp" className={classes.deselect}>
+                REGISTER
+              </a>
             </Box>
           </Box>
           <form className={classes.form} onSubmit={submit}>
             <Collapse in={open}>
               <Alert
                 severity="info"
-                action={(
+                action={
                   <IconButton
                     aria-label="close"
                     color="inherit"
@@ -155,7 +163,7 @@ export default function SignInSide() {
                   >
                     <CloseIcon fontSize="inherit" />
                   </IconButton>
-                  )}
+                }
               >
                 {message}
               </Alert>
@@ -172,10 +180,10 @@ export default function SignInSide() {
               value={email}
               InputLabelProps={{
                 style: {
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  width: '100%',
-                  color: '#173A77',
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  width: "100%",
+                  color: "#173A77",
                 },
               }}
               onChange={(e) => {
@@ -184,7 +192,7 @@ export default function SignInSide() {
                 setOpen(false);
               }}
               error={!!error}
-              helperText={error ? 'Incorrect Username or password' : ''}
+              helperText={error ? "Incorrect Username or password" : ""}
             />
             <TextField
               margin="normal"
@@ -198,10 +206,10 @@ export default function SignInSide() {
               value={pass}
               InputLabelProps={{
                 style: {
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  width: '100%',
-                  color: '#173A77',
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  width: "100%",
+                  color: "#173A77",
                 },
               }}
               onChange={(e) => {
@@ -220,12 +228,16 @@ export default function SignInSide() {
               >
                 Login
               </Button>
-              {admin ? <Redirect to="/Admin"/> : null}
-              {customer? <Redirect to='/Customer'/> : null}
+              {admin ? <Redirect to="/Admin" /> : null}
+              {customer ? <Redirect to="/Customer" /> : null}
             </div>
             <Grid container align="center">
               <Grid item xs>
-                <Link href="/ForgetPass" variant="body2" className={classes.forgetButton}>
+                <Link
+                  href="/ForgetPass"
+                  variant="body2"
+                  className={classes.forgetButton}
+                >
                   Forgot password?
                 </Link>
               </Grid>

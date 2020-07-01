@@ -21,7 +21,7 @@ const CreditCardSchema = new Schema({
   },
   creditcard_type: {
     type: String,
-    enum: ["Platinum", "Gold", "Silver", "Women", "Student", "Singtel"],
+    enum: ["Platinum", "Gold", "Silver", "Women", "Student"],
     require: true,
   },
   user: {
