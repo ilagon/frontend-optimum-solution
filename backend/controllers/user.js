@@ -141,10 +141,11 @@ exports.forgot_password = (req, res) => {
           from: "Mailgun Sandbox <noreply@optimum.com>",
           to: req.body.email,
           subject: "Reset Password",
-          html: `There was recently a request to change the password on your account.
+          html: `
                     <p>
                     Hello there,
                     <p>
+                        There was recently a request to change the password on your account.
                         If you requested this password change, please click the link below to set a new password within 15min
                         <br>
                         <a href=" http://localhost:3000/ResetPass/recover/${token}">Click here to change your password</a>

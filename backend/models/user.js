@@ -24,7 +24,7 @@ const UserSchema = new Schema({
   },
   user_type: {
     type: String,
-    enum: ["Admin", "Customer", "Singtel"],
+    enum: ["Admin", "Customer"],
     default: "Customer",
   },
   resetPasswordToken: {
