@@ -47,27 +47,27 @@ export default function ApplyCreditCardPage() {
 
   const handlecard_Silver = () => {
     dispatch(storeInput("", "Silver"));
-    history.push("/apply-creditcard/creditcard-name");
+    history.push("/Customer/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Gold = () => {
     dispatch(storeInput("", "Gold"));
-    history.push("/apply-creditcard/creditcard-name");
+    history.push("/Customer/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Platinum = () => {
     dispatch(storeInput("", "Platinum"));
-    history.push("/apply-creditcard/creditcard-name");
+    history.push("/Customer/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Women = () => {
     dispatch(storeInput("", "Women"));
-    history.push("/apply-creditcard/creditcard-name");
+    history.push("/Customer/apply-creditcard/creditcard-name");
   };
 
   const handlecard_Student = () => {
     dispatch(storeInput("", "Student"));
-    history.push("/apply-creditcard/creditcard-name");
+    history.push("/Customer/apply-creditcard/creditcard-name");
   };
 
   return (
@@ -97,7 +97,7 @@ export default function ApplyCreditCardPage() {
             <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
               {customerCardTypes.indexOf("Silver") === -1 ? (
                 <Link
-                  to="/apply-creditcard/creditcard-name"
+                  to="/Customer/apply-creditcard/creditcard-name"
                   className={styles.ccLink}
                 >
                   <Button
@@ -145,7 +145,7 @@ export default function ApplyCreditCardPage() {
             <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
               {customerCardTypes.indexOf("Gold") === -1 ? (
                 <Link
-                  to="/apply-creditcard/creditcard-name"
+                  to="/Customer/apply-creditcard/creditcard-name"
                   className={styles.ccLink}
                 >
                   <Button
@@ -192,7 +192,7 @@ export default function ApplyCreditCardPage() {
             <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
               {customerCardTypes.indexOf("Platinum") === -1 ? (
                 <Link
-                  to="/apply-creditcard/creditcard-name"
+                  to="/Customer/apply-creditcard/creditcard-name"
                   className={styles.ccLink}
                 >
                   <Button
@@ -237,7 +237,7 @@ export default function ApplyCreditCardPage() {
             <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
               {customerCardTypes.indexOf("Women") === -1 ? (
                 <Link
-                  to="/apply-creditcard/creditcard-name"
+                  to="/Customer/apply-creditcard/creditcard-name"
                   className={styles.ccLink}
                 >
                   <Button
@@ -283,7 +283,7 @@ export default function ApplyCreditCardPage() {
             <Grid item xs={12} md={4} lg={4} className={styles.ccSelectDiv}>
               {customerCardTypes.indexOf("Student") === -1 ? (
                 <Link
-                  to="/apply-creditcard/creditcard-name"
+                  to="/Customer/apply-creditcard/creditcard-name"
                   className={styles.ccLink}
                 >
                   <Button
