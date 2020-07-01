@@ -33,18 +33,23 @@ export default function BodyContainer() {
     } else alert("Please fill in the form");
   };
 
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("1-800-AinResign");
   const [amount, setAmount] = useState("");
   const [creditCard, setCreditCard] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
-
+  let jsonID = sessionStorage.getItem('_id');
+  let id = jsonID;
+  console.log(id);
+  
 
   useEffect(() => {
     function fetchData(){
       axios
-        .get("http://localhost:9000/creditcards/5ee9d8eea80b44418c8d8b6c")
+        .get(`http://localhost:9000/cust/searchById/`, {
+          userId: id
+        })
         .then((response) => {
           response.data.creditcard.map((obj) => {
             if (obj.creditcard_status === "Approved")
@@ -124,20 +129,23 @@ export default function BodyContainer() {
     <div className="toForm">
       <h1>To</h1>
       <div>
-        <TextField
+        {/* <TextField
           required
           className={classes.textBoxMargin}
           id="phoneNumberInput"
           label="Phone Number"
           type="number"
-          value={phoneNumber}
+          value="1800"
           onInput={(e) => {
             e.target.value = Math.max(0, parseInt(e.target.value))
               .toString()
               .slice(0, 8);
           }}
           onChange={(e) => setPhoneNumber(e.target.value)}
-        />
+        /> */}
+        <label>
+          Account Name: State Of Ain
+        </label>
       </div>
       <div>
         <TextField
