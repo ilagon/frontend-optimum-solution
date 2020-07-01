@@ -99,9 +99,9 @@ export default function SignInSide() {
         setError(false);
         if (res.data.message === "success") {
           sessionStorage.setItem("token", res.data.token);
-          dispatch(userInfo(res.data.name));
-          // sessionStorage.setItem('name', res.data.name);
-          // sessionStorage.setItem('_id', res.data._id);
+          dispatch(userInfo(res.data.name, res.data._id));
+          sessionStorage.setItem("name", res.data.name);
+          sessionStorage.setItem("_id", res.data._id);
           if (res.data.user_type === "Admin") {
             //   window.location.href = '/Admin';
             setAdmin(true);
@@ -229,6 +229,7 @@ export default function SignInSide() {
                 Login
               </Button>
               {admin ? <Redirect to="/Admin" /> : null}
+              {customer ? <Redirect to="/Customer" /> : null}
             </div>
             <Grid container align="center">
               <Grid item xs>

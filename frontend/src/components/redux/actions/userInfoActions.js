@@ -1,6 +1,7 @@
 export const userInfo = (name, id) => {
   return {
       type: "LOGIN",
-      payload: name
+      name: name,
+      id: id
   }
 };
