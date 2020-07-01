@@ -7,7 +7,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { storePayee } from "../../common/redux/actions/taxPayment_storeInput";
+import { storePayee } from "../../../redux/actions/taxPayment_storeInput";
 import { useHistory, Link, NavLink } from "react-router-dom";
 
 var payeeList = [];
