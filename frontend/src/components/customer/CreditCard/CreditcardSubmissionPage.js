@@ -69,7 +69,7 @@ export default function ApplyCreditcardSubmit() {
                 <p className="darkBlueColor">{custEmail}</p>
               </Grid>
             </Grid>
-            <Link to="/apply-creditcard/creditcard-confirm">
+            <Link to="/Customer/apply-creditcard/creditcard-confirm">
               <Button
                 variant="contained"
                 id="cardApplyBtn"

@@ -31,7 +31,7 @@ export default function ApplyCC() {
     console.log("cardType")
     console.log(cardType)
     dispatch(storeInput(name, cardType));
-    history.push("/apply-creditcard/creditcard-submit");
+    history.push("/Customer/apply-creditcard/creditcard-submit");
   };
 
   return (
@@ -51,7 +51,7 @@ export default function ApplyCC() {
               />
             </Grid>
           </Grid>
-          <Link to = "/apply-creditcard/creditcard-submit">
+          <Link to = "/Customer/apply-creditcard/creditcard-submit">
             <Button variant="contained" id="cardNameBtn" onClick={() => handleFormInputs()}>
               Next
             </Button>
