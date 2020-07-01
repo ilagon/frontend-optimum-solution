@@ -495,7 +495,7 @@ exports.creditcard_get_by_userId = (req, res) => {
 
 // update balance
 exports.update_balance = (req, res) => {
-  const id = req.body.creditcard_Id;
+  const id = req.body.creditcardId;
   CreditCard.updateOne(
     { _id: id },
     {

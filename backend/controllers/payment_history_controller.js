@@ -40,9 +40,9 @@ exports.add_paymentHistory = (req, res) => {
 };
 
 exports.paymentHistory_get_all_by_creditcardId = (req, res) => {
-  const creditcardId = req.params.creditcardId;
+  const creditcardId = req.body.creditcardId;
   PaymentHistory.find({ creditCard: creditcardId })
-    .populate("creditCard", ["creditcard_num"])
+    .populate("creditCard", ["creditcard_num", "creditcard_type"])
     .exec()
     .then((docs) => {
       const response = {
