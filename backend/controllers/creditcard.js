@@ -126,38 +126,6 @@ exports.creditcard_search_by_userid = (req, res) => {
     });
 };
 
-//ain testing
-exports.ain_testing = (req, res) => {
-  const email = req.body.email;
-  CreditCard.find()
-    // CreditCard.findOne({ email: req.body.email })
-    .populate("user", ["email", "account_status"])
-    .exec()
-    .then((docs) => {
-      const response = {
-        count: docs.length,
-        CreditCard: docs.map((doc) => {
-          return {
-            creditcard_status: doc.creditcard_status,
-            creditcard_limit: doc.creditcard_limit,
-            creditcard_balance: doc.creditcard_balance,
-            creditcard_type: doc.creditcard_type,
-            user: doc.user,
-            email: doc.user.email,
-            account_status: doc.user.account_status,
-          };
-        }),
-      };
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
-
 //overview page user search by card status "Approved""
 //accept current change
 exports.creditcard_search_by_cardStatus_active = (req, res) => {
