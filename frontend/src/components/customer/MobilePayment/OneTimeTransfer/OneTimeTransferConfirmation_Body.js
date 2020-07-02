@@ -66,13 +66,8 @@ export default function BodyContainer() {
   const formTo = (
     <div className="toForm toFormConfirmation">
       <h1>To</h1>
-<<<<<<< HEAD
-      <p>Phone Number: {state.mobilePayment.phoneNumber}</p>
-      <p>Singtel</p>
-=======
       <p>Reference Number: {state.mobilePayment.phoneNumber}</p>
       <p>Singtel Mobile Bill</p>
->>>>>>> eb094854f835fce2d90791e1760dc49dc7514c53
       <p>$ {state.mobilePayment.amount}</p>
     </div>
   );
