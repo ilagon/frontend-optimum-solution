@@ -4,12 +4,12 @@ import image from "../images/greentick.png";
 
 export function PaymentSuccessfulPage() {
   return (
-    <div id= "paymentUnSuccessful">
-    <img id= "img" src= {image} />
-     <h1 id = "text">Payment Sucessful!</h1>
-     <p id = "message">If unauthorised, call 1800 1234 5678.</p>
-    </div>
-
-    
+    <main className="content">
+      <div id="paymentUnSuccessful">
+        <img id="img" src={image} />
+        <h1 id="text">Payment Sucessful!</h1>
+        <p id="message">If unauthorised, call 1800 1234 5678.</p>
+      </div>
+    </main>
   );
-} 
+}
