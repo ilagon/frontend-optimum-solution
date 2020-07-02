@@ -19,7 +19,6 @@ import {
   NavLink,
 } from "react-router-dom";
 
-var cards = [];
 
 export default function BodyContainer() {
   const dispatch = useDispatch();
@@ -39,23 +38,21 @@ export default function BodyContainer() {
   const [isLoading, setLoading] = useState(false);
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
+  const [cards, setCards] = useState([]);
+  let id = sessionStorage.getItem("_id");
 
   useEffect(() => {
-    function fetchData(){
+    
       axios
-        .get("http://localhost:9000/creditcards/5ee8792db5be6439f4d8474e")
-        .then((response) => {
-          response.data.creditcard.map((obj) => {
-            if (obj.creditcard_status === "Approved")
-              cards.push(obj)
-          })
-          setLoading(true);
+        .post("http://localhost:9000/creditcard/cust/searchActive", {
+          userId: id
         })
-        .catch((error) => console.log(error));
-    }
-    if (cards.length === 0)
-      fetchData();
-  });
+        .then((response) => {
+            setCards(response.data.creditcard);
+            setLoading(true);
+          })
+        .catch(err => console.log(err))
+      }, [cards]);
 
   const handleAmount = (value) => {
     if (value > creditCard.creditcard_balance) {

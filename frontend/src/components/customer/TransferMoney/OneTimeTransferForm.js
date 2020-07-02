@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -50,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-var cards = [];
-
 export default function OneTimeTransferForm() {
   
   const [state, setState] = React.useState({
@@ -63,22 +61,20 @@ export default function OneTimeTransferForm() {
     senderCreditCardBalance: '',
     senderCreditCardID: ''
   });
+  const [cards, setCards] = useState([]);
+  let id = sessionStorage.getItem('_id');
 
-  function getCards(){
+  
+  useEffect(() => {
     axios
-      .get("http://localhost:9000/creditcards/5ee8792db5be6439f4d8474e")
-      .then((response) => {
-        console.log(response.data.creditcard);
-        response.data.creditcard.map((obj) => {
-          if (obj.creditcard_status==='Approved') {
-          cards.push(obj)
-          }
-});
-console.log(cards);
-localStorage.setItem("UserCreditCards", JSON.stringify(cards));
+      .post("http://localhost:9000/creditcard/cust/searchActive", {
+        userId: id
       })
-.catch((error) => console.log(error));
-};
+      .then((response) => {
+        setCards(response.data.creditcard);
+      })
+      .catch(err => console.log(err))
+    })
 
   const getCreditCardBalance = (creditCardType) => {
         var balance = 0.0;
@@ -141,7 +137,6 @@ localStorage.setItem("UserCreditCards", JSON.stringify(cards));
 
   return (
     <div>
-      {cards.length===0 ? getCards() : ''}
       <CssBaseline />
       {/* Title */}
       <Grid container spacing={3}>
