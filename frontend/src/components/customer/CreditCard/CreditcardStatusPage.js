@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CreditCardStatus() {
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
-  const [creditCardNum, setCreditCardNum] = useState("Null");
+  const [creditCardId, setCreditCardId] = useState("Null");
   const [creditCardStatus, setCreditCardStatus] = useState("");
   const customerId = sessionStorage.getItem("_id");
 
@@ -34,7 +34,7 @@ export default function CreditCardStatus() {
   }, []);
 
   const handleChangeCC = (e) => {
-    setCreditCardNum(creditcards[e.target.value].creditcard_num);
+    setCreditCardId(creditcards[e.target.value]._id);
     setCreditCardStatus(creditcards[e.target.value].creditcard_status);
   };
 
@@ -69,10 +69,10 @@ export default function CreditCardStatus() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <h2 className="darkBlueColor">Credit Card Status</h2>
-            <p className="darkBlueColor">Ref No.: {creditCardNum}</p>
+            <p className="darkBlueColor">Ref No.: {creditCardId}</p>
             <p className="darkBlueColor">
-              {creditCardNum === "Null" ? "Please select a credit card." : ""}
-              {creditCardStatus === "Approved"
+              {creditCardId === "Null" ? "Please select a credit card." : ""}
+              {creditCardStatus === "Active"
                 ? "Your credit card has been approved. Thank you."
                 : ""}
               {creditCardStatus === "Rejected"
