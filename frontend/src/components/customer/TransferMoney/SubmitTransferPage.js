@@ -66,7 +66,7 @@ export default function SubmitTransferPage() {
   var states = JSON.parse(retrievedData);
 
   const cancelHandle = () => {
-    window.location.href = "/Customer/Payment/Unsuccessful";
+    window.location.href = "/Customer/Transfer/Unsuccessful";
   };
   const handleSubmit = async () => {
     axios
