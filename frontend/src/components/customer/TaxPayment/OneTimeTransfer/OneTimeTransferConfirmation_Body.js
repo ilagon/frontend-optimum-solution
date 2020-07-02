@@ -23,24 +23,24 @@ export default function BodyContainer() {
       .then((response) => {
         console.log(response);
         axios
-          .patch("http://localhost:9000/creditcards/updateBalance", {
-            creditcard_Id: state.taxPayment.creditCard._id,
+          .patch("http://localhost:9000/creditcard/updateBalance", {
+            creditcardId: state.taxPayment.creditCard._id,
             creditcard_balance:
               state.taxPayment.creditCard.creditcard_balance -
               state.taxPayment.amount,
           })
           .then((response2) => {
             console.log(response2);
-            window.location.href="/Customer/Payment/Successful"
+            window.location.href = "/Customer/Payment/Successful";
           })
           .catch((error) => {
             console.log(error);
-            window.location.href="/Customer/Payment/Unsuccessful"
+            window.location.href = "/Customer/Payment/Unsuccessful";
           });
       })
       .catch((error) => {
         console.log(error);
-        window.location.href="/Customer/Payment/Unsuccessful"
+        window.location.href = "/Customer/Payment/Unsuccessful";
       });
   };
 
@@ -89,7 +89,7 @@ export default function BodyContainer() {
         <Button
           id="cancelButton"
           variant="contained"
-          onClick={() => window.location.href="/Payment/Unsuccessful"}
+          onClick={() => (window.location.href = "/Payment/Unsuccessful")}
         >
           Cancel
         </Button>
@@ -98,24 +98,24 @@ export default function BodyContainer() {
   );
 
   return (
-      <main className="content" >
-        <div className={classes.appBarSpacer} />
-        <Grid container direction="row" justify="space-evenly" wrap="wrap">
-          <Grid item sm={10} className={classes.gridMargin + " taxPayment"}>
-            <h1>Tax Payment Details</h1>
-          </Grid>
-          <Grid
-            item
-            sm={6}
-            direction="row"
-            className={classes.gridMargin + " border"}
-          >
-            {formTo}
-          </Grid>
-          <Grid item sm={6} className={classes.gridMargin + " border"}>
-            {formFrom}
-          </Grid>
+    <main className="content">
+      <div className={classes.appBarSpacer} />
+      <Grid container direction="row" justify="space-evenly" wrap="wrap">
+        <Grid item sm={10} className={classes.gridMargin + " taxPayment"}>
+          <h1>Tax Payment Details</h1>
         </Grid>
-      </main>
+        <Grid
+          item
+          sm={6}
+          direction="row"
+          className={classes.gridMargin + " border"}
+        >
+          {formTo}
+        </Grid>
+        <Grid item sm={6} className={classes.gridMargin + " border"}>
+          {formFrom}
+        </Grid>
+      </Grid>
+    </main>
   );
 }
