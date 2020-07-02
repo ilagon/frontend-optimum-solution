@@ -461,6 +461,29 @@ exports.creditcard_get_by_userId = (req, res) => {
     });
 };
 
+exports.creditcard_get_active_userId = (req, res) => {
+  const userId = req.body.userId;
+  CreditCard.find({ user: userId, creditcard_status: "Active" })
+    .select(
+      "creditcard_num creditcard_status creditcard_balance creditcard_limit creditcard_type user _id"
+    )
+    .exec()
+    .then((doc) => {
+      console.log("From db", doc);
+      if (doc) {
+        res.status(200).json({
+          creditcard: doc,
+        });
+      } else {
+        res.status(404).json({ message: "No valid entry found!" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
+
 // update balance
 exports.update_balance = (req, res) => {
   const id = req.body.creditcardId;

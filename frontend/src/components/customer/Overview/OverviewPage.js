@@ -25,7 +25,7 @@ export default function Overview() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/creditcard/cust/searchById", {
+      .post("http://localhost:9000/creditcard/cust/searchActive", {
         userId: customerId,
       })
       .then((res) => {
@@ -62,7 +62,7 @@ export default function Overview() {
                   <option value="0"></option>
                   {creditcards.map((creditcard, index) => (
                     <option value={index} key={creditcard._id}>
-                      {creditcard.creditcard_type} {creditcard.creditcard_num}
+                      {creditcard.creditcard_type}
                     </option>
                   ))}
                 </Select>

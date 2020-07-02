@@ -52,7 +52,11 @@ router.patch("/approve", creditcardController.creditcard_approve); // A you need
 router.patch("/reject", creditcardController.creditcard_deny); // A checked
 
 //customer module
-router.get("/cust/searchById", creditcardController.creditcard_get_by_userId); // A checked
+router.post("/cust/searchById", creditcardController.creditcard_get_by_userId); // A checked
+router.post(
+  "/cust/searchActive",
+  creditcardController.creditcard_get_active_userId
+); // A checked
 router.post(
   "/creditcardApplication",
   creditcardController.creditcard_application
