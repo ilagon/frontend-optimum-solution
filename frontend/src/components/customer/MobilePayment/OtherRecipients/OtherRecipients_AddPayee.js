@@ -32,6 +32,7 @@ export default function BodyContainer() {
 
   const [name, setName] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
+  const customerId = sessionStorage.getItem("_id");
 
   const handleSavePayee = () => {
     if (name != undefined && phoneNumber != undefined) {
@@ -40,7 +41,7 @@ export default function BodyContainer() {
           name: name,
           number: phoneNumber,
           payee_type: "MobileBill",
-          userId: "5ee8792db5be6439f4d8474e",
+          userId: customerId,
         })
         .then((response) => {
           console.log(response);
@@ -120,7 +121,9 @@ export default function BodyContainer() {
               <Button
                 id="cancelButton"
                 variant="contained"
-                onClick={() => history.push("/Customer/MobilePayment/OtherRecipients")}
+                onClick={() =>
+                  history.push("/Customer/MobilePayment/OtherRecipients")
+                }
               >
                 Cancel
               </Button>
