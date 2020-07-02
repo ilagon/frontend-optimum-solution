@@ -50,7 +50,7 @@ export default function PaymentDetails(props) {
   const customerId = props.customerId;
 
   axios
-    .get("http://localhost:9000/payment_history/checkPayment", {
+    .post("http://localhost:9000/payment_history/checkPayment", {
       creditcardId: creditCardId,
     })
     .then((res) => {

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const PaymentHistoryController = require("../controllers/payment_history_controller");
 
-router.get(
+router.post(
   "/checkPayment",
   PaymentHistoryController.paymentHistory_get_all_by_creditcardId
 ); // A checked
