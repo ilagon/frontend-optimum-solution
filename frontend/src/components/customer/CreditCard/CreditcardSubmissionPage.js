@@ -43,6 +43,7 @@ export default function ApplyCreditcardSubmit() {
   }, [])
 
   const handleChange = () => {
+    window.location.href = "/Customer";
   };
 
   const applyCC = () => {
