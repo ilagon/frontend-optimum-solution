@@ -98,12 +98,15 @@ export default function CreditCardStatus() {
   };
 
 
-  const getDenyCreditCard = () => {
+  const getDenyCreditCard = (id) => {
     axios
-      .patch(`http://localhost:9000/deny/reject/${denyCreditCardState}`)
+      .patch(`http://localhost:9000/creditcard/reject`, {
+        cardId: id
+      })
       .then((response) => {
         console.log(response.data.creditcard.creditcard_status);
       })
+      .catch(err => console.log(err))
   };
   
   const onClickApprove = (event) => {
@@ -114,7 +117,8 @@ export default function CreditCardStatus() {
   };
 
   const onClickDeny = (event) => {
-    setDenyCreditCardState(event.target.value);
+    getDenyCreditCard(event.target.value);
+    //setDenyCreditCardState(event.target.value);
   };
 
   return (
