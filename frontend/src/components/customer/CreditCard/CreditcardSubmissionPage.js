@@ -7,18 +7,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../Overview/Overview.css";
 import { store } from "../../../index";
-import {
-  BrowserRouter as Router,
-  Link,
-  useHistory
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
 }));
 
 export default function ApplyCreditcardSubmit() {
-
   const history = useHistory();
   const state = store.getState();
   const classes = useStyles();
@@ -28,27 +23,29 @@ export default function ApplyCreditcardSubmit() {
   console.log("state.applyCreditcard.selectedCardType");
   console.log(state.applyCreditcard.selectedCardType);
 
-  const customerId = "5ee86a90e62e0a29d8c0a003"; 
+  const customerId = sessionStorage.getItem("_id");
   const [custEmail, setCustEmail] = useState();
   var arr = [];
-  
-  useEffect(() => {
-    axios.get("http://localhost:9000/users/" + customerId)
-    .then((res) => {        
-    console.log("Success");
-      const test = res.data.user;
-        setCustEmail(test.email);
-       })
-    .catch(error => console.log(error));
-  }, [])
 
-  const handleChange = () => {
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:9000/users/search/userId", {
+        userId: customerId,
+      })
+      .then((res) => {
+        console.log("Success");
+        const test = res.data.user;
+        setCustEmail(test.email);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleChange = () => {};
 
   const applyCC = () => {
     //selected creditcard type is not in DB (Apply new CC)
     axios
-      .post("http://localhost:9000/creditcards/creditcardApplication", {
+      .post("http://localhost:9000/creditcard/creditcardApplication", {
         creditcard_type: creditcardType,
         userId: customerId,
       })
@@ -56,39 +53,35 @@ export default function ApplyCreditcardSubmit() {
       .catch((error) => console.log(error));
   };
 
-    return (
-      <React.Fragment>
-        <main className="content">
-          <div className={classes.appBarSpacer} />
-          <Container maxWidth="md" className="container">
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <h2 className="darkRedColor">Credit Card Application</h2>
-                <p className="darkBlueColor">Ref No.: {referenceNum}</p>
-                <p className="darkBlueColor">{creditcardName}</p>
-                <p className="darkBlueColor">{custEmail}</p>
-              </Grid>
+  return (
+    <React.Fragment>
+      <main className="content">
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="md" className="container">
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <h2 className="darkRedColor">Credit Card Application</h2>
+              <p className="darkBlueColor">Ref No.: {referenceNum}</p>
+              <p className="darkBlueColor">{creditcardName}</p>
+              <p className="darkBlueColor">{custEmail}</p>
             </Grid>
-            <Link to="/Customer/apply-creditcard/creditcard-confirm">
-              <Button
-                variant="contained"
-                id="cardApplyBtn"
-                onClick={applyCC}
-              >
-                Apply
-              </Button>
-            </Link>
-            <Link to="/">
-              <Button
-                variant="contained"
-                id="cardCancelBtn"
-                onClick={handleChange}
-              >
-                Cancel
-              </Button>
-            </Link>
-          </Container>
-        </main>
-      </React.Fragment>
-    );
-  }
+          </Grid>
+          <Link to="/Customer/apply-creditcard/creditcard-confirm">
+            <Button variant="contained" id="cardApplyBtn" onClick={applyCC}>
+              Apply
+            </Button>
+          </Link>
+          <Link to="/">
+            <Button
+              variant="contained"
+              id="cardCancelBtn"
+              onClick={handleChange}
+            >
+              Cancel
+            </Button>
+          </Link>
+        </Container>
+      </main>
+    </React.Fragment>
+  );
+}

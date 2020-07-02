@@ -26,7 +26,7 @@ export default function ApplyCreditCardPage() {
   const classes = useStyles();
   const [creditcards, setcreditcards] = useState([]);
   const [customerCardTypes, setCustomerCardTypes] = useState([]);
-  const customerId = "5ee86a90e62e0a29d8c0a003";
+  const customerId = sessionStorage.getItem("_id");
   var arr = [];
 
   useEffect(() => {

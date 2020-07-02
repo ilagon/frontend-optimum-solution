@@ -25,7 +25,7 @@ export default function Overview() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/creditcards/cust/searchById", {
+      .get("http://localhost:9000/creditcard/cust/searchById", {
         userId: customerId,
       })
       .then((res) => {
