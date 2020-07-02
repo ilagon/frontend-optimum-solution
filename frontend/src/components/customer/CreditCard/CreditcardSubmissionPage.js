@@ -40,7 +40,9 @@ export default function ApplyCreditcardSubmit() {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleChange = () => {};
+  const handleChange = () => {
+    window.location.href = "/Customer";
+  };
 
   const applyCC = () => {
     //selected creditcard type is not in DB (Apply new CC)

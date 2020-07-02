@@ -41,27 +41,21 @@ export default function BodyContainer() {
   const [isLoading, setLoading] = useState(false);
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
+  const [cards, setCards] = useState([]);
   let id = sessionStorage.getItem("_id");
   console.log(id);
-  let cards = [];
 
   useEffect(() => {
-    function fetchData() {
       axios
-        .get(`http://localhost:9000/creditcard/cust/searchById/`, {
+        .post(`http://localhost:9000/creditcard/cust/searchActive/`, {
           userId: id,
         })
         .then((response) => {
-          response.data.creditcard.map((obj) => {
-            console.log(obj);
-            if (obj.creditcard_status === "Active") cards.push(obj);
-          });
+          setCards(response.data.creditcard);
           setLoading(true);
         })
         .catch((error) => console.log(error));
-    }
-    if (cards.length === 0) fetchData();
-  });
+  }, [cards]);
 
   const handleAmount = (value) => {
     if (value > creditCard.creditcard_balance) {
