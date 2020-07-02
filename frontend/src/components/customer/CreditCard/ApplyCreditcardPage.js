@@ -30,12 +30,14 @@ export default function ApplyCreditCardPage() {
   var arr = [];
 
   useEffect(() => {
+    console.log(customerId);
     axios
-      .get("http://localhost:9000/creditcards/cust/searchById", {
+      .post("http://localhost:9000/creditcard/cust/searchById", {
         userId: customerId,
       })
       .then((res) => {
-        setcreditcards(res.data.creditcard);
+        console.log(res.data.creditcard);
+        setcreditcards(res.data.creditcard);        
         let test = res.data.creditcard;
         test.map((creditcard) => {
           arr.push(creditcard.creditcard_type);
