@@ -32,7 +32,7 @@ export default function ApplyCreditCardPage() {
   useEffect(() => {
     console.log(customerId);
     axios
-      .post("http://localhost:9000/creditcard/cust/searchById", {
+      .post("https://bankapp-backend.herokuapp.com/creditcard/cust/searchById", {
         userId: customerId,
       })
       .then((res) => {

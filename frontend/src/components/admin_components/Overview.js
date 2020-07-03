@@ -75,7 +75,7 @@ export default function Overview() {
   };
   const getPendingCreditCardStatus = () => {
     axios
-      .get(`http://localhost:9000/creditcard/pending`)
+      .get(`https://bankapp-backend.herokuapp.com/creditcard/pending`)
       .then((response) => {
         // Retrieve the number of pending creditcard
         setPendingCreditCardState(response.data.count);
@@ -86,7 +86,7 @@ export default function Overview() {
 
   const getPendingCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/pending`)
+      .get(`https://bankapp-backend.herokuapp.com/users/pending`)
       .then((response) => {
         // Retrieve the number of pending customer
         setPendingCustomerState(response.data.count);
@@ -97,7 +97,7 @@ export default function Overview() {
 
   const resetSelection = () => {
     axios
-      .post("http://localhost:9000/creditcard/resetBalance", {
+      .post("https://bankapp-backend.herokuapp.com/creditcard/resetBalance", {
         creditcard_type: CardType,
       })
       .then((res) => console.log(res))

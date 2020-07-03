@@ -77,7 +77,7 @@ const ForgetPass = () => {
   const getPass = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:9000/users/forget_password', {
+    axios.post('https://bankapp-backend.herokuapp.com/users/forget_password', {
       email,
     })
       .then((res) => {

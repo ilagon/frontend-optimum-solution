@@ -29,7 +29,7 @@ export default function ApplyCreditcardSubmit() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/users/search/userId", {
+      .get("https://bankapp-backend.herokuapp.com/users/search/userId", {
         userId: customerId,
       })
       .then((res) => {
@@ -47,7 +47,7 @@ export default function ApplyCreditcardSubmit() {
   const applyCC = () => {
     //selected creditcard type is not in DB (Apply new CC)
     axios
-      .post("http://localhost:9000/creditcard/creditcardApplication", {
+      .post("https://bankapp-backend.herokuapp.com/creditcard/creditcardApplication", {
         creditcard_type: creditcardType,
         userId: customerId,
       })

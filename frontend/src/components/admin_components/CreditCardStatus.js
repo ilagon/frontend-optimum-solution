@@ -92,7 +92,7 @@ export default function CreditCardStatus() {
 
   const getApproveCreditCard = (id, type) => {
     axios
-      .patch(`http://localhost:9000/creditcard/approve/`, {
+      .patch(`https://bankapp-backend.herokuapp.com/creditcard/approve/`, {
         cardId: id,
         creditcard_type: type,
       })
@@ -104,7 +104,7 @@ export default function CreditCardStatus() {
 
   const getDenyCreditCard = (id) => {
     axios
-      .patch(`http://localhost:9000/creditcard/reject`, {
+      .patch(`https://bankapp-backend.herokuapp.com/creditcard/reject`, {
         cardId: id,
       })
       .then((response) => {

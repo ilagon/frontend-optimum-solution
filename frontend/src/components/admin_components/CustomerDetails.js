@@ -61,7 +61,7 @@ export default function CustomerDetails() {
   // Retrieve all the customers
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/`)
+      .get(`https://bankapp-backend.herokuapp.com/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setRows([...response.data.Users]);
@@ -76,7 +76,7 @@ export default function CustomerDetails() {
   // Searching for a specific customer
   const getSpecificCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/search/${idState}`)
+      .get(`https://bankapp-backend.herokuapp.com/users/search/${idState}`)
       .then((response) => {
         setCustomerState(response.data.user);
       })

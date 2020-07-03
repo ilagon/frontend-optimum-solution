@@ -70,7 +70,7 @@ export default function ApprovalStatus() {
   useEffect(() => {
     //getAllCustomer();
     axios
-      .get(`http://localhost:9000/users/pending`)
+      .get(`https://bankapp-backend.herokuapp.com/users/pending`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setRows([...response.data.Users]);
@@ -94,7 +94,7 @@ export default function ApprovalStatus() {
   // Searching for a specific customer
   const getSpecificCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/search/${idState}`)
+      .get(`https://bankapp-backend.herokuapp.com/users/search/${idState}`)
       .then((response) => {
         setCustomerState(response.data.user);
       })
@@ -107,7 +107,7 @@ export default function ApprovalStatus() {
 
   const approveCustomer = (id) => {
     axios
-      .patch(`http://localhost:9000/users/activate`, {
+      .patch(`https://bankapp-backend.herokuapp.com/users/activate`, {
         userId: id,
         status: "Active",
       })
@@ -119,7 +119,7 @@ export default function ApprovalStatus() {
 
   const denyCustomer = (id) => {
     axios
-      .patch(`http://localhost:9000/users/deactivate`, {
+      .patch(`https://bankapp-backend.herokuapp.com/deactivate`, {
         userId: id,
       })
       .then((response) => {

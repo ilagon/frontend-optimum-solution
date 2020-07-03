@@ -30,7 +30,7 @@ export default function BodyContainer() {
 
   useEffect(() => {
       axios
-        .post("http://localhost:9000/creditcard/cust/searchActive", {
+        .post("https://bankapp-backend.herokuapp.com/creditcard/cust/searchActive", {
           userId: id
         })
         .then((response) => {

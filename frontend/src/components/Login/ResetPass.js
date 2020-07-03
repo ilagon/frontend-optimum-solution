@@ -79,7 +79,7 @@ export default function ResetPass() {
       return;
     }
 
-    axios.patch(`http://localhost:9000/users/recover/${token}`, {
+    axios.patch(`https://bankapp-backend.herokuapp.com/users/recover/${token}`, {
       password,
     })
       .then((res) => {

@@ -14,7 +14,7 @@ export default function BodyContainer() {
   console.log("cc id:" + state.taxPayment.creditCard._id);
   const handleSubmit = () => {
     axios
-      .post("http://localhost:9000/payment_history/addPayment", {
+      .post("https://bankapp-backend.herokuapp.com/payment_history/addPayment", {
         payment_type: "Tax",
         payment_amount: state.taxPayment.amount,
         transfer_number: 1,
@@ -23,7 +23,7 @@ export default function BodyContainer() {
       .then((response) => {
         console.log(response);
         axios
-          .patch("http://localhost:9000/creditcard/updateBalance", {
+          .patch("https://bankapp-backend.herokuapp.com/creditcard/updateBalance", {
             creditcardId: state.taxPayment.creditCard._id,
             creditcard_balance:
               state.taxPayment.creditCard.creditcard_balance -
