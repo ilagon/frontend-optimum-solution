@@ -67,7 +67,7 @@ export default function BodyContainer() {
     <div className="toForm toFormConfirmation">
       <h1>To</h1>
       <p>Reference Number: {state.mobilePayment.phoneNumber}</p>
-      <p>Singtel Mobile Bill</p>
+      <p>{state.mobilePayment.payeeInfo.name} Mobile Bill</p>
       <p>$ {state.mobilePayment.amount}</p>
     </div>
   );

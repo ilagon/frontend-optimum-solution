@@ -13,7 +13,6 @@ import { useHistory } from "react-router-dom";
 import { storeInput } from "../../../redux/actions/mobilePayment_storeInput";
 import axios from "axios";
 
-var cards = [];
 
 export default function BodyContainer() {
   const dispatch = useDispatch();
@@ -26,21 +25,20 @@ export default function BodyContainer() {
   const [isLoading, setLoading] = useState(false);
   const [visible, setVisible] = useState("hidden");
   const [nextButton, setNextButton] = useState(false);
+  const [cards, setcards] = useState([]);
+  let id = sessionStorage.getItem('_id');
 
   useEffect(() => {
-    function fetchData() {
       axios
-        .get("http://localhost:9000/creditcards/5ee8792db5be6439f4d8474e")
+        .post("http://localhost:9000/creditcard/cust/searchActive", {
+          userId: id
+        })
         .then((response) => {
-          response.data.creditcard.map((obj) => {
-            if (obj.creditcard_status === "Approved") cards.push(obj);
-          });
+          setcards(response.data.creditcard);
           setLoading(true);
         })
         .catch((error) => console.log(error));
-    }
-    if (cards.length === 0) fetchData();
-  });
+    });
 
   const handleAmount = (value) => {
     if (value > creditCard.creditcard_balance) {
