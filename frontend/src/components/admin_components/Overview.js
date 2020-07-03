@@ -52,7 +52,7 @@ export default function Overview() {
 
   const getTotalCustomer = () => {
     axios
-      .get(`http://localhost:9000/users/active`)
+      .get(`https://bankapp-backend.herokuapp.com/users/active`)
       .then((response) => {
         // Retrieve the number of customer
         setCountCustomerState(response.data.count);
@@ -64,7 +64,7 @@ export default function Overview() {
   // Retrieve all the customers
   const getAllCustomer = () => {
     axios
-      .get(`http://localhost:9000/creditcard`)
+      .get(`https://bankapp-backend.herokuapp.com/creditcard`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
         setRows([...response.data.creditcard]);
