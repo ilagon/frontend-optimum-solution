@@ -374,7 +374,7 @@ exports.reset_credit_balance = (req, res) => {
       if (creditcard_type == "Women") {
         CreditCard.updateMany(
           { creditcard_status: "Active", creditcard_type: "Women" },
-          { $set: { ccreditcard_balance: 40000 } }
+          { $set: { creditcard_balance: 40000 } }
         ).exec();
       }
       if (creditcard_type == "Student") {
