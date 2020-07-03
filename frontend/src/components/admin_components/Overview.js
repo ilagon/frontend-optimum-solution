@@ -96,12 +96,13 @@ export default function Overview() {
   };
 
   const resetSelection = () => {
-    axios.post('http://localhost:9000/creditcard/resetBalance', {
-      creditcard_type: CardType
-    })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }
+    axios
+      .post("http://localhost:9000/creditcard/resetBalance", {
+        creditcard_type: CardType,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   // const handleSearchCustomerById = () => {
   //   setSearchState(true);
@@ -162,14 +163,26 @@ export default function Overview() {
           </Grid>
         </Grid>
         <Grid item xs={12} style={{ paddingTop: "15px" }}>
-          <Select native="true" onChange={e => setCardType(e.target.value)}>
+          <Select native="true" onChange={(e) => setCardType(e.target.value)}>
             <option value="Silver">Silver</option>
             <option value="Gold">Gold</option>
             <option value="Platinum">Platinum</option>
             <option value="Student">Student</option>
             <option value="Women">Women</option>
           </Select>
-          <Button variant="contained" size="small" style={{marginLeft: "10px", background: "#AA3A21", fontFamily:"Arial"}} color="primary" onClick={resetSelection}>Reset</Button>
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              marginLeft: "10px",
+              background: "#AA3A21",
+              fontFamily: "Arial",
+            }}
+            color="primary"
+            onClick={resetSelection}
+          >
+            Reset
+          </Button>
         </Grid>
         <Grid item xs={12} style={{ paddingTop: "10px" }}>
           <Paper elevation="3" style={{ width: "128%" }}>

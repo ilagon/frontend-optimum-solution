@@ -77,7 +77,7 @@ export default function ApprovalStatus() {
         setAllCustomerState(response.data.Users);
       })
       // throws an error if there is no data
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   });
 
   // const getAllCustomer = () => {
@@ -88,7 +88,7 @@ export default function ApprovalStatus() {
   //       setAllCustomerState(response.data.Users);
   //     })
   //     // throws an error if there is no data
-  //     .catch((error) => alert(error));
+  //     .catch((error) => console.log(error));
   // };
 
   // Searching for a specific customer
@@ -98,7 +98,7 @@ export default function ApprovalStatus() {
       .then((response) => {
         setCustomerState(response.data.user);
       })
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   const handleId = (event) => {
