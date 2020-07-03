@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -19,7 +19,7 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import "../Overview/Overview.css";
 import MobilePaymentRoutes from "../MobilePayment/MobilePaymentRoutes";
-import TransferMoneyPage from "../TransferMoney/transfer_money";
+import TransferMoneyPage from "../TransferMoney/TransferRoutes";
 import OverviewPage from "../Overview/OverviewPage";
 import {
   BrowserRouter as Router,
@@ -27,32 +27,28 @@ import {
   Switch,
   NavLink,
 } from "react-router-dom";
-import SubmitTransferPage from "../TransferMoney/SubmitTransferPage";
 import { PaymentSuccessfulPage } from "../ResultPage/PaymentSuccessful";
 import { PaymentUnSuccessfulPage } from "../ResultPage/PaymentUnsuccessful";
 import MobilePaymentConfirmationBody from "../MobilePayment/OneTimeTransfer/OneTimeTransferConfirmation_Body";
-import AddPayeeForm from "../TransferMoney/AddPayeeForm";
-import AddPayeeReceipentForm from "../TransferMoney/AddPayeeReceipentForm";
 import CreditCardStatus from "../CreditCard/CreditcardStatusPage";
 import ApplyCreditCardPage from "../CreditCard/ApplyCreditcardPage";
 import CreditCardName from "../CreditCard/CreditcardNamePage";
 import CreditCardSubmit from "../CreditCard/CreditcardSubmissionPage";
 import CreditCardConfirm from "../CreditCard/CreditcardConfirmationPage";
-
+import TransferConfirmationBody from "../TransferMoney/OneTimeTransfer/OneTimeTransferConfirmation_Body";
 import TaxPaymentRoutes from "../TaxPayment/TaxPaymentRoutes";
 
 import { TransferSuccessfulPage } from "../ResultPage/TransferSuccessful";
 import { TransferUnSuccessfulPage } from "../ResultPage/TransferUnsuccessful";
 
 export default function Dashboard() {
-
   useEffect(() => {
-    let token = sessionStorage.getItem('token');
-    if(token === null){
-      window.location.href ="/login";
+    let token = sessionStorage.getItem("token");
+    if (token === null) {
+      window.location.href = "/login";
     }
-  })
-  
+  });
+
   return (
     <Router>
       <div className="root1" style={{ display: "flex" }}>
@@ -160,15 +156,6 @@ export default function Dashboard() {
             component={MobilePaymentRoutes}
           />
           <Route path="/Customer/TransferMoney" component={TransferMoneyPage} />
-          <Route path="/Customer/AddPayee" component={AddPayeeForm} />
-          <Route
-            path="/Customer/SubmitTransfer"
-            component={SubmitTransferPage}
-          />
-          <Route
-            path="/Customer/SetTransferFromPayeeList"
-            component={AddPayeeReceipentForm}
-          />
           <Route
             path="/Customer/Payment/Successful"
             component={PaymentSuccessfulPage}
@@ -176,14 +163,6 @@ export default function Dashboard() {
           <Route
             path="/Customer/Payment/Unsuccessful"
             component={PaymentUnSuccessfulPage}
-          />
-          <Route
-            path="/Customer/Transfer/Successful"
-            component={TransferSuccessfulPage}
-          />
-          <Route
-            path="/Customer/Transfer/Unsuccessful"
-            component={TransferUnSuccessfulPage}
           />
           <Route
             exact
