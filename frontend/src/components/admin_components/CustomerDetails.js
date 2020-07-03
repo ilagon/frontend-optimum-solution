@@ -19,8 +19,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import TablePagination from "@material-ui/core/TablePagination";
 
-// 10 Users per page
-
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
   searchIconStyle: {
