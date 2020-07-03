@@ -22,12 +22,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Mainpage() {
   const classes = useStyles();
   
-  // useEffect(() => {
-  //   let auth = JSON.parse(sessionStorage.getItem('token'));
-  //   if(auth == "null"){
-  //     window.location.href = "/Login";
-  //   }
-  // });
+  useEffect(() => {
+    let auth = sessionStorage.getItem('token');
+    let type = sessionStorage.getItem('type');
+    if(auth === null ){
+      window.location.href = "/Login";
+    }else{
+      if(type !== "Admin"){
+        window.location.href ="/Customer";
+      }
+    }
+  });
 
   return (
     <>

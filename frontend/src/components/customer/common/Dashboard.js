@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -45,6 +45,14 @@ import { TransferSuccessfulPage } from "../ResultPage/TransferSuccessful";
 import { TransferUnSuccessfulPage } from "../ResultPage/TransferUnsuccessful";
 
 export default function Dashboard() {
+
+  useEffect(() => {
+    let token = sessionStorage.getItem('token');
+    if(token === null){
+      window.location.href ="/login";
+    }
+  })
+  
   return (
     <Router>
       <div className="root1" style={{ display: "flex" }}>

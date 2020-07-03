@@ -26,7 +26,7 @@ export default function MobilePaymentRoutes() {
         <main className="content">
           <div className={classes.appBarSpacer} />
           <Grid container direction="row" justify="space-evenly" wrap="wrap">
-            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/MobilePayment") ? "1" : "0.5"}}>
+            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/Customer/MobilePayment") ? "1" : "0.5"}}>
               <a
                 href="/Customer/MobilePayment"
                 style={{textDecoration: "none", color: "#173a77"}}
@@ -34,12 +34,12 @@ export default function MobilePaymentRoutes() {
                 <h1>One Time Transfer</h1>
               </a>
             </Grid>
-            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/MobilePayment") ? "0.5" : "1"}}>
+            <Grid item sm={6} className="bodyTitle" style={{opacity: (window.location.pathname === "/Customer/MobilePayment") ? "0.5" : "1"}}>
               <a
                 href="/Customer/MobilePayment/OtherRecipients"
                 style={{ textDecoration: "none", color: "#173a77" }}
               >
-                <h1>Other Recipients</h1>
+                <h1>Other Providers</h1>
               </a>
             </Grid>
           </Grid>

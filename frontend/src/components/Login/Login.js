@@ -102,6 +102,7 @@ export default function SignInSide() {
           dispatch(userInfo(res.data.name, res.data._id));
           sessionStorage.setItem("name", res.data.name);
           sessionStorage.setItem("_id", res.data._id);
+          sessionStorage.setItem('type', res.data.user_type);
           if (res.data.user_type === "Admin") {
             //   window.location.href = '/Admin';
             setAdmin(true);

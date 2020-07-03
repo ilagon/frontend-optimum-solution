@@ -16,11 +16,12 @@ export default function BodyContainer() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isLoading, setLoading] = useState(false);
+  let id = sessionStorage.getItem('_id');
 
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get("http://localhost:9000/payee/mobile/5ee8792db5be6439f4d8474e")
+        .get(`http://localhost:9000/payee/mobile/${id}`)
         .then((response) => {
           console.log(response);
           payeeList = response.data.payee;
