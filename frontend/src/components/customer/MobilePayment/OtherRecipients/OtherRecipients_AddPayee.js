@@ -45,7 +45,7 @@ export default function BodyContainer() {
         })
         .then((response) => {
           console.log(response);
-          history.push("/Customer/MobilePayment/OtherRecipients");
+          history.push("/Customer/MobilePayment/");
         })
         .catch((error) => console.log(error));
     } else alert("Please complete the form!");
@@ -57,14 +57,20 @@ export default function BodyContainer() {
     <div className="toForm">
       <h1>To</h1>
       <div>
-        <TextField
+        {/* <TextField
           required
           className={classes.textBoxMargin}
           id="nameInput"
           label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
+        /> */}
+        <Select native="true" onChange={e => setName(e.target.value)}>
+          <option value=""> </option>
+          <option value="Singtel">Singtel</option>
+          <option value="Starhub">Starhub</option>
+          <option value="M1">M1</option>
+        </Select>
       </div>
       <div>
         <TextField
