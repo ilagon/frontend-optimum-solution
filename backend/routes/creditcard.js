@@ -37,7 +37,7 @@ router.post("/create", creditcardController.creditcard_create); //A checked
 //router.patch("/reject/:cardId", creditcardController.creditcard_search_by_cardStatus_reject);
 
 //reset credit balance to credit limit
-router.patch("/resetBalance", creditcardController.reset_credit_balance); //A will review later
+router.post("/resetBalance", creditcardController.reset_credit_balance); //A will review later
 
 //overview customer list search by card id
 router.get("/search/cardId", creditcardController.creditcard_search_by_cardid); // A checked

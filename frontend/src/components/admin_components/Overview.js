@@ -13,6 +13,9 @@ import {
   TableContainer,
   Typography,
   TextField,
+  Select,
+  MenuItem,
+  Button,
 } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +34,7 @@ export default function Overview() {
   const [countCustomerState, setCountCustomerState] = useState();
   const [pendingCreditCardState, setPendingCreditCardState] = useState();
   const [pendingCustomerState, setPendingCustomerState] = useState();
+  const [CardType, setCardType] = useState();
   // const [idState, setIdState] = useState("");
   // const [searchState, setSearchState] = useState("");
 
@@ -86,6 +90,14 @@ export default function Overview() {
       .catch((error) => alert(error));
   };
 
+  const resetSelection = () => {
+    axios.post('http://localhost:9000/creditcard/resetBalance', {
+      creditcard_type: CardType
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
+
   // const handleSearchCustomerById = () => {
   //   setSearchState(true);
   // };
@@ -135,7 +147,17 @@ export default function Overview() {
             </Paper>
           </Grid>
         </Grid>
-        <Grid item xs={12} style={{ paddingTop: "3%" }}>
+        <Grid item xs={12} style={{ paddingTop: "15px" }}>
+          <Select native="true" onChange={e => setCardType(e.target.value)}>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+            <option value="Student">Student</option>
+            <option value="Women">Women</option>
+          </Select>
+          <Button variant="contained" size="small" style={{marginLeft: "10px", background: "#AA3A21", fontFamily:"Arial"}} color="primary" onClick={resetSelection}>Reset</Button>
+        </Grid>
+        <Grid item xs={12} style={{ paddingTop: "10px" }}>
           <Paper elevation="3" style={{ width: "128%" }}>
             <TableContainer>
               <Table className={classes.table}>
