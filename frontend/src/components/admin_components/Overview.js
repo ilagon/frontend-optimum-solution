@@ -58,7 +58,7 @@ export default function Overview() {
         setCountCustomerState(response.data.count);
       })
       // throws an error if there is no data
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   // Retrieve all the customers
@@ -71,7 +71,7 @@ export default function Overview() {
         setAllCustomerState(response.data.creditcard);
       })
       // throws an error if there is no data
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
   const getPendingCreditCardStatus = () => {
     axios
@@ -81,7 +81,7 @@ export default function Overview() {
         setPendingCreditCardState(response.data.count);
       })
       // throws an error if there is no data
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   const getPendingCustomer = () => {
@@ -92,7 +92,7 @@ export default function Overview() {
         setPendingCustomerState(response.data.count);
       })
       // throws an error if there is no data
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   const resetSelection = () => {
