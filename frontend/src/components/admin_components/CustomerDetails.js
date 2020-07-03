@@ -68,7 +68,7 @@ export default function CustomerDetails() {
         setAllCustomerState(response.data.Users);
       })
       // throws an error if there is no data
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   // Ensure that the data gets re-rendered
@@ -80,7 +80,7 @@ export default function CustomerDetails() {
       .then((response) => {
         setCustomerState(response.data.user);
       })
-      .catch((error) => alert(error));
+      .catch((error) => console.log(error));
   };
 
   const handleChangePage = (event, newPage) => {

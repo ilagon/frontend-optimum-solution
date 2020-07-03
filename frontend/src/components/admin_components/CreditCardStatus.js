@@ -74,7 +74,7 @@ export default function CreditCardStatus() {
   //       // Retrieve from object => object => array (creditcard)
   //       setAllCreditCardState(response.data.creditcard);
   //     })
-  //     .catch((error) => alert(error));
+  //     .catch((error) => console.log(error));
   // };
 
   // Upon loading, useEffect will get called
