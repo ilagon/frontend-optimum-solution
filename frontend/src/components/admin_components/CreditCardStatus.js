@@ -17,6 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import TablePagination from "@material-ui/core/TablePagination";
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#00a152",
     color: "#fff",
     left: "41%",
-    margin: "5px 5px 5px 5px"
+    margin: "5px 5px 5px 5px",
   },
 
   denyButtonStyle: {
@@ -61,6 +62,9 @@ export default function CreditCardStatus() {
   const [approveCreditCardState, setApproveCreditCardState] = useState();
   const [denyCreditCardState, setDenyCreditCardState] = useState();
   const [allCreditCardState, setAllCreditCardState] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Get all pending creditcard
   // const getAllCreditCard = () => {
@@ -77,19 +81,20 @@ export default function CreditCardStatus() {
   useEffect(() => {
     //getAllCreditCard();
     axios
-    .get(`http://localhost:9000/creditcard/pending`)
-    .then((response) => {
-      // Retrieve from object => object => array (creditcard)
-      setAllCreditCardState(response.data.creditcard);
-    })
-    .catch((error) => console.log(error));
+      .get(`http://localhost:9000/creditcard/pending`)
+      .then((response) => {
+        // Retrieve from object => object => array (creditcard)
+        setRows([...response.data.creditcard]);
+        setAllCreditCardState(response.data.creditcard);
+      })
+      .catch((error) => console.log(error));
   });
 
   const getApproveCreditCard = (id, type) => {
     axios
       .patch(`http://localhost:9000/creditcard/approve/`, {
         cardId: id,
-        creditcard_type: type
+        creditcard_type: type,
       })
       .then((response) => {
         //console.log(response.data.creditcard.creditcard_status);
@@ -97,20 +102,20 @@ export default function CreditCardStatus() {
       .catch((error) => console.log(error));
   };
 
-
   const getDenyCreditCard = (id) => {
     axios
       .patch(`http://localhost:9000/creditcard/reject`, {
-        cardId: id
+        cardId: id,
       })
       .then((response) => {
         console.log(response.data.creditcard.creditcard_status);
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   };
-  
+
   const onClickApprove = (event) => {
-    let cardType = document.getElementById(`${event.target.value}type`).innerText;
+    let cardType = document.getElementById(`${event.target.value}type`)
+      .innerText;
     //setApproveCreditCardState(event.target.value);
     getApproveCreditCard(event.target.value, cardType);
     //console.log(cardType);
@@ -119,6 +124,15 @@ export default function CreditCardStatus() {
   const onClickDeny = (event) => {
     getDenyCreditCard(event.target.value);
     //setDenyCreditCardState(event.target.value);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   return (
@@ -167,57 +181,72 @@ export default function CreditCardStatus() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCreditCardState.map((row, index) => (
-                    <TableRow key={row._id}>
-                      <TableCell
-                        style={{ letterSpacing: "2px" }}
-                        width="30%"
-                        component="th"
-                        scope="row"
-                      >
-                        {row._id}
-                      </TableCell>
-
-                      <TableCell style={{ letterSpacing: "2px" }} width="20%">
-                        {row.user.email}
-                      </TableCell>
-
-                      <TableCell id={`${row._id}type`} style={{ letterSpacing: "2px" }} width="15%">
-                        {row.creditcard_type}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          letterSpacing: "2px",
-                        }}
-                        //width="15%"
-                        align="right"
-                      >
-                        {/* {console.log(row._id)} */}
-                        <button
-                          className={classes.approveButtonStyle}
-                          variant="contained"
-                          value={row._id}
-                          onClick={onClickApprove}
-                          //disableRipple
+                  {allCreditCardState
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="30%"
+                          component="th"
+                          scope="row"
                         >
-                          Approve
-                        </button>
-                        <button
-                          className={classes.denyButtonStyle}
-                          variant="contained"
-                          value={row._id}
-                          onClick={onClickDeny}
-                          //disableRipple
+                          {row._id}
+                        </TableCell>
+
+                        <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                          {row.user.email}
+                        </TableCell>
+
+                        <TableCell
+                          id={`${row._id}type`}
+                          style={{ letterSpacing: "2px" }}
+                          width="15%"
                         >
-                          Deny
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                          {row.creditcard_type}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            letterSpacing: "2px",
+                          }}
+                          //width="15%"
+                          align="right"
+                        >
+                          {/* {console.log(row._id)} */}
+                          <button
+                            className={classes.approveButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickApprove}
+                            //disableRipple
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className={classes.denyButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickDeny}
+                            //disableRipple
+                          >
+                            Deny
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Paper>
           </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 15, 20]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </Grid>
       </Grid>
     </Container>

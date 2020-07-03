@@ -17,7 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-// 10 Users per page
+import TablePagination from "@material-ui/core/TablePagination";
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#00a152",
     color: "#fff",
     right: "100px",
-    margin: "5px 5px 5px 5px"
+    margin: "5px 5px 5px 5px",
   },
 
   denyButtonStyle: {
@@ -62,6 +62,9 @@ export default function ApprovalStatus() {
   const [allCustomerState, setAllCustomerState] = useState([]);
   const [customerState, setCustomerState] = useState({});
   const [idState, setIdState] = useState();
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Upon loading, useEffect will get called
   useEffect(() => {
@@ -70,6 +73,7 @@ export default function ApprovalStatus() {
       .get(`http://localhost:9000/users/pending`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
+        setRows([...response.data.Users]);
         setAllCustomerState(response.data.Users);
       })
       // throws an error if there is no data
@@ -105,7 +109,7 @@ export default function ApprovalStatus() {
     axios
       .patch(`http://localhost:9000/users/activate`, {
         userId: id,
-        status: "Active"
+        status: "Active",
       })
       .then((response) => {
         console.log(response);
@@ -116,7 +120,7 @@ export default function ApprovalStatus() {
   const denyCustomer = (id) => {
     axios
       .patch(`http://localhost:9000/users/deactivate`, {
-        userId: id
+        userId: id,
       })
       .then((response) => {
         console.log(response.data.Users);
@@ -127,12 +131,21 @@ export default function ApprovalStatus() {
   const onClickApprove = (event) => {
     //setIdState(event.target.value);
     // let id = document.getElementById(`${event.target.value}`).value;
-     approveCustomer(event.target.value);
+    approveCustomer(event.target.value);
   };
 
   const onClickDeny = (event) => {
     //setIdState(event.target.value);
     denyCustomer(event.target.value);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   return (
@@ -184,49 +197,60 @@ export default function ApprovalStatus() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCustomerState.map((row) => (
-                    <TableRow key={row._id}>
-                      <TableCell
-                        style={{ letterSpacing: "2px" }}
-                        width="30%"
-                        component="th"
-                        scope="row"
-                        id={row._id}
-                      >
-                        {row._id}
-                      </TableCell>
+                  {allCustomerState
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="30%"
+                          component="th"
+                          scope="row"
+                          id={row._id}
+                        >
+                          {row._id}
+                        </TableCell>
 
-                      <TableCell style={{ letterSpacing: "2px" }} width="30%">
-                        {row.email}
-                      </TableCell>
-                      <TableCell
-                        style={{ letterSpacing: "2px" }}
-                        width="25%"
-                        align="right"
-                      >
-                        <button
-                          className={classes.approveButtonStyle}
-                          variant="contained"
-                          value={row._id}
-                          onClick={onClickApprove}
+                        <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="25%"
+                          align="right"
                         >
-                          Approve
-                        </button>
-                        <button
-                          className={classes.denyButtonStyle}
-                          variant="contained"
-                          value={row._id}
-                          onClick={onClickDeny}
-                        >
-                          Deny
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                          <button
+                            className={classes.approveButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickApprove}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className={classes.denyButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickDeny}
+                          >
+                            Deny
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Paper>
           </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 15, 20]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </Grid>
       </Grid>
     </Container>

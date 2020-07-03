@@ -17,12 +17,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-
-// 10 Users per page
+import TablePagination from "@material-ui/core/TablePagination";
 
 // Overrides the current default theme provided by the material UI
 const useStyles = makeStyles((theme) => ({
-
   searchIconStyle: {
     marginTop: "25px",
     marginLeft: "20px",
@@ -39,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "inherit",
   },
 
-  tableContainerStyle:{
+  tableContainerStyle: {
     height: "165%",
     minHeight: "80vh",
   },
@@ -51,6 +49,9 @@ export default function CustomerDetails() {
   const [allCustomerState, setAllCustomerState] = useState([]);
   const [customerState, setCustomerState] = useState({});
   const [idState, setIdState] = useState("");
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Upon loading, useEffect will get called
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function CustomerDetails() {
       .get(`http://localhost:9000/users/`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
+        setRows([...response.data.Users]);
         setAllCustomerState(response.data.Users);
       })
       // throws an error if there is no data
@@ -81,79 +83,98 @@ export default function CustomerDetails() {
       .catch((error) => alert(error));
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   return (
     <Container className={classes.containerStyle} fixed>
-      <Grid container justify="center"  className={classes.gridContainerStyle}>
+      <Grid container justify="center" className={classes.gridContainerStyle}>
         <Grid item xs={12}>
-          <TableContainer style={{height:"100%"}}>
-            <Paper style={{height:"inherit", minWidth:"750px"}} elevation>
-            <Table style={{minWidth:"750px"}}>
-              <TableHead>
-                <Typography
-                  style={{ letterSpacing: "3px", width: "max-content" }}
-                  variant="h6"
-                >
-                  Customer Details
-                </Typography>
-                <Grid>
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                    className={classes.searchIconStyle}
-                  />
-                  <TextField
-                    id="search-with-icon"
-                    value={idState}
-                    label="SEARCH"
-                    onChange={(event) => setIdState(event.target.value)}
-                  />
-                </Grid>
-                <TableRow>
-                  <TableCell style={{ letterSpacing: "2px" }} width="20%">
-                    Customer ID
-                  </TableCell>
-                  <TableCell style={{ letterSpacing: "2px" }} width="10%">
-                    Name
-                  </TableCell>
-                  <TableCell style={{ letterSpacing: "2px" }} width="20%">
-                    Email
-                  </TableCell>
-                  <TableCell style={{ letterSpacing: "2px" }} width="30%">
-                    Address
-                  </TableCell>
-                  <TableCell style={{ letterSpacing: "2px" }} width="25%">
-                    Contact No.
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {allCustomerState.map((row) => (
-                  <TableRow key={row._id}>
-                    <TableCell
-                      style={{ letterSpacing: "2px" }}
-                      width="20%"
-                      component="th"
-                      scope="row"
-                    >
-                      {row._id}
+          <TableContainer style={{ height: "100%" }}>
+            <Paper style={{ height: "inherit", minWidth: "750px" }} elevation>
+              <Table style={{ minWidth: "750px" }}>
+                <TableHead>
+                  <Typography
+                    style={{ letterSpacing: "3px", width: "max-content" }}
+                    variant="h6"
+                  >
+                    Customer Details
+                  </Typography>
+                  <Grid>
+                    <FontAwesomeIcon
+                      icon={faSearch}
+                      className={classes.searchIconStyle}
+                    />
+                    <TextField
+                      id="search-with-icon"
+                      value={idState}
+                      label="SEARCH"
+                      onChange={(event) => setIdState(event.target.value)}
+                    />
+                  </Grid>
+                  <TableRow>
+                    <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                      Customer ID
                     </TableCell>
                     <TableCell style={{ letterSpacing: "2px" }} width="10%">
-                      {row.name}
+                      Name
                     </TableCell>
                     <TableCell style={{ letterSpacing: "2px" }} width="20%">
-                      {row.email}
+                      Email
                     </TableCell>
                     <TableCell style={{ letterSpacing: "2px" }} width="30%">
-                      63 Arch St. Goodlettsville, TN 37072
+                      Address
                     </TableCell>
                     <TableCell style={{ letterSpacing: "2px" }} width="25%">
-                      9283 9210
+                      Contact No.
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {allCustomerState
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="20%"
+                          component="th"
+                          scope="row"
+                        >
+                          {row._id}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="10%">
+                          {row.name}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                          {row.email}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                          63 Arch St. Goodlettsville, TN 37072
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="25%">
+                          9283 9210
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
             </Paper>
           </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 15, 20]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </Grid>
       </Grid>
     </Container>

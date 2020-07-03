@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import axios from "axios";
+import TablePagination from "@material-ui/core/TablePagination";
 // 5 users per page
 
 export default function Overview() {
@@ -35,6 +36,9 @@ export default function Overview() {
   const [pendingCreditCardState, setPendingCreditCardState] = useState();
   const [pendingCustomerState, setPendingCustomerState] = useState();
   const [CardType, setCardType] = useState();
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   // const [idState, setIdState] = useState("");
   // const [searchState, setSearchState] = useState("");
 
@@ -63,6 +67,7 @@ export default function Overview() {
       .get(`http://localhost:9000/creditcard`)
       .then((response) => {
         // Retrieve from object => object => array (Users)
+        setRows([...response.data.creditcard]);
         setAllCustomerState(response.data.creditcard);
       })
       // throws an error if there is no data
@@ -117,6 +122,15 @@ export default function Overview() {
   //     })
   //     .catch((error) => alert(error));
   // };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <div className={classes.divStyle}>
@@ -197,39 +211,50 @@ export default function Overview() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCustomerState.map((row) => (
-                    <TableRow key={row._id}>
-                      <TableCell
-                        style={{ letterSpacing: "2px" }}
-                        width="20%"
-                        component="th"
-                        scope="row"
-                      >
-                        {row.user._id}
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="12%">
-                        {row.user.account_status}
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="13%">
-                        {row.user.email}
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="11%">
-                        {row.creditcard_balance}
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
-                        {row.creditcard_type}
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="15%">
-                        {row.creditcard_status}
-                      </TableCell>
-                      <TableCell style={{ letterSpacing: "2px" }} width="19%">
-                        {row.creditcard_limit}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {allCustomerState
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="20%"
+                          component="th"
+                          scope="row"
+                        >
+                          {row.user._id}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="12%">
+                          {row.user.account_status}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="13%">
+                          {row.user.email}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="11%">
+                          {row.creditcard_balance}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                          {row.creditcard_type}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                          {row.creditcard_status}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="19%">
+                          {row.creditcard_limit}
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 20]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
           </Paper>
         </Grid>
       </Container>
