@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
     // Adjust according to the (screen) length of the device
     height: "100vh",
   },
+  module: {
+    position: "relative",
+    left: "10vw"
+
+  }
 }));
 
 
@@ -38,8 +43,9 @@ export default function Mainpage() {
     <>
       <Header />
       <Router>
-        <Sidebar />
         <div className={classes.root}>
+        <Sidebar />
+        <div className={classes.module}>
           <Switch>
             <Route exact path="/Admin">
               <Overview></Overview>
@@ -54,6 +60,7 @@ export default function Mainpage() {
               <CreditCardStatus />
             </Route>
           </Switch>
+          </div>
         </div>
       </Router>
     </>

@@ -134,7 +134,7 @@ export default function Overview() {
   };
 
   return (
-    <div className={classes.divStyle}>
+    <div className={classes.divStyle, classes.root}>
       <Container maxWidth="lg" className={classes.gridContainerStyle}>
         <Grid container spacing={3} justify="center" style={{ width: "130%" }}>
           <Grid item xs={12} md={4} lg={4}>
@@ -296,7 +296,7 @@ const useStyles = makeStyles((theme) => ({
 
   paperStyle: {
     display: "flex",
-    overflow: "auto",
+    overflow: "hidden",
     flexDirection: "column",
     letterSpacing: "2px",
     justifyContent: "center",
