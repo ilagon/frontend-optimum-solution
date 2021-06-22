@@ -16,7 +16,7 @@ mongoose.Promise = global.Promise; // gets a response from DB fail or success
 //connect to the schema
 //mongodb://localhost/bankAppPhase2
 mongoose.connect(
-  "mongodb+srv://optimum-leads:12345@optimumbatch7-1rg4n.mongodb.net/bankappphase2?retryWrites=true&w=majority",
+  /*"mongodb+srv://optimum-leads:12345@optimumbatch7-1rg4n.mongodb.net/bankappphase2?retryWrites=true&w=majority"*/"mongodb+srv://admin-adrian:12345@cluster0-70fmj.mongodb.net/test?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -33,6 +33,6 @@ app.use("/users", userRoutes); //Using userRoutes file
 app.use("/creditcard", creditcardRoutes);
 app.use("/payment_history", paymentHistoryRoutes);
 app.use("/payee", payeeRoutes);
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(/*PORT*/9000, () => console.log(`Server is running on port ${/*PORT*/9000}`));
 
 module.exports = app;

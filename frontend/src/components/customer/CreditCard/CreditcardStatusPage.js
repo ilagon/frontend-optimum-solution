@@ -23,7 +23,7 @@ export default function CreditCardStatus() {
   useEffect(() => {
     console.log(customerId);
     axios
-      .post("https://bankapp-backend.herokuapp.com/creditcard/cust/searchById", {
+      .post(/*"https://bankapp-backend.herokuapp.com/creditcard/cust/searchById"*/"http://localhost:9000/creditcard/cust/searchById", {
         userId: customerId,
       })
       .then((res) => {

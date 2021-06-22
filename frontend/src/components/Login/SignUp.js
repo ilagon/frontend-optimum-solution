@@ -84,7 +84,7 @@ export default function SignUp() {
       return;
     }
     //mongodb+srv://optimum-leads:12345@optimumbatch7-1rg4n.mongodb.net/bankappphase2?retryWrites=true&w=majority
-    axios.post('https://bankapp-backend.herokuapp.com/users/register', {
+    axios.post(/*'https://bankapp-backend.herokuapp.com/users/register'*/"http://localhost:9000/users/register", {
       name,
       email,
       password,
