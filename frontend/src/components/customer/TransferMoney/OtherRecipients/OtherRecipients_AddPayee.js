@@ -37,7 +37,7 @@ export default function BodyContainer() {
   const handleSavePayee = () => {
     if (name != undefined && accountNumber != undefined) {
       axios
-        .post("https://bankapp-backend.herokuapp.com/payee/addPayee", {
+        .post("http://localhost:9000/payee/addPayee", {
           name: name,
           number: accountNumber,
           payee_type: "Transfer",

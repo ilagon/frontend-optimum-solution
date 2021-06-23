@@ -21,7 +21,7 @@ export default function BodyContainer() {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get(`https://bankapp-backend.herokuapp.com/payee/transfer/${id}`)
+        .get(`http://localhost:9000/payee/transfer/${id}`)
         .then((response) => {
           console.log(response);
           payeeList = response.data.payee;
