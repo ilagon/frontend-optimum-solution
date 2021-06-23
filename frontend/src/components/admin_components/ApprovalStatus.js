@@ -60,6 +60,7 @@ export default function ApprovalStatus() {
   const classes = useStyles();
 
   const [allCustomerState, setAllCustomerState] = useState([]);
+  const [filteredCustomer, setFilteredCustomers] = useState([]);
   const [customerState, setCustomerState] = useState({});
   const [idState, setIdState] = useState();
   const [rows, setRows] = useState([]);
@@ -128,6 +129,14 @@ export default function ApprovalStatus() {
       .catch((error) => console.log(error));
   };
 
+  const searchFilter = (e) => {
+    if(e.length > 0){
+      setFilteredCustomers(allCustomerState.filter(row => row.email.includes(e))); 
+    }else{
+      setFilteredCustomers([]);
+    }
+  }
+
   const onClickApprove = (event) => {
     //setIdState(event.target.value);
     // let id = document.getElementById(`${event.target.value}`).value;
@@ -172,7 +181,7 @@ export default function ApprovalStatus() {
                       id="search-with-icon"
                       value={idState}
                       label="SEARCH"
-                      onChange={(event) => setIdState(event.target.value)}
+                      onChange={(event) => searchFilter(event.target.value)}
                     />
                   </Grid>
                   <TableRow>
@@ -197,7 +206,7 @@ export default function ApprovalStatus() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCustomerState
+                  {filteredCustomer.length === 0 ? allCustomerState
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
                       <TableRow key={row._id}>
@@ -237,7 +246,50 @@ export default function ApprovalStatus() {
                           </button>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )) 
+                    :
+                    filteredCustomer
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="30%"
+                          component="th"
+                          scope="row"
+                          id={row._id}
+                        >
+                          {row._id}
+                        </TableCell>
+
+                        <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="25%"
+                          align="right"
+                        >
+                          <button
+                            className={classes.approveButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickApprove}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className={classes.denyButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickDeny}
+                          >
+                            Deny
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                    }
                 </TableBody>
               </Table>
             </Paper>

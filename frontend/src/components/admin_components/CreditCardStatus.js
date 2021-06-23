@@ -62,6 +62,7 @@ export default function CreditCardStatus() {
   const [approveCreditCardState, setApproveCreditCardState] = useState();
   const [denyCreditCardState, setDenyCreditCardState] = useState();
   const [allCreditCardState, setAllCreditCardState] = useState([]);
+  const [filteredCreditCards, setFilteredCreditCards] = useState([]);
   const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -126,6 +127,14 @@ export default function CreditCardStatus() {
     //setDenyCreditCardState(event.target.value);
   };
 
+  const searchFilter = (e) => {
+    if(e.length > 0){
+      setFilteredCreditCards(allCreditCardState.filter(row => row.user.email.includes(e))); 
+    }else{
+      setFilteredCreditCards([]);
+    }
+  }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -154,7 +163,7 @@ export default function CreditCardStatus() {
                       icon={faSearch}
                       className={classes.searchIconStyle}
                     />
-                    <TextField id="search-with-icon" label="SEARCH" />
+                    <TextField id="search-with-icon" label="SEARCH" onChange={(e) => searchFilter(e.target.value)}/>
                   </Grid>
                   <TableRow>
                     <TableCell style={{ letterSpacing: "2px" }} width="30%">
@@ -181,7 +190,7 @@ export default function CreditCardStatus() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCreditCardState
+                  {filteredCreditCards.length === 0 ? allCreditCardState
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => (
                       <TableRow key={row._id}>
@@ -233,7 +242,62 @@ export default function CreditCardStatus() {
                           </button>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )) 
+                    : 
+                    filteredCreditCards
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="30%"
+                          component="th"
+                          scope="row"
+                        >
+                          {row._id}
+                        </TableCell>
+
+                        <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                          {row.user.email}
+                        </TableCell>
+
+                        <TableCell
+                          id={`${row._id}type`}
+                          style={{ letterSpacing: "2px" }}
+                          width="15%"
+                        >
+                          {row.creditcard_type}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            letterSpacing: "2px",
+                          }}
+                          //width="15%"
+                          align="right"
+                        >
+                          {/* {console.log(row._id)} */}
+                          <button
+                            className={classes.approveButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickApprove}
+                            //disableRipple
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className={classes.denyButtonStyle}
+                            variant="contained"
+                            value={row._id}
+                            onClick={onClickDeny}
+                            //disableRipple
+                          >
+                            Deny
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                    }
                 </TableBody>
               </Table>
             </Paper>

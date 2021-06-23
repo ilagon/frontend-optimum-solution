@@ -32,6 +32,7 @@ export default function Overview() {
   const fixedHeightPaper = clsx(classes.paperStyle, classes.heightStyle);
 
   const [allCustomerState, setAllCustomerState] = useState([]);
+  const [filteredCustomers, setFilteredCustomers] = useState([]);
   const [countCustomerState, setCountCustomerState] = useState();
   const [pendingCreditCardState, setPendingCreditCardState] = useState();
   const [pendingCustomerState, setPendingCustomerState] = useState();
@@ -133,6 +134,15 @@ export default function Overview() {
     setPage(0);
   };
 
+
+  const searchFilter = (e) => {
+    if(e.length > 0){
+      setFilteredCustomers(allCustomerState.filter(row => row.user.email.includes(e))); 
+    }else{
+      setFilteredCustomers([]);
+    }
+  }
+
   return (
     <div className={classes.divStyle, classes.root}>
       <Container maxWidth="lg" className={classes.gridContainerStyle}>
@@ -164,6 +174,7 @@ export default function Overview() {
         </Grid>
         <Grid item xs={12} style={{ paddingTop: "15px" }}>
           <Select native="true" onChange={(e) => setCardType(e.target.value)}>
+            <option value=""></option>
             <option value="Silver">Silver</option>
             <option value="Gold">Gold</option>
             <option value="Platinum">Platinum</option>
@@ -197,7 +208,7 @@ export default function Overview() {
                       icon={faSearch}
                       className={classes.searchIconStyle}
                     />
-                    <TextField id="search-with-icon" label="SEARCH" />
+                    <TextField id="search-with-icon" label="SEARCH" onChange={(e) => searchFilter(e.target.value)}/>
                   </Grid>
                   <TableRow>
                     <TableCell style={{ letterSpacing: "2px" }} width="12%">
@@ -224,7 +235,7 @@ export default function Overview() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCustomerState
+                  {filteredCustomers.length === 0 ? allCustomerState
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
                       <TableRow key={row._id}>
@@ -255,7 +266,41 @@ export default function Overview() {
                           {row.creditcard_limit}
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )) 
+                    :
+                    filteredCustomers
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="20%"
+                          component="th"
+                          scope="row"
+                        >
+                          {row.user._id}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="12%">
+                          {row.user.account_status}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="13%">
+                          {row.user.email}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="11%">
+                          {row.creditcard_balance}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                          {row.creditcard_type}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="15%">
+                          {row.creditcard_status}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="19%">
+                          {row.creditcard_limit}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                    }
                 </TableBody>
               </Table>
             </TableContainer>

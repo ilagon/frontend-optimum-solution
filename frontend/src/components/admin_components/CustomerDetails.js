@@ -47,6 +47,7 @@ export default function CustomerDetails() {
   const classes = useStyles();
 
   const [allCustomerState, setAllCustomerState] = useState([]);
+  const [filteredCustomer, setFilteredCustomers] = useState([]);
   const [customerState, setCustomerState] = useState({});
   const [idState, setIdState] = useState("");
   const [rows, setRows] = useState([]);
@@ -83,6 +84,14 @@ export default function CustomerDetails() {
       .catch((error) => console.log(error));
   };
 
+  const searchFilter = (e) => {
+    if(e.length > 0){
+      setFilteredCustomers(allCustomerState.filter(row => row.email.includes(e))); 
+    }else{
+      setFilteredCustomers([]);
+    }
+  }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -112,9 +121,8 @@ export default function CustomerDetails() {
                     />
                     <TextField
                       id="search-with-icon"
-                      value={idState}
                       label="SEARCH"
-                      onChange={(event) => setIdState(event.target.value)}
+                      onChange={(e) => searchFilter(e.target.value)}
                     />
                   </Grid>
                   <TableRow>
@@ -136,7 +144,7 @@ export default function CustomerDetails() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allCustomerState
+                  {filteredCustomer.length === 0 ? allCustomerState
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
                       <TableRow key={row._id}>
@@ -161,7 +169,35 @@ export default function CustomerDetails() {
                           9283 9210
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )) 
+                    : 
+                    filteredCustomer
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => (
+                      <TableRow key={row._id}>
+                        <TableCell
+                          style={{ letterSpacing: "2px" }}
+                          width="20%"
+                          component="th"
+                          scope="row"
+                        >
+                          {row._id}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="10%">
+                          {row.name}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="20%">
+                          {row.email}
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="30%">
+                          63 Arch St. Goodlettsville, TN 37072
+                        </TableCell>
+                        <TableCell style={{ letterSpacing: "2px" }} width="25%">
+                          9283 9210
+                        </TableCell>
+                      </TableRow>
+                    )) 
+                    }
                 </TableBody>
               </Table>
             </Paper>
