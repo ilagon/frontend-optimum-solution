@@ -52,7 +52,7 @@ exports.paymentHistory_get_all_by_creditcardId = (req, res) => {
             payment_type: doc.payment_type,
             payment_amount: doc.payment_amount,
             date_time: doc.date_time,
-            transfer_number: doc.transfer_number,
+            payment_id: doc._id,
             creditCard: doc.creditCard,
           };
         }),

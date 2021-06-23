@@ -12,7 +12,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import "./Overview.css";
 
 const columns = [
-  { id: "transfer_number", label: "Payment Id" },
+  { id: "payment_id", label: "Payment Id" },
   { id: "payment_type", label: "Payment Type" },
   {
     id: "payment_amount",
@@ -27,10 +27,10 @@ const columns = [
     id: "customer_id",
     label: "Customer ID",
   },
-  {
-    id: "transfer_number",
-    label: "Transfer ID",
-  },
+  // {
+  //   id: "transfer_number",
+  //   label: "Transfer ID",
+  // },
 ];
 
 const useStyles = makeStyles({
